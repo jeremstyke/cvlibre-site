@@ -17,7 +17,16 @@
     out.hidden = !!user; inn.hidden = !user;
     var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     btn.textContent = user ? "Mon compte" : "Se connecter";
-    if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); }
+    if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
+  }
+  var passTried = false;
+  function findPass() {
+    if (passTried || !window.CVPASS || window.CVPASS.paid()) return;
+    passTried = true;
+    sb.rpc("my_pass").then(function (r) {
+      if (r.error || !r.data) return;
+      window.CVPASS.activate(r.data).then(function (a) { if (a.ok) say("Votre Pass 1 an a été retrouvé grâce à votre adresse e-mail."); });
+    });
   }
   function refresh() {
     sb.from("cvs").select("id,title,updated_at").order("updated_at", { ascending: false }).then(function (r) {

@@ -263,6 +263,31 @@
     Object.keys(LISTS).forEach(renderList); photoUI(); changed();
   });
 
+
+  /* ---------- sauvegarde en fichier (sans compte) ---------- */
+  $("#export").addEventListener("click", function () {
+    var n = (S.name || "").trim().replace(/[^\w\u00C0-\u017F-]+/g, "_") || "cv";
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(S)], { type: "application/json" }));
+    a.download = "cvlibre-" + n + ".json"; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  });
+  $("#import").addEventListener("click", function () { $("#import-file").click(); });
+  $("#import-file").addEventListener("change", function (e) {
+    var f = e.target.files && e.target.files[0]; e.target.value = "";
+    if (!f) return;
+    if (f.size > 3e6) { passMsg.textContent = "Ce fichier est trop volumineux pour être un CV CVLibre."; passMsg.hidden = false; return; }
+    var r = new FileReader();
+    r.onload = function () {
+      try {
+        var o = JSON.parse(r.result);
+        if (!o || typeof o !== "object" || !Array.isArray(o.exp) || typeof o.name !== "string") throw 0;
+        passMsg.hidden = true; setState(Object.assign(clone(CVR.sample), o));
+      } catch (x) { passMsg.textContent = "Ce fichier n'est pas un CV exporté depuis CVLibre."; passMsg.hidden = false; }
+    };
+    r.readAsText(f);
+  });
+
   /* ---------- onglets mobile ---------- */
   $$(".mobile-tabs button").forEach(function (b) {
     b.addEventListener("click", function () {

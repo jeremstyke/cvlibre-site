@@ -59,6 +59,8 @@
       <div class="swatches" id="swatches"></div>
     </div>
     <div class="app-actions">
+      <button type="button" class="btn btn-ghost btn-sm" id="export">Exporter (fichier)</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="import">Importer</button><input type="file" id="import-file" accept=".json,application/json" hidden>
       <button type="button" class="btn btn-ghost btn-sm" id="reset">Repartir de zéro</button>
       <button type="button" class="btn btn-ghost btn-sm" id="acc-btn">Se connecter</button>
       <button type="button" class="btn btn-ghost btn-sm" id="pass-btn">Retirer le filigrane</button>
@@ -198,11 +200,12 @@
 
 <footer class="foot">
   <div class="wrap foot-in">
-    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Votre CV reste dans votre navigateur.</p>
+    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Sans compte, votre CV reste dans votre navigateur.</p>
     <nav aria-label="Pages légales">
       <a href="/blog/">Conseils CV</a>
       <a href="/mentions-legales/">Mentions légales</a>
       <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">Conditions de vente</a>
     </nav>
   </div>
 </footer>
