@@ -151,13 +151,22 @@
   }
   $("#print").addEventListener("click", function () {
     passMsg.hidden = true; forceWm = false;
-    if (!window.CVPASS || !window.CVPASS.paid()) { doPrint(); return; }
+    if (!window.CVPASS || !window.CVPASS.paid()) {
+      var wd = $("#wm-dlg");
+      if (wd && wd.showModal && !wmSeen) { wd.showModal(); return; }
+      doPrint(); return;
+    }
     window.CVPASS.exportPdf(S.name).then(function (r) {
       forceWm = !!r.wm;
       if (r.text) { passMsg.textContent = r.text; passMsg.hidden = false; }
       doPrint();
     });
   });
+  var wmSeen = false, wmd = $("#wm-dlg");
+  if (wmd) {
+    $("#wm-go").addEventListener("click", function () { wmSeen = true; wmd.close(); doPrint(); });
+    $("#wm-remove").addEventListener("click", function () { wmd.close(); var b = $("#pass-btn"); if (b) b.click(); });
+  }
   window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint(); });
   if (window.CVPASS) window.CVPASS.onChange(function () { paint(); });
 
