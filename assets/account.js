@@ -23,12 +23,6 @@
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
-  /* le téléchargement du PDF demande un compte gratuit : le CV se crée librement, le brouillon reste dans le navigateur */
-  document.addEventListener("click", function (e) {
-    var t = e.target && e.target.closest ? e.target.closest("#print") : null;
-    if (!t || user) return;
-    e.preventDefault(); e.stopImmediatePropagation(); openDlg();
-  }, true);
   window.CVACC = { signOut: function () { return sb.auth.signOut(); } };
   var hl0 = document.getElementById("nav-acc");
   if (hl0) hl0.addEventListener("click", function (e) { if (!user) { e.preventDefault(); openDlg(); } });
