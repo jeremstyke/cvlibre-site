@@ -4,9 +4,9 @@
   var REF = /^sb-zltqrnflowxkycrjmhbx-auth-token/;
   function keys() { var r = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && REF.test(k)) r.push(k); } return r; }
   function show(on) {
-    var nav = document.querySelector(".nav"), a = document.querySelector('.nav a[href*="connexion=1"]'), o = document.getElementById("nav-out");
+    var nav = document.querySelector(".nav"), a = document.getElementById("nav-acc"), o = document.getElementById("nav-out");
     if (nav) nav.classList.toggle("in", !!on);
-    if (a) a.textContent = on ? "Mon compte" : "Se connecter";
+    if (a) { a.textContent = on ? "Mon compte" : "Se connecter"; a.setAttribute("href", on ? "/mon-espace/" : "/creer-un-cv/?connexion=1"); }
     if (o) o.hidden = !on;
   }
   window.CVNAV = { show: show };

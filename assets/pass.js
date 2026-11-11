@@ -66,7 +66,7 @@
     var p = paid();
     off.hidden = p; on.hidden = !p; offBtn.hidden = !p;
     if (p) $("#pass-status").textContent = "Pass actif jusqu'au " + new Date(st.until).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + ". Vos PDF sortent sans filigrane.";
-    btn.textContent = p ? "Pass actif" : "Retirer le filigrane";
+    btn.textContent = p ? "Pass actif" : (btn.getAttribute("data-off") || "Retirer le filigrane");
   }
   btn.addEventListener("click", function () { note.textContent = ""; ui(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
   go.addEventListener("click", function () {

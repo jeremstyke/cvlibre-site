@@ -30,8 +30,8 @@
     e.preventDefault(); e.stopImmediatePropagation(); openDlg();
   }, true);
   window.CVACC = { signOut: function () { return sb.auth.signOut(); } };
-  var hl0 = document.querySelector('.nav a[href*="connexion=1"]');
-  if (hl0) hl0.addEventListener("click", function (e) { e.preventDefault(); openDlg(); });
+  var hl0 = document.getElementById("nav-acc");
+  if (hl0) hl0.addEventListener("click", function (e) { if (!user) { e.preventDefault(); openDlg(); } });
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
     btn.textContent = user ? "Mon compte" : "Se connecter";
@@ -115,6 +115,8 @@
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ui();
     /* lien « Se connecter » de l'en-tête (visiteurs qui reviennent) */
-    if (/[?&]connexion=1/.test(location.search)) { openDlg(); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
+    if (/[?&]connexion=1/.test(location.search)) { if (!user) openDlg(); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
+    var m = /[?&]cv=([0-9a-f-]{36})/.exec(location.search);
+    if (m && user) { open_(m[1]); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
   });
 })();

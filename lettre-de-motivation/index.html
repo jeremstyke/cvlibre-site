@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lettre de motivation avec l'IA | CVLibre</title>
+<meta name="description" content="Collez l'annonce, l'IA rédige une lettre de motivation adaptée au poste. Vous la relisez, la modifiez et la téléchargez en PDF. Avec le Pass 1 an.">
+<link rel="canonical" href="https://cvlibre.com/lettre-de-motivation/">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Lettre de motivation avec l'IA | CVLibre">
+<meta property="og:description" content="L'IA rédige une première version à partir de l'annonce et de votre parcours. Vous gardez la main sur chaque phrase.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cvlibre.com/lettre-de-motivation/">
+<meta name="theme-color" content="#f3f5f8">
+<link rel="stylesheet" href="/assets/style.css?v=b11c086e">
+<link rel="stylesheet" href="/assets/letter.css?v=b11c086e">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/lettre-de-motivation/">Lettre de motivation</a>
+      <a href="/blog/">Conseils</a>
+      <a href="/#questions">Questions fréquentes</a>
+      <a class="btn btn-ghost btn-sm" id="nav-acc" href="/creer-un-cv/?connexion=1" rel="nofollow">Se connecter</a>
+      <a class="btn btn-ghost btn-sm" id="nav-out" href="#" hidden>Se déconnecter</a>
+      <a class="btn btn-sm" href="/creer-un-cv/">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap lt">
+  <h1>Lettre de motivation avec l'IA</h1>
+  <p class="lead lt-lead">Indiquez le poste et collez l'annonce. L'IA rédige une première version à partir de votre parcours. Relisez-la, corrigez-la, puis téléchargez-la en PDF.</p>
+  <div class="lt-lock" id="lt-lock" hidden>
+    <p><strong>La lettre de motivation avec l'IA est incluse dans le Pass 1 an.</strong> 4,99 € en un seul paiement, valable 12 mois, sans renouvellement. Le pass retire aussi le filigrane de vos CV et donne 15 utilisations IA par jour.</p>
+    <p><button type="button" class="btn" id="pass-btn" data-off="Obtenir le Pass ou entrer ma clé">Obtenir le Pass ou entrer ma clé</button></p>
+  </div>
+  <div class="lt-grid">
+    <div class="lt-form">
+      <section class="lt-card">
+        <h2>Le poste</h2>
+        <div class="fld"><label for="lt-job">Poste visé</label><input id="lt-job" maxlength="100" placeholder="Ex. Employé polyvalent de restauration" autocomplete="off"></div>
+        <div class="fld"><label for="lt-company">Entreprise</label><input id="lt-company" maxlength="100" placeholder="Ex. Restaurant Le Bistrot du Port" autocomplete="off"></div>
+        <div class="fld"><label for="lt-ad">Annonce (facultatif)</label><textarea id="lt-ad" rows="5" maxlength="4000" placeholder="Collez ici le texte de l'offre : l'IA reprendra les compétences demandées."></textarea></div>
+      </section>
+      <section class="lt-card">
+        <h2>Votre parcours</h2>
+        <div class="fld" id="lt-cvrow" hidden><label for="lt-cv">Partir d'un de mes CV</label><select id="lt-cv"><option value="">Aucun, je décris mon parcours</option></select></div>
+        <div class="fld"><label for="lt-profile">En quelques lignes</label><textarea id="lt-profile" rows="5" maxlength="2500" placeholder="Ex. Serveur depuis 3 ans à Nantes, un an de caisse en supermarché, bac pro commerce. J'aime le contact client et le travail en équipe."></textarea></div>
+        <div class="fld"><label for="lt-tone">Ton</label><select id="lt-tone"><option value="classique">Classique et professionnel</option><option value="dynamique">Dynamique et motivé</option><option value="sobre">Sobre et direct</option></select></div>
+        <button type="button" class="btn acc-big" id="lt-gen">Rédiger ma lettre avec l'IA</button>
+        <p class="hint" id="lt-msg" role="status" aria-live="polite">L'IA peut se tromper : relisez tout avant d'envoyer. Avec le Pass 1 an : 15 utilisations IA par jour, partagées avec le remplissage de CV.</p>
+      </section>
+      <section class="lt-card" id="lt-result">
+        <h2>Votre lettre</h2>
+        <div class="fld"><label for="lt-name">Votre nom</label><input id="lt-name" maxlength="80" autocomplete="name"></div>
+        <div class="fld"><label for="lt-contact">Vos coordonnées</label><textarea id="lt-contact" rows="3" maxlength="300" placeholder="Adresse&#10;Téléphone&#10;E-mail"></textarea></div>
+        <div class="fld"><label for="lt-rcpt">Destinataire</label><textarea id="lt-rcpt" rows="3" maxlength="300" placeholder="Nom de l'entreprise&#10;Adresse"></textarea></div>
+        <div class="fld"><label for="lt-city">Ville (pour « Fait à ... »)</label><input id="lt-city" maxlength="60" autocomplete="address-level2"></div>
+        <div class="fld"><label for="lt-subject">Objet</label><input id="lt-subject" maxlength="150" placeholder="Candidature au poste de ..."></div>
+        <div class="fld"><label for="lt-body">Texte de la lettre</label><textarea id="lt-body" rows="14" maxlength="6000"></textarea></div>
+      </section>
+      <section class="lt-card">
+        <h2>Enregistrer</h2>
+        <div class="fld"><label for="lt-title">Nom de cette lettre (pour vous seul)</label><input id="lt-title" maxlength="60" placeholder="Ex. Lettre pour Amazon"></div>
+        <div class="lt-actions">
+          <button type="button" class="btn" id="lt-print">Télécharger en PDF</button>
+          <button type="button" class="btn btn-ghost" id="lt-save">Enregistrer dans mon espace</button>
+          <button type="button" class="btn btn-ghost" id="lt-new">Nouvelle lettre</button>
+        </div>
+        <p class="hint" id="lt-save-msg" role="status" aria-live="polite">Le téléchargement et l'enregistrement demandent le Pass 1 an et un compte gratuit.</p>
+      </section>
+    </div>
+    <div class="lt-prev"><div class="lt-box" id="lt-box"><div class="lt-sheet" id="lt-sheet" aria-label="Aperçu de la lettre"></div></div></div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Compte gratuit, sans mot de passe.</p>
+    <nav aria-label="Pages légales">
+      <a href="/blog/">Conseils CV</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">Conditions de vente</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/nav.js?v=b11c086e" defer></script>
+<script src="/assets/support.js?v=b11c086e" defer></script>
+
+<dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
+  <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
+  <div id="acc-out">
+    <p class="acc-brand" aria-hidden="true"><span class="b1">CV</span><span class="b2">libre</span></p>
+    <h2 id="acc-title">Connexion</h2>
+    <ul class="acc-perks" id="acc-intro">
+      <li>Téléchargez vos documents en PDF</li>
+      <li>Enregistrez-les et retrouvez-les sur tous vos appareils</li>
+      <li>Gratuit, sans mot de passe</li>
+    </ul>
+    <div id="acc-step1">
+      <button type="button" class="btn acc-big" id="acc-mail-open">Continuer avec mon e-mail</button>
+    </div>
+    <div id="acc-step2" hidden>
+      <label for="acc-email" class="acc-lab">Adresse e-mail</label>
+      <input type="email" id="acc-email" autocomplete="email" inputmode="email" placeholder="vous@exemple.fr">
+      <button type="button" class="btn acc-big" id="acc-mail-go">Recevoir mon lien de connexion</button>
+      <button type="button" class="link-btn" id="acc-back">Retour</button>
+    </div>
+    <p class="acc-legal">En continuant, vous acceptez les <a href="/cgv/">conditions de vente</a> et la <a href="/confidentialite/">politique de confidentialité</a>.</p>
+    <p class="pass-note" id="acc-note" role="status"></p>
+  </div>
+</dialog>
+
+<dialog class="pass-dlg" id="pass-dlg" aria-labelledby="pass-title">
+  <form method="dialog">
+    <h2 id="pass-title">Retirer le filigrane</h2>
+    <div id="pass-off">
+      <p>Le pass supprime le bandeau « CV créé gratuitement avec CVLibre » de vos PDF pendant 12 mois, et donne accès à la lettre de motivation avec l'IA.</p>
+      <p class="pass-price">4,99 € en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
+      <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
+      <p class="hint">Après l'achat, vous recevez une clé de licence par e-mail. Collez-la ci-dessous.</p>
+      <div class="pass-row"><input id="pass-key" autocomplete="off" spellcheck="false" placeholder="Votre clé de licence" aria-label="Clé de licence"><button type="button" class="btn btn-sm" id="pass-go">Activer</button></div>
+    </div>
+    <div id="pass-on" hidden>
+      <p id="pass-status"></p>
+      <p class="hint">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
+    </div>
+    <p class="hint" id="pass-note" role="status" aria-live="polite"></p>
+    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Retirer la clé de cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+  </form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/assets/pass.js?v=b11c086e"></script>
+<script src="/assets/auth.js?v=b11c086e"></script>
+<script src="/assets/letter.js?v=b11c086e"></script>
+</body>
+</html>

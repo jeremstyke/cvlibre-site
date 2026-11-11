@@ -1,0 +1,53 @@
+/* Lettre de motivation et Mon espace */
+.lt { padding-block: 28px 40px; }
+.lt h1 { margin: 0 0 8px; }
+.lt-lead { max-width: 62ch; margin: 0 0 22px; }
+.lt-lock { background: var(--blue-wash); border: 1px solid #c9d6f5; border-radius: 10px; padding: 16px 20px; margin-bottom: 22px; }
+.lt-lock p { margin: 0 0 10px; line-height: 1.5; }
+.lt-lock p:last-child { margin: 0; }
+.lt-lock[hidden] { display: none; }
+.lt-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-items: start; }
+@media (min-width: 960px) { .lt-grid { grid-template-columns: minmax(0, 460px) minmax(0, 1fr); } .lt-prev { position: sticky; top: 84px; } }
+.lt-form { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.lt-card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.lt-card h2 { margin: 0; font-size: 1.2rem; }
+.lt-card input, .lt-card textarea, .lt-card select { width: 100%; box-sizing: border-box; font: 16px var(--body); color: var(--ink); background: #fff; padding: .6rem .75rem; border: 1px solid #c3cad6; border-radius: .5rem; }
+.lt-card textarea { resize: vertical; line-height: 1.45; }
+.lt-card input:focus, .lt-card textarea:focus, .lt-card select:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.lt-card .hint { margin: 0; font-size: .88rem; color: var(--ink-2); line-height: 1.45; }
+.lt-card .fld[hidden] { display: none; }
+.lt-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.lt-prev { min-width: 0; }
+.lt-box { width: 100%; background: #e4e9f1; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.lt-sheet { width: 794px; min-height: 1123px; box-sizing: border-box; padding: 76px 76px 70px; background: #fff; color: #1a1a1a; font: 15px/1.5 "Source Sans 3", Georgia, serif; transform-origin: top left; }
+.lt-from, .lt-to { line-height: 1.45; }
+.lt-name { font-weight: 700; }
+.lt-to { margin: 26px 0 0 auto; width: 46%; }
+.lt-date { margin: 26px 0 0; text-align: right; }
+.lt-obj { margin: 26px 0 22px; }
+.lt-p { margin: 0 0 14px; text-align: left; }
+.lt-sign { margin-top: 30px; text-align: right; font-weight: 600; }
+/* Mon espace */
+.sp { padding-block: 28px 40px; max-width: 760px; }
+.sp h1 { margin: 0 0 6px; }
+.sp-sec { margin-top: 18px; }
+.sp-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sp-head h2 { margin: 0; }
+.sp-list { display: flex; flex-direction: column; }
+.sp-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--rule); }
+.sp-row:first-child { border-top: 0; }
+.sp-t { display: flex; flex-direction: column; min-width: 0; }
+.sp-t a { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+.sp-t span { font-size: .85rem; color: var(--ink-2); }
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .skip, .top, .foot, .lt-form, .lt h1, .lt-lead, .pass-dlg, .sup { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .lt { padding: 0; }
+  .lt-grid { display: block; }
+  .lt-prev { position: static; }
+  .lt-box { border: 0; border-radius: 0; background: #fff; overflow: visible; height: auto !important; }
+  .lt-sheet { transform: none !important; min-height: 296mm; }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon espace | CVLibre</title>
+<meta name="description" content="Vos CV et vos lettres de motivation enregistrés.">
+<link rel="canonical" href="https://cvlibre.com/mon-espace/">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f3f5f8">
+<link rel="stylesheet" href="/assets/style.css?v=b11c086e">
+<link rel="stylesheet" href="/assets/letter.css?v=b11c086e">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/lettre-de-motivation/">Lettre de motivation</a>
+      <a href="/blog/">Conseils</a>
+      <a href="/#questions">Questions fréquentes</a>
+      <a class="btn btn-ghost btn-sm" id="nav-acc" href="/creer-un-cv/?connexion=1" rel="nofollow">Se connecter</a>
+      <a class="btn btn-ghost btn-sm" id="nav-out" href="#" hidden>Se déconnecter</a>
+      <a class="btn btn-sm" href="/creer-un-cv/">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap sp">
+  <h1>Mon espace</h1>
+  <p class="lead" id="sp-who">Chargement...</p>
+  <div id="sp-out" hidden>
+    <p>Connectez-vous pour retrouver vos CV et vos lettres de motivation.</p>
+    <p><button type="button" class="btn" id="sp-login">Se connecter</button></p>
+  </div>
+  <div id="sp-in" hidden>
+    <section class="lt-card sp-sec">
+      <div class="sp-head"><h2>Mes CV</h2><a class="btn btn-sm" href="/creer-un-cv/">Créer un CV</a></div>
+      <div class="sp-list" id="sp-cvs"></div>
+    </section>
+    <section class="lt-card sp-sec">
+      <div class="sp-head"><h2>Mes lettres de motivation</h2><a class="btn btn-sm" href="/lettre-de-motivation/">Écrire une lettre</a></div>
+      <div class="sp-list" id="sp-letters"></div>
+    </section>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Compte gratuit, sans mot de passe.</p>
+    <nav aria-label="Pages légales">
+      <a href="/blog/">Conseils CV</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">Conditions de vente</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/nav.js?v=b11c086e" defer></script>
+<script src="/assets/support.js?v=b11c086e" defer></script>
+
+<dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
+  <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
+  <div id="acc-out">
+    <p class="acc-brand" aria-hidden="true"><span class="b1">CV</span><span class="b2">libre</span></p>
+    <h2 id="acc-title">Connexion</h2>
+    <ul class="acc-perks" id="acc-intro">
+      <li>Téléchargez vos documents en PDF</li>
+      <li>Enregistrez-les et retrouvez-les sur tous vos appareils</li>
+      <li>Gratuit, sans mot de passe</li>
+    </ul>
+    <div id="acc-step1">
+      <button type="button" class="btn acc-big" id="acc-mail-open">Continuer avec mon e-mail</button>
+    </div>
+    <div id="acc-step2" hidden>
+      <label for="acc-email" class="acc-lab">Adresse e-mail</label>
+      <input type="email" id="acc-email" autocomplete="email" inputmode="email" placeholder="vous@exemple.fr">
+      <button type="button" class="btn acc-big" id="acc-mail-go">Recevoir mon lien de connexion</button>
+      <button type="button" class="link-btn" id="acc-back">Retour</button>
+    </div>
+    <p class="acc-legal">En continuant, vous acceptez les <a href="/cgv/">conditions de vente</a> et la <a href="/confidentialite/">politique de confidentialité</a>.</p>
+    <p class="pass-note" id="acc-note" role="status"></p>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/assets/auth.js?v=b11c086e"></script>
+<script src="/assets/space.js?v=b11c086e"></script>
+</body>
+</html>
