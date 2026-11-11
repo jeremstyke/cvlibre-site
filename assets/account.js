@@ -5,7 +5,7 @@
   var CK = "cvlibre.cvid";
   var $ = function (s) { return document.querySelector(s); };
   var dlg = $("#acc-dlg"), btn = $("#acc-btn");
-  if (!dlg || !btn || !window.supabase || !window.CVB) { if (btn) btn.hidden = true; return; }
+  if (!dlg || !btn || !window.supabase || !window.CVB) { if (btn) btn.hidden = true; var pr0 = $("#acc-promo"); if (pr0) pr0.hidden = true; return; }
   var sb = window.supabase.createClient(URL_, PUB, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
   var user = null, curId = null;
   try { curId = localStorage.getItem(CK) || null; } catch (e) {}
@@ -15,6 +15,7 @@
   function fmt(d) { return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }); }
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
+    var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     btn.textContent = user ? "Mon compte" : "Se connecter";
     if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); }
   }
@@ -56,6 +57,7 @@
       remember(r.data[0].id); say("CV enregistré."); refresh();
     });
   }
+  var pb = $("#acc-promo-btn"); if (pb) pb.addEventListener("click", function () { btn.click(); });
   btn.addEventListener("click", function () { say(""); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
   $("#acc-mail-go").addEventListener("click", function () {
     var m = $("#acc-email").value.trim();
