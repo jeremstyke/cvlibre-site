@@ -50,7 +50,7 @@
     sheet.style.transform = "scale(" + k + ")";
     pbox.style.height = Math.ceil(sheet.offsetHeight * k) + "px";
     var pages = Math.ceil((sheet.offsetHeight - 3) / (297 * 96 / 25.4));
-    if (pages > 1) { warn.hidden = false; warn.textContent = "Ton CV fait " + pages + " pages. Pour la plupart des candidatures, une page suffit : raccourcis les descriptions ou garde les expériences les plus récentes."; }
+    if (pages > 1) { warn.hidden = false; warn.textContent = "Votre CV fait " + pages + " pages. Pour la plupart des candidatures, une page suffit : raccourcissez les descriptions ou gardez les expériences les plus récentes."; }
     else warn.hidden = true;
   }
   function changed() { save(); paint(); }
@@ -164,10 +164,10 @@
   /* ---------- IA : remplir le CV et reformuler ---------- */
   var AI = "https://cvlibre-ai-production.up.railway.app";
   var ERR = {
-    limit: "Tu as utilisé tes 3 essais gratuits du jour. Reviens demain.",
-    busy: "Le service est très demandé en ce moment. Réessaie un peu plus tard.",
-    empty: "Écris quelques lignes sur ton parcours ou ajoute ton ancien CV.",
-    net: "Connexion impossible. Vérifie ta connexion et réessaie."
+    limit: "Vous avez utilisé vos 3 essais gratuits du jour. Revenez demain.",
+    busy: "Le service est très demandé en ce moment. Réessayez un peu plus tard.",
+    empty: "Écrivez quelques lignes sur votre parcours ou ajoute votre ancien CV.",
+    net: "Connexion impossible. Vérifiez votre connexion et réessayez."
   };
   function aiPost(path, payload) {
     if (window.CVPASS && window.CVPASS.key()) payload.key = window.CVPASS.key();
@@ -175,7 +175,7 @@
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; }); })
       .catch(function () { return { error: "net" }; });
   }
-  var leftTxt = function (n) { return typeof n === "number" ? " Il te reste " + n + " essai" + (n > 1 ? "s" : "") + " aujourd'hui." : ""; };
+  var leftTxt = function (n) { return typeof n === "number" ? " Il vous reste " + n + " essai" + (n > 1 ? "s" : "") + " aujourd'hui." : ""; };
   var aiMsg = $("#ai-msg"), aiGo = $("#ai-go"), aiUndo = $("#ai-undo"), aiPrev = null;
   function str(x) { return typeof x === "string" ? x.trim() : ""; }
   function normCV(cv) {
@@ -200,10 +200,10 @@
     return new Promise(function (ok, ko) {
       if (!f) return ok(null);
       if (f.type === "application/pdf") {
-        if (f.size > 4 * 1024 * 1024) return ko("Ce PDF dépasse 4 Mo. Réduis-le ou colle son texte ci-dessus.");
+        if (f.size > 4 * 1024 * 1024) return ko("Ce PDF dépasse 4 Mo. Réduisez-le ou colle son texte ci-dessus.");
         var rd = new FileReader(); rd.onload = function () { ok({ type: f.type, data: String(rd.result).split(",")[1] }); }; rd.onerror = function () { ko("Fichier illisible."); }; rd.readAsDataURL(f); return;
       }
-      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return ko("Format non pris en charge. Utilise un PDF ou une photo (JPEG, PNG).");
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return ko("Format non pris en charge. Utilisez un PDF ou une photo (JPEG, PNG).");
       var url = URL.createObjectURL(f), img = new Image();
       img.onload = function () {
         var k = Math.min(1, 1600 / Math.max(img.width, img.height)), c = document.createElement("canvas");
@@ -223,16 +223,16 @@
       return aiPost("/fill", { text: text, file: file });
     }, function (m) { return { error: "local", msg: m }; }).then(function (j) {
       aiGo.disabled = false; aiGo.textContent = "Remplir mon CV";
-      if (j.error || !j.cv) { aiMsg.textContent = j.msg || ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessaie, ton essai n'est pas décompté."; return; }
+      if (j.error || !j.cv) { aiMsg.textContent = j.msg || ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté."; return; }
       aiPrev = clone(S); setState(normCV(j.cv)); aiUndo.hidden = false;
-      aiMsg.textContent = "C'est rempli. Relis tout et corrige : l'IA peut se tromper." + leftTxt(j.left);
+      aiMsg.textContent = "C'est rempli. Relisez tout et corrigez : l'IA peut se tromper." + leftTxt(j.left);
       $("#f-name").scrollIntoView({ block: "nearest" });
     });
   });
-  aiUndo.addEventListener("click", function () { if (aiPrev) { setState(aiPrev); aiPrev = null; } aiUndo.hidden = true; aiMsg.textContent = "Ton CV d'avant est de retour."; });
+  aiUndo.addEventListener("click", function () { if (aiPrev) { setState(aiPrev); aiPrev = null; } aiUndo.hidden = true; aiMsg.textContent = "Votre CV d'avant est de retour."; });
 
   function rewrite(btn, get, set, field) {  // exposé plus bas pour les listes
-    var t = get().trim(); if (t.length < 5) { btn.textContent = "Écris d'abord quelques mots"; setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 2500); return; }
+    var t = get().trim(); if (t.length < 5) { btn.textContent = "Écrivez d'abord quelques mots"; setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 2500); return; }
     btn.disabled = true; btn.textContent = "Reformulation...";
     aiPost("/rewrite", { text: t, field: field }).then(function (j) {
       btn.disabled = false;

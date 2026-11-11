@@ -58,7 +58,7 @@
       sec("Compétences", skills.length ? '<ul class="c-tags">' + skills.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("") + "</ul>" : "") +
       sec("Langues", langs ? '<ul class="c-lang">' + langs + "</ul>" : "") +
       sec("Centres d'intérêt", hobbies ? '<div class="c-desc">' + fmt(hobbies) + "</div>" : "");
-    return '<div class="cv"><header class="c-head"><div class="c-id"><h1>' + esc(s.name || "Ton nom") + "</h1>" +
+    return '<div class="cv"><header class="c-head"><div class="c-id"><h1>' + esc(s.name || "Votre nom") + "</h1>" +
       (clean(s.title) ? '<p class="c-title">' + esc(s.title) + "</p>" : "") + "</div>" +
       (photo ? photo.replace('class="c-photo"', 'class="c-photo c-photo-h"') : "") +
       (contact ? '<div class="c-contact-h">' + contact + "</div>" : "") + "</header>" +
