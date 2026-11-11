@@ -208,6 +208,24 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .pass-dlg .pass-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .pass-dlg .pass-row input { flex: 1 1 180px; min-width: 0; }
 .pass-dlg .pass-end { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+#acc-dlg { padding: 22px; box-sizing: border-box; max-height: calc(100dvh - 32px); overflow-y: auto; }
+#acc-dlg[open] { display: grid; gap: 14px; }
+#acc-dlg h2 { margin: 0; font-size: 1.25rem; }
+#acc-dlg > div { display: grid; gap: 12px; }
+#acc-dlg > div[hidden] { display: none; }
+#acc-dlg p, #pass-dlg p { line-height: 1.5; }
+#pass-off, #pass-on { display: grid; gap: 14px; }
+#pass-off[hidden], #pass-on[hidden] { display: none; }
+#acc-dlg .pass-note:empty { display: none; }
+#acc-dlg .pass-end { justify-content: flex-end; }
+.pass-dlg input { font-size: 16px; padding: .6rem .75rem; border: 1px solid #c3cad6; border-radius: .5rem; font-family: inherit; }
+.pass-dlg input:focus { outline: 2px solid #2147d6; outline-offset: 1px; }
+@media (max-width: 520px) {
+  .pass-dlg .pass-row { flex-direction: column; align-items: stretch; }
+  .pass-dlg .pass-row .btn { width: 100%; text-align: center; }
+  .pass-dlg .pass-row input { flex: 0 0 auto; width: 100%; box-sizing: border-box; }
+  .pass-dlg { font-size: 1rem; }
+}
 .pass-dlg .pass-note { font-size: .92rem; color: #4b5565; margin: .5rem 0; }
 .pass-dlg .pass-note.bad { color: #b42318; }
 .pass-dlg input[type=email] { flex: 1; min-width: 0; padding: .55rem .7rem; border: 1px solid #c3cad6; border-radius: .5rem; font: inherit; }
