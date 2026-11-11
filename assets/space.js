@@ -85,6 +85,21 @@
   if (window.CVPASS) window.CVPASS.onChange(function () { offer(); });
   offer();
   $("#sp-login").addEventListener("click", function () { A.open(); });
+  $("#sp-out-btn").addEventListener("click", function () { A.signOut(); });
+  var sdel = $("#sp-del"), smsg = $("#sp-del-msg");
+  sdel.addEventListener("click", function () {
+    if (sdel.dataset.arm !== "1") {
+      sdel.dataset.arm = "1"; sdel.textContent = "Confirmer : supprimer mon compte et tous mes CV";
+      setTimeout(function () { sdel.dataset.arm = ""; sdel.textContent = "Supprimer mon compte"; }, 5000); return;
+    }
+    sdel.disabled = true;
+    A.sb.rpc("delete_my_account").then(function (r) {
+      sdel.disabled = false; sdel.dataset.arm = ""; sdel.textContent = "Supprimer mon compte"; smsg.hidden = false;
+      if (r.error) { smsg.textContent = "Suppression impossible. Écrivez-nous à contact@cvlibre.com."; return; }
+      try { localStorage.removeItem("cvlibre.cvid"); } catch (e) {}
+      smsg.textContent = "Votre compte et vos données ont été supprimés."; A.signOut();
+    });
+  });
   A.on(function (user) {
     $("#sp-out").hidden = !!user; $("#sp-in").hidden = !user;
     if (!user) { $("#sp-who").textContent = "Vous n'êtes pas connecté."; A.open(); return; }
