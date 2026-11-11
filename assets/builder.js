@@ -123,7 +123,7 @@
     tgrid.textContent = "";
     TPLS.forEach(function (t) {
       var locked = !!PREMIUM[t[0]] && !paid();
-      var card = document.createElement("button"); card.type = "button"; card.className = "tpl-card" + (S.tpl === t[0] ? " on" : "");
+      var card = document.createElement("button"); card.type = "button"; card.className = "tpl-card" + (S.tpl === t[0] ? " on" : ""); card.setAttribute("data-tpl", t[0]); card.setAttribute("data-locked", locked ? "1" : "0");
       var th = document.createElement("span"); th.className = "tpl-thumb";
       var sh = document.createElement("div"); sh.className = "sheet t-" + t[0]; sh.style.setProperty("--acc", S.accent); sh.setAttribute("aria-hidden", "true");
       sh.innerHTML = CVR.render(S); th.appendChild(sh);

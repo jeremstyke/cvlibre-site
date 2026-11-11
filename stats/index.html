@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Statistiques | CVLibre</title>
+<meta name="description" content="Statistiques privées.">
+<link rel="canonical" href="https://cvlibre.com/stats/">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f3f5f8">
+<link rel="stylesheet" href="/assets/style.css?v=76355124">
+<link rel="stylesheet" href="/assets/letter.css?v=76355124">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/lettre-de-motivation/">Lettre de motivation</a>
+      <a href="/blog/">Conseils</a>
+      <a href="/#questions">Questions fréquentes</a>
+      <a class="btn btn-ghost btn-sm" id="nav-acc" href="/creer-un-cv/?connexion=1" rel="nofollow">Se connecter</a>
+      <a class="btn btn-ghost btn-sm" id="nav-out" href="#" hidden>Se déconnecter</a>
+      <a class="btn btn-sm" href="/creer-un-cv/">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap sp">
+  <h1>Statistiques</h1>
+  <p class="lead" id="st-who">Chargement...</p>
+  <div id="st-out" hidden>
+    <p>Connectez-vous avec le compte propriétaire pour voir les statistiques.</p>
+    <p><button type="button" class="btn" id="st-login">Se connecter</button></p>
+  </div>
+  <div id="st-in" hidden>
+    <div class="st-bar"><div class="seg" id="st-days"><button type="button" data-d="7">7 jours</button><button type="button" data-d="30" aria-pressed="true">30 jours</button><button type="button" data-d="90">90 jours</button></div></div>
+    <p class="hint" id="st-err" hidden></p>
+    <div class="st-kpis" id="st-kpis"></div>
+    <section class="lt-card sp-sec"><h2>Pages vues par jour</h2><div class="st-chart" id="st-chart" role="img" aria-label="Pages vues par jour"></div></section>
+    <section class="lt-card sp-sec"><h2>Parcours d'achat</h2><div id="st-funnel"></div></section>
+    <div class="st-two">
+      <section class="lt-card sp-sec"><h2>Pages les plus vues</h2><div id="st-pages"></div></section>
+      <section class="lt-card sp-sec"><h2>Sources des visites</h2><div id="st-refs"></div></section>
+      <section class="lt-card sp-sec"><h2>Modèles choisis</h2><div id="st-tpl"></div></section>
+      <section class="lt-card sp-sec"><h2>Assistant IA</h2><div id="st-ai"></div></section>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Compte gratuit, sans mot de passe.</p>
+    <nav aria-label="Pages légales">
+      <a href="/blog/">Conseils CV</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">Conditions de vente</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/nav.js?v=76355124" defer></script>
+<script src="/assets/support.js?v=76355124" defer></script>
+<script src="/assets/stats.js?v=76355124" defer></script>
+
+<dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
+  <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
+  <div id="acc-out">
+    <p class="acc-brand" aria-hidden="true"><span class="b1">CV</span><span class="b2">libre</span></p>
+    <h2 id="acc-title">Connexion</h2>
+    <ul class="acc-perks" id="acc-intro">
+      <li>Téléchargez vos documents en PDF</li>
+      <li>Enregistrez-les et retrouvez-les sur tous vos appareils</li>
+      <li>Gratuit, sans mot de passe</li>
+    </ul>
+    <div id="acc-step1">
+      <button type="button" class="btn btn-ghost acc-big" id="acc-google">Continuer avec Google</button>
+      <button type="button" class="btn acc-big" id="acc-mail-open">Continuer avec mon e-mail</button>
+    </div>
+    <div id="acc-step2" hidden>
+      <label for="acc-email" class="acc-lab">Adresse e-mail</label>
+      <input type="email" id="acc-email" autocomplete="email" inputmode="email" placeholder="vous@exemple.fr">
+      <button type="button" class="btn acc-big" id="acc-mail-go">Recevoir mon lien de connexion</button>
+      <button type="button" class="link-btn" id="acc-back">Retour</button>
+    </div>
+    <p class="acc-legal">En continuant, vous acceptez les <a href="/cgv/">conditions de vente</a> et la <a href="/confidentialite/">politique de confidentialité</a>.</p>
+    <p class="pass-note" id="acc-note" role="status"></p>
+  </div>
+</dialog>
+
+<style>
+.st-bar { margin: 10px 0 16px; }
+.st-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.st-kpi { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 14px; }
+.st-kpi b { display: block; font: 800 1.7rem/1.1 var(--head); letter-spacing: -.02em; }
+.st-kpi span { color: var(--ink-2); font-size: .88rem; }
+.st-chart { display: flex; align-items: flex-end; gap: 2px; height: 140px; padding-top: 8px; }
+.st-chart i { flex: 1; min-width: 2px; background: var(--blue); border-radius: 2px 2px 0 0; display: block; }
+.st-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 18px; }
+.st-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 6px 0; border-top: 1px solid var(--rule); font-size: .95rem; }
+.st-row:first-child { border-top: 0; }
+.st-row span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.st-row u { grid-column: 1 / -1; display: block; height: 5px; background: #e6ebf5; border-radius: 3px; text-decoration: none; }
+.st-row u i { display: block; height: 100%; background: var(--blue); border-radius: 3px; }
+.st-note { color: var(--ink-2); font-size: .88rem; margin: 0; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/assets/auth.js?v=76355124"></script>
+<script src="/assets/stats-page.js?v=76355124"></script>
+</body>
+</html>
