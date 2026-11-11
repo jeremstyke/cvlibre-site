@@ -12,6 +12,13 @@
   function open() { say(""); step(1); if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", ""); $("#acc-mail-open").focus({ preventScroll: true }); }
   function close() { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
   function fire() { linkPass(); if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
+  var gb = $("#acc-google");
+  if (gb) gb.addEventListener("click", function () {
+    say("Redirection vers Google...");
+    sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
+      if (r.error) say("Connexion Google impossible. Essayez avec votre e-mail.", true);
+    });
+  });
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-close").addEventListener("click", close);

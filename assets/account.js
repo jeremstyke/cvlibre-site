@@ -20,6 +20,13 @@
     if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", "");
     var f = user ? null : $("#acc-mail-open"); if (f) f.focus({ preventScroll: true });
   }
+  var gb = $("#acc-google");
+  if (gb) gb.addEventListener("click", function () {
+    say("Redirection vers Google...");
+    sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
+      if (r.error) say("Connexion Google impossible. Essayez avec votre e-mail.", true);
+    });
+  });
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
