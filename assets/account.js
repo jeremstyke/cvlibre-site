@@ -77,7 +77,19 @@
       say("CV supprimé."); refresh();
     });
   }
+  var FREE_CVS = 1;
   function saveCv(asNew) {
+    var creating = !curId || asNew;
+    if (creating && !(window.CVPASS && window.CVPASS.paid())) {
+      sb.from("cvs").select("id", { count: "exact", head: true }).then(function (c) {
+        if (!c.error && (c.count || 0) >= FREE_CVS) { say("Le compte gratuit garde 1 CV en ligne. Le Pass 1 an permet d'en garder jusqu'à 20. Vous pouvez modifier ou remplacer votre CV existant.", true); return; }
+        doSave(asNew);
+      });
+      return;
+    }
+    doSave(asNew);
+  }
+  function doSave(asNew) {
     var data = window.CVB.get(), typed = ($("#acc-title-in").value || "").trim().slice(0, 60);
     var title = typed || ((data.name || "").trim() ? "CV " + data.name.trim() : "Mon CV");
     $("#acc-title-in").value = title;
