@@ -310,13 +310,12 @@
 .t-compact .c-tags li { font-size: 8.6pt; padding: .4mm 1.6mm; }
 
 .sheet.t-diagonale { padding: 0; overflow: hidden; }
-.t-diagonale .c-head { position: relative; display: block; padding: 14mm 16mm 32mm; color: #fff; }
-.t-diagonale .c-head::before { content: ""; position: absolute; inset: 0 0 0 0; z-index: 0; background: #1f4fd8; background: var(--acc); clip-path: polygon(0 0, 100% 0, 100% 42%, 0 80%); }
-.t-diagonale .c-head > * { position: relative; z-index: 1; }
+.t-diagonale .c-head { position: relative; display: block; padding: 14mm 16mm 0; }
+.t-diagonale .c-id { position: relative; z-index: 0; margin: -14mm -16mm 0; padding: 14mm 62mm 22mm 16mm; color: #fff; background: #1f4fd8; background: var(--acc); clip-path: polygon(0 0, 100% 0, 100% 62%, 0 100%); }
 .t-diagonale .c-id h1 { font: 800 28pt/1.02 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.025em; color: #fff; }
 .t-diagonale .c-title { font-size: 12.5pt; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 1.5mm; }
-.t-diagonale .c-photo-h { position: absolute; right: 16mm; top: 12mm; border: .9mm solid #fff; }
-.t-diagonale .c-contact-h { position: absolute; left: 16mm; right: 16mm; bottom: 5mm; }
+.t-diagonale .c-photo-h { position: absolute; z-index: 1; right: 16mm; top: 12mm; border: .9mm solid #fff; }
+.t-diagonale .c-contact-h { position: relative; margin-top: 3mm; }
 .t-diagonale .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; color: #3b4453; }
 .t-diagonale .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 58mm; column-gap: 9mm; padding: 4mm 16mm 14mm; }
 .t-diagonale .c-sec h2 { color: var(--acc); }
