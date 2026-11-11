@@ -56,9 +56,9 @@
     });
   }
   function open_(id) {
-    sb.from("cvs").select("data").eq("id", id).single().then(function (r) {
+    sb.from("cvs").select("title,data").eq("id", id).single().then(function (r) {
       if (r.error || !r.data) { say("Ce CV est introuvable.", true); return; }
-      window.CVB.set(r.data.data); remember(id); say("CV ouvert."); refresh();
+      window.CVB.set(r.data.data); $("#acc-title-in").value = r.data.title || ""; remember(id); say("CV ouvert."); refresh();
     });
   }
   function del(id) {
@@ -69,7 +69,9 @@
     });
   }
   function saveCv(asNew) {
-    var data = window.CVB.get(), title = (data.name || "").trim() ? "CV " + data.name.trim() : "Mon CV";
+    var data = window.CVB.get(), typed = ($("#acc-title-in").value || "").trim().slice(0, 60);
+    var title = typed || ((data.name || "").trim() ? "CV " + data.name.trim() : "Mon CV");
+    $("#acc-title-in").value = title;
     var q = (curId && !asNew) ? sb.from("cvs").update({ title: title, data: data }).eq("id", curId).select("id") : sb.from("cvs").insert({ user_id: user.id, title: title, data: data }).select("id");
     q.then(function (r) {
       if (r.error) { say(/cv_limit/.test(r.error.message) ? "Vous avez atteint la limite de 20 CV. Supprimez-en un." : "Enregistrement impossible. Réessayez.", true); return; }
