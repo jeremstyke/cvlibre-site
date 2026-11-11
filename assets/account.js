@@ -72,11 +72,13 @@
     });
   }
   var FREE_CVS = 1;
+  var maxCvs = function () { return window.CVPASS && window.CVPASS.paid() ? (window.CVPASS.plan() === "pro" ? 200 : 20) : FREE_CVS; };
   function saveCv(asNew) {
     var creating = !curId || asNew;
-    if (creating && !(window.CVPASS && window.CVPASS.paid())) {
+    if (creating) {
       sb.from("cvs").select("id", { count: "exact", head: true }).then(function (c) {
-        if (!c.error && (c.count || 0) >= FREE_CVS) { say("Le compte gratuit garde 1 CV en ligne. Le Pass 1 an permet d'en garder jusqu'à 20. Vous pouvez modifier ou remplacer votre CV existant.", true); return; }
+        var m = maxCvs();
+        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "Le compte gratuit garde 1 CV en ligne. Le Pass 1 an permet d'en garder jusqu'à 20. Vous pouvez modifier ou remplacer votre CV existant." : "Vous avez atteint la limite de " + m + " CV. Supprimez-en un.", true); return; }
         doSave(asNew);
       });
       return;
@@ -89,7 +91,7 @@
     $("#acc-title-in").value = title;
     var q = (curId && !asNew) ? sb.from("cvs").update({ title: title, data: data }).eq("id", curId).select("id") : sb.from("cvs").insert({ user_id: user.id, title: title, data: data }).select("id");
     q.then(function (r) {
-      if (r.error) { say(/cv_limit/.test(r.error.message) ? "Vous avez atteint la limite de 20 CV. Supprimez-en un." : "Enregistrement impossible. Réessayez.", true); return; }
+      if (r.error) { say(/cv_limit/.test(r.error.message) ? "Vous avez atteint la limite de CV. Supprimez-en un." : "Enregistrement impossible. Réessayez.", true); return; }
       if (!r.data || !r.data.length) { remember(null); saveCv(true); return; }
       remember(r.data[0].id); say("CV enregistré."); refresh();
     });

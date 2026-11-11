@@ -95,9 +95,21 @@
     S.title = title; el("title").value = title; store();
     var data = {}; F.forEach(function (id) { data[id] = S[id] || ""; });
     var u = A.user(), t = A.sb.from("letters");
+    if (!curId || asNew) {
+      var mx = window.CVPASS && window.CVPASS.plan() === "pro" ? 200 : 30;
+      t.select("id", { count: "exact", head: true }).then(function (c) {
+        if (!c.error && (c.count || 0) >= mx) { say("Vous avez atteint la limite de " + mx + " lettres. Supprimez-en une dans Mon espace."); return; }
+        write_(title, data, asNew);
+      });
+      return;
+    }
+    write_(title, data, asNew);
+  }
+  function write_(title, data, asNew) {
+    var u = A.user(), t = A.sb.from("letters");
     var q = (curId && !asNew) ? t.update({ title: title, data: data }).eq("id", curId).select("id") : t.insert({ user_id: u.id, title: title, data: data }).select("id");
     q.then(function (r) {
-      if (r.error) { say(/letter_limit/.test(r.error.message) ? "Vous avez atteint la limite de 30 lettres. Supprimez-en une dans Mon espace." : "Enregistrement impossible. Réessayez."); return; }
+      if (r.error) { say(/letter_limit/.test(r.error.message) ? "Vous avez atteint la limite de lettres. Supprimez-en une dans Mon espace." : "Enregistrement impossible. Réessayez."); return; }
       if (!r.data || !r.data.length) { curId = null; save(true); return; }
       curId = r.data[0].id; store(); say("Lettre enregistrée dans Mon espace.");
     });
