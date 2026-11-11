@@ -11,7 +11,7 @@
   function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
   function open() { say(""); step(1); if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", ""); $("#acc-mail-open").focus({ preventScroll: true }); }
   function close() { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
-  function fire() { linkPass(); if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
+  function fire() { linkPass(); findPass(); if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
   var gb = $("#acc-google");
   if (gb) gb.addEventListener("click", function () {
     say("Redirection vers Google...");
@@ -39,6 +39,14 @@
     sb.rpc("link_pass", { k: P.key(), u: new Date(P.until()).toISOString() });
   }
   if (window.CVPASS) window.CVPASS.onChange(linkPass);
+  /* Pass acheté avec la même adresse e-mail : retrouvé et activé automatiquement. */
+  var passTried = false;
+  function findPass() {
+    var P = window.CVPASS;
+    if (passTried || !user || !P || P.paid()) return;
+    passTried = true;
+    sb.rpc("my_pass").then(function (r) { if (!r.error && r.data) P.activate(r.data); });
+  }
   var acc = $("#nav-acc");
   if (acc) acc.addEventListener("click", function (e) { if (!user) { e.preventDefault(); open(); } });
   window.CVAUTH = {
