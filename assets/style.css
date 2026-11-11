@@ -260,3 +260,23 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 #acc-step2 input { width: 100%; box-sizing: border-box; }
 #acc-step1 .hint { margin: 0; text-align: center; }
 #acc-step2 .link-btn { justify-self: center; }
+/* écran de connexion */
+#acc-dlg { position: fixed; padding: 32px 28px 26px; width: min(420px, calc(100vw - 32px)); }
+.dlg-x { position: absolute; top: 10px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); font: 400 28px/1 var(--body); cursor: pointer; }
+.dlg-x:hover { background: var(--blue-wash); color: var(--ink); }
+#acc-out { align-items: stretch; gap: 14px; text-align: center; }
+.acc-brand { margin: 0; font-family: var(--head); font-size: 1.5rem; letter-spacing: -.01em; }
+.acc-brand .b1 { font-weight: 800; color: var(--ink); }
+.acc-brand .b2 { font-weight: 400; color: var(--blue); }
+#acc-out #acc-title { font-family: var(--head); font-size: 1.55rem; margin: 2px 0 0; }
+.acc-h2 { margin: 0 0 4px; font-size: 1.3rem; }
+.acc-perks { list-style: none; margin: 0 auto 4px; padding: 0; display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 330px; }
+.acc-perks li { position: relative; padding-left: 28px; line-height: 1.4; color: var(--ink-2); }
+.acc-perks li::before { content: ""; position: absolute; left: 0; top: .2em; width: 18px; height: 18px; border-radius: 50%; background: var(--blue-wash) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.3l2.6 2.6L13 6.5' fill='none' stroke='%231f4fd8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.acc-big { min-height: 50px; border-radius: 8px; font-weight: 700; }
+#acc-step2 .acc-lab { text-align: left; }
+#acc-step2 input { min-height: 48px; }
+.acc-legal { margin: 2px 0 0; font-size: .82rem; color: var(--ink-2); line-height: 1.45; }
+.acc-legal a { color: inherit; }
+#acc-note:not(:empty) { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--blue-wash); color: var(--ink); font-size: .93rem; text-align: left; }
+.dlg-x:focus:not(:focus-visible) { outline: none; }

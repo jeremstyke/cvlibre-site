@@ -18,6 +18,7 @@
   function openDlg() {
     say(""); step(1);
     if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", "");
+    var f = user ? null : $("#acc-mail-open"); if (f) f.focus({ preventScroll: true });
   }
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
@@ -30,7 +31,7 @@
   }, true);
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
-    btn.textContent = user ? "Mon compte" : "Se connecter"; $("#acc-title").textContent = user ? "Mon compte" : "Connexion";
+    btn.textContent = user ? "Mon compte" : "Se connecter";
     var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
   }
