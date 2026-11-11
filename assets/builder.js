@@ -56,6 +56,7 @@
   var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"], ["aurore", "Aurore"], ["horizon", "Horizon"], ["minimal", "Minimal"], ["pastel", "Pastel"], ["atelier", "Atelier"], ["prestige", "Prestige"], ["standard", "Standard"], ["compact", "Compact"], ["diagonale", "Diagonale"], ["bulle", "Bulle"], ["papier", "Papier"], ["pop", "Pop"]];
   function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
+    lockName();
     sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
     sheet.style.setProperty("--acc", S.accent);
     applyFmt();
@@ -80,7 +81,16 @@
     if (pages > 1) { warn.hidden = false; warn.textContent = "Votre CV fait " + pages + " pages. Pour la plupart des candidatures, une page suffit : raccourcissez les descriptions ou gardez les expériences les plus récentes."; }
     else warn.hidden = true;
   }
-  function changed() { save(); paint(); }
+  /* Pass personnel : le nom du CV est celui du titulaire et ne peut plus être modifié. */
+  function lockName() {
+    var P = window.CVPASS, h = P && P.paid() && P.holder ? P.holder() : null, el = $('[data-k="name"]'), nt = $("#name-lock");
+    if (h) {
+      if (S.name !== h.name) S.name = h.name;
+      if (el) { el.value = h.name; el.readOnly = true; }
+      if (nt) { nt.hidden = false; nt.textContent = "Nom verrouillé par votre pass (" + h.name + "). Pour le CV d'une autre personne, ajoutez un deuxième pass dans Mon espace."; }
+    } else { if (el) el.readOnly = false; if (nt) nt.hidden = true; }
+  }
+  function changed() { lockName(); save(); paint(); }
 
   /* ---------- champs simples ---------- */
   $$("[data-k]").forEach(function (el) {

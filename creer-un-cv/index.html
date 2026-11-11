@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=2469e4dd">
-<link rel="stylesheet" href="/assets/cv.css?v=2469e4dd">
+<link rel="stylesheet" href="/assets/style.css?v=6434e34e">
+<link rel="stylesheet" href="/assets/cv.css?v=6434e34e">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -116,6 +116,7 @@
             <span class="hint">Courante sur un CV français. Facultative, et déconseillée dans les pays anglo-saxons.</span>
           </div>
           <div class="fld"><label for="f-name">Prénom et nom</label><input id="f-name" data-k="name" autocomplete="name"></div>
+          <p class="hint" id="name-lock" hidden></p>
           <div class="fld"><label for="f-title">Poste visé ou titre</label><input id="f-title" data-k="title" placeholder="Ex. Comptable, Développeur web"></div>
           <div class="row2">
             <div class="fld"><label for="f-email">E-mail</label><input id="f-email" data-k="email" type="email" autocomplete="email"></div>
@@ -251,6 +252,13 @@
       <p class="hint">Une question ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
     </div>
     <div id="pass-on" hidden>
+      <div id="pass-who" hidden>
+        <p><strong>Pour qui est ce pass ?</strong></p>
+        <p class="hint">Le pass est personnel. Le prénom et le nom indiqués ici sont définitifs : ils seront verrouillés sur votre CV. Pour le CV d'une autre personne, il faudra un deuxième pass. Une erreur ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
+        <div class="fld"><label for="who-p">Prénom</label><input id="who-p" maxlength="60" autocomplete="given-name"></div>
+        <div class="fld"><label for="who-n">Nom</label><input id="who-n" maxlength="60" autocomplete="family-name"></div>
+        <p><button type="button" class="btn btn-sm" id="who-ok">Verrouiller mon pass</button></p>
+      </div>
       <p id="pass-status"></p>
       <p class="hint" id="pass-manage"><span id="pass-manage-txt">Une question sur votre pass ou votre facture ?</span> Écrivez-nous : <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
       <p class="hint" id="pass-rules">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
@@ -272,14 +280,14 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=2469e4dd" defer></script>
-<script src="/assets/support.js?v=2469e4dd" defer></script>
-<script src="/assets/stats.js?v=2469e4dd" defer></script>
+<script src="/assets/nav.js?v=6434e34e" defer></script>
+<script src="/assets/support.js?v=6434e34e" defer></script>
+<script src="/assets/stats.js?v=6434e34e" defer></script>
 
-<script src="/assets/render.js?v=2469e4dd"></script>
-<script src="/assets/pass.js?v=2469e4dd"></script>
-<script src="/assets/builder.js?v=2469e4dd"></script>
+<script src="/assets/render.js?v=6434e34e"></script>
+<script src="/assets/pass.js?v=6434e34e"></script>
+<script src="/assets/builder.js?v=6434e34e"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/account.js?v=2469e4dd"></script>
+<script src="/assets/account.js?v=6434e34e"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@
         var ok = new Date(x.until).getTime() > Date.now(); if (ok) live++;
         var d = document.createElement("div"); d.className = "sp-row";
         var t = document.createElement("div"); t.className = "sp-t";
-        var a = document.createElement("strong"); a.textContent = "Pass " + (i + 1);
+        var a = document.createElement("strong"); a.textContent = x.holder_p ? "Pass de " + x.holder_p + " " + x.holder_n : "Pass " + (i + 1) + " (nom à définir)";
         var s = document.createElement("span"); s.textContent = (ok ? "Valable jusqu'au " : "Expiré le ") + fmt(x.until);
         t.appendChild(a); t.appendChild(s); d.appendChild(t);
         if (ok) {
