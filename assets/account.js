@@ -29,13 +29,14 @@
     if (!t || user) return;
     e.preventDefault(); e.stopImmediatePropagation(); openDlg();
   }, true);
+  window.CVACC = { signOut: function () { return sb.auth.signOut(); } };
   var hl0 = document.querySelector('.nav a[href*="connexion=1"]');
   if (hl0) hl0.addEventListener("click", function (e) { e.preventDefault(); openDlg(); });
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
     btn.textContent = user ? "Mon compte" : "Se connecter";
     var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
-    var hl = document.querySelector('.nav a[href*="connexion=1"]'); if (hl) hl.textContent = user ? "Mon compte" : "Se connecter";
+    if (window.CVNAV) window.CVNAV.show(!!user);
     if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
   }
   var passTried = false;

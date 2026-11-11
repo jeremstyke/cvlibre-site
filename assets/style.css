@@ -280,3 +280,5 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .acc-legal a { color: inherit; }
 #acc-note:not(:empty) { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--blue-wash); color: var(--ink); font-size: .93rem; text-align: left; }
 .dlg-x:focus:not(:focus-visible) { outline: none; }
+.nav [hidden] { display: none !important; }
+@media (max-width: 520px) { .nav.in .btn:not(.btn-ghost) { display: none; } }
