@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=d4589cf0">
-<link rel="stylesheet" href="/assets/letter.css?v=d4589cf0">
+<link rel="stylesheet" href="/assets/style.css?v=7d0ed56a">
+<link rel="stylesheet" href="/assets/letter.css?v=7d0ed56a">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,7 +47,7 @@
   <p class="lead lt-lead">Indiquez le poste et collez l'annonce. L'IA rédige une première version à partir de votre parcours. Relisez-la, corrigez-la, puis téléchargez-la en PDF.</p>
   <div class="lt-lock" id="lt-lock" hidden>
     <p><strong>La lettre de motivation avec l'IA est incluse dans le Pass 1 an.</strong> 4,99 € TTC en un seul paiement, valable 12 mois, sans renouvellement. Le pass retire aussi le filigrane de vos CV et donne 15 utilisations IA par jour.</p>
-    <p><button type="button" class="btn" id="pass-btn" data-off="Obtenir le Pass ou entrer ma clé">Obtenir le Pass ou entrer ma clé</button></p>
+    <p><button type="button" class="btn" id="pass-btn" data-off="Obtenir le Pass">Obtenir le Pass</button></p>
   </div>
   <div class="lt-grid">
     <div class="lt-form">
@@ -99,9 +99,9 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=d4589cf0" defer></script>
-<script src="/assets/support.js?v=d4589cf0" defer></script>
-<script src="/assets/stats.js?v=d4589cf0" defer></script>
+<script src="/assets/nav.js?v=7d0ed56a" defer></script>
+<script src="/assets/support.js?v=7d0ed56a" defer></script>
+<script src="/assets/stats.js?v=7d0ed56a" defer></script>
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
   <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
@@ -136,8 +136,7 @@
       <p class="pass-price">4,99 € TTC en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
       <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
       <p class="hint">Connectez-vous d'abord (une adresse e-mail suffit, sans mot de passe) : le pass est rattaché à votre compte et s'active tout seul après le paiement. Gardez la même adresse e-mail au moment de payer. Paiement sécurisé par Stripe, en euros.</p>
-      <p class="hint">Vous avez déjà une clé de licence ? Collez-la ci-dessous. Une question : <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
-      <div class="pass-row"><input id="pass-key" autocomplete="off" spellcheck="false" placeholder="Votre clé de licence" aria-label="Clé de licence"><button type="button" class="btn btn-sm" id="pass-go">Activer</button></div>
+      <p class="hint">Une question ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
     </div>
     <div id="pass-on" hidden>
       <p id="pass-status"></p>
@@ -145,13 +144,13 @@
       <p class="hint" id="pass-rules">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
     </div>
     <p class="hint" id="pass-note" role="status" aria-live="polite"></p>
-    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Retirer la clé de cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Désactiver le pass sur cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
   </form>
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/pass.js?v=d4589cf0"></script>
-<script src="/assets/auth.js?v=d4589cf0"></script>
-<script src="/assets/letter.js?v=d4589cf0"></script>
+<script src="/assets/pass.js?v=7d0ed56a"></script>
+<script src="/assets/auth.js?v=7d0ed56a"></script>
+<script src="/assets/letter.js?v=7d0ed56a"></script>
 </body>
 </html>

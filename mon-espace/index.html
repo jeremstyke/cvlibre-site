@@ -8,8 +8,8 @@
 <link rel="canonical" href="https://cvlibre.com/mon-espace/">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=d4589cf0">
-<link rel="stylesheet" href="/assets/letter.css?v=d4589cf0">
+<link rel="stylesheet" href="/assets/style.css?v=7d0ed56a">
+<link rel="stylesheet" href="/assets/letter.css?v=7d0ed56a">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head>
@@ -38,13 +38,13 @@
   </div>
   <div id="sp-in" hidden>
     <section class="lt-card sp-sec" id="sp-offer">
-      <div class="sp-head"><h2>Mon offre</h2><button type="button" class="btn btn-sm" id="pass-btn" data-off="Obtenir le Pass ou entrer ma clé">Obtenir le Pass ou entrer ma clé</button></div>
+      <div class="sp-head"><h2>Mon offre</h2><button type="button" class="btn btn-sm" id="pass-btn" data-off="Obtenir le Pass">Obtenir le Pass</button></div>
       <p id="sp-offer-txt" class="hint"></p>
       <p id="sp-pay" class="hint" role="status" aria-live="polite" hidden></p>
       <div class="sp-list" id="sp-passes"></div>
       <p id="sp-addp" hidden><a class="btn btn-ghost btn-sm" id="sp-add" href="#" target="_blank" rel="noopener">Ajouter une personne : nouveau pass à 4,99 € TTC</a></p>
       <p class="hint" id="sp-addhint" hidden>Un pass est personnel (un seul prénom). Pour le CV d'une autre personne, ajoutez un pass depuis votre compte, puis choisissez-le ci-dessus sur cet appareil.</p>
-      <p class="hint">Votre clé est liée à votre compte : elle vous suit sur tous vos appareils. Besoin d'aide ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a></p>
+      <p class="hint">Votre pass est lié à votre compte : il vous suit sur tous vos appareils. Besoin d'aide ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a></p>
     </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>Mes CV</h2><a class="btn btn-sm" href="/creer-un-cv/">Créer un CV</a></div>
@@ -67,9 +67,9 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=d4589cf0" defer></script>
-<script src="/assets/support.js?v=d4589cf0" defer></script>
-<script src="/assets/stats.js?v=d4589cf0" defer></script>
+<script src="/assets/nav.js?v=7d0ed56a" defer></script>
+<script src="/assets/support.js?v=7d0ed56a" defer></script>
+<script src="/assets/stats.js?v=7d0ed56a" defer></script>
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
   <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
@@ -104,8 +104,7 @@
       <p class="pass-price">4,99 € TTC en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
       <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
       <p class="hint">Connectez-vous d'abord (une adresse e-mail suffit, sans mot de passe) : le pass est rattaché à votre compte et s'active tout seul après le paiement. Gardez la même adresse e-mail au moment de payer. Paiement sécurisé par Stripe, en euros.</p>
-      <p class="hint">Vous avez déjà une clé de licence ? Collez-la ci-dessous. Une question : <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
-      <div class="pass-row"><input id="pass-key" autocomplete="off" spellcheck="false" placeholder="Votre clé de licence" aria-label="Clé de licence"><button type="button" class="btn btn-sm" id="pass-go">Activer</button></div>
+      <p class="hint">Une question ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
     </div>
     <div id="pass-on" hidden>
       <p id="pass-status"></p>
@@ -113,13 +112,13 @@
       <p class="hint" id="pass-rules">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
     </div>
     <p class="hint" id="pass-note" role="status" aria-live="polite"></p>
-    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Retirer la clé de cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Désactiver le pass sur cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
   </form>
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/pass.js?v=d4589cf0"></script>
-<script src="/assets/auth.js?v=d4589cf0"></script>
-<script src="/assets/space.js?v=d4589cf0"></script>
+<script src="/assets/pass.js?v=7d0ed56a"></script>
+<script src="/assets/auth.js?v=7d0ed56a"></script>
+<script src="/assets/space.js?v=7d0ed56a"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@
   /* ---------- fenêtre ---------- */
   var dlg = $("#pass-dlg");
   if (!dlg) return;
-  var off = $("#pass-off"), on = $("#pass-on"), note = $("#pass-note"), keyIn = $("#pass-key"), go = $("#pass-go"), offBtn = $("#pass-off-btn"), btn = $("#pass-btn");
+  var off = $("#pass-off"), on = $("#pass-on"), note = $("#pass-note"), offBtn = $("#pass-off-btn"), btn = $("#pass-btn");
   var buy = $("#pass-buy");
   buy.href = BUY;
   /* Le pass est rattaché au compte : on se connecte d'abord, puis le paiement s'ouvre avec l'e-mail déjà rempli. */
@@ -87,11 +87,6 @@
     btn.textContent = p ? "Pass actif" : (btn.getAttribute("data-off") || "Retirer le filigrane");
   }
   btn.addEventListener("click", function () { note.textContent = ""; ui(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
-  go.addEventListener("click", function () {
-    go.disabled = true; note.textContent = "Vérification en cours...";
-    activate(keyIn.value).then(function (r) { go.disabled = false; note.textContent = r.ok ? "" : r.text; if (r.ok) keyIn.value = ""; });
-  });
-  keyIn.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); go.click(); } });
-  offBtn.addEventListener("click", function () { forget(); note.textContent = "Clé retirée de cet appareil."; });
+  offBtn.addEventListener("click", function () { forget(); note.textContent = "Pass désactivé sur cet appareil."; });
   subs.push(ui); ui();
 })();
