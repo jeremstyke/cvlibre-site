@@ -11,8 +11,9 @@
 @font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
 @font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
-/* Choix de la police (Pass) : remplace les polices du modèle */
+/* Choix des polices (Pass) : une pour le texte, une pour les titres (nom, intitulé, rubriques) */
 .sheet[data-font], .sheet[data-font] * { font-family: var(--ff) !important; }
+.sheet[data-font-t] h1, .sheet[data-font-t] h2, .sheet[data-font-t] .c-title { font-family: var(--fft) !important; }
 .sheet[data-font="inter"] { --ff: "CVF Inter", Arial, Helvetica, sans-serif; }
 .sheet[data-font="nunito"] { --ff: "CVF Nunito", Arial, Helvetica, sans-serif; }
 .sheet[data-font="montserrat"] { --ff: "CVF Montserrat", Arial, Helvetica, sans-serif; }
@@ -21,6 +22,14 @@
 .sheet[data-font="lora"] { --ff: "CVF Lora", Georgia, "Times New Roman", serif; }
 .sheet[data-font="playfair"] { --ff: "CVF Playfair", Georgia, "Times New Roman", serif; }
 .sheet[data-font="sourceserif"] { --ff: "Source Serif 4", Georgia, "Times New Roman", serif; }
+.sheet[data-font-t="inter"] { --fft: "CVF Inter", Arial, Helvetica, sans-serif; }
+.sheet[data-font-t="nunito"] { --fft: "CVF Nunito", Arial, Helvetica, sans-serif; }
+.sheet[data-font-t="montserrat"] { --fft: "CVF Montserrat", Arial, Helvetica, sans-serif; }
+.sheet[data-font-t="sourcesans"] { --fft: "Source Sans 3", Arial, Helvetica, sans-serif; }
+.sheet[data-font-t="bricolage"] { --fft: "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; }
+.sheet[data-font-t="lora"] { --fft: "CVF Lora", Georgia, "Times New Roman", serif; }
+.sheet[data-font-t="playfair"] { --fft: "CVF Playfair", Georgia, "Times New Roman", serif; }
+.sheet[data-font-t="sourceserif"] { --fft: "Source Serif 4", Georgia, "Times New Roman", serif; }
 /* Le CV (feuille A4) et ses modèles : classique, moderne, sobre (gratuits), dix modèles réservés au Pass et au Pro */
 .sheet { position: relative; --acc: #1f4fd8; width: 210mm; min-height: 297mm; background: #fff; color: #1b1f27; font: 10pt/1.42 "Source Sans 3", Arial, Helvetica, sans-serif; box-sizing: border-box; overflow-wrap: anywhere; }
 .sheet * { box-sizing: border-box; }

@@ -43,8 +43,11 @@
     sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
     sheet.style.setProperty("--acc", S.accent);
     if (paid() && S.font && FONTS[S.font]) sheet.setAttribute("data-font", S.font); else sheet.removeAttribute("data-font");
-    var fs = $("#font-sel"); if (fs) $$("#font-sel option").forEach(function (o) { o.textContent = o.textContent.replace(/ \(Pass\)$/, "") + (o.value && !paid() ? " (Pass)" : ""); });
+    if (paid() && S.fontT && FONTS[S.fontT]) sheet.setAttribute("data-font-t", S.fontT); else sheet.removeAttribute("data-font-t");
+    $$("#font-sel option, #font-sel-t option").forEach(function (o) { o.textContent = o.textContent.replace(/ \(Pass\)$/, "") + (o.value && !paid() ? " (Pass)" : ""); });
+    var fs = $("#font-sel"), ft = $("#font-sel-t");
     if (fs) fs.value = paid() && S.font && FONTS[S.font] ? S.font : "";
+    if (ft) ft.value = paid() && S.fontT && FONTS[S.fontT] ? S.fontT : "";
     sheet.innerHTML = CVR.render(S) + (wmOn() ? '<div class="wm" role="img" aria-label="CV créé gratuitement avec CVLibre"></div>' : "");
     fit();
     $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl && !(PREMIUM[S.tpl] && !paid()))); b.classList.toggle("locked", !!PREMIUM[b.dataset.tpl] && !paid()); });
@@ -153,10 +156,12 @@
     if (PREMIUM[b.dataset.tpl] && !paid()) { var pb = $("#pass-btn"); if (pb) pb.click(); return; }
     S.tpl = b.dataset.tpl; changed();
   }); });
-  var fsel = $("#font-sel");
-  if (fsel) fsel.addEventListener("change", function () {
-    if (fsel.value && !paid()) { fsel.value = ""; var pb = $("#pass-btn"); if (pb) pb.click(); return; }
-    S.font = fsel.value; changed();
+  [["#font-sel", "font"], ["#font-sel-t", "fontT"]].forEach(function (p) {
+    var el = $(p[0]); if (!el) return;
+    el.addEventListener("change", function () {
+      if (el.value && !paid()) { el.value = ""; var pb = $("#pass-btn"); if (pb) pb.click(); return; }
+      S[p[1]] = el.value; changed();
+    });
   });
   COLORS.forEach(function (c) {
     var b = document.createElement("button"); b.type = "button"; b.dataset.c = c[0]; b.style.background = c[0];
@@ -234,7 +239,7 @@
     var list = function (a, max, fn, blank) { var r = (Array.isArray(a) ? a : []).slice(0, max).map(fn); return r.length ? r : [clone(blank)]; };
     var skills = Array.isArray(cv.skills) ? cv.skills.map(str).filter(Boolean).join(", ") : str(cv.skills);
     return {
-      tpl: S.tpl, accent: S.accent, font: S.font || "", photo: S.photo,
+      tpl: S.tpl, accent: S.accent, font: S.font || "", fontT: S.fontT || "", photo: S.photo,
       name: str(cv.name), title: str(cv.title), email: str(cv.email), phone: str(cv.phone), city: str(cv.city), link: str(cv.link), summary: str(cv.summary),
       exp: list(cv.exp, 6, function (e) { e = e || {}; return { role: str(e.role), company: str(e.company), city: str(e.city), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.exp.blank),
       edu: list(cv.edu, 4, function (e) { e = e || {}; return { degree: str(e.degree), school: str(e.school), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.edu.blank),
@@ -309,8 +314,8 @@
       rstT = setTimeout(function () { rst.dataset.arm = ""; rst.textContent = "Repartir de zéro"; }, 4000); return;
     }
     clearTimeout(rstT); rst.dataset.arm = ""; rst.textContent = "Repartir de zéro";
-    var keepTpl = S.tpl, keepAcc = S.accent, keepFont = S.font || "";
-    S = { tpl: keepTpl, accent: keepAcc, font: keepFont, photo: "", name: "", title: "", email: "", phone: "", city: "", link: "", summary: "", exp: [clone(LISTS.exp.blank)], edu: [clone(LISTS.edu.blank)], skills: "", langs: [clone(LISTS.langs.blank)], hobbies: "" };
+    var keepTpl = S.tpl, keepAcc = S.accent, keepFont = S.font || "", keepFontT = S.fontT || "";
+    S = { tpl: keepTpl, accent: keepAcc, font: keepFont, fontT: keepFontT, photo: "", name: "", title: "", email: "", phone: "", city: "", link: "", summary: "", exp: [clone(LISTS.exp.blank)], edu: [clone(LISTS.edu.blank)], skills: "", langs: [clone(LISTS.langs.blank)], hobbies: "" };
     $$("[data-k]").forEach(function (el) { el.value = ""; });
     Object.keys(LISTS).forEach(renderList); photoUI(); changed();
   });
