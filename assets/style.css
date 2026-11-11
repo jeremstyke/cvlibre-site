@@ -303,6 +303,10 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 #tpls { flex-wrap: wrap; }
 .seg button.locked::after { content: "Pass"; margin-left: 6px; padding: 1px 6px; border-radius: 999px; background: var(--blue); color: #fff; font-size: .68rem; font-weight: 700; vertical-align: 2px; }
 
+.fmt-list { display: grid; gap: 10px; margin: 6px 0 12px; }
+.fmt-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 10px; font-weight: 600; }
+.fmt-row select { min-width: 190px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--sheet); color: var(--ink); padding: 8px 10px; font: 600 .95rem var(--body); }
+#fmt-dlg { width: min(520px, calc(100vw - 24px)); }
 .tpl-dlg { width: min(720px, calc(100vw - 24px)); }
 .tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, 172px); justify-content: center; gap: 14px; max-height: 60vh; overflow: auto; padding: 2px; }
 .tpl-card { display: flex; flex-direction: column; gap: 6px; align-items: stretch; background: none; border: 2px solid transparent; border-radius: 8px; padding: 6px; cursor: pointer; font: inherit; color: var(--ink); text-align: left; }

@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=2463a923">
-<link rel="stylesheet" href="/assets/cv.css?v=2463a923">
+<link rel="stylesheet" href="/assets/style.css?v=2469e4dd">
+<link rel="stylesheet" href="/assets/cv.css?v=2469e4dd">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -68,32 +68,7 @@
         <button type="button" id="tpl-more" aria-haspopup="dialog">Plus de modèles</button>
       </div>
     </div>
-    <div class="grp" role="group" aria-label="Police des titres"><span>Titres</span>
-      <select id="font-sel-t" aria-label="Police des titres">
-        <option value="">Selon le modèle</option>
-        <option value="inter">Inter (Pass)</option>
-        <option value="nunito">Nunito, arrondie (Pass)</option>
-        <option value="montserrat">Montserrat (Pass)</option>
-        <option value="sourcesans">Source Sans (Pass)</option>
-        <option value="bricolage">Bricolage (Pass)</option>
-        <option value="lora">Lora, serif (Pass)</option>
-        <option value="playfair">Playfair, serif élégant (Pass)</option>
-        <option value="sourceserif">Source Serif (Pass)</option>
-      </select>
-    </div>
-    <div class="grp" role="group" aria-label="Police du texte"><span>Texte</span>
-      <select id="font-sel" aria-label="Police du texte">
-        <option value="">Selon le modèle</option>
-        <option value="inter">Inter (Pass)</option>
-        <option value="nunito">Nunito, arrondie (Pass)</option>
-        <option value="montserrat">Montserrat (Pass)</option>
-        <option value="sourcesans">Source Sans (Pass)</option>
-        <option value="bricolage">Bricolage (Pass)</option>
-        <option value="lora">Lora, serif (Pass)</option>
-        <option value="playfair">Playfair, serif élégant (Pass)</option>
-        <option value="sourceserif">Source Serif (Pass)</option>
-      </select>
-    </div>
+    <div class="grp" role="group" aria-label="Mise en forme"><button type="button" class="btn btn-ghost btn-sm" id="fmt-btn" aria-haspopup="dialog">Personnaliser (Pass)</button></div>
     <div class="grp" role="group" aria-label="Couleur"><span>Couleur</span>
       <div class="swatches" id="swatches"></div>
     </div>
@@ -234,6 +209,22 @@
   </div>
   <p class="pass-note" id="acc-note" role="status"></p>
 </dialog>
+<dialog class="pass-dlg" id="fmt-dlg" aria-labelledby="fmt-title">
+  <form method="dialog">
+    <h2 id="fmt-title">Personnaliser mon CV</h2>
+    <p class="hint">Chaque élément a sa propre police. Laissez « Selon le modèle » pour garder celle du modèle choisi.</p>
+    <div class="fmt-list">
+      <label class="fmt-row"><span>Nom</span><select data-f="n"><option value="">Selon le modèle</option><option value="inter">Inter</option><option value="nunito">Nunito (arrondie)</option><option value="montserrat">Montserrat</option><option value="sourcesans">Source Sans</option><option value="bricolage">Bricolage</option><option value="lora">Lora (serif)</option><option value="playfair">Playfair (serif élégant)</option><option value="sourceserif">Source Serif</option></select></label>
+      <label class="fmt-row"><span>Intitulé du poste</span><select data-f="i"><option value="">Selon le modèle</option><option value="inter">Inter</option><option value="nunito">Nunito (arrondie)</option><option value="montserrat">Montserrat</option><option value="sourcesans">Source Sans</option><option value="bricolage">Bricolage</option><option value="lora">Lora (serif)</option><option value="playfair">Playfair (serif élégant)</option><option value="sourceserif">Source Serif</option></select></label>
+      <label class="fmt-row"><span>Titres de rubriques</span><select data-f="r"><option value="">Selon le modèle</option><option value="inter">Inter</option><option value="nunito">Nunito (arrondie)</option><option value="montserrat">Montserrat</option><option value="sourcesans">Source Sans</option><option value="bricolage">Bricolage</option><option value="lora">Lora (serif)</option><option value="playfair">Playfair (serif élégant)</option><option value="sourceserif">Source Serif</option></select></label>
+      <label class="fmt-row"><span>Postes et diplômes</span><select data-f="p"><option value="">Selon le modèle</option><option value="inter">Inter</option><option value="nunito">Nunito (arrondie)</option><option value="montserrat">Montserrat</option><option value="sourcesans">Source Sans</option><option value="bricolage">Bricolage</option><option value="lora">Lora (serif)</option><option value="playfair">Playfair (serif élégant)</option><option value="sourceserif">Source Serif</option></select></label>
+      <label class="fmt-row"><span>Texte</span><select data-f="t"><option value="">Selon le modèle</option><option value="inter">Inter</option><option value="nunito">Nunito (arrondie)</option><option value="montserrat">Montserrat</option><option value="sourcesans">Source Sans</option><option value="bricolage">Bricolage</option><option value="lora">Lora (serif)</option><option value="playfair">Playfair (serif élégant)</option><option value="sourceserif">Source Serif</option></select></label>
+    </div>
+    <div class="fmt-row"><span>Taille</span><div class="seg"><button type="button" data-size="s" aria-pressed="false">Petite</button><button type="button" data-size="" aria-pressed="true">Normale</button><button type="button" data-size="l" aria-pressed="false">Grande</button></div></div>
+    <div class="fmt-row"><span>Espacement</span><div class="seg"><button type="button" data-space="t" aria-pressed="false">Serré</button><button type="button" data-space="" aria-pressed="true">Normal</button><button type="button" data-space="a" aria-pressed="false">Aéré</button></div></div>
+    <div class="pass-end"><button type="button" class="btn btn-ghost btn-sm" id="fmt-reset">Tout réinitialiser</button><button type="submit" class="btn btn-sm">Terminé</button></div>
+  </form>
+</dialog>
 <dialog class="pass-dlg tpl-dlg" id="tpl-dlg" aria-labelledby="tpl-title">
   <form method="dialog">
     <h2 id="tpl-title">Tous les modèles</h2>
@@ -281,14 +272,14 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=2463a923" defer></script>
-<script src="/assets/support.js?v=2463a923" defer></script>
-<script src="/assets/stats.js?v=2463a923" defer></script>
+<script src="/assets/nav.js?v=2469e4dd" defer></script>
+<script src="/assets/support.js?v=2469e4dd" defer></script>
+<script src="/assets/stats.js?v=2469e4dd" defer></script>
 
-<script src="/assets/render.js?v=2463a923"></script>
-<script src="/assets/pass.js?v=2463a923"></script>
-<script src="/assets/builder.js?v=2463a923"></script>
+<script src="/assets/render.js?v=2469e4dd"></script>
+<script src="/assets/pass.js?v=2469e4dd"></script>
+<script src="/assets/builder.js?v=2469e4dd"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/account.js?v=2463a923"></script>
+<script src="/assets/account.js?v=2469e4dd"></script>
 </body>
 </html>

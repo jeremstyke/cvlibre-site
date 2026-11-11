@@ -11,25 +11,18 @@
 @font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
 @font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
-/* Choix des polices (Pass) : une pour le texte, une pour les titres (nom, intitulé, rubriques) */
-.sheet[data-font], .sheet[data-font] * { font-family: var(--ff) !important; }
-.sheet[data-font-t] h1, .sheet[data-font-t] h2, .sheet[data-font-t] .c-title { font-family: var(--fft) !important; }
-.sheet[data-font="inter"] { --ff: "CVF Inter", Arial, Helvetica, sans-serif; }
-.sheet[data-font="nunito"] { --ff: "CVF Nunito", Arial, Helvetica, sans-serif; }
-.sheet[data-font="montserrat"] { --ff: "CVF Montserrat", Arial, Helvetica, sans-serif; }
-.sheet[data-font="sourcesans"] { --ff: "Source Sans 3", Arial, Helvetica, sans-serif; }
-.sheet[data-font="bricolage"] { --ff: "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; }
-.sheet[data-font="lora"] { --ff: "CVF Lora", Georgia, "Times New Roman", serif; }
-.sheet[data-font="playfair"] { --ff: "CVF Playfair", Georgia, "Times New Roman", serif; }
-.sheet[data-font="sourceserif"] { --ff: "Source Serif 4", Georgia, "Times New Roman", serif; }
-.sheet[data-font-t="inter"] { --fft: "CVF Inter", Arial, Helvetica, sans-serif; }
-.sheet[data-font-t="nunito"] { --fft: "CVF Nunito", Arial, Helvetica, sans-serif; }
-.sheet[data-font-t="montserrat"] { --fft: "CVF Montserrat", Arial, Helvetica, sans-serif; }
-.sheet[data-font-t="sourcesans"] { --fft: "Source Sans 3", Arial, Helvetica, sans-serif; }
-.sheet[data-font-t="bricolage"] { --fft: "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; }
-.sheet[data-font-t="lora"] { --fft: "CVF Lora", Georgia, "Times New Roman", serif; }
-.sheet[data-font-t="playfair"] { --fft: "CVF Playfair", Georgia, "Times New Roman", serif; }
-.sheet[data-font-t="sourceserif"] { --fft: "Source Serif 4", Georgia, "Times New Roman", serif; }
+/* Mise en forme du Pass : police par élément, taille, espacement (valeurs posées par builder.js) */
+.sheet[data-f-t], .sheet[data-f-t] * { font-family: var(--f-t) !important; }
+.sheet[data-f-p] .c-line strong { font-family: var(--f-p) !important; }
+.sheet[data-f-r] h2 { font-family: var(--f-r) !important; }
+.sheet[data-f-i] .c-title { font-family: var(--f-i) !important; }
+.sheet[data-f-n] h1 { font-family: var(--f-n) !important; }
+.sheet[data-size="s"] .c-head, .sheet[data-size="s"] .c-main, .sheet[data-size="s"] .c-side { zoom: .9; }
+.sheet[data-size="l"] .c-head, .sheet[data-size="l"] .c-main, .sheet[data-size="l"] .c-side { zoom: 1.1; }
+.sheet[data-space="t"] .c-sec { margin-bottom: 3.5mm !important; }
+.sheet[data-space="t"] .c-item { margin-bottom: 2.2mm !important; }
+.sheet[data-space="a"] .c-sec { margin-bottom: 9mm !important; }
+.sheet[data-space="a"] .c-item { margin-bottom: 6mm !important; }
 /* Le CV (feuille A4) et ses modèles : classique, moderne, sobre (gratuits), dix modèles réservés au Pass et au Pro */
 .sheet { position: relative; --acc: #1f4fd8; width: 210mm; min-height: 297mm; background: #fff; color: #1b1f27; font: 10pt/1.42 "Source Sans 3", Arial, Helvetica, sans-serif; box-sizing: border-box; overflow-wrap: anywhere; }
 .sheet * { box-sizing: border-box; }
