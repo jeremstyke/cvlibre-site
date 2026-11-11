@@ -31,8 +31,16 @@
     btn.textContent = user ? "Mon compte" : "Se connecter";
     var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     if (window.CVNAV) window.CVNAV.show(!!user);
-    if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
+    if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); linkPass(); }
   }
+
+  /* Lie la clé de licence au compte : elle suit la personne sur tous ses appareils. */
+  function linkPass() {
+    var P = window.CVPASS;
+    if (!user || !P || !P.paid()) return;
+    sb.rpc("link_pass", { k: P.key(), u: new Date(P.until()).toISOString() });
+  }
+  if (window.CVPASS) window.CVPASS.onChange(linkPass);
   var passTried = false;
   function findPass() {
     if (passTried || !window.CVPASS || window.CVPASS.paid()) return;

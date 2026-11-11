@@ -8,8 +8,8 @@
 <link rel="canonical" href="https://cvlibre.com/mon-espace/">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=2010397c">
-<link rel="stylesheet" href="/assets/letter.css?v=2010397c">
+<link rel="stylesheet" href="/assets/style.css?v=55594d88">
+<link rel="stylesheet" href="/assets/letter.css?v=55594d88">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -36,6 +36,11 @@
     <p><button type="button" class="btn" id="sp-login">Se connecter</button></p>
   </div>
   <div id="sp-in" hidden>
+    <section class="lt-card sp-sec" id="sp-offer">
+      <div class="sp-head"><h2>Mon offre</h2><button type="button" class="btn btn-sm" id="pass-btn" data-off="Obtenir le Pass ou entrer ma clé">Obtenir le Pass ou entrer ma clé</button></div>
+      <p id="sp-offer-txt" class="hint"></p>
+      <p class="hint">Votre clé est liée à votre compte : elle vous suit sur tous vos appareils. Besoin d'aide ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a></p>
+    </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>Mes CV</h2><a class="btn btn-sm" href="/creer-un-cv/">Créer un CV</a></div>
       <div class="sp-list" id="sp-cvs"></div>
@@ -57,8 +62,8 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=2010397c" defer></script>
-<script src="/assets/support.js?v=2010397c" defer></script>
+<script src="/assets/nav.js?v=55594d88" defer></script>
+<script src="/assets/support.js?v=55594d88" defer></script>
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
   <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
@@ -84,8 +89,30 @@
   </div>
 </dialog>
 
+<dialog class="pass-dlg" id="pass-dlg" aria-labelledby="pass-title">
+  <form method="dialog">
+    <h2 id="pass-title">Retirer le filigrane</h2>
+    <div id="pass-off">
+      <p>Le pass supprime le bandeau « CV créé gratuitement avec CVLibre » de vos PDF pendant 12 mois, et donne accès à la lettre de motivation avec l'IA.</p>
+      <p class="pass-price">4,99 € TTC en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
+      <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
+      <p class="hint">Pour créer les CV de plusieurs personnes (conseiller, association, agence) : <a href="https://jeremstyke.gumroad.com/l/Cvlibre-pro?wanted=true" target="_blank" rel="noopener">offre Pro à 19,99 € HT par mois</a>, sans engagement.</p>
+      <p class="hint">Après l'achat, vous recevez une clé de licence par e-mail. Collez-la ci-dessous. Clé perdue ? <a href="https://gumroad.com/library" target="_blank" rel="noopener">Retrouvez-la dans votre espace d'achats</a>, ou écrivez-nous : <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
+      <div class="pass-row"><input id="pass-key" autocomplete="off" spellcheck="false" placeholder="Votre clé de licence" aria-label="Clé de licence"><button type="button" class="btn btn-sm" id="pass-go">Activer</button></div>
+    </div>
+    <div id="pass-on" hidden>
+      <p id="pass-status"></p>
+      <p class="hint" id="pass-manage"><span id="pass-manage-txt">Clé perdue ou facture à retrouver ?</span> <a href="https://gumroad.com/library" target="_blank" rel="noopener">Ouvrir mon espace d'achats</a>. Besoin d'aide ? Écrivez-nous : <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>.</p>
+      <p class="hint" id="pass-rules">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
+    </div>
+    <p class="hint" id="pass-note" role="status" aria-live="polite"></p>
+    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Retirer la clé de cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+  </form>
+</dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/auth.js?v=2010397c"></script>
-<script src="/assets/space.js?v=2010397c"></script>
+<script src="/assets/pass.js?v=55594d88"></script>
+<script src="/assets/auth.js?v=55594d88"></script>
+<script src="/assets/space.js?v=55594d88"></script>
 </body>
 </html>

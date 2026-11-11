@@ -11,7 +11,7 @@
   function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
   function open() { say(""); step(1); if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", ""); $("#acc-mail-open").focus({ preventScroll: true }); }
   function close() { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
-  function fire() { if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
+  function fire() { linkPass(); if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-close").addEventListener("click", close);
@@ -24,6 +24,14 @@
       say(r.error ? "Envoi impossible. Réessayez dans un instant." : "Un lien de connexion vient de vous être envoyé. Ouvrez-le sur cet appareil.", !!r.error);
     });
   });
+
+  /* Lie la clé de licence au compte : elle suit la personne sur tous ses appareils. */
+  function linkPass() {
+    var P = window.CVPASS;
+    if (!user || !P || !P.paid()) return;
+    sb.rpc("link_pass", { k: P.key(), u: new Date(P.until()).toISOString() });
+  }
+  if (window.CVPASS) window.CVPASS.onChange(linkPass);
   var acc = $("#nav-acc");
   if (acc) acc.addEventListener("click", function (e) { if (!user) { e.preventDefault(); open(); } });
   window.CVAUTH = {
