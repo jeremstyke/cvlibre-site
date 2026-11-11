@@ -1,11 +1,11 @@
-/* Compte facultatif : connexion Google ou lien par email, CV enregistrés en ligne (Supabase). Sans compte, tout reste dans ce navigateur. */
+/* Compte obligatoire pour utiliser le créateur : connexion Google ou lien par email, CV enregistrés en ligne (Supabase). Sans compte, tout reste dans ce navigateur. */
 (function () {
   "use strict";
   var URL_ = "https://zltqrnflowxkycrjmhbx.supabase.co", PUB = "sb_publishable_KVXGhm7oHvaymjzOZyfp6A_03X6EcXr";
   var CK = "cvlibre.cvid";
   var $ = function (s) { return document.querySelector(s); };
   var dlg = $("#acc-dlg"), btn = $("#acc-btn");
-  if (!dlg || !btn || !window.supabase || !window.CVB) { if (btn) btn.hidden = true; var pr0 = $("#acc-promo"); if (pr0) pr0.hidden = true; return; }
+  if (!dlg || !btn || !window.supabase || !window.CVB) { if (btn) btn.hidden = true; return; }
   var sb = window.supabase.createClient(URL_, PUB, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
   var user = null, curId = null;
   try { curId = localStorage.getItem(CK) || null; } catch (e) {}
@@ -13,10 +13,18 @@
   function say(t, bad) { note.textContent = t || ""; note.className = "pass-note" + (bad ? " bad" : ""); }
   function remember(id) { curId = id; try { if (id) localStorage.setItem(CK, id); else localStorage.removeItem(CK); } catch (e) {} }
   function fmt(d) { return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }); }
+  var wall = false, closeBtn = $("#acc-close"), intro = $("#acc-intro");
+  function gate() {
+    /* mur de connexion : tant que personne n'est connecté, la fenêtre ne peut pas être fermée */
+    wall = !user; closeBtn.style.display = wall ? "none" : ""; if (intro) intro.hidden = !wall;
+    if (wall) { if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); } }
+    else if (dlg.open && !dlg.dataset.manual) { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
+  }
+  dlg.addEventListener("cancel", function (e) { if (wall) e.preventDefault(); });
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
-    var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     btn.textContent = user ? "Mon compte" : "Se connecter";
+    gate();
     if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
   }
   var passTried = false;
@@ -66,8 +74,7 @@
       remember(r.data[0].id); say("CV enregistré."); refresh();
     });
   }
-  var pb = $("#acc-promo-btn"); if (pb) pb.addEventListener("click", function () { btn.click(); });
-  btn.addEventListener("click", function () { say(""); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
+  btn.addEventListener("click", function () { say(""); dlg.dataset.manual = "1"; if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
   $("#acc-mail-go").addEventListener("click", function () {
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Saisissez une adresse email valide.", true); return; }
@@ -88,7 +95,7 @@
     });
     delAcc.dataset.arm = ""; delAcc.textContent = "Supprimer mon compte";
   });
-  $("#acc-close").addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
+  closeBtn.addEventListener("click", function () { dlg.dataset.manual = ""; dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
   sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; ui(); });
   sb.auth.getSession().then(function (r) { user = r.data && r.data.session ? r.data.session.user : null; ui(); });
 })();
