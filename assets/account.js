@@ -30,6 +30,7 @@
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
+  if (window.CVPASS) { window.CVPASS.setUser(function () { return user && user.email ? user.email : ""; }); window.CVPASS.setLogin(openDlg); }
   window.CVACC = { signOut: function () { return sb.auth.signOut(); } };
   var hl0 = document.getElementById("nav-acc");
   if (hl0) hl0.addEventListener("click", function (e) { if (!user) { e.preventDefault(); openDlg(); } });

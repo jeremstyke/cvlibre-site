@@ -1,11 +1,12 @@
-/* Pass 1 an : clé de licence Gumroad vérifiée par le serveur. La clé reste dans ce navigateur. */
+/* Pass 1 an : paiement Stripe, clé créée à l'achat et rattachée au compte. La clé reste dans ce navigateur. */
 (function () {
   "use strict";
   var API = "https://cvlibre-ai-production.up.railway.app";
-  var BUY = "https://jeremstyke.gumroad.com/l/Pass-1an-cvlibre?wanted=true";
+  var BUY = "https://buy.stripe.com/5kQ7sE1GEfnbh31bijcjS04";
   var PK = "cvlibre.pass";
   var $ = function (s) { return document.querySelector(s); };
-  var st = load(), subs = [];
+  var st = load(), subs = [], userFn = function () { return ""; }, loginFn = null;
+  function buyUrl(email) { return BUY + (email ? "?prefilled_email=" + encodeURIComponent(email) : ""); }
 
   function load() { try { var o = JSON.parse(localStorage.getItem(PK)); if (o && o.key) return o; } catch (e) {} return null; }
   function persist() { try { if (st) localStorage.setItem(PK, JSON.stringify(st)); else localStorage.removeItem(PK); } catch (e) {} }
@@ -18,7 +19,7 @@
   }
   var TEXT = {
     invalid: "Cette clé n'est pas reconnue. Vérifiez qu'elle est copiée en entier.",
-    expired: "Ce pass a expiré (12 mois après l'achat).",
+    expired: "Ce pass a expiré (12 mois après l'achat) ou a été remboursé.",
     refunded: "Cet achat a été remboursé : la clé n'est plus valable.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez.",
     name: "Ce pass est personnel : il est déjà utilisé pour une autre personne. Un autre CV nécessite un autre pass.",
@@ -55,13 +56,24 @@
     });
   }
 
-  window.CVPASS = { paid: paid, key: function () { return paid() ? st.key : ""; }, until: function () { return st ? st.until : 0; }, plan: function () { return paid() && st.plan === "pro" ? "pro" : "pass"; }, activate: activate, forget: forget, exportPdf: exportPdf, onChange: function (f) { subs.push(f); } };
+  window.CVPASS = { paid: paid, key: function () { return paid() ? st.key : ""; }, until: function () { return st ? st.until : 0; }, plan: function () { return paid() && st.plan === "pro" ? "pro" : "pass"; }, activate: activate, forget: forget, exportPdf: exportPdf, onChange: function (f) { subs.push(f); },
+    buyUrl: buyUrl, setUser: function (f) { userFn = f; }, setLogin: function (f) { loginFn = f; } };
 
   /* ---------- fenêtre ---------- */
   var dlg = $("#pass-dlg");
   if (!dlg) return;
   var off = $("#pass-off"), on = $("#pass-on"), note = $("#pass-note"), keyIn = $("#pass-key"), go = $("#pass-go"), offBtn = $("#pass-off-btn"), btn = $("#pass-btn");
-  $("#pass-buy").href = BUY;
+  var buy = $("#pass-buy");
+  buy.href = BUY;
+  /* Le pass est rattaché au compte : on se connecte d'abord, puis le paiement s'ouvre avec l'e-mail déjà rempli. */
+  buy.addEventListener("click", function (e) {
+    var em = userFn();
+    if (em) { buy.href = buyUrl(em); return; }
+    if (!loginFn) return;
+    e.preventDefault();
+    if (dlg.close) dlg.close(); else dlg.removeAttribute("open");
+    loginFn();
+  });
   function ui() {
     var p = paid();
     off.hidden = p; on.hidden = !p; offBtn.hidden = !p;
@@ -69,7 +81,7 @@
       var pro = st.plan === "pro", rl = $("#pass-rules");
       $("#pass-status").textContent = pro ? "Offre Pro active. Vos PDF sortent sans filigrane." : "Pass actif jusqu'au " + new Date(st.until).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + ". Vos PDF sortent sans filigrane.";
       var mt = $("#pass-manage-txt");
-      if (mt) mt.textContent = pro ? "Pour résilier votre abonnement, utilisez le lien « Gérer l'abonnement » de votre e-mail de reçu, ou retrouvez votre clé et vos factures :" : "Clé perdue ou facture à retrouver ?";
+      if (mt) mt.textContent = pro ? "Une question sur votre abonnement ?" : "Une question sur votre pass ou votre facture ?";
       if (rl) rl.textContent = pro ? "Offre Pro : prénom et nom libres, 30 PDF sans filigrane et 60 utilisations IA par jour, jusqu'à 200 CV et 200 lettres enregistrés." : "Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.";
     }
     btn.textContent = p ? "Pass actif" : (btn.getAttribute("data-off") || "Retirer le filigrane");

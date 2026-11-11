@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=8acc123d">
+<link rel="stylesheet" href="/assets/style.css?v=53b6c85c">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <title>Confidentialité | CVLibre</title>
@@ -38,13 +38,13 @@
   <h2>Statistiques de fréquentation</h2>
   <p>Nous comptons de façon anonyme les pages vues et quelques actions (téléchargement d'un PDF, ouverture de la fenêtre du Pass, modèle choisi, usage de l'assistant IA). Aucun cookie n'est déposé, aucun identifiant n'est créé, ni votre adresse IP ni le contenu de votre CV ne sont enregistrés dans ces statistiques, et rien ne permet de vous reconnaître d'une visite à l'autre. Seuls sont conservés le nom de la page, l'action, le site d'origine du lien et le type d'appareil (mobile ou ordinateur). Si votre navigateur envoie le signal « Ne pas suivre », nous ne comptons rien.</p>
   <h2>Le Pass 1 an</h2>
-  <p>L'achat du pass est géré par Gumroad, qui collecte les données de paiement : nous n'y avons pas accès. Quand vous saisissez votre clé de licence, elle est envoyée à notre service pour être vérifiée auprès de Gumroad. Pour appliquer la règle « un pass pour une seule personne », nous recevons aussi une empreinte chiffrée (hash) du prénom et du nom de votre CV, jamais le nom en clair. Cette clé est gardée dans votre navigateur.</p>
+  <p>L'achat du pass est géré par Stripe, qui collecte les données de paiement : nous n'y avons pas accès. Nous recevons de Stripe l'adresse e-mail du paiement, pour rattacher le pass à votre compte, et nous créons une clé de pass enregistrée avec cette adresse. Cette clé est envoyée à notre service pour être vérifiée. Pour appliquer la règle « un pass pour une seule personne », nous recevons aussi une empreinte chiffrée (hash) du prénom et du nom de votre CV, jamais le nom en clair. Cette clé est gardée dans votre navigateur.</p>
   <h2>Le compte</h2>
   <p>Un compte gratuit est facultatif : il sert à garder votre CV en ligne. Nous enregistrons votre adresse e-mail et les CV que vous choisissez d'enregistrer, dans une base de données hébergée par Supabase (région Union européenne, Paris). La connexion se fait par un lien envoyé par e-mail, via le service d'envoi Resend. Vos CV enregistrés ne sont visibles que de vous. Vous pouvez supprimer chaque CV, ou votre compte entier avec tous vos CV, à tout moment depuis le bouton « Mon compte » : la suppression est immédiate et définitive. Nous conservons vos données tant que votre compte existe.</p>
   <h2>Ce qui est enregistré sur votre appareil</h2>
   <p>Pour que vous puissiez reprendre votre brouillon, une copie est gardée dans le stockage local de votre navigateur (localStorage), avec votre clé de pass et, si vous êtes connecté, votre session. Vous pouvez effacer le brouillon avec le bouton « Repartir de zéro », ou en vidant les données du site dans votre navigateur. Si vous utilisez un ordinateur partagé, pensez à le faire.</p>
   <h2>Cookies et suivi</h2>
-  <p>Ce site n'utilise aucun cookie, ni outil de mesure d'audience, ni publicité. Les polices sont hébergées sur le site. Les services de tiers (IA, Gumroad, Supabase, Resend) ne sont appelés que si vous utilisez la fonction correspondante. Si cela change un jour, cette page sera mise à jour avant.</p>
+  <p>Ce site n'utilise aucun cookie, ni outil de mesure d'audience, ni publicité. Les polices sont hébergées sur le site. Les services de tiers (IA, Stripe, Supabase, Resend) ne sont appelés que si vous utilisez la fonction correspondante. Si cela change un jour, cette page sera mise à jour avant.</p>
   <h2>Vos droits</h2>
   <p>Vous pouvez à tout moment accéder à vos données, les corriger ou les supprimer : directement depuis « Mon compte » pour vos CV et votre compte, ou en écrivant à <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>. Vous pouvez aussi saisir la CNIL (cnil.fr) si vous estimez que vos droits ne sont pas respectés.</p>
 </main>
@@ -59,9 +59,9 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=8acc123d" defer></script>
-<script src="/assets/support.js?v=8acc123d" defer></script>
-<script src="/assets/stats.js?v=8acc123d" defer></script>
+<script src="/assets/nav.js?v=53b6c85c" defer></script>
+<script src="/assets/support.js?v=53b6c85c" defer></script>
+<script src="/assets/stats.js?v=53b6c85c" defer></script>
 
 </body>
 </html>

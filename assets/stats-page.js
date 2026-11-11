@@ -40,7 +40,7 @@
     rows($("#st-funnel"), [
       { k: "Pages vues", c: e("view") }, { k: "PDF téléchargés (avec bandeau : " + N(d.pdf_wm) + ")", c: e("pdf") },
       { k: "Fenêtre « Retirer le bandeau » : clic sur Retirer", c: e("wm_remove") }, { k: "Fenêtre du Pass ouverte", c: e("pass_open") },
-      { k: "Clic Acheter le Pass", c: e("buy_pass") }, { k: "Clic offre Pro", c: e("buy_pro") }, { k: "Clé activée", c: e("key_ok") },
+      { k: "Clic Acheter le Pass", c: e("buy_pass") }, { k: "Clé activée", c: e("key_ok") },
       { k: "Modèle réservé touché sans Pass", c: e("tpl_locked") }
     ]);
     rows($("#st-pages"), d.pages || []);

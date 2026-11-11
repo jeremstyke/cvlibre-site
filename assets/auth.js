@@ -49,6 +49,7 @@
   }
   var acc = $("#nav-acc");
   if (acc) acc.addEventListener("click", function (e) { if (!user) { e.preventDefault(); open(); } });
+  if (window.CVPASS) { window.CVPASS.setUser(function () { return user && user.email ? user.email : ""; }); window.CVPASS.setLogin(open); }
   window.CVAUTH = {
     sb: sb, open: open, close: close, user: function () { return user; },
     on: function (f) { cbs.push(f); if (ready) f(user); },
