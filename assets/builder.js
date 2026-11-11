@@ -35,7 +35,8 @@
   /* ---------- aperçu ---------- */
   var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
   function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
-  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1 };
+  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1 };
+  var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"]];
   function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
     sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
@@ -43,6 +44,7 @@
     sheet.innerHTML = CVR.render(S) + (wmOn() ? '<div class="wm" role="img" aria-label="CV créé gratuitement avec CVLibre"></div>' : "");
     fit();
     $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl && !(PREMIUM[S.tpl] && !paid()))); b.classList.toggle("locked", !!PREMIUM[b.dataset.tpl] && !paid()); });
+    var tm = $("#tpl-more"); if (tm) { var cur = PREMIUM[S.tpl] && paid(); tm.setAttribute("aria-pressed", String(!!cur)); tm.textContent = cur ? (TPLS.filter(function (t) { return t[0] === S.tpl; })[0] || ["", "Plus de modèles"])[1] : "Plus de modèles"; }
     $$("#swatches button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === S.accent)); });
   }
   function fit() {
@@ -116,6 +118,28 @@
   Object.keys(LISTS).forEach(renderList);
 
   /* ---------- modèle et couleur ---------- */
+  var tdlg = $("#tpl-dlg"), tgrid = $("#tpl-grid"), tmore = $("#tpl-more");
+  function openGallery() {
+    tgrid.textContent = "";
+    TPLS.forEach(function (t) {
+      var locked = !!PREMIUM[t[0]] && !paid();
+      var card = document.createElement("button"); card.type = "button"; card.className = "tpl-card" + (S.tpl === t[0] ? " on" : "");
+      var th = document.createElement("span"); th.className = "tpl-thumb";
+      var sh = document.createElement("div"); sh.className = "sheet t-" + t[0]; sh.style.setProperty("--acc", S.accent); sh.setAttribute("aria-hidden", "true");
+      sh.innerHTML = CVR.render(S); th.appendChild(sh);
+      var nm = document.createElement("span"); nm.className = "tpl-name"; nm.textContent = t[1];
+      if (locked) { var bd = document.createElement("span"); bd.className = "tpl-badge"; bd.textContent = "Pass"; nm.appendChild(bd); }
+      card.appendChild(th); card.appendChild(nm);
+      card.addEventListener("click", function () {
+        tdlg.close();
+        if (locked) { var pb = $("#pass-btn"); if (pb) pb.click(); return; }
+        S.tpl = t[0]; changed();
+      });
+      tgrid.appendChild(card);
+    });
+    if (tdlg.showModal) tdlg.showModal(); else tdlg.setAttribute("open", "");
+  }
+  if (tmore && tdlg) tmore.addEventListener("click", openGallery);
   $$("#tpls button").forEach(function (b) { b.addEventListener("click", function () {
     if (PREMIUM[b.dataset.tpl] && !paid()) { var pb = $("#pass-btn"); if (pb) pb.click(); return; }
     S.tpl = b.dataset.tpl; changed();

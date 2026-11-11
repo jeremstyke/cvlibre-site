@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=27e11ee4">
-<link rel="stylesheet" href="/assets/cv.css?v=27e11ee4">
+<link rel="stylesheet" href="/assets/style.css?v=89f4d5a6">
+<link rel="stylesheet" href="/assets/cv.css?v=89f4d5a6">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -65,9 +65,7 @@
         <button type="button" data-tpl="classique" aria-pressed="false">Classique</button>
         <button type="button" data-tpl="moderne" aria-pressed="false">Moderne</button>
         <button type="button" data-tpl="sobre" aria-pressed="false">Sobre</button>
-        <button type="button" data-tpl="elegant" aria-pressed="false">Élégant</button>
-        <button type="button" data-tpl="bandeau" aria-pressed="false">Bandeau</button>
-        <button type="button" data-tpl="chrono" aria-pressed="false">Chronologie</button>
+        <button type="button" id="tpl-more" aria-haspopup="dialog">Plus de modèles</button>
       </div>
     </div>
     <div class="grp" role="group" aria-label="Couleur"><span>Couleur</span>
@@ -210,6 +208,14 @@
   </div>
   <p class="pass-note" id="acc-note" role="status"></p>
 </dialog>
+<dialog class="pass-dlg tpl-dlg" id="tpl-dlg" aria-labelledby="tpl-title">
+  <form method="dialog">
+    <h2 id="tpl-title">Tous les modèles</h2>
+    <p class="hint">Trois modèles sont gratuits. Les dix autres sont inclus avec le Pass 1 an et l'offre Pro.</p>
+    <div class="tpl-grid" id="tpl-grid"></div>
+    <div class="pass-end"><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+  </form>
+</dialog>
 <dialog class="pass-dlg" id="wm-dlg" aria-labelledby="wm-title">
   <form method="dialog">
     <h2 id="wm-title">Votre PDF portera un petit bandeau</h2>
@@ -221,7 +227,7 @@
   <form method="dialog">
     <h2 id="pass-title">Retirer le filigrane</h2>
     <div id="pass-off">
-      <p>Le pass supprime le bandeau « CV créé gratuitement avec CVLibre » de vos PDF pendant 12 mois, et donne accès à la lettre de motivation avec l'IA et à trois modèles de CV en plus (Élégant, Bandeau, Chronologie).</p>
+      <p>Le pass supprime le bandeau « CV créé gratuitement avec CVLibre » de vos PDF pendant 12 mois, et donne accès à la lettre de motivation avec l'IA et à dix modèles de CV en plus.</p>
       <p class="pass-price">4,99 € TTC en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
       <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
       <p class="hint">Pour créer les CV de plusieurs personnes (conseiller, association, agence) : <a href="https://jeremstyke.gumroad.com/l/Cvlibre-pro?wanted=true" target="_blank" rel="noopener">offre Pro à 19,99 € HT par mois</a>, sans engagement.</p>
@@ -250,13 +256,13 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=27e11ee4" defer></script>
-<script src="/assets/support.js?v=27e11ee4" defer></script>
+<script src="/assets/nav.js?v=89f4d5a6" defer></script>
+<script src="/assets/support.js?v=89f4d5a6" defer></script>
 
-<script src="/assets/render.js?v=27e11ee4"></script>
-<script src="/assets/pass.js?v=27e11ee4"></script>
-<script src="/assets/builder.js?v=27e11ee4"></script>
+<script src="/assets/render.js?v=89f4d5a6"></script>
+<script src="/assets/pass.js?v=89f4d5a6"></script>
+<script src="/assets/builder.js?v=89f4d5a6"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/account.js?v=27e11ee4"></script>
+<script src="/assets/account.js?v=89f4d5a6"></script>
 </body>
 </html>
