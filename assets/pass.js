@@ -68,6 +68,8 @@
     if (p) {
       var pro = st.plan === "pro", rl = $("#pass-rules");
       $("#pass-status").textContent = pro ? "Offre Pro active. Vos PDF sortent sans filigrane." : "Pass actif jusqu'au " + new Date(st.until).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + ". Vos PDF sortent sans filigrane.";
+      var mt = $("#pass-manage-txt");
+      if (mt) mt.textContent = pro ? "Pour résilier votre abonnement, utilisez le lien « Gérer l'abonnement » de votre e-mail de reçu, ou retrouvez votre clé et vos factures :" : "Clé perdue ou facture à retrouver ?";
       if (rl) rl.textContent = pro ? "Offre Pro : prénom et nom libres, 30 PDF sans filigrane et 60 utilisations IA par jour, jusqu'à 200 CV et 200 lettres enregistrés." : "Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.";
     }
     btn.textContent = p ? "Pass actif" : (btn.getAttribute("data-off") || "Retirer le filigrane");
