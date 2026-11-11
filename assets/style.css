@@ -250,3 +250,5 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .sup-form input { flex: 1; min-width: 0; font: 16px var(--body); padding: .55rem .7rem; border: 1px solid #c3cad6; border-radius: .5rem; }
 .sup-foot { margin: 0; padding: 0 14px 12px; font-size: .85rem; color: var(--ink-2); }
 @media print { .sup { display: none !important; } }
+.foot { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
