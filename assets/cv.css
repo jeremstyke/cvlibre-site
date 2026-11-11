@@ -1,4 +1,4 @@
-/* Le CV (feuille A4) et ses trois modèles : classique, moderne, sobre */
+/* Le CV (feuille A4) et ses modèles : classique, moderne, sobre (gratuits), élégant, bandeau, chronologie (Pass et Pro) */
 .sheet { position: relative; --acc: #1f4fd8; width: 210mm; min-height: 297mm; background: #fff; color: #1b1f27; font: 10pt/1.42 "Source Sans 3", Arial, Helvetica, sans-serif; box-sizing: border-box; overflow-wrap: anywhere; }
 .sheet * { box-sizing: border-box; }
 .sheet h1, .sheet h2, .sheet p, .sheet ul { margin: 0; padding: 0; }
@@ -65,6 +65,48 @@
 .t-sobre .c-tags li { border: 0; padding: 0; }
 .t-sobre .c-tags li:not(:last-child)::after { content: ","; margin-right: .6mm; }
 .t-sobre .c-tags { gap: 0 1.5mm; }
+
+/* Modèles du Pass et du Pro : élégant, bandeau, chronologie */
+.sheet.t-elegant { padding: 16mm 18mm; }
+.t-elegant .c-head { display: block; text-align: center; }
+.t-elegant .c-photo-h { margin: 0 auto 4mm; }
+.t-elegant .c-id h1 { font: 600 27pt/1.1 "Source Serif 4", Georgia, "Times New Roman", serif; letter-spacing: .01em; color: #111827; }
+.t-elegant .c-title { font-size: 10pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--acc); margin-top: 2mm; }
+.t-elegant .c-contact-h { margin-top: 4mm; padding: 2.2mm 0; border-top: .3mm solid #c9ced8; border-bottom: .3mm solid #c9ced8; }
+.t-elegant .c-contact-h .c-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6mm; font-size: 9.3pt; }
+.t-elegant .c-cols { margin-top: 7mm; }
+.t-elegant .c-sec h2 { display: flex; align-items: center; gap: 3mm; font: 600 12pt/1.2 "Source Serif 4", Georgia, serif; color: var(--acc); }
+.t-elegant .c-sec h2::after { content: ""; flex: 1; height: .25mm; background: #c9ced8; }
+.t-elegant .c-tags li { border-color: #d3d8e2; }
+
+.sheet.t-bandeau { padding: 0; }
+.t-bandeau .c-head { display: flex; align-items: center; gap: 8mm; flex-wrap: wrap; background: var(--acc); color: #fff; padding: 14mm 16mm 10mm; }
+.t-bandeau .c-photo-h { border: .8mm solid #fff; }
+.t-bandeau .c-id { flex: 1; min-width: 0; }
+.t-bandeau .c-id h1 { font: 800 26pt/1.05 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #fff; }
+.t-bandeau .c-title { font-size: 12.5pt; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 1.5mm; }
+.t-bandeau .c-contact-h { flex-basis: 100%; padding-top: 3mm; border-top: .25mm solid rgba(255, 255, 255, .45); }
+.t-bandeau .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.5pt; color: #fff; }
+.t-bandeau .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 60mm; column-gap: 9mm; padding: 9mm 16mm 14mm; }
+.t-bandeau .c-side { border-left: .25mm solid #dfe3ec; padding-left: 7mm; }
+.t-bandeau .c-sec h2 { color: var(--acc); }
+
+.sheet.t-chrono { padding: 0; }
+.t-chrono .cv { display: grid; grid-template-columns: minmax(0, 1fr) 64mm; grid-template-areas: "head side" "body side"; grid-template-rows: auto 1fr; min-height: 297mm; }
+.t-chrono .c-cols { display: contents; }
+.t-chrono .c-head { grid-area: head; padding: 16mm 12mm 0 14mm; display: block; }
+.t-chrono .c-head .c-photo-h, .t-chrono .c-contact-h { display: none; }
+.t-chrono .c-id h1 { font: 800 26pt/1.02 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #111827; }
+.t-chrono .c-title { font-size: 13pt; font-weight: 600; color: var(--acc); margin-top: 2mm; }
+.t-chrono .c-main { grid-area: body; padding: 8mm 12mm 14mm 14mm; }
+.t-chrono .c-side { grid-area: side; background: #eef2fb; background: color-mix(in srgb, var(--acc) 10%, #fff); padding: 16mm 8mm 14mm; }
+.t-chrono .c-photo-s { display: block; margin: 0 auto 8mm; }
+.t-chrono .c-contact-s { display: block; }
+.t-chrono .c-sec h2 { color: var(--acc); }
+.t-chrono .c-side .c-sec h2 { border-bottom: .25mm solid var(--acc); padding-bottom: 1mm; }
+.t-chrono .c-side .c-tags li { background: #fff; border-color: transparent; }
+.t-chrono .c-main .c-item { position: relative; border-left: .45mm solid var(--acc); padding-left: 5mm; }
+.t-chrono .c-main .c-item::before { content: ""; position: absolute; left: -1.5mm; top: 1.6mm; width: 2.6mm; height: 2.6mm; border-radius: 50%; background: var(--acc); }
 
 /* Filigrane de la version gratuite : bandeau image (pas de texte, donc rien dans le texte lu par les logiciels de recrutement) */
 .sheet .wm { position: absolute; left: 0; right: 0; bottom: 0; height: 16mm; background: #dfe6f1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 60'%3E%3Ctext x='260' y='41' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' font-weight='700' fill='%231d4ed8'%3Ecvlibre.com%3C/text%3E%3C/svg%3E") center / auto 70% no-repeat; border-top: .4mm solid #9aa8bf; -webkit-print-color-adjust: exact; print-color-adjust: exact; }

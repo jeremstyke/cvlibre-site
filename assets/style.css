@@ -298,3 +298,6 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .jobs { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .jobs a { display: inline-block; padding: .5rem .9rem; border: 1px solid var(--rule); border-radius: 999px; background: #fff; color: var(--ink); text-decoration: none; font-weight: 600; }
 .jobs a:hover { border-color: var(--blue); color: var(--blue); }
+
+#tpls { flex-wrap: wrap; }
+.seg button.locked::after { content: "Pass"; margin-left: 6px; padding: 1px 6px; border-radius: 999px; background: var(--blue); color: #fff; font-size: .68rem; font-weight: 700; vertical-align: 2px; }

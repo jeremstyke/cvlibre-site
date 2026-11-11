@@ -35,12 +35,14 @@
   /* ---------- aperçu ---------- */
   var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
   function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
+  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1 };
+  function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
-    sheet.className = "sheet t-" + S.tpl;
+    sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
     sheet.style.setProperty("--acc", S.accent);
     sheet.innerHTML = CVR.render(S) + (wmOn() ? '<div class="wm" role="img" aria-label="CV créé gratuitement avec CVLibre"></div>' : "");
     fit();
-    $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl)); });
+    $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl && !(PREMIUM[S.tpl] && !paid()))); b.classList.toggle("locked", !!PREMIUM[b.dataset.tpl] && !paid()); });
     $$("#swatches button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === S.accent)); });
   }
   function fit() {
@@ -114,7 +116,10 @@
   Object.keys(LISTS).forEach(renderList);
 
   /* ---------- modèle et couleur ---------- */
-  $$("#tpls button").forEach(function (b) { b.addEventListener("click", function () { S.tpl = b.dataset.tpl; changed(); }); });
+  $$("#tpls button").forEach(function (b) { b.addEventListener("click", function () {
+    if (PREMIUM[b.dataset.tpl] && !paid()) { var pb = $("#pass-btn"); if (pb) pb.click(); return; }
+    S.tpl = b.dataset.tpl; changed();
+  }); });
   COLORS.forEach(function (c) {
     var b = document.createElement("button"); b.type = "button"; b.dataset.c = c[0]; b.style.background = c[0];
     b.setAttribute("aria-label", c[1]); b.title = c[1];
