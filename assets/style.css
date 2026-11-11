@@ -293,3 +293,8 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .plan li { margin: 6px 0; }
 .plan .btn { align-self: flex-start; }
 @media (max-width: 800px) { .plans { grid-template-columns: 1fr; } }
+
+.lead-s { color: var(--ink-2); margin: 8px 0 0; }
+.jobs { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.jobs a { display: inline-block; padding: .5rem .9rem; border: 1px solid var(--rule); border-radius: 999px; background: #fff; color: var(--ink); text-decoration: none; font-weight: 600; }
+.jobs a:hover { border-color: var(--blue); color: var(--blue); }
