@@ -195,6 +195,7 @@
     S = n; $$("[data-k]").forEach(function (el) { el.value = S[el.dataset.k] || ""; });
     Object.keys(LISTS).forEach(renderList); photoUI(); changed();
   }
+  window.CVB = { get: function () { return clone(S); }, set: function (d) { setState(Object.assign(clone(CVR.sample), d)); } };
   function fileToPayload(f) {
     return new Promise(function (ok, ko) {
       if (!f) return ok(null);

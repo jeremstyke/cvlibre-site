@@ -60,6 +60,7 @@
     </div>
     <div class="app-actions">
       <button type="button" class="btn btn-ghost btn-sm" id="reset">Repartir de zéro</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="acc-btn">Se connecter</button>
       <button type="button" class="btn btn-ghost btn-sm" id="pass-btn">Retirer le filigrane</button>
       <button type="button" class="btn btn-sm" id="print">Télécharger en PDF</button>
     </div>
@@ -159,6 +160,22 @@
 </main>
 
 
+<dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
+  <h2 id="acc-title">Mon compte</h2>
+  <div id="acc-out">
+    <p>Le compte est facultatif. Il sert à enregistrer vos CV en ligne et à les retrouver sur tous vos appareils. Vous pouvez les supprimer à tout moment.</p>
+    <p class="pass-note">Saisissez votre email : vous recevrez un lien de connexion, sans mot de passe.</p>
+    <div class="pass-row"><input type="email" id="acc-email" autocomplete="email" placeholder="vous@exemple.fr" aria-label="Adresse email"><button type="button" class="btn btn-ghost btn-sm" id="acc-mail-go">Recevoir le lien</button></div>
+  </div>
+  <div id="acc-in" hidden>
+    <p>Connecté : <strong id="acc-mail"></strong></p>
+    <p class="pass-row"><button type="button" class="btn btn-sm" id="acc-save">Enregistrer ce CV</button><button type="button" class="btn btn-ghost btn-sm" id="acc-new">Enregistrer comme nouveau CV</button></p>
+    <div id="acc-list"></div>
+    <p class="pass-row"><button type="button" class="btn btn-ghost btn-sm" id="acc-out-btn">Se déconnecter</button><button type="button" class="btn btn-ghost btn-sm" id="acc-del">Supprimer mon compte</button></p>
+  </div>
+  <p class="pass-note" id="acc-note" role="status"></p>
+  <p class="pass-end"><button type="button" class="btn btn-ghost btn-sm" id="acc-close">Fermer</button></p>
+</dialog>
 <dialog class="pass-dlg" id="pass-dlg" aria-labelledby="pass-title">
   <form method="dialog">
     <h2 id="pass-title">Retirer le filigrane</h2>
@@ -192,5 +209,7 @@
 <script src="/assets/render.js"></script>
 <script src="/assets/pass.js"></script>
 <script src="/assets/builder.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/assets/account.js"></script>
 </body>
 </html>

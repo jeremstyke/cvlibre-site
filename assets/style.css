@@ -208,3 +208,8 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .pass-dlg .pass-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .pass-dlg .pass-row input { flex: 1 1 180px; min-width: 0; }
 .pass-dlg .pass-end { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.pass-dlg .pass-note { font-size: .92rem; color: #4b5565; margin: .5rem 0; }
+.pass-dlg .pass-note.bad { color: #b42318; }
+.pass-dlg input[type=email] { flex: 1; min-width: 0; padding: .55rem .7rem; border: 1px solid #c3cad6; border-radius: .5rem; font: inherit; }
+.pass-dlg #acc-list { display: grid; gap: .4rem; margin: .8rem 0; }
+.pass-dlg #acc-list .pass-row span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
