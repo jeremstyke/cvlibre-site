@@ -194,5 +194,172 @@
 .t-cartes .c-sec { padding: 4mm 5mm 1mm; border: .3mm solid #dfe3ec; border-radius: 3mm; margin-bottom: 4mm; }
 .t-cartes .c-sec h2 { color: var(--acc); }
 
+/* Six modèles de plus pour le Pass : aurore, horizon, minimal, pastel, atelier, prestige */
+.sheet.t-aurore { padding: 0; }
+.t-aurore .cv { display: flex; flex-direction: column; }
+.t-aurore .c-head { display: flex; align-items: center; gap: 8mm; flex-wrap: wrap; padding: 14mm 16mm 9mm; color: #fff; background: #1f4fd8; background: var(--acc); background: linear-gradient(115deg, var(--acc), color-mix(in srgb, var(--acc) 50%, #0f172a)); }
+.t-aurore .c-id { flex: 1; min-width: 0; }
+.t-aurore .c-id h1 { font: 800 27pt/1.04 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #fff; }
+.t-aurore .c-title { font-size: 12.5pt; font-weight: 600; color: rgba(255, 255, 255, .9); margin-top: 1.5mm; }
+.t-aurore .c-photo-h { border: .8mm solid rgba(255, 255, 255, .85); }
+.t-aurore .c-contact-h { flex-basis: 100%; }
+.t-aurore .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; color: #fff; }
+.t-aurore .c-cols { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 62mm; }
+.t-aurore .c-main { padding: 9mm 9mm 14mm 16mm; }
+.t-aurore .c-side { padding: 9mm 12mm 14mm 8mm; background: #f1f4fa; background: color-mix(in srgb, var(--acc) 8%, #fff); }
+.t-aurore .c-sec h2 { color: var(--acc); }
+.t-aurore .c-tags li { background: #fff; border-color: transparent; }
+
+.sheet.t-horizon { padding: 0; border-top: 4mm solid var(--acc); }
+.t-horizon .c-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; flex-wrap: wrap; padding: 11mm 16mm 6mm; }
+.t-horizon .c-id h1 { font: 800 28pt/1.02 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.025em; color: #111827; }
+.t-horizon .c-title { font-size: 12.5pt; font-weight: 600; color: var(--acc); margin-top: 1.5mm; }
+.t-horizon .c-contact-h { text-align: right; font-size: 9.3pt; }
+.t-horizon .c-contact-h .c-list li { margin: 0 0 .6mm; }
+.t-horizon .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 56mm; column-gap: 9mm; padding: 4mm 16mm 14mm; }
+.t-horizon .c-sec h2 { color: #111827; margin-bottom: 3.5mm; }
+.t-horizon .c-sec h2::after { content: ""; display: block; width: 9mm; height: .8mm; background: var(--acc); margin-top: 1.3mm; }
+.t-horizon .c-tags li { border-radius: 5mm; }
+
+.sheet.t-minimal { padding: 17mm 20mm; }
+.t-minimal .c-head { display: block; text-align: center; padding-bottom: 5mm; border-bottom: .25mm solid #d4d8e0; }
+.t-minimal .c-photo-h { margin: 0 auto 4mm; }
+.t-minimal .c-id h1 { font: 300 25pt/1.1 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #111827; }
+.t-minimal .c-title { font-size: 9.5pt; letter-spacing: .2em; text-transform: uppercase; color: #6b7280; margin-top: 2.5mm; }
+.t-minimal .c-contact-h { margin-top: 4mm; }
+.t-minimal .c-contact-h .c-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6mm; font-size: 9.2pt; color: #4b5565; }
+.t-minimal .c-cols { margin-top: 7mm; }
+.t-minimal .c-sec h2 { text-align: center; font: 600 8.5pt/1.2 "Source Sans 3", Arial, sans-serif; letter-spacing: .24em; text-transform: uppercase; color: #374151; margin-bottom: 4mm; }
+.t-minimal .c-sec h2::before { content: ""; display: block; width: 8mm; height: .5mm; background: var(--acc); margin: 0 auto 2mm; }
+.t-minimal .c-date { color: var(--acc); }
+.t-minimal .c-tags { justify-content: center; }
+.t-minimal .c-tags li { border-color: #d4d8e0; border-radius: 5mm; }
+.t-minimal .c-lang { max-width: 90mm; margin: 0 auto; }
+
+.sheet.t-pastel { padding: 0; }
+.t-pastel .cv { display: grid; grid-template-columns: 66mm minmax(0, 1fr); grid-template-areas: "side head" "side body"; grid-template-rows: auto 1fr; min-height: 297mm; }
+.t-pastel .c-cols { display: contents; }
+.t-pastel .c-head { grid-area: head; padding: 16mm 14mm 0 12mm; display: block; }
+.t-pastel .c-head .c-photo-h, .t-pastel .c-contact-h { display: none; }
+.t-pastel .c-id h1 { font: 800 26pt/1.02 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #111827; }
+.t-pastel .c-title { font-size: 13pt; font-weight: 600; color: var(--acc); margin-top: 2mm; }
+.t-pastel .c-main { grid-area: body; padding: 8mm 14mm 14mm 12mm; }
+.t-pastel .c-main .c-sec h2 { color: var(--acc); }
+.t-pastel .c-side { grid-area: side; padding: 16mm 8mm 14mm; background: #eef2fb; background: color-mix(in srgb, var(--acc) 11%, #fff); }
+.t-pastel .c-photo-s { display: block; margin: 0 auto 8mm; border-radius: 4mm; width: 34mm; height: 40mm; }
+.t-pastel .c-contact-s { display: block; }
+.t-pastel .c-side .c-sec h2 { color: #111827; border-bottom: .3mm solid var(--acc); padding-bottom: 1mm; }
+.t-pastel .c-side .c-tags li { background: #fff; border-color: transparent; border-radius: 5mm; }
+.t-pastel .c-side .c-list li { font-size: 9.5pt; }
+
+.sheet.t-atelier { padding: 15mm 16mm 14mm; }
+.t-atelier .c-head { display: flex; align-items: center; justify-content: space-between; gap: 8mm; flex-wrap: wrap; }
+.t-atelier .c-id h1 { font: 800 30pt/1 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.03em; text-transform: uppercase; color: #111827; }
+.t-atelier .c-title { display: inline-block; font-size: 11pt; font-weight: 700; color: #fff; background: var(--acc); padding: .8mm 3mm; border-radius: 1mm; margin-top: 2.5mm; }
+.t-atelier .c-contact-h { flex-basis: 100%; margin-top: 4mm; padding: 2.5mm 0; border-top: .25mm solid #d4d8e0; border-bottom: .25mm solid #d4d8e0; }
+.t-atelier .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.3pt; }
+.t-atelier .c-contact-h .c-list li { margin: 0; }
+.t-atelier .c-cols { margin-top: 6mm; }
+.t-atelier .c-sec h2 { display: flex; align-items: center; gap: 2.5mm; color: #111827; }
+.t-atelier .c-sec h2::before { content: ""; width: 6mm; height: 1.2mm; background: var(--acc); flex: none; }
+.t-atelier .c-side { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8mm; margin-top: 2mm; padding-top: 5mm; border-top: .25mm solid #d4d8e0; }
+.t-atelier .c-side .c-sec { margin-bottom: 0; }
+.t-atelier .c-tags li { border-color: var(--acc); }
+
+.sheet.t-prestige { padding: 0; }
+.t-prestige .c-head { display: flex; align-items: center; gap: 8mm; flex-wrap: wrap; padding: 14mm 16mm 9mm; background: #171c28; color: #fff; border-bottom: 1.2mm solid var(--acc); }
+.t-prestige .c-id { flex: 1; min-width: 0; }
+.t-prestige .c-id h1 { font: 600 26pt/1.08 "Source Serif 4", Georgia, "Times New Roman", serif; letter-spacing: .01em; color: #fff; }
+.t-prestige .c-title { font-size: 10pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #fff; opacity: .85; margin-top: 2mm; }
+.t-prestige .c-photo-h { border: .6mm solid var(--acc); }
+.t-prestige .c-contact-h { flex-basis: 100%; }
+.t-prestige .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; color: rgba(255, 255, 255, .9); }
+.t-prestige .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 58mm; column-gap: 9mm; padding: 9mm 16mm 14mm; }
+.t-prestige .c-side { border-left: .25mm solid var(--acc); padding-left: 7mm; }
+.t-prestige .c-sec h2 { font: 600 12pt/1.2 "Source Serif 4", Georgia, serif; color: var(--acc); }
+
+/* Six autres : deux sobres (standard, compact) et quatre plus originales (diagonale, bulle, papier, pop) */
+.sheet.t-standard { padding: 16mm 18mm; font-family: "Source Serif 4", Georgia, "Times New Roman", serif; font-size: 10pt; }
+.t-standard .c-head { display: block; text-align: center; }
+.t-standard .c-photo-h { margin: 0 auto 3mm; }
+.t-standard .c-id h1 { font: 700 22pt/1.1 "Source Serif 4", Georgia, serif; color: #111; }
+.t-standard .c-title { font-size: 11.5pt; font-style: italic; color: #333; margin-top: 1mm; }
+.t-standard .c-contact-h { margin-top: 2.5mm; }
+.t-standard .c-contact-h .c-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 5mm; font-size: 9.3pt; color: #333; }
+.t-standard .c-cols { margin-top: 6mm; }
+.t-standard .c-sec h2 { font: 700 10.5pt/1.2 "Source Serif 4", Georgia, serif; text-transform: uppercase; letter-spacing: .06em; color: #111; border-bottom: .3mm solid #111; padding-bottom: 1mm; }
+.t-standard .c-date, .t-standard .c-sub, .t-standard .c-line strong, .t-standard .c-tags li, .t-standard .c-lang li span { font-family: "Source Serif 4", Georgia, serif; }
+.t-standard .c-sub { color: var(--acc); font-style: italic; font-weight: 600; }
+.t-standard .c-tags li { border: 0; padding: 0; }
+.t-standard .c-tags li:not(:last-child)::after { content: ","; margin-right: .6mm; }
+.t-standard .c-tags { gap: 0 1.5mm; }
+
+.sheet.t-compact { padding: 12mm 14mm; font-size: 9.3pt; line-height: 1.36; }
+.t-compact .c-head { display: flex; align-items: center; justify-content: space-between; gap: 6mm; flex-wrap: wrap; padding-bottom: 3mm; border-bottom: .5mm solid var(--acc); }
+.t-compact .c-photo { width: 24mm; height: 24mm; }
+.t-compact .c-id h1 { font: 800 21pt/1.05 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #111827; }
+.t-compact .c-title { font-size: 11pt; font-weight: 600; color: var(--acc); margin-top: 1mm; }
+.t-compact .c-contact-h { flex-basis: 100%; }
+.t-compact .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 5mm; font-size: 8.8pt; color: #3b4453; }
+.t-compact .c-contact-h .c-list li { margin: 0; }
+.t-compact .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 52mm; column-gap: 7mm; margin-top: 4mm; }
+.t-compact .c-sec { margin-bottom: 4mm; }
+.t-compact .c-sec h2 { font-size: 9.8pt; text-transform: uppercase; letter-spacing: .06em; color: var(--acc); margin-bottom: 1.8mm; }
+.t-compact .c-item { margin-bottom: 3mm; }
+.t-compact .c-side { border-left: .25mm solid #dfe3ec; padding-left: 5mm; }
+.t-compact .c-tags li { font-size: 8.6pt; padding: .4mm 1.6mm; }
+
+.sheet.t-diagonale { padding: 0; overflow: hidden; }
+.t-diagonale .c-head { position: relative; display: block; padding: 14mm 16mm 32mm; color: #fff; }
+.t-diagonale .c-head::before { content: ""; position: absolute; inset: 0 0 0 0; z-index: 0; background: #1f4fd8; background: var(--acc); clip-path: polygon(0 0, 100% 0, 100% 42%, 0 80%); }
+.t-diagonale .c-head > * { position: relative; z-index: 1; }
+.t-diagonale .c-id h1 { font: 800 28pt/1.02 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.025em; color: #fff; }
+.t-diagonale .c-title { font-size: 12.5pt; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 1.5mm; }
+.t-diagonale .c-photo-h { position: absolute; right: 16mm; top: 12mm; border: .9mm solid #fff; }
+.t-diagonale .c-contact-h { position: absolute; left: 16mm; right: 16mm; bottom: 5mm; }
+.t-diagonale .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; color: #3b4453; }
+.t-diagonale .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 58mm; column-gap: 9mm; padding: 4mm 16mm 14mm; }
+.t-diagonale .c-sec h2 { color: var(--acc); }
+
+.sheet.t-bulle { padding: 15mm 16mm 14mm; overflow: hidden; }
+.t-bulle .c-head { position: relative; display: block; min-height: 44mm; padding-right: 50mm; }
+.t-bulle .c-head::before { content: ""; position: absolute; right: -36mm; top: -42mm; width: 86mm; height: 86mm; border-radius: 50%; background: #dbe5fb; background: color-mix(in srgb, var(--acc) 18%, #fff); z-index: 0; }
+.t-bulle .c-head::after { content: ""; position: absolute; right: 38mm; top: 18mm; width: 9mm; height: 9mm; border-radius: 50%; background: var(--acc); z-index: 0; }
+.t-bulle .c-head > * { position: relative; z-index: 1; }
+.t-bulle .c-photo-h { position: absolute; right: 2mm; top: -2mm; width: 34mm; height: 34mm; border: 1.2mm solid #fff; }
+.t-bulle .c-id h1 { font: 800 27pt/1.03 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.025em; color: #111827; }
+.t-bulle .c-title { font-size: 12.5pt; font-weight: 600; color: var(--acc); margin-top: 1.5mm; }
+.t-bulle .c-contact-h { margin-top: 5mm; }
+.t-bulle .c-contact-h .c-list { font-size: 9.4pt; }
+.t-bulle .c-contact-h .c-list li { display: inline-block; margin: 0 5mm 1mm 0; }
+.t-bulle .c-cols { margin-top: 5mm; }
+.t-bulle .c-sec h2 { color: #111827; display: flex; align-items: center; gap: 2.2mm; }
+.t-bulle .c-sec h2::before { content: ""; width: 3mm; height: 3mm; border-radius: 50%; background: var(--acc); flex: none; }
+.t-bulle .c-tags li { border-radius: 5mm; border-color: var(--acc); }
+
+.sheet.t-papier { padding: 16mm 17mm 14mm 24mm; background: #fbf8f1; box-shadow: inset 11mm 0 0 #f3ecda, inset 11.4mm 0 0 var(--acc); }
+.t-papier .c-head { display: flex; align-items: center; justify-content: space-between; gap: 8mm; flex-wrap: wrap; }
+.t-papier .c-id h1 { font: 700 26pt/1.05 "Source Serif 4", Georgia, "Times New Roman", serif; color: #2a2118; }
+.t-papier .c-title { font-size: 12pt; font-style: italic; color: var(--acc); margin-top: 1.5mm; }
+.t-papier .c-contact-h { flex-basis: 100%; margin-top: 2.5mm; padding-top: 2.5mm; border-top: .3mm dashed #b9ad94; }
+.t-papier .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.3pt; color: #4a3f31; }
+.t-papier .c-cols { margin-top: 6mm; }
+.t-papier .c-sec h2 { font: 700 11.5pt/1.2 "Source Serif 4", Georgia, serif; color: #2a2118; }
+.t-papier .c-sec h2::after { content: ""; display: block; height: .5mm; margin-top: 1mm; background: repeating-linear-gradient(90deg, var(--acc) 0 2mm, transparent 2mm 3.4mm); }
+.t-papier .c-tags li { background: #fff; border-color: #d9ceb7; }
+.t-papier .c-date, .t-papier .c-sub { color: #5a4d3a; }
+
+.sheet.t-pop { padding: 15mm 16mm 14mm; }
+.t-pop .c-head { display: flex; align-items: center; justify-content: space-between; gap: 8mm; flex-wrap: wrap; }
+.t-pop .c-id { background: var(--acc); color: #fff; padding: 5mm 7mm; border: .5mm solid #111827; box-shadow: 1.6mm 1.6mm 0 #111827; flex: 1; min-width: 0; }
+.t-pop .c-id h1 { font: 800 25pt/1.04 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.02em; color: #fff; }
+.t-pop .c-title { font-size: 12pt; font-weight: 700; color: #fff; margin-top: 1.5mm; }
+.t-pop .c-photo-h { border: .5mm solid #111827; box-shadow: 1.2mm 1.2mm 0 #111827; border-radius: 3mm; }
+.t-pop .c-contact-h { flex-basis: 100%; margin-top: 3mm; }
+.t-pop .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; font-weight: 600; }
+.t-pop .c-cols { margin-top: 6mm; }
+.t-pop .c-sec h2 { display: inline-block; font-size: 11pt; color: #111827; background: linear-gradient(transparent 55%, #b9cdf8 55%); background: linear-gradient(transparent 55%, color-mix(in srgb, var(--acc) 45%, #fff) 55%); padding: 0 1.5mm; margin-left: -1.5mm; }
+.t-pop .c-tags li { border: .35mm solid #111827; border-radius: 1mm; box-shadow: .7mm .7mm 0 #111827; background: #fff; margin: 0 .8mm .8mm 0; }
+
 /* Filigrane de la version gratuite : bandeau image (pas de texte, donc rien dans le texte lu par les logiciels de recrutement) */
 .sheet .wm { position: absolute; left: 0; right: 0; bottom: 0; height: 16mm; background: #dfe6f1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 60'%3E%3Ctext x='260' y='41' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' font-weight='700' fill='%231d4ed8'%3Ecvlibre.com%3C/text%3E%3C/svg%3E") center / auto 70% no-repeat; border-top: .4mm solid #9aa8bf; -webkit-print-color-adjust: exact; print-color-adjust: exact; }

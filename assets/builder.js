@@ -35,8 +35,8 @@
   /* ---------- aperçu ---------- */
   var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
   function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
-  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1 };
-  var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"]];
+  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1, aurore: 1, horizon: 1, minimal: 1, pastel: 1, atelier: 1, prestige: 1, standard: 1, compact: 1, diagonale: 1, bulle: 1, papier: 1, pop: 1 };
+  var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"], ["aurore", "Aurore"], ["horizon", "Horizon"], ["minimal", "Minimal"], ["pastel", "Pastel"], ["atelier", "Atelier"], ["prestige", "Prestige"], ["standard", "Standard"], ["compact", "Compact"], ["diagonale", "Diagonale"], ["bulle", "Bulle"], ["papier", "Papier"], ["pop", "Pop"]];
   function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
     sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
