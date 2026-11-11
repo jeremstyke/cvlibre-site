@@ -62,7 +62,7 @@
   /* ---------- fenêtre ---------- */
   var dlg = $("#pass-dlg");
   if (!dlg) return;
-  var off = $("#pass-off"), on = $("#pass-on"), note = $("#pass-note"), offBtn = $("#pass-off-btn"), btn = $("#pass-btn");
+  var off = $("#pass-off"), on = $("#pass-on"), note = $("#pass-note"), btn = $("#pass-btn");
   var buy = $("#pass-buy");
   buy.href = BUY;
   /* Le pass est rattaché au compte : on se connecte d'abord, puis le paiement s'ouvre avec l'e-mail déjà rempli. */
@@ -76,7 +76,7 @@
   });
   function ui() {
     var p = paid();
-    off.hidden = p; on.hidden = !p; offBtn.hidden = !p;
+    off.hidden = p; on.hidden = !p;
     if (p) {
       var pro = st.plan === "pro", rl = $("#pass-rules");
       $("#pass-status").textContent = pro ? "Offre Pro active. Vos PDF sortent sans filigrane." : "Pass actif jusqu'au " + new Date(st.until).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + ". Vos PDF sortent sans filigrane.";
@@ -87,6 +87,5 @@
     btn.textContent = p ? "Pass actif" : (btn.getAttribute("data-off") || "Retirer le filigrane");
   }
   btn.addEventListener("click", function () { note.textContent = ""; ui(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
-  offBtn.addEventListener("click", function () { forget(); note.textContent = "Pass désactivé sur cet appareil."; });
   subs.push(ui); ui();
 })();

@@ -55,7 +55,7 @@
     on: function (f) { cbs.push(f); if (ready) f(user); },
     signOut: function () { return sb.auth.signOut(); }
   };
-  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ready) fire(); });
+  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_OUT" && window.CVPASS) window.CVPASS.forget(); if (ready) fire(); });
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ready = true; fire();
     if (/[?&]connexion=1/.test(location.search)) { if (!user) open(); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
