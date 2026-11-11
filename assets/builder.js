@@ -1,0 +1,277 @@
+/* Créateur de CV : état, formulaire, aperçu en direct, impression PDF. Tout reste dans le navigateur. */
+(function () {
+  "use strict";
+  var KEY = "cvlibre.v1";
+  var COLORS = [["#1f4fd8", "Bleu"], ["#0f766e", "Vert"], ["#9d174d", "Prune"], ["#b45309", "Ambre"], ["#374151", "Ardoise"], ["#111827", "Noir"]];
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
+
+  var LISTS = {
+    exp: { el: "#exp-list", label: "Expérience", blank: { role: "", company: "", city: "", from: "", to: "", desc: "" }, fields: [
+      ["role", "Poste", "text", "full"], ["company", "Entreprise", "text", "half"], ["city", "Ville", "text", "half"],
+      ["from", "Début", "text", "half", "Ex. Sept. 2022"], ["to", "Fin", "text", "half", "Ex. Aujourd'hui"],
+      ["desc", "Missions et résultats", "area", "full", "Une ligne par mission. Commence la ligne par un tiret pour faire une puce."]] },
+    edu: { el: "#edu-list", label: "Formation", blank: { degree: "", school: "", from: "", to: "", desc: "" }, fields: [
+      ["degree", "Diplôme ou formation", "text", "full"], ["school", "École ou université", "text", "full"],
+      ["from", "Début", "text", "half"], ["to", "Fin", "text", "half"], ["desc", "Détails (facultatif)", "area", "full"]] },
+    langs: { el: "#langs-list", label: "Langue", blank: { name: "", level: "" }, fields: [
+      ["name", "Langue", "text", "half"], ["level", "Niveau", "text", "half", "Ex. Courant (C1)"]] }
+  };
+
+  var S = load(), saveT = 0;
+  function load() {
+    try {
+      var t = localStorage.getItem(KEY);
+      if (t) { var o = JSON.parse(t); if (o && typeof o === "object") return Object.assign(clone(CVR.sample), o); }
+    } catch (e) {}
+    return clone(CVR.sample);
+  }
+  function flush() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function save() { clearTimeout(saveT); saveT = setTimeout(flush, 300); }
+  window.addEventListener("pagehide", flush);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flush(); });
+
+  /* ---------- aperçu ---------- */
+  var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
+  function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
+  function paint() {
+    sheet.className = "sheet t-" + S.tpl;
+    sheet.style.setProperty("--acc", S.accent);
+    sheet.innerHTML = CVR.render(S) + (wmOn() ? '<div class="wm" role="img" aria-label="CV créé gratuitement avec CVLibre"></div>' : "");
+    fit();
+    $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl)); });
+    $$("#swatches button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === S.accent)); });
+  }
+  function fit() {
+    var w = pbox.clientWidth, sw = sheet.offsetWidth;
+    if (!w || !sw) return;
+    var k = w / sw;
+    sheet.style.transform = "scale(" + k + ")";
+    pbox.style.height = Math.ceil(sheet.offsetHeight * k) + "px";
+    var pages = Math.ceil((sheet.offsetHeight - 3) / (297 * 96 / 25.4));
+    if (pages > 1) { warn.hidden = false; warn.textContent = "Ton CV fait " + pages + " pages. Pour la plupart des candidatures, une page suffit : raccourcis les descriptions ou garde les expériences les plus récentes."; }
+    else warn.hidden = true;
+  }
+  function changed() { save(); paint(); }
+
+  /* ---------- champs simples ---------- */
+  $$("[data-k]").forEach(function (el) {
+    el.value = S[el.dataset.k] || "";
+    el.addEventListener("input", function () { S[el.dataset.k] = el.value; changed(); });
+  });
+
+  /* ---------- listes (expériences, formations, langues) ---------- */
+  function renderList(key) {
+    var cfg = LISTS[key], box = $(cfg.el), arr = S[key];
+    box.innerHTML = "";
+    arr.forEach(function (item, i) {
+      var card = document.createElement("div"); card.className = "item";
+      var head = document.createElement("div"); head.className = "item-head";
+      var t = document.createElement("strong"); t.textContent = cfg.label + " " + (i + 1);
+      var mini = document.createElement("div"); mini.className = "mini";
+      [["↑", "Monter", -1], ["↓", "Descendre", 1], ["×", "Supprimer", 0]].forEach(function (a) {
+        var b = document.createElement("button"); b.type = "button"; b.textContent = a[0];
+        b.setAttribute("aria-label", a[1] + " : " + cfg.label.toLowerCase() + " " + (i + 1));
+        if ((a[2] === -1 && i === 0) || (a[2] === 1 && i === arr.length - 1)) b.disabled = true;
+        b.addEventListener("click", function () {
+          if (a[2] === 0) arr.splice(i, 1);
+          else { var j = i + a[2], tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp; }
+          renderList(key); changed();
+        });
+        mini.appendChild(b);
+      });
+      head.appendChild(t); head.appendChild(mini); card.appendChild(head);
+      var row = null;
+      cfg.fields.forEach(function (f) {
+        var id = key + "-" + i + "-" + f[0], wrap = document.createElement("div"); wrap.className = "fld";
+        var lab = document.createElement("label"); lab.htmlFor = id; lab.textContent = f[1];
+        var inp = document.createElement(f[2] === "area" ? "textarea" : "input"); inp.id = id; inp.value = item[f[0]] || "";
+        if (f[4] && f[2] !== "area") inp.placeholder = f[4];
+        wrap.appendChild(lab); wrap.appendChild(inp);
+        if (f[4] && f[2] === "area") { var h = document.createElement("span"); h.className = "hint"; h.textContent = f[4]; wrap.appendChild(h); }
+        inp.addEventListener("input", function () { item[f[0]] = inp.value; changed(); });
+        if (f[0] === "desc") {
+          var rw = document.createElement("button"); rw.type = "button"; rw.className = "link-btn rw"; rw.textContent = "Reformuler avec l'IA";
+          rw.addEventListener("click", function () { window.CVAI.rewrite(rw, function () { return inp.value; }, function (v) { inp.value = v; item.desc = v; changed(); }, key); });
+          wrap.appendChild(rw);
+        }
+        if (f[3] === "half") {
+          if (!row) { row = document.createElement("div"); row.className = "row2"; card.appendChild(row); }
+          row.appendChild(wrap);
+          if (row.children.length === 2) row = null;
+        } else { row = null; card.appendChild(wrap); }
+      });
+      box.appendChild(card);
+    });
+  }
+  $$("[data-add]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var k = b.dataset.add; S[k].push(clone(LISTS[k].blank)); renderList(k); changed();
+      var last = $(LISTS[k].el + " .item:last-child input"); if (last) last.focus();
+    });
+  });
+  Object.keys(LISTS).forEach(renderList);
+
+  /* ---------- modèle et couleur ---------- */
+  $$("#tpls button").forEach(function (b) { b.addEventListener("click", function () { S.tpl = b.dataset.tpl; changed(); }); });
+  COLORS.forEach(function (c) {
+    var b = document.createElement("button"); b.type = "button"; b.dataset.c = c[0]; b.style.background = c[0];
+    b.setAttribute("aria-label", c[1]); b.title = c[1];
+    b.addEventListener("click", function () { S.accent = c[0]; changed(); });
+    $("#swatches").appendChild(b);
+  });
+
+  /* ---------- photo ---------- */
+  var prev = $("#photo-prev"), del = $("#photo-del");
+  function photoUI() { prev.style.backgroundImage = S.photo ? "url(" + S.photo + ")" : "none"; del.hidden = !S.photo; }
+  $("#photo-file").addEventListener("change", function (e) {
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var s = Math.min(img.width, img.height), c = document.createElement("canvas"); c.width = c.height = 360;
+        c.getContext("2d").drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 360, 360);
+        S.photo = c.toDataURL("image/jpeg", 0.85); photoUI(); changed();
+      };
+      img.src = rd.result;
+    };
+    rd.readAsDataURL(f);
+  });
+  del.addEventListener("click", function () { S.photo = ""; $("#photo-file").value = ""; photoUI(); changed(); });
+
+  /* ---------- impression PDF ---------- */
+  var oldTitle = document.title, passMsg = $("#pass-msg");
+  function doPrint() {
+    var n = (S.name || "").trim();
+    document.title = n ? "CV " + n : "CV";
+    paint();
+    window.print();
+  }
+  $("#print").addEventListener("click", function () {
+    passMsg.hidden = true; forceWm = false;
+    if (!window.CVPASS || !window.CVPASS.paid()) { doPrint(); return; }
+    window.CVPASS.exportPdf(S.name).then(function (r) {
+      forceWm = !!r.wm;
+      if (r.text) { passMsg.textContent = r.text; passMsg.hidden = false; }
+      doPrint();
+    });
+  });
+  window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint(); });
+  if (window.CVPASS) window.CVPASS.onChange(function () { paint(); });
+
+  /* ---------- IA : remplir le CV et reformuler ---------- */
+  var AI = "https://cvlibre-ai-production.up.railway.app";
+  var ERR = {
+    limit: "Tu as utilisé tes 3 essais gratuits du jour. Reviens demain.",
+    busy: "Le service est très demandé en ce moment. Réessaie un peu plus tard.",
+    empty: "Écris quelques lignes sur ton parcours ou ajoute ton ancien CV.",
+    net: "Connexion impossible. Vérifie ta connexion et réessaie."
+  };
+  function aiPost(path, payload) {
+    if (window.CVPASS && window.CVPASS.key()) payload.key = window.CVPASS.key();
+    return fetch(AI + path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; }); })
+      .catch(function () { return { error: "net" }; });
+  }
+  var leftTxt = function (n) { return typeof n === "number" ? " Il te reste " + n + " essai" + (n > 1 ? "s" : "") + " aujourd'hui." : ""; };
+  var aiMsg = $("#ai-msg"), aiGo = $("#ai-go"), aiUndo = $("#ai-undo"), aiPrev = null;
+  function str(x) { return typeof x === "string" ? x.trim() : ""; }
+  function normCV(cv) {
+    var list = function (a, max, fn, blank) { var r = (Array.isArray(a) ? a : []).slice(0, max).map(fn); return r.length ? r : [clone(blank)]; };
+    var skills = Array.isArray(cv.skills) ? cv.skills.map(str).filter(Boolean).join(", ") : str(cv.skills);
+    return {
+      tpl: S.tpl, accent: S.accent, photo: S.photo,
+      name: str(cv.name), title: str(cv.title), email: str(cv.email), phone: str(cv.phone), city: str(cv.city), link: str(cv.link), summary: str(cv.summary),
+      exp: list(cv.exp, 6, function (e) { e = e || {}; return { role: str(e.role), company: str(e.company), city: str(e.city), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.exp.blank),
+      edu: list(cv.edu, 4, function (e) { e = e || {}; return { degree: str(e.degree), school: str(e.school), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.edu.blank),
+      skills: skills,
+      langs: list(cv.langs, 5, function (l) { l = l || {}; return { name: str(l.name), level: str(l.level) }; }, LISTS.langs.blank),
+      hobbies: str(cv.hobbies)
+    };
+  }
+  function setState(n) {
+    S = n; $$("[data-k]").forEach(function (el) { el.value = S[el.dataset.k] || ""; });
+    Object.keys(LISTS).forEach(renderList); photoUI(); changed();
+  }
+  function fileToPayload(f) {
+    return new Promise(function (ok, ko) {
+      if (!f) return ok(null);
+      if (f.type === "application/pdf") {
+        if (f.size > 4 * 1024 * 1024) return ko("Ce PDF dépasse 4 Mo. Réduis-le ou colle son texte ci-dessus.");
+        var rd = new FileReader(); rd.onload = function () { ok({ type: f.type, data: String(rd.result).split(",")[1] }); }; rd.onerror = function () { ko("Fichier illisible."); }; rd.readAsDataURL(f); return;
+      }
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) return ko("Format non pris en charge. Utilise un PDF ou une photo (JPEG, PNG).");
+      var url = URL.createObjectURL(f), img = new Image();
+      img.onload = function () {
+        var k = Math.min(1, 1600 / Math.max(img.width, img.height)), c = document.createElement("canvas");
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        ok({ type: "image/jpeg", data: c.toDataURL("image/jpeg", 0.85).split(",")[1] });
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); ko("Image illisible."); };
+      img.src = url;
+    });
+  }
+  aiGo.addEventListener("click", function () {
+    var text = $("#ai-text").value.trim(), f = $("#ai-file").files && $("#ai-file").files[0];
+    if (!text && !f) { aiMsg.textContent = ERR.empty; return; }
+    aiGo.disabled = true; aiGo.textContent = "L'IA travaille..."; aiMsg.textContent = "Cela prend 5 à 15 secondes.";
+    fileToPayload(f).then(function (file) {
+      return aiPost("/fill", { text: text, file: file });
+    }, function (m) { return { error: "local", msg: m }; }).then(function (j) {
+      aiGo.disabled = false; aiGo.textContent = "Remplir mon CV";
+      if (j.error || !j.cv) { aiMsg.textContent = j.msg || ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessaie, ton essai n'est pas décompté."; return; }
+      aiPrev = clone(S); setState(normCV(j.cv)); aiUndo.hidden = false;
+      aiMsg.textContent = "C'est rempli. Relis tout et corrige : l'IA peut se tromper." + leftTxt(j.left);
+      $("#f-name").scrollIntoView({ block: "nearest" });
+    });
+  });
+  aiUndo.addEventListener("click", function () { if (aiPrev) { setState(aiPrev); aiPrev = null; } aiUndo.hidden = true; aiMsg.textContent = "Ton CV d'avant est de retour."; });
+
+  function rewrite(btn, get, set, field) {  // exposé plus bas pour les listes
+    var t = get().trim(); if (t.length < 5) { btn.textContent = "Écris d'abord quelques mots"; setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 2500); return; }
+    btn.disabled = true; btn.textContent = "Reformulation...";
+    aiPost("/rewrite", { text: t, field: field }).then(function (j) {
+      btn.disabled = false;
+      if (j.error || !j.text) { btn.textContent = ERR[j.error] ? ERR[j.error].split(".")[0] : "Échec, réessaie"; setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 3500); return; }
+      set(j.text); btn.textContent = "Reformulé" + (typeof j.left === "number" ? " (reste " + j.left + " essai" + (j.left > 1 ? "s" : "") + ")" : "");
+      setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 4000);
+    });
+  }
+  window.CVAI = { rewrite: rewrite };
+  $$("[data-rw]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var k = b.dataset.rw, el = $('[data-k="' + k + '"]');
+      rewrite(b, function () { return el.value; }, function (v) { el.value = v; S[k] = v; changed(); }, k);
+    });
+  });
+
+  /* ---------- repartir de zéro ---------- */
+  var rst = $("#reset"), rstT = 0;
+  rst.addEventListener("click", function () {
+    if (rst.dataset.arm !== "1") {
+      rst.dataset.arm = "1"; rst.textContent = "Confirmer l'effacement";
+      rstT = setTimeout(function () { rst.dataset.arm = ""; rst.textContent = "Repartir de zéro"; }, 4000); return;
+    }
+    clearTimeout(rstT); rst.dataset.arm = ""; rst.textContent = "Repartir de zéro";
+    var keepTpl = S.tpl, keepAcc = S.accent;
+    S = { tpl: keepTpl, accent: keepAcc, photo: "", name: "", title: "", email: "", phone: "", city: "", link: "", summary: "", exp: [clone(LISTS.exp.blank)], edu: [clone(LISTS.edu.blank)], skills: "", langs: [clone(LISTS.langs.blank)], hobbies: "" };
+    $$("[data-k]").forEach(function (el) { el.value = ""; });
+    Object.keys(LISTS).forEach(renderList); photoUI(); changed();
+  });
+
+  /* ---------- onglets mobile ---------- */
+  $$(".mobile-tabs button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.body.dataset.tab = b.dataset.tab;
+      $$(".mobile-tabs button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      setTimeout(fit, 30); window.scrollTo(0, 0);
+    });
+  });
+
+  window.addEventListener("resize", fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  photoUI(); paint();
+})();

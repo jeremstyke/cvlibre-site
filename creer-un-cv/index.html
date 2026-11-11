@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Créer mon CV en ligne, gratuit | CVLibre</title>
+<meta name="description" content="Remplis tes informations, vois ton CV se construire en direct et télécharge-le en PDF. Trois modèles lisibles par les logiciels de recrutement, sans inscription.">
+<link rel="canonical" href="https://cvlibre.com/creer-un-cv/">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Créer mon CV en ligne, gratuit | CVLibre">
+<meta property="og:description" content="Trois modèles de CV, aperçu en direct, export PDF. Ton CV reste dans ton navigateur.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cvlibre.com/creer-un-cv/">
+<meta name="theme-color" content="#f3f5f8">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/cv.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .skip, .top, .foot, .app-bar, .panel, .mobile-tabs, .notice, .help, .pass-dlg { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .app { display: block; padding: 0; }
+  body .preview-col { display: block !important; position: static; }
+  body .panel { display: none !important; }
+  .preview-outer { border: 0; padding: 0; background: #fff; border-radius: 0; overflow: visible; }
+  .preview-box { height: auto !important; }
+  .preview-box .sheet { transform: none !important; position: relative !important; min-height: 296mm; }
+}
+</style>
+</head>
+<body data-tab="edit">
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/blog/">Conseils</a>
+      <a href="/#questions">Questions fréquentes</a>
+      <a class="btn btn-sm" href="/creer-un-cv/">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+
+<div class="app-bar" role="region" aria-label="Réglages du CV">
+  <div class="wrap app-bar-in">
+    <div class="grp" role="group" aria-label="Modèle"><span>Modèle</span>
+      <div class="seg" id="tpls">
+        <button type="button" data-tpl="classique" aria-pressed="false">Classique</button>
+        <button type="button" data-tpl="moderne" aria-pressed="false">Moderne</button>
+        <button type="button" data-tpl="sobre" aria-pressed="false">Sobre</button>
+      </div>
+    </div>
+    <div class="grp" role="group" aria-label="Couleur"><span>Couleur</span>
+      <div class="swatches" id="swatches"></div>
+    </div>
+    <div class="app-actions">
+      <button type="button" class="btn btn-ghost btn-sm" id="reset">Repartir de zéro</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="pass-btn">Retirer le filigrane</button>
+      <button type="button" class="btn btn-sm" id="print">Télécharger en PDF</button>
+    </div>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <h1 class="sr-only" style="position:absolute;left:-9999px">Créer mon CV</h1>
+  <div class="mobile-tabs"><div class="seg" role="group" aria-label="Affichage">
+    <button type="button" id="tab-edit" aria-pressed="true" data-tab="edit">Modifier</button>
+    <button type="button" id="tab-view" aria-pressed="false" data-tab="view">Aperçu</button>
+  </div></div>
+
+  <div class="app">
+    <div class="panel" id="panel">
+      <details class="fs" open>
+        <summary>Remplir avec l'IA</summary>
+        <div class="fs-body">
+          <div class="fld"><label for="ai-text">Raconte ton parcours en quelques lignes</label>
+            <textarea id="ai-text" maxlength="8000" placeholder="Ex. Serveur 3 ans au Bistrot du Port à Nantes, un an de caisse chez Carrefour, bac pro commerce en 2019. Anglais courant. Je vise un poste de responsable de salle."></textarea>
+            <span class="hint">Ou ajoute ton ancien CV ci-dessous : l'IA le lit et remplit le formulaire.</span>
+          </div>
+          <div class="fld"><label for="ai-file">Ancien CV (PDF ou photo, facultatif)</label><input type="file" id="ai-file" accept="application/pdf,image/jpeg,image/png,image/webp"></div>
+          <div class="ai-actions"><button type="button" class="btn btn-sm" id="ai-go">Remplir mon CV</button><button type="button" class="link-btn" id="ai-undo" hidden>Annuler</button></div>
+          <p class="hint" id="ai-msg" role="status" aria-live="polite">3 essais gratuits par jour. L'IA ne rajoute rien : vérifie le résultat avant d'envoyer ton CV. Ce que tu envoies est traité par une IA (voir <a href="/confidentialite/">confidentialité</a>).</p>
+        </div>
+      </details>
+      <details class="fs" open>
+        <summary>Qui es-tu ?</summary>
+        <div class="fs-body">
+          <div class="fld"><span class="lab">Photo (facultative)</span>
+            <div class="photo-row">
+              <div class="photo-prev" id="photo-prev" aria-hidden="true"></div>
+              <input type="file" id="photo-file" accept="image/*" aria-label="Choisir une photo">
+              <button type="button" class="link-btn" id="photo-del" hidden>Retirer la photo</button>
+            </div>
+            <span class="hint">Courante sur un CV français. Facultative, et déconseillée dans les pays anglo-saxons.</span>
+          </div>
+          <div class="fld"><label for="f-name">Prénom et nom</label><input id="f-name" data-k="name" autocomplete="name"></div>
+          <div class="fld"><label for="f-title">Poste visé ou titre</label><input id="f-title" data-k="title" placeholder="Ex. Comptable, Développeur web"></div>
+          <div class="row2">
+            <div class="fld"><label for="f-email">E-mail</label><input id="f-email" data-k="email" type="email" autocomplete="email"></div>
+            <div class="fld"><label for="f-phone">Téléphone</label><input id="f-phone" data-k="phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="row2">
+            <div class="fld"><label for="f-city">Ville</label><input id="f-city" data-k="city" autocomplete="address-level2"><span class="hint">Inutile de mettre ton adresse complète.</span></div>
+            <div class="fld"><label for="f-link">Lien (LinkedIn, portfolio)</label><input id="f-link" data-k="link"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="fs" open>
+        <summary>Profil</summary>
+        <div class="fs-body">
+          <div class="fld"><label for="f-summary">Présentation en 2 ou 3 phrases</label><textarea id="f-summary" data-k="summary"></textarea><span class="hint">Qui tu es, ce que tu sais faire, ce que tu cherches.</span><button type="button" class="link-btn rw" data-rw="summary">Reformuler avec l'IA</button></div>
+        </div>
+      </details>
+
+      <details class="fs" open>
+        <summary>Expérience professionnelle</summary>
+        <div class="fs-body"><div id="exp-list" style="display:grid;gap:14px"></div><button type="button" class="add" data-add="exp">Ajouter une expérience</button></div>
+      </details>
+
+      <details class="fs">
+        <summary>Formation</summary>
+        <div class="fs-body"><div id="edu-list" style="display:grid;gap:14px"></div><button type="button" class="add" data-add="edu">Ajouter une formation</button></div>
+      </details>
+
+      <details class="fs">
+        <summary>Compétences</summary>
+        <div class="fs-body">
+          <div class="fld"><label for="f-skills">Tes compétences</label><textarea id="f-skills" data-k="skills"></textarea><span class="hint">Sépare-les par des virgules.</span></div>
+        </div>
+      </details>
+
+      <details class="fs">
+        <summary>Langues</summary>
+        <div class="fs-body"><div id="langs-list" style="display:grid;gap:14px"></div><button type="button" class="add" data-add="langs">Ajouter une langue</button></div>
+      </details>
+
+      <details class="fs">
+        <summary>Centres d'intérêt</summary>
+        <div class="fs-body">
+          <div class="fld"><label for="f-hobbies">Tes loisirs</label><textarea id="f-hobbies" data-k="hobbies" style="min-height:70px"></textarea></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="preview-col">
+      <div class="preview-outer"><div class="preview-box" id="pbox"><div class="sheet t-moderne" id="sheet" aria-label="Aperçu du CV"></div></div></div>
+      <p class="notice warn" id="pages-warn" hidden></p>
+      <p class="notice warn" id="pass-msg" role="status" hidden></p>
+      <p class="help">Pour enregistrer en PDF : clique sur « Télécharger en PDF », choisis « Enregistrer au format PDF » comme imprimante et décoche « En-têtes et pieds de page ». Le texte du PDF reste sélectionnable, donc lisible par les logiciels de recrutement.</p>
+      <p class="help">Ton CV reste dans ce navigateur. Seul ce que tu envoies à l'IA (bloc « Remplir avec l'IA » ou bouton « Reformuler ») est transmis pour être traité.</p>
+    </div>
+  </div>
+</main>
+
+
+<dialog class="pass-dlg" id="pass-dlg" aria-labelledby="pass-title">
+  <form method="dialog">
+    <h2 id="pass-title">Retirer le filigrane</h2>
+    <div id="pass-off">
+      <p>Le pass supprime le bandeau « CV créé gratuitement avec CVLibre » de vos PDF pendant 12 mois.</p>
+      <p class="pass-price">4,99 € en un seul paiement. Aucun renouvellement, aucun prélèvement ensuite.</p>
+      <p><a class="btn btn-sm" id="pass-buy" href="#" target="_blank" rel="noopener">Acheter le pass</a></p>
+      <p class="hint">Après l'achat, vous recevez une clé de licence par e-mail. Collez-la ci-dessous.</p>
+      <div class="pass-row"><input id="pass-key" autocomplete="off" spellcheck="false" placeholder="Votre clé de licence" aria-label="Clé de licence"><button type="button" class="btn btn-sm" id="pass-go">Activer</button></div>
+    </div>
+    <div id="pass-on" hidden>
+      <p id="pass-status"></p>
+      <p class="hint">Pass personnel : un seul prénom, le nom de famille peut être modifié une fois. 3 PDF sans filigrane par jour.</p>
+    </div>
+    <p class="hint" id="pass-note" role="status" aria-live="polite"></p>
+    <div class="pass-end"><button type="button" class="link-btn" id="pass-off-btn" hidden>Retirer la clé de cet appareil</button><button type="submit" class="btn btn-ghost btn-sm">Fermer</button></div>
+  </form>
+</dialog>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><strong>CVLibre</strong> : un CV propre, prêt à envoyer. Ton CV reste dans ton navigateur.</p>
+    <nav aria-label="Pages légales">
+      <a href="/blog/">Conseils CV</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/assets/render.js"></script>
+<script src="/assets/pass.js"></script>
+<script src="/assets/builder.js"></script>
+</body>
+</html>
