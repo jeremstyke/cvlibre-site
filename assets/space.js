@@ -32,7 +32,7 @@
   }
   function offer() {
     var P = window.CVPASS, t = $("#sp-offer-txt"); if (!P || !t) return;
-    t.textContent = !P.paid() ? "Offre gratuite : 1 CV gardé en ligne, PDF avec bandeau. Le Pass 1 an (4,99 €) retire le bandeau et ouvre les lettres IA et 20 CV." :
+    t.textContent = !P.paid() ? "Offre gratuite : 1 CV gardé en ligne, PDF avec bandeau. Le Pass 1 an (4,99 € TTC) retire le bandeau et ouvre les lettres IA et 20 CV." :
       P.plan() === "pro" ? "Offre Pro active : CV de plusieurs personnes, 30 PDF et 60 utilisations IA par jour, jusqu'à 200 CV et 200 lettres." :
       "Pass 1 an actif jusqu'au " + new Date(P.until()).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + " : PDF sans bandeau, lettres IA, jusqu'à 20 CV et 30 lettres.";
   }
