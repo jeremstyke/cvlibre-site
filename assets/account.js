@@ -103,5 +103,9 @@
   });
   closeBtn.addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
   sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; ui(); });
-  sb.auth.getSession().then(function (r) { user = r.data && r.data.session ? r.data.session.user : null; ui(); });
+  sb.auth.getSession().then(function (r) {
+    user = r.data && r.data.session ? r.data.session.user : null; ui();
+    /* lien « Se connecter » de l'en-tête (visiteurs qui reviennent) */
+    if (/[?&]connexion=1/.test(location.search)) { openDlg(false); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
+  });
 })();
