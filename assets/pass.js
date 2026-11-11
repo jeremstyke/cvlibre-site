@@ -56,8 +56,16 @@
     });
   }
 
+  /* Après la connexion, si la personne venait de cliquer sur « Acheter », on l'envoie directement au paiement. */
+  function resumeBuy() {
+    var em = userFn(), t = 0;
+    if (!em || paid()) return;
+    try { t = Number(localStorage.getItem("cvlibre.buy") || 0); localStorage.removeItem("cvlibre.buy"); } catch (x) {}
+    if (t && Date.now() - t < 30 * 60000) location.href = buyUrl(em);
+  }
+
   window.CVPASS = { paid: paid, key: function () { return paid() ? st.key : ""; }, until: function () { return st ? st.until : 0; }, plan: function () { return paid() && st.plan === "pro" ? "pro" : "pass"; }, activate: activate, forget: forget, exportPdf: exportPdf, onChange: function (f) { subs.push(f); },
-    buyUrl: buyUrl, setUser: function (f) { userFn = f; }, setLogin: function (f) { loginFn = f; } };
+    buyUrl: buyUrl, resumeBuy: resumeBuy, setUser: function (f) { userFn = f; }, setLogin: function (f) { loginFn = f; } };
 
   /* ---------- fenêtre ---------- */
   var dlg = $("#pass-dlg");
@@ -71,6 +79,7 @@
     if (em) { buy.href = buyUrl(em); return; }
     if (!loginFn) return;
     e.preventDefault();
+    try { localStorage.setItem("cvlibre.buy", String(Date.now())); } catch (x) {}
     if (dlg.close) dlg.close(); else dlg.removeAttribute("open");
     loginFn();
   });

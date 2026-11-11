@@ -75,7 +75,7 @@
         if (live.length) {
           var last = live[live.length - 1];
           var go = P.paid() && P.key() === last.key ? Promise.resolve() : P.activate(last.key);
-          go.then(function () { m.textContent = "Votre pass est activé. Merci !"; offer(); passes(); });
+          go.then(function () { m.textContent = "Votre pass est activé. Merci !"; $("#sp-back").hidden = false; offer(); passes(); });
           try { history.replaceState(null, "", location.pathname); } catch (e) {}
         } else if (++n < 15) setTimeout(tick, 3000);
         else m.textContent = "Le paiement est bien reçu, l'activation prend plus de temps que prévu. Rechargez cette page dans une minute, ou écrivez-nous : contact@cvlibre.com.";

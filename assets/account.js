@@ -54,7 +54,8 @@
     if (passTried || !window.CVPASS || window.CVPASS.paid()) return;
     passTried = true;
     sb.rpc("my_pass").then(function (r) {
-      if (r.error || !r.data) return;
+      if (r.error) return;
+      if (!r.data) { window.CVPASS.resumeBuy(); return; }
       window.CVPASS.activate(r.data).then(function (a) { if (a.ok) say("Votre Pass 1 an a été retrouvé grâce à votre adresse e-mail."); });
     });
   }
@@ -135,7 +136,7 @@
     delAcc.dataset.arm = ""; delAcc.textContent = "Supprimer mon compte";
   });
   closeBtn.addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
-  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_OUT" && window.CVPASS) window.CVPASS.forget(); ui(); });
+  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_OUT") { passTried = false; if (window.CVPASS) window.CVPASS.forget(); } ui(); });
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ui();
     /* lien « Se connecter » de l'en-tête (visiteurs qui reviennent) */
