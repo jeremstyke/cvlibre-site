@@ -165,11 +165,19 @@
 
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
-  <h2 id="acc-title">Mon compte</h2>
+  <h2 id="acc-title">Connexion</h2>
   <div id="acc-out">
-    <p id="acc-intro">Créez votre compte gratuitement pour garder et modifier vite vos CV. Il est nécessaire pour télécharger le PDF. Il sert à enregistrer vos CV en ligne et à les retrouver sur tous vos appareils. Vous pouvez les supprimer à tout moment.</p>
-    <p class="pass-note">Saisissez votre email : vous recevrez un lien de connexion, sans mot de passe.</p>
-    <div class="pass-row"><input type="email" id="acc-email" autocomplete="email" placeholder="vous@exemple.fr" aria-label="Adresse email"><button type="button" class="btn btn-ghost btn-sm" id="acc-mail-go">Recevoir le lien</button></div>
+    <p id="acc-intro">Un compte gratuit vous permet de télécharger votre CV en PDF, de l'enregistrer et de le retrouver sur tous vos appareils.</p>
+    <div id="acc-step1">
+      <button type="button" class="btn acc-big" id="acc-mail-open">Continuer avec mon e-mail</button>
+      <p class="hint">Sans mot de passe : vous recevez un lien de connexion par e-mail.</p>
+    </div>
+    <div id="acc-step2" hidden>
+      <label for="acc-email" class="acc-lab">Votre adresse e-mail</label>
+      <input type="email" id="acc-email" autocomplete="email" placeholder="vous@exemple.fr">
+      <button type="button" class="btn acc-big" id="acc-mail-go">Recevoir le lien</button>
+      <button type="button" class="link-btn" id="acc-back">Retour</button>
+    </div>
   </div>
   <div id="acc-in" hidden>
     <p>Connecté : <strong id="acc-mail"></strong></p>

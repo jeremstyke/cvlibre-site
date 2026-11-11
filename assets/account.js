@@ -13,20 +13,24 @@
   function say(t, bad) { note.textContent = t || ""; note.className = "pass-note" + (bad ? " bad" : ""); }
   function remember(id) { curId = id; try { if (id) localStorage.setItem(CK, id); else localStorage.removeItem(CK); } catch (e) {} }
   function fmt(d) { return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }); }
-  var closeBtn = $("#acc-close"), intro = $("#acc-intro");
-  function openDlg(why) {
-    say(""); if (intro) intro.hidden = !why;
+  var closeBtn = $("#acc-close");
+  function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
+  function openDlg() {
+    say(""); step(1);
     if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", "");
   }
+  $("#acc-mail-open").addEventListener("click", function () { step(2); });
+  $("#acc-back").addEventListener("click", function () { say(""); step(1); });
+  $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
   /* le téléchargement du PDF demande un compte gratuit : le CV se crée librement, le brouillon reste dans le navigateur */
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target.closest("#print") : null;
     if (!t || user) return;
-    e.preventDefault(); e.stopImmediatePropagation(); openDlg(true);
+    e.preventDefault(); e.stopImmediatePropagation(); openDlg();
   }, true);
   function ui() {
     out.hidden = !!user; inn.hidden = !user;
-    btn.textContent = user ? "Mon compte" : "Se connecter";
+    btn.textContent = user ? "Mon compte" : "Se connecter"; $("#acc-title").textContent = user ? "Mon compte" : "Connexion";
     var pr = $("#acc-promo"); if (pr) pr.hidden = !!user;
     if (user) { $("#acc-mail").textContent = user.email || ""; refresh(); findPass(); }
   }
@@ -79,8 +83,8 @@
       remember(r.data[0].id); say("CV enregistré."); refresh();
     });
   }
-  var pb = $("#acc-promo-btn"); if (pb) pb.addEventListener("click", function () { openDlg(false); });
-  btn.addEventListener("click", function () { openDlg(false); });
+  var pb = $("#acc-promo-btn"); if (pb) pb.addEventListener("click", function () { openDlg(); });
+  btn.addEventListener("click", function () { openDlg(); });
   $("#acc-mail-go").addEventListener("click", function () {
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Saisissez une adresse email valide.", true); return; }
@@ -106,6 +110,6 @@
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ui();
     /* lien « Se connecter » de l'en-tête (visiteurs qui reviennent) */
-    if (/[?&]connexion=1/.test(location.search)) { openDlg(false); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
+    if (/[?&]connexion=1/.test(location.search)) { openDlg(); try { history.replaceState(null, "", location.pathname); } catch (e) {} }
   });
 })();
