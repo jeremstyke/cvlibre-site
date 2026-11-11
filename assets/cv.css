@@ -1,3 +1,26 @@
+@font-face { font-family: "Source Serif 4"; font-weight: 200 900; font-display: swap; src: url(fonts/source-serif-4-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "Source Serif 4"; font-weight: 200 900; font-display: swap; src: url(fonts/source-serif-4-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "CVF Inter"; font-weight: 200 900; font-display: swap; src: url(fonts/inter-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "CVF Inter"; font-weight: 200 900; font-display: swap; src: url(fonts/inter-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "CVF Nunito"; font-weight: 200 900; font-display: swap; src: url(fonts/nunito-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "CVF Nunito"; font-weight: 200 900; font-display: swap; src: url(fonts/nunito-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "CVF Montserrat"; font-weight: 200 900; font-display: swap; src: url(fonts/montserrat-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "CVF Montserrat"; font-weight: 200 900; font-display: swap; src: url(fonts/montserrat-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "CVF Lora"; font-weight: 200 900; font-display: swap; src: url(fonts/lora-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "CVF Lora"; font-weight: 200 900; font-display: swap; src: url(fonts/lora-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "CVF Playfair"; font-weight: 200 900; font-display: swap; src: url(fonts/playfair-display-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* Choix de la police (Pass) : remplace les polices du modèle */
+.sheet[data-font], .sheet[data-font] * { font-family: var(--ff) !important; }
+.sheet[data-font="inter"] { --ff: "CVF Inter", Arial, Helvetica, sans-serif; }
+.sheet[data-font="nunito"] { --ff: "CVF Nunito", Arial, Helvetica, sans-serif; }
+.sheet[data-font="montserrat"] { --ff: "CVF Montserrat", Arial, Helvetica, sans-serif; }
+.sheet[data-font="sourcesans"] { --ff: "Source Sans 3", Arial, Helvetica, sans-serif; }
+.sheet[data-font="bricolage"] { --ff: "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; }
+.sheet[data-font="lora"] { --ff: "CVF Lora", Georgia, "Times New Roman", serif; }
+.sheet[data-font="playfair"] { --ff: "CVF Playfair", Georgia, "Times New Roman", serif; }
+.sheet[data-font="sourceserif"] { --ff: "Source Serif 4", Georgia, "Times New Roman", serif; }
 /* Le CV (feuille A4) et ses modèles : classique, moderne, sobre (gratuits), dix modèles réservés au Pass et au Pro */
 .sheet { position: relative; --acc: #1f4fd8; width: 210mm; min-height: 297mm; background: #fff; color: #1b1f27; font: 10pt/1.42 "Source Sans 3", Arial, Helvetica, sans-serif; box-sizing: border-box; overflow-wrap: anywhere; }
 .sheet * { box-sizing: border-box; }
@@ -362,3 +385,13 @@
 
 /* Filigrane de la version gratuite : bandeau image (pas de texte, donc rien dans le texte lu par les logiciels de recrutement) */
 .sheet .wm { position: absolute; left: 0; right: 0; bottom: 0; height: 16mm; background: #dfe6f1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 60'%3E%3Ctext x='260' y='41' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' font-weight='700' fill='%231d4ed8'%3Ecvlibre.com%3C/text%3E%3C/svg%3E") center / auto 70% no-repeat; border-top: .4mm solid #9aa8bf; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* Impression sur plusieurs pages : marges, cadres et colonnes colorées se répètent sur chaque page */
+@media print {
+  .sheet, .sheet .cv, .sheet .c-main, .sheet .c-side, .sheet .c-cols { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  /* colonnes colorées : le fond est porté par la grille, donc il couvre toute la hauteur de chaque page */
+  .t-moderne .cv { background: linear-gradient(90deg, var(--acc) 0 68mm, transparent 68mm); }
+  .t-nuit .cv { background: linear-gradient(90deg, #1a2233 0 70mm, transparent 70mm); }
+  .t-pastel .cv { background: linear-gradient(90deg, #eef2fb 0 66mm, transparent 66mm); background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 11%, #fff) 0 66mm, transparent 66mm); }
+  .t-chrono .cv { background: linear-gradient(90deg, transparent calc(100% - 64mm), #eef2fb calc(100% - 64mm)); background: linear-gradient(90deg, transparent calc(100% - 64mm), color-mix(in srgb, var(--acc) 10%, #fff) calc(100% - 64mm)); }
+}

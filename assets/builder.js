@@ -36,11 +36,15 @@
   var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
   function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
   var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1, aurore: 1, horizon: 1, minimal: 1, pastel: 1, atelier: 1, prestige: 1, standard: 1, compact: 1, diagonale: 1, bulle: 1, papier: 1, pop: 1 };
+  var FONTS = { inter: 1, nunito: 1, montserrat: 1, sourcesans: 1, bricolage: 1, lora: 1, playfair: 1, sourceserif: 1 };
   var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"], ["aurore", "Aurore"], ["horizon", "Horizon"], ["minimal", "Minimal"], ["pastel", "Pastel"], ["atelier", "Atelier"], ["prestige", "Prestige"], ["standard", "Standard"], ["compact", "Compact"], ["diagonale", "Diagonale"], ["bulle", "Bulle"], ["papier", "Papier"], ["pop", "Pop"]];
   function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
     sheet.className = "sheet t-" + (PREMIUM[S.tpl] && !paid() ? "moderne" : S.tpl);
     sheet.style.setProperty("--acc", S.accent);
+    if (paid() && S.font && FONTS[S.font]) sheet.setAttribute("data-font", S.font); else sheet.removeAttribute("data-font");
+    var fs = $("#font-sel"); if (fs) $$("#font-sel option").forEach(function (o) { o.textContent = o.textContent.replace(/ \(Pass\)$/, "") + (o.value && !paid() ? " (Pass)" : ""); });
+    if (fs) fs.value = paid() && S.font && FONTS[S.font] ? S.font : "";
     sheet.innerHTML = CVR.render(S) + (wmOn() ? '<div class="wm" role="img" aria-label="CV créé gratuitement avec CVLibre"></div>' : "");
     fit();
     $$("#tpls button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tpl === S.tpl && !(PREMIUM[S.tpl] && !paid()))); b.classList.toggle("locked", !!PREMIUM[b.dataset.tpl] && !paid()); });
@@ -51,9 +55,14 @@
     var w = pbox.clientWidth, sw = sheet.offsetWidth;
     if (!w || !sw) return;
     var k = w / sw;
+    var cvEl = sheet.querySelector(".cv"); sheet.style.minHeight = ""; if (cvEl) cvEl.style.minHeight = "";
+    /* à l'impression les marges haut et bas se répètent sur chaque page : on en tient compte */
+    var cs = getComputedStyle(sheet), mv = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0), pg = 297 * 96 / 25.4;
+    var pages = Math.max(1, Math.ceil((sheet.offsetHeight - 3 - mv) / Math.max(pg - mv, pg / 2)));
+    /* la feuille remplit un nombre entier de pages : fonds et cadres vont jusqu'en bas de la dernière page */
+    if (pages > 1) { var mh = (pages * 297 - 0.4) + "mm"; sheet.style.minHeight = mh; if (cvEl) cvEl.style.minHeight = mh; }
     sheet.style.transform = "scale(" + k + ")";
     pbox.style.height = Math.ceil(sheet.offsetHeight * k) + "px";
-    var pages = Math.ceil((sheet.offsetHeight - 3) / (297 * 96 / 25.4));
     if (pages > 1) { warn.hidden = false; warn.textContent = "Votre CV fait " + pages + " pages. Pour la plupart des candidatures, une page suffit : raccourcissez les descriptions ou gardez les expériences les plus récentes."; }
     else warn.hidden = true;
   }
@@ -144,6 +153,11 @@
     if (PREMIUM[b.dataset.tpl] && !paid()) { var pb = $("#pass-btn"); if (pb) pb.click(); return; }
     S.tpl = b.dataset.tpl; changed();
   }); });
+  var fsel = $("#font-sel");
+  if (fsel) fsel.addEventListener("change", function () {
+    if (fsel.value && !paid()) { fsel.value = ""; var pb = $("#pass-btn"); if (pb) pb.click(); return; }
+    S.font = fsel.value; changed();
+  });
   COLORS.forEach(function (c) {
     var b = document.createElement("button"); b.type = "button"; b.dataset.c = c[0]; b.style.background = c[0];
     b.setAttribute("aria-label", c[1]); b.title = c[1];
@@ -220,7 +234,7 @@
     var list = function (a, max, fn, blank) { var r = (Array.isArray(a) ? a : []).slice(0, max).map(fn); return r.length ? r : [clone(blank)]; };
     var skills = Array.isArray(cv.skills) ? cv.skills.map(str).filter(Boolean).join(", ") : str(cv.skills);
     return {
-      tpl: S.tpl, accent: S.accent, photo: S.photo,
+      tpl: S.tpl, accent: S.accent, font: S.font || "", photo: S.photo,
       name: str(cv.name), title: str(cv.title), email: str(cv.email), phone: str(cv.phone), city: str(cv.city), link: str(cv.link), summary: str(cv.summary),
       exp: list(cv.exp, 6, function (e) { e = e || {}; return { role: str(e.role), company: str(e.company), city: str(e.city), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.exp.blank),
       edu: list(cv.edu, 4, function (e) { e = e || {}; return { degree: str(e.degree), school: str(e.school), from: str(e.from), to: str(e.to), desc: str(e.desc) }; }, LISTS.edu.blank),
@@ -295,8 +309,8 @@
       rstT = setTimeout(function () { rst.dataset.arm = ""; rst.textContent = "Repartir de zéro"; }, 4000); return;
     }
     clearTimeout(rstT); rst.dataset.arm = ""; rst.textContent = "Repartir de zéro";
-    var keepTpl = S.tpl, keepAcc = S.accent;
-    S = { tpl: keepTpl, accent: keepAcc, photo: "", name: "", title: "", email: "", phone: "", city: "", link: "", summary: "", exp: [clone(LISTS.exp.blank)], edu: [clone(LISTS.edu.blank)], skills: "", langs: [clone(LISTS.langs.blank)], hobbies: "" };
+    var keepTpl = S.tpl, keepAcc = S.accent, keepFont = S.font || "";
+    S = { tpl: keepTpl, accent: keepAcc, font: keepFont, photo: "", name: "", title: "", email: "", phone: "", city: "", link: "", summary: "", exp: [clone(LISTS.exp.blank)], edu: [clone(LISTS.edu.blank)], skills: "", langs: [clone(LISTS.langs.blank)], hobbies: "" };
     $$("[data-k]").forEach(function (el) { el.value = ""; });
     Object.keys(LISTS).forEach(renderList); photoUI(); changed();
   });

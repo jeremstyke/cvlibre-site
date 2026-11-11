@@ -101,6 +101,7 @@ a:hover { color: var(--blue-dark); }
 .app-bar-in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-top: 10px; padding-bottom: 10px; }
 .grp { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .grp > span { font-weight: 700; font-size: .9rem; color: var(--ink-2); }
+.app-bar select { border: 1px solid var(--rule); border-radius: var(--r); background: var(--sheet); color: var(--ink); padding: 8px 10px; font: 600 .95rem var(--body); max-width: 210px; }
 .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
 .seg button { background: var(--sheet); border: 0; border-right: 1px solid var(--rule); padding: 9px 14px; font: 600 .95rem var(--body); color: var(--ink); cursor: pointer; min-height: 40px; }
 .seg button:last-child { border-right: 0; }
