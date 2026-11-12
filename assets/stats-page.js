@@ -32,6 +32,7 @@
     kpi(k, pct(e("pass_open"), e("pdf")), "Ouvertures du Pass / PDF");
     kpi(k, N(e("buy_pass") + e("buy_pro")), "Clics vers le paiement");
     kpi(k, N(e("key_ok")), "Clés activées");
+    kpi(k, N(e("paid")), "Retours de paiement");
     kpi(k, N(d.users), "Comptes (+" + N(d.users_new) + ")");
     kpi(k, N(d.passes), "Pass et abonnements enregistrés");
     var ch = $("#st-chart"); ch.textContent = "";
@@ -40,7 +41,7 @@
     rows($("#st-funnel"), [
       { k: "Pages vues", c: e("view") }, { k: "PDF téléchargés (avec bandeau : " + N(d.pdf_wm) + ")", c: e("pdf") },
       { k: "Fenêtre « Retirer le bandeau » : clic sur Retirer", c: e("wm_remove") }, { k: "Fenêtre du Pass ouverte", c: e("pass_open") },
-      { k: "Clic Acheter le Pass", c: e("buy_pass") }, { k: "Clé activée", c: e("key_ok") },
+      { k: "Clic Acheter le Pass", c: e("buy_pass") }, { k: "Retour de paiement", c: e("paid") }, { k: "Clé activée", c: e("key_ok") },
       { k: "Modèle réservé touché sans Pass", c: e("tpl_locked") }
     ]);
     rows($("#st-pages"), d.pages || []);

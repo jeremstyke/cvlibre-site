@@ -5,15 +5,28 @@
   if (/[?&]nostats=1/.test(location.search)) { try { localStorage.setItem("cvlibre.nostats", "1"); } catch (e) {} return; }
   if (navigator.doNotTrack === "1" || /^(localhost|127\.)/.test(location.hostname)) return;
   var path = location.pathname;
-  if (/^\/(mon-espace|stats)\//.test(path)) return;
+  var SRC = "";
+  try {
+    var q = new URLSearchParams(location.search), us = q.get("utm_campaign") || q.get("utm_source") || (q.get("gclid") ? "google" : "");
+    if (us) { SRC = "pub:" + us.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40); sessionStorage.setItem("cvlibre.src", SRC); }
+    else SRC = sessionStorage.getItem("cvlibre.src") || "";
+  } catch (e) {}
+  var paidBack = path === "/mon-espace/" && /[?&]paiement=ok/.test(location.search);
+  if (/^\/(mon-espace|stats)\//.test(path) && !paidBack) return;
   var URL_ = "https://zltqrnflowxkycrjmhbx.supabase.co/rest/v1/rpc/track", KEY = "sb_publishable_KVXGhm7oHvaymjzOZyfp6A_03X6EcXr";
   var of = window.fetch ? window.fetch.bind(window) : null;
   if (!of) return;
   var ref = "";
   try { if (document.referrer) { var h = new URL(document.referrer).hostname.replace(/^www\./, ""); ref = h === location.hostname.replace(/^www\./, "") ? "interne" : h; } } catch (e) {}
   var dev = window.innerWidth < 700 ? "mobile" : "desktop";
+  if (SRC) ref = SRC;
   function send(ev, x) {
     try { of(URL_, { method: "POST", keepalive: true, headers: { "content-type": "application/json", apikey: KEY }, body: JSON.stringify({ p: path, e: ev, r: ref, d: dev, x: x || null }) }).catch(function () {}); } catch (e) {}
+  }
+  if (paidBack) {
+    /* Retour de Stripe : un seul "paid" par session, avec la source de la visite (pub, recherche...). */
+    try { if (!sessionStorage.getItem("cvlibre.paid")) { sessionStorage.setItem("cvlibre.paid", "1"); send("paid"); } } catch (e) { send("paid"); }
+    return;
   }
   send("view");
 
