@@ -327,3 +327,4 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .free-note p:last-child { margin: 0; }
 .give { max-width: 640px; }
 .give .free-note { margin-top: 18px; }
+.tipeee-wrap{margin:14px 0;max-width:100%;overflow:hidden}.tipeee-wrap>a.tipeee-project-card{display:none}.tipeee-wrap iframe{max-width:100%}
