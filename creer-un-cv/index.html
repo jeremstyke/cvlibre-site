@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261112g" defer></script>
+<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261112h" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Créer mon CV en ligne, gratuit | CVLibre</title>
-<meta name="description" content="Remplissez vos informations, voyez votre CV se construire en direct et téléchargez-le en PDF. 33 modèles gratuits lisibles par les logiciels de recrutement, sans inscription.">
+<title>Créer mon CV avec l'IA, gratuit | CVLibre</title>
+<meta name="description" content="L'IA remplit votre CV depuis votre ancien CV, reformule vos expériences et l'adapte à une offre d'emploi. Aperçu en direct, 33 modèles gratuits, PDF sans inscription.">
 <link rel="canonical" href="https://cvlibre.com/creer-un-cv/">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Créer mon CV en ligne, gratuit | CVLibre">
-<meta property="og:description" content="33 modèles de CV gratuits, aperçu en direct, export PDF. Votre CV reste dans votre navigateur.">
+<meta property="og:title" content="Créer mon CV avec l'IA, gratuit | CVLibre">
+<meta property="og:description" content="L'IA remplit, reformule et adapte votre CV à une offre. 33 modèles gratuits, export PDF.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cvlibre.com/creer-un-cv/">
 <meta property="og:image" content="https://cvlibre.com/assets/og.png">
@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261112g">
-<link rel="stylesheet" href="/assets/cv.css?v=20261112g">
+<link rel="stylesheet" href="/assets/style.css?v=20261112h">
+<link rel="stylesheet" href="/assets/cv.css?v=20261112h">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -60,7 +60,8 @@
 
 <div class="app-bar" role="region" aria-label="Réglages du CV">
   <div class="wrap app-bar-in">
-    <div class="grp" role="group" aria-label="Modèle"><span>Modèle</span>
+    <div class="grp grp-tpl" role="group" aria-label="Modèle"><span>Modèle</span>
+      <button type="button" class="btn btn-ghost btn-sm tpl-cur" id="tpl-cur" aria-haspopup="dialog">Moderne ▾</button>
       <div class="seg" id="tpls">
         <button type="button" data-tpl="classique" aria-pressed="false">Classique</button>
         <button type="button" data-tpl="moderne" aria-pressed="false">Moderne</button>
@@ -73,10 +74,16 @@
       <div class="swatches" id="swatches"></div>
     </div>
     <div class="app-actions">
-      <button type="button" class="btn btn-ghost btn-sm" id="export">Exporter (fichier)</button>
-      <button type="button" class="btn btn-ghost btn-sm" id="import">Importer</button><input type="file" id="import-file" accept=".json,application/json" hidden>
-      <button type="button" class="btn btn-ghost btn-sm" id="reset">Repartir de zéro</button>
-      <button type="button" class="btn btn-ghost btn-sm" id="acc-btn">Se connecter</button>
+      <details class="tbm" id="more">
+        <summary class="btn btn-ghost btn-sm">Plus<span class="tbm-dots" aria-hidden="true"> ⋯</span></summary>
+        <div class="tbm-menu" role="group" aria-label="Autres actions">
+          <button type="button" class="tbm-item" id="tailor-open">Adapter à une offre (IA)</button>
+          <button type="button" class="tbm-item" id="acc-btn">Enregistrer en ligne (compte gratuit)</button>
+          <button type="button" class="tbm-item" id="export">Exporter (fichier)</button>
+          <button type="button" class="tbm-item" id="import">Importer un fichier</button><input type="file" id="import-file" accept=".json,application/json" hidden>
+          <button type="button" class="tbm-item danger" id="reset">Repartir de zéro</button>
+        </div>
+      </details>
       <button type="button" class="btn btn-sm" id="print">Télécharger en PDF</button>
     </div>
   </div>
@@ -101,6 +108,18 @@
           <div class="fld"><label for="ai-file">Ancien CV (PDF ou photo, facultatif)</label><input type="file" id="ai-file" accept="application/pdf,image/jpeg,image/png,image/webp"></div>
           <div class="ai-actions"><button type="button" class="btn btn-sm" id="ai-go">Remplir mon CV</button><button type="button" class="link-btn" id="ai-undo" hidden>Annuler</button></div>
           <p class="hint" id="ai-msg" role="status" aria-live="polite">5 essais gratuits par jour. L'IA ne rajoute rien : vérifiez le résultat avant d'envoyer votre CV. Ce que vous envoyez est traité par une IA (voir <a href="/confidentialite/">confidentialité</a>).</p>
+        </div>
+      </details>
+      <details class="fs" id="tailor">
+        <summary>Adapter mon CV à une offre (IA)</summary>
+        <div class="fs-body">
+          <p class="hint">Collez une offre d'emploi : l'IA ajuste votre titre, votre profil, vos compétences et vos missions pour coller à l'annonce, et repère les mots-clés qui manquent. Elle ne fait que reformuler ce qui est déjà dans votre CV : vous choisissez ce que vous gardez.</p>
+          <div class="fld"><label for="tl-ad">L'offre d'emploi</label>
+            <textarea id="tl-ad" maxlength="5000" placeholder="Collez ici le texte de l'annonce (intitulé, missions, profil recherché)."></textarea>
+          </div>
+          <div class="ai-actions"><button type="button" class="btn btn-sm" id="tl-go">Adapter mon CV</button><button type="button" class="link-btn" id="tl-undo" hidden>Annuler l'adaptation</button></div>
+          <p class="hint" id="tl-msg" role="status" aria-live="polite">Compte pour 1 essai IA sur vos 5 gratuits du jour. Remplissez d'abord votre CV.</p>
+          <div class="tl-res" id="tl-res" hidden></div>
         </div>
       </details>
       <details class="fs" open>
@@ -238,7 +257,7 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand"><strong>CVLibre</strong> est 100 % gratuit. Le site est financé par la publicité et le soutien volontaire de ses utilisateurs. <a href="/soutenir/">Merci de votre soutien ❤️</a></p>
-    <p class="foot-ai">CVLibre s'aide de l'intelligence artificielle : pour remplir et reformuler un CV, rédiger une lettre de motivation (vous relisez et corrigez toujours le résultat) et pour écrire une partie des guides du blog.</p>
+    <p class="foot-ai">CVLibre s'aide de l'intelligence artificielle : pour remplir, reformuler et adapter un CV à une offre, rédiger une lettre de motivation (vous relisez et corrigez toujours le résultat) et pour écrire une partie des guides du blog.</p>
     <nav aria-label="Pages légales">
       <a href="/blog/">Conseils CV</a>
       <a href="/mentions-legales/">Mentions légales</a>
@@ -248,14 +267,14 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=20261112g" defer></script>
-<script src="/assets/support.js?v=20261112g" defer></script>
-<script src="/assets/stats.js?v=20261112g" defer></script>
+<script src="/assets/nav.js?v=20261112h" defer></script>
+<script src="/assets/support.js?v=20261112h" defer></script>
+<script src="/assets/stats.js?v=20261112h" defer></script>
 
-<script src="/assets/render.js?v=20261112g"></script>
-<script src="/assets/pass.js?v=20261112g"></script>
-<script src="/assets/builder.js?v=20261112g"></script>
+<script src="/assets/render.js?v=20261112h"></script>
+<script src="/assets/pass.js?v=20261112h"></script>
+<script src="/assets/builder.js?v=20261112h"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/account.js?v=20261112g"></script>
+<script src="/assets/account.js?v=20261112h"></script>
 </body>
 </html>
