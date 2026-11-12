@@ -11,6 +11,17 @@
   function fillFields() { F.forEach(function (id) { var e = el(id); if (e) e.value = S[id] || (id === "tone" ? "classique" : ""); }); }
   F.forEach(function (id) { var e = el(id); if (e) e.addEventListener("input", function () { S[id] = e.value; store(); paint(); }); });
   fillFields();
+  /* Arrivée depuis une offre d'emploi (/offres-emploi/) : poste, entreprise et annonce pré-remplis. */
+  var FROM = null;
+  if (/[?&]offre=1/.test(location.search)) {
+    try { FROM = JSON.parse(localStorage.getItem("cvlibre.offre") || "null"); } catch (e) {}
+    if (FROM && Date.now() - (FROM.at || 0) < 864e5) {
+      S.job = String(FROM.titre || "").slice(0, 100); S.company = String(FROM.entreprise || "").slice(0, 100); S.ad = String(FROM.ad || "").slice(0, 4000);
+      if (S.company && !(S.rcpt || "").trim()) S.rcpt = S.company;
+      S.subject = ""; S.body = ""; curId = null; store(); fillFields();
+      setTimeout(function () { var m = $("#lt-msg"); if (m) m.textContent = "L'offre « " + S.job + " » est déjà remplie. Décrivez votre parcours en quelques lignes (ou choisissez un de vos CV), puis cliquez sur Rédiger ma lettre."; var pr = $("#lt-profile"); if (pr) pr.focus(); }, 300);
+    } else FROM = null;
+  }
 
   /* aperçu */
   var sheet = $("#lt-sheet"), box = $("#lt-box");

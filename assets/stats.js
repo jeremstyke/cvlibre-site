@@ -28,13 +28,14 @@
     try { of(URL_, { method: "POST", keepalive: true, headers: { "content-type": "application/json", apikey: KEY }, body: JSON.stringify({ p: path, e: ev, r: ref, d: dev, x: x || null }) }).catch(function () {}); } catch (e) {}
   }
   send("view");
+  window.CVSTAT = send;
 
   // Appels à l'IA : on compte l'action (remplir, reformuler, lettre...), jamais le contenu.
   window.fetch = function (u) {
     var p = of.apply(window, arguments);
     try {
       var s = String(u && u.url ? u.url : u);
-      if (s.indexOf("cvlibre-ai-production") > -1 && !/\/(health|usage)/.test(s) && s.indexOf("/pass/") === -1) {
+      if (s.indexOf("cvlibre-ai-production") > -1 && !/\/(health|usage|jobs)/.test(s) && s.indexOf("/pass/") === -1) {
         var rt = s.split("?")[0].split("/").pop();
         send("ai", rt);
         p.then(function (r) { if (r && r.status === 402) send("ai_402", rt); }).catch(function () {});
@@ -53,6 +54,7 @@
     if (t.closest("#ct-gen")) return send("courrier_ia", CT);
     if (t.closest("#ct-model")) return send("courrier_modele", CT);
     if ((el = t.closest("#ct-copy, #ct-mail, #ct-print"))) return send("courrier_export", CT);
+    if (t.closest("#after-jobs")) return send("after_jobs");
     if (t.closest("#after-acc-go")) return send("after_account");
     if (t.closest("#after-don")) return send("after_don");
     if (t.closest("#acc-google")) return send("login_google");

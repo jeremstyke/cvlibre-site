@@ -357,6 +357,14 @@
   if (tlGo) {
     var tlOpen = $("#tailor-open");
     if (tlOpen) tlOpen.addEventListener("click", function () { var d = $("#tailor"); d.open = true; document.body.dataset.tab = "edit"; d.scrollIntoView({ behavior: "smooth", block: "start" }); setTimeout(function () { $("#tl-ad").focus(); }, 400); });
+    /* Arrivée depuis une offre d'emploi (/offres-emploi/) : l'annonce est déjà collée dans « Adapter mon CV à une offre ». */
+    if (/[?&]offre=1/.test(location.search)) {
+      var OF = null; try { OF = JSON.parse(localStorage.getItem("cvlibre.offre") || "null"); } catch (e) {}
+      if (OF && OF.ad && Date.now() - (OF.at || 0) < 864e5) {
+        var tdet = $("#tailor"), tad = $("#tl-ad");
+        if (tdet && tad) { tad.value = OF.ad; tad.dispatchEvent(new Event("input", { bubbles: true })); tdet.open = true; document.body.dataset.tab = "edit"; setTimeout(function () { tdet.scrollIntoView({ behavior: "smooth", block: "start" }); }, 300); }
+      }
+    }
     tlGo.addEventListener("click", function () {
       var ad = $("#tl-ad").value.trim();
       if (ad.length < 60) { tlMsg.textContent = "Collez le texte complet de l'offre (au moins quelques lignes)."; return; }

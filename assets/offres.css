@@ -1,0 +1,15 @@
+.jb-form{display:grid;gap:12px;grid-template-columns:1fr;margin:20px 0 8px}
+@media(min-width:760px){.jb-form{grid-template-columns:2fr 1.5fr 1fr auto;align-items:end}.jb-form .fld{margin:0}}
+.jb-list{display:grid;gap:14px;margin:14px 0}
+.jb-card{padding:18px}
+.jb-t{font-size:1.15rem;margin:0 0 4px;line-height:1.3}
+.jb-meta{margin:0 0 8px;color:var(--muted,#55606e)}
+.jb-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.jb-tag{font-size:.85rem;background:#eef2fb;color:#1e3a8a;border-radius:6px;padding:2px 8px}
+.jb-desc{margin:0 0 6px;white-space:pre-line;line-height:1.5}
+.jb-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.jb-date{font-size:.85rem;color:var(--muted,#55606e);margin:10px 0 0}
+.jb-src{font-size:.85rem;color:var(--muted,#55606e);margin:18px 0}
+.jb-how{margin:28px 0}
+@media(max-width:520px){.jb-act .btn{flex:1 1 100%;text-align:center}}
+.jb-card .link-btn{display:inline-block;width:auto;margin:0;text-align:left;padding:0}
