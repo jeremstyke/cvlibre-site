@@ -261,7 +261,24 @@
   window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint();
     /* 12 nov 2026 : site 100 % gratuit, un petit mot de soutien après le PDF */
     if (passMsg) { passMsg.innerHTML = 'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Soutenir CVLibre sur Tipeee ❤️</a>'; passMsg.hidden = false; }
+    afterAsk();
   });
+  /* après le téléchargement : proposer le compte gratuit et le don (au plus une fois par jour) */
+  var adlg = $("#after-dlg"), asked = false;
+  function afterAsk() {
+    if (!adlg || asked || !adlg.showModal) return;
+    try { var t = +localStorage.getItem("cvlibre.afterAsk") || 0; if (Date.now() - t < 864e5) return; localStorage.setItem("cvlibre.afterAsk", String(Date.now())); } catch (e) {}
+    asked = true;
+    var ab = $("#acc-btn"), logged = ab && /compte/i.test(ab.textContent || "");
+    $("#after-acc").hidden = !ab || ab.hidden || logged;
+    setTimeout(function () { if (!adlg.open) adlg.showModal(); }, 400);
+  }
+  if (adlg) {
+    $("#after-acc-go").addEventListener("click", function () { adlg.close(); var ab = $("#acc-btn"); if (ab) ab.click(); });
+    $("#after-don").addEventListener("click", function () { setTimeout(function () { adlg.close(); }, 300); });
+  }
+  /* sur iPhone, "afterprint" n'arrive pas toujours : on propose aussi peu après le clic sur le PDF */
+  $("#print").addEventListener("click", function () { setTimeout(function () { if (!document.hidden) afterAsk(); }, 2500); });
   if (window.CVPASS) window.CVPASS.onChange(function () { paint(); });
 
   /* ---------- IA : remplir le CV et reformuler ---------- */

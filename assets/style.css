@@ -400,3 +400,8 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .aib-msg a { font-weight: 700; }
 @media (prefers-reduced-motion: reduce) { .aib-bar i { transition: none; } }
 @media print { .ai-budget { display: none !important; } }
+/* Après le téléchargement (12 nov 2026) */
+.after-dlg { max-width: 520px; }
+.after-box { border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; margin: 12px 0; background: var(--sheet); }
+.after-box h3 { margin: 0 0 6px; font-size: 1.02rem; }
+.after-box p { margin: 0 0 10px; font-size: .95rem; color: var(--ink-2); line-height: 1.5; }

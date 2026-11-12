@@ -59,6 +59,8 @@
     if (t.closest("#wm-go")) return send("wm_go");
     if (t.closest("#pass-btn")) return send("pass_open");
     if (t.closest("#pass-buy, #sp-add")) return send("buy_pass");
+    if (t.closest("#after-acc-go")) return send("after_account");
+    if (t.closest("#after-don")) return send("after_don");
     if (t.closest("#acc-google")) return send("login_google");
     if (t.closest("#acc-mail-go")) return send("login_mail");
     if ((el = t.closest(".tpl-card"))) return send(el.getAttribute("data-locked") === "1" ? "tpl_locked" : "tpl_pick", el.getAttribute("data-tpl"));
