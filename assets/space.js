@@ -54,8 +54,9 @@
         if (ok) {
           var b = document.createElement("button"); b.type = "button"; b.className = "btn btn-ghost btn-sm";
           var cur = P.paid() && P.key() === x.key;
-          b.textContent = cur ? "Utilisé sur cet appareil" : "Utiliser sur cet appareil"; b.disabled = cur;
-          b.addEventListener("click", function () { b.disabled = true; P.activate(x.key).then(function () { passes(); offer(); }); });
+          if (cur && !x.holder_p) { b.textContent = "Définir le nom"; b.className = "btn btn-sm"; b.addEventListener("click", function () { P.askHolder(); }); }
+          else { b.textContent = cur ? "Utilisé sur cet appareil" : "Utiliser sur cet appareil"; b.disabled = cur; }
+          if (!cur) b.addEventListener("click", function () { b.disabled = true; P.activate(x.key).then(function () { passes(); offer(); }); });
           d.appendChild(b);
         }
         box.appendChild(d);
@@ -82,7 +83,7 @@
       });
     })();
   }
-  if (window.CVPASS) window.CVPASS.onChange(function () { offer(); });
+  if (window.CVPASS) window.CVPASS.onChange(function () { offer(); passes(); });
   offer();
   $("#sp-login").addEventListener("click", function () { A.open(); });
   $("#sp-out-btn").addEventListener("click", function () { A.signOut(); });
