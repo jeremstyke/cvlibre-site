@@ -24,7 +24,7 @@
     log.appendChild(m); log.scrollTop = log.scrollHeight; return m;
   }
   function open_(v) { panel.hidden = !v; fab.setAttribute("aria-expanded", v ? "true" : "false"); fab.hidden = v;
-    if (v) { if (!log.children.length) say("bot", "Bonjour, posez votre question sur CVLibre (PDF, compte, Pass 1 an, IA). Si je ne sais pas, je vous renvoie vers une personne."); inp.focus(); } else fab.focus(); }
+    if (v) { if (!log.children.length) say("bot", "Bonjour, posez votre question sur CVLibre (PDF, modèles, compte, IA). Si je ne sais pas, je vous renvoie vers une personne."); inp.focus(); } else fab.focus(); }
   fab.addEventListener("click", function () { open_(true); });
   x.addEventListener("click", function () { open_(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) open_(false); });

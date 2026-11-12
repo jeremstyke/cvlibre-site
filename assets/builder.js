@@ -240,13 +240,16 @@
     $("#wm-go").addEventListener("click", function () { wmSeen = true; wmd.close(); doPrint(); });
     $("#wm-remove").addEventListener("click", function () { wmd.close(); var b = $("#pass-btn"); if (b) b.click(); });
   }
-  window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint(); });
+  window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint();
+    /* 12 nov 2026 : site 100 % gratuit, un petit mot de soutien après le PDF */
+    if (passMsg) { passMsg.innerHTML = 'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Merci de votre soutien ❤️</a>'; passMsg.hidden = false; }
+  });
   if (window.CVPASS) window.CVPASS.onChange(function () { paint(); });
 
   /* ---------- IA : remplir le CV et reformuler ---------- */
   var AI = "https://cvlibre-ai-production.up.railway.app";
   var ERR = {
-    limit: "Vous avez utilisé vos 3 essais gratuits du jour. Revenez demain.",
+    limit: "Vous avez utilisé vos 5 essais IA gratuits du jour. Revenez demain. Chaque utilisation de l'IA nous coûte : si CVLibre vous aide, pensez à nous soutenir (lien en bas de page).",
     busy: "Le service est très demandé en ce moment. Réessayez un peu plus tard.",
     empty: "Écrivez quelques lignes sur votre parcours ou ajoute votre ancien CV.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez."

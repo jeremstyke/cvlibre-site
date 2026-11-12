@@ -39,8 +39,8 @@
   /* IA */
   var gen = $("#lt-gen"), msg = $("#lt-msg");
   var ERR = {
-    pass: "La lettre de motivation avec l'IA est réservée au Pass 1 an.",
-    limit: "Vous avez atteint la limite d'essais IA du jour. Revenez demain, ou prenez le Pass 1 an (15 par jour).",
+    pass: "Le service IA est momentanément indisponible. Réessayez dans un instant.",
+    limit: "Vous avez utilisé vos 5 essais IA gratuits du jour. Revenez demain. L'IA nous coûte à chaque utilisation : si CVLibre vous aide, vous pouvez nous soutenir sur /soutenir/.",
     busy: "Le service est très demandé. Réessayez dans quelques minutes.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez.",
     parse: "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté.",

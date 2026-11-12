@@ -45,7 +45,7 @@
   /* Lie la clé de licence au compte : elle suit la personne sur tous ses appareils. */
   function linkPass() {
     var P = window.CVPASS;
-    if (!user || !P || !P.paid()) return;
+    if (!user || !P || !P.paid() || !P.key()) return;
     sb.rpc("link_pass", { k: P.key(), u: new Date(P.until()).toISOString() });
   }
   if (window.CVPASS) window.CVPASS.onChange(linkPass);
