@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261113a" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recruteurs : publiez vos offres d'emploi gratuitement | CVLibre</title>
+<meta name="description" content="Publiez gratuitement vos offres d'emploi sur CVLibre et touchez des candidats qui préparent leur CV et leur lettre de motivation. Chaque offre est vérifiée avant publication.">
+<link rel="canonical" href="https://cvlibre.com/recruteurs/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#f3f5f8">
+<link rel="stylesheet" href="/assets/style.css?v=20261113a">
+<link rel="stylesheet" href="/assets/letter.css?v=20261113a">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/lettre-de-motivation/">Lettre de motivation</a>
+      <a href="/courriers/">Courriers</a>
+      <a href="/offres-emploi/">Offres d'emploi</a>
+      <a href="/blog/">Conseils</a>
+      <a href="/#questions">Questions fréquentes</a>
+      <a class="btn btn-ghost btn-sm" id="nav-acc" href="/creer-un-cv/?connexion=1" rel="nofollow">Se connecter</a>
+      <a class="btn btn-ghost btn-sm" id="nav-out" href="#" hidden>Se déconnecter</a>
+      <a class="btn btn-sm" href="/creer-un-cv/">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap sp rc">
+  <h1>Recruteurs : publiez vos offres gratuitement</h1>
+  <p class="lead">Vos offres d'emploi apparaissent en tête des recherches sur CVLibre, devant les candidats qui préparent leur CV et leur lettre de motivation. Chaque candidat peut adapter son CV à votre annonce en un clic.</p>
+  <ul class="rc-perks">
+    <li><strong>Gratuit</strong> : publication sans frais, en ligne 60 jours.</li>
+    <li><strong>Vérifiée</strong> : chaque offre est relue par CVLibre avant d'être publiée, pour protéger les candidats.</li>
+    <li><strong>Simple</strong> : les candidats postulent directement chez vous, par votre lien ou votre e-mail.</li>
+  </ul>
+  <div id="rc-out" hidden>
+    <p>Connectez-vous pour publier une offre. Pas de mot de passe : un lien de connexion arrive par e-mail.</p>
+    <p><button type="button" class="btn" id="rc-login">Se connecter ou créer mon compte</button></p>
+  </div>
+  <div id="rc-in" hidden>
+    <p class="hint" id="rc-who"></p>
+    <section class="lt-card sp-sec">
+      <h2 id="rc-form-title">Publier une offre</h2>
+      <form id="rc-form" novalidate>
+        <div class="rc-grid">
+          <div class="fld"><label for="rc-company">Entreprise *</label><input id="rc-company" maxlength="120" required autocomplete="organization"></div>
+          <div class="fld"><label for="rc-siret">SIRET (facultatif, accélère la vérification)</label><input id="rc-siret" maxlength="17" inputmode="numeric" placeholder="14 chiffres"></div>
+          <div class="fld"><label for="rc-title">Intitulé du poste *</label><input id="rc-title" maxlength="120" required placeholder="Ex. Vendeur en boulangerie (H/F)"></div>
+          <div class="fld"><label for="rc-city">Ville *</label><input id="rc-city" maxlength="80" required placeholder="Ex. Vienne (38)" autocomplete="address-level2"></div>
+          <div class="fld"><label for="rc-contract">Contrat *</label><select id="rc-contract"><option>CDI</option><option>CDD</option><option>Intérim</option><option>Saisonnier</option><option>Alternance</option><option>Stage</option><option>Freelance</option></select></div>
+          <div class="fld"><label for="rc-hours">Temps de travail</label><input id="rc-hours" maxlength="60" placeholder="Ex. 35 h, temps partiel 24 h"></div>
+          <div class="fld"><label for="rc-salary">Salaire</label><input id="rc-salary" maxlength="80" placeholder="Ex. 1 900 € brut par mois"></div>
+          <div class="fld"><label for="rc-contact">Nom du contact</label><input id="rc-contact" maxlength="80" autocomplete="name"></div>
+        </div>
+        <div class="fld"><label for="rc-desc">Description du poste * (missions, profil recherché, avantages)</label><textarea id="rc-desc" rows="9" maxlength="6000" required></textarea></div>
+        <div class="rc-grid">
+          <div class="fld"><label for="rc-url">Lien pour postuler</label><input id="rc-url" type="url" maxlength="400" placeholder="https://..."></div>
+          <div class="fld"><label for="rc-email">ou e-mail pour recevoir les candidatures</label><input id="rc-email" type="email" maxlength="160" autocomplete="email"></div>
+        </div>
+        <label class="rc-ok"><input type="checkbox" id="rc-legal"> Je certifie que ce poste est réel et à pourvoir, que l'offre respecte la loi (aucune discrimination, aucun frais demandé aux candidats) et j'accepte les <a href="/cgv/" target="_blank">conditions d'utilisation</a>.</label>
+        <p><button type="submit" class="btn" id="rc-send">Envoyer pour vérification</button> <button type="button" class="link-btn" id="rc-cancel" hidden>Annuler la modification</button></p>
+        <p class="hint" id="rc-msg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="lt-card sp-sec">
+      <h2>Mes offres</h2>
+      <div class="sp-list" id="rc-list"></div>
+    </section>
+  </div>
+  <p class="hint">Une question ? <a href="mailto:contact@cvlibre.com">contact@cvlibre.com</a>. CVLibre peut refuser ou retirer une offre trompeuse, illégale ou discriminatoire.</p>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><strong>CVLibre</strong> est 100 % gratuit. Le site est financé par la publicité et le soutien volontaire de ses utilisateurs. <a href="/soutenir/">Merci de votre soutien ❤️</a></p>
+    <p class="foot-ai">CVLibre s'aide de l'intelligence artificielle : pour remplir, reformuler et adapter un CV à une offre, rédiger une lettre de motivation et des courriers emploi (vous relisez et corrigez toujours le résultat) et pour écrire une partie des guides du blog.</p>
+    <nav aria-label="Pages légales">
+      <a href="/blog/">Conseils CV</a>
+      <a href="/courriers/">Courriers emploi</a>
+      <a href="/offres-emploi/">Offres d'emploi</a>
+      <a href="/recruteurs/">Recruteurs : publier une offre</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">Conditions d'utilisation</a>
+      <a href="/soutenir/">Soutenir CVLibre</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/nav.js?v=20261113a" defer></script>
+<script src="/assets/support.js?v=20261113a" defer></script>
+<script src="/assets/stats.js?v=20261113a" defer></script>
+
+<dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
+  <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
+  <div id="acc-out">
+    <p class="acc-brand" aria-hidden="true"><span class="b1">CV</span><span class="b2">libre</span></p>
+    <h2 id="acc-title">Créer mon compte gratuit</h2>
+    <ul class="acc-perks" id="acc-intro">
+      <li>Gardez vos documents et retrouvez-les sur tous vos appareils</li>
+      <li>Gratuit, sans mot de passe : une adresse e-mail suffit</li>
+      <li>Déjà inscrit ? Reconnectez-vous de la même façon</li>
+    </ul>
+    <div id="acc-step1">
+      <button type="button" class="btn btn-ghost acc-big" id="acc-google">Continuer avec Google</button>
+      <button type="button" class="btn acc-big" id="acc-mail-open">Continuer avec mon e-mail</button>
+    </div>
+    <div id="acc-step2" hidden>
+      <label for="acc-email" class="acc-lab">Adresse e-mail</label>
+      <input type="email" id="acc-email" autocomplete="email" inputmode="email" placeholder="vous@exemple.fr">
+      <button type="button" class="btn acc-big" id="acc-mail-go">Recevoir mon lien de connexion</button>
+      <button type="button" class="link-btn" id="acc-back">Retour</button>
+    </div>
+    <p class="acc-legal">En continuant, vous acceptez les <a href="/cgv/">conditions d'utilisation</a> et la <a href="/confidentialite/">politique de confidentialité</a>.</p>
+    <p class="pass-note" id="acc-note" role="status"></p>
+  </div>
+</dialog>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/assets/pass.js?v=20261113a"></script>
+<script src="/assets/auth.js?v=20261113a"></script>
+<script src="/assets/recruteurs.js?v=20261113a"></script>
+</body>
+</html>

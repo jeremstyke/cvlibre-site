@@ -39,6 +39,8 @@
     kpi(k, N(e("job_search")), "Recherches d'offres d'emploi");
     kpi(k, N(e("job_open")), "Clics vers une offre (Careerjet paie au clic)");
     kpi(k, N(e("job_tailor") + e("job_letter")), "Offre vers CV ou lettre");
+    kpi(k, N(e("rc_post")), "Offres envoyées par des recruteurs");
+    kpi(k, N(e("cvt_on")), "Accords CVthèque");
     kpi(k, N(dons), "Clics vers Tipeee (dons)");
     kpi(k, N(d.users), "Comptes (+" + N(d.users_new) + ")");
     var ch = $("#st-chart"); ch.textContent = "";
@@ -64,7 +66,32 @@
     var n = document.createElement("p"); n.className = "st-note"; n.textContent = "Appareils : " + N(d.mobile) + " mobile, " + N(d.desktop) + " ordinateur. Données anonymes, sans cookie.";
     $("#st-ai").appendChild(n);
   }
+  /* Modération des offres publiées par les recruteurs. */
+  function mod() {
+    var box = $("#st-mod-list"); box.textContent = "";
+    A.sb.rpc("job_posts_pending").then(function (r) {
+      if (r.error) { box.textContent = "Chargement impossible."; return; }
+      if (!r.data.length) { var p0 = document.createElement("p"); p0.className = "st-note"; p0.textContent = "Aucune offre en attente."; box.appendChild(p0); return; }
+      r.data.forEach(function (o) {
+        var c = document.createElement("div"); c.className = "st-job";
+        var h = document.createElement("p"); var b = document.createElement("strong"); b.textContent = o.title + " · " + o.company + " · " + o.city + " · " + o.contract; h.appendChild(b); c.appendChild(h);
+        var meta = document.createElement("p"); meta.className = "st-note";
+        meta.textContent = [o.salary, o.hours, o.siret ? "SIRET " + o.siret : "Sans SIRET", o.contact_name, "Postuler : " + (o.apply_url || o.apply_email), "Reçue le " + new Date(o.created_at).toLocaleString("fr-FR")].filter(Boolean).join(" · ");
+        c.appendChild(meta);
+        var d = document.createElement("p"); d.className = "st-desc"; d.textContent = o.description; c.appendChild(d);
+        var why = document.createElement("input"); why.placeholder = "Motif du refus (visible par le recruteur)"; why.maxLength = 300; why.className = "st-why";
+        var ok = document.createElement("button"); ok.type = "button"; ok.className = "btn btn-sm"; ok.textContent = "✅ Publier";
+        var no = document.createElement("button"); no.type = "button"; no.className = "btn btn-ghost btn-sm"; no.textContent = "❌ Refuser";
+        function act(yes) { ok.disabled = no.disabled = true; A.sb.rpc("job_posts_moderate", { pid: o.id, ok: yes, reason: why.value.trim() || null }).then(function (x) { if (x.error) { ok.disabled = no.disabled = false; alert0(c, "Échec"); } else c.remove(); if (!box.children.length) mod(); }); }
+        function alert0(el, t) { var e = document.createElement("p"); e.className = "st-note"; e.textContent = t; el.appendChild(e); }
+        ok.addEventListener("click", function () { act(true); }); no.addEventListener("click", function () { act(false); });
+        var bar = document.createElement("div"); bar.className = "st-jobbar"; bar.appendChild(ok); bar.appendChild(no); bar.appendChild(why);
+        c.appendChild(bar); box.appendChild(c);
+      });
+    });
+  }
   function load() {
+    mod();
     $("#st-err").hidden = true;
     A.sb.rpc("stats_summary", { days_: days }).then(function (r) {
       if (r.error) { $("#st-err").hidden = false; $("#st-err").textContent = "Accès refusé ou chargement impossible. Connectez-vous avec le compte propriétaire."; return; }

@@ -406,3 +406,6 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .after-box h3 { margin: 0 0 6px; font-size: 1.02rem; }
 .after-box p { margin: 0 0 10px; font-size: .95rem; color: var(--ink-2); line-height: 1.5; }
 .st-ct{display:block;margin:0 0 8px;line-height:1.5}
+.sp-cvt{display:flex;align-items:center;gap:6px;font-size:.9rem;margin-top:6px;cursor:pointer}.sp-cvt input{width:18px;height:18px}.sp-cvt-info{margin-top:14px;padding-top:12px;border-top:1px solid #e5e8ee}.sp-cvt-info p{margin:0 0 6px}
+.rc-perks{margin:0 0 18px;padding-left:20px;line-height:1.6}.rc-grid{display:grid;gap:0 14px;grid-template-columns:1fr}@media(min-width:760px){.rc-grid{grid-template-columns:1fr 1fr}}.rc-ok{display:flex;gap:8px;align-items:flex-start;font-size:.92rem;margin:8px 0 4px}.rc-ok input{margin-top:3px;width:18px;height:18px;flex:none}.rc-acts{display:flex;gap:6px;flex-wrap:wrap}
+.st-job{border:1px solid #e5e8ee;border-radius:10px;padding:12px;margin:0 0 12px}.st-job p{margin:0 0 6px}.st-desc{white-space:pre-line;max-height:220px;overflow:auto;font-size:.92rem}.st-jobbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.st-why{flex:1 1 220px;padding:6px 8px;border:1px solid #cdd3dd;border-radius:6px}

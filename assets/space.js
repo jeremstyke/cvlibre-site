@@ -16,7 +16,22 @@
       if (del.dataset.arm !== "1") { del.dataset.arm = "1"; del.textContent = "Confirmer"; setTimeout(function () { del.dataset.arm = ""; del.textContent = "Supprimer"; }, 4000); return; }
       A.sb.from(table).delete().eq("id", r.id).then(function (x) { if (!x.error) { d.remove(); if (!box.children.length) empty(box, table); } else del.textContent = "Échec"; });
     });
-    d.appendChild(t); d.appendChild(del); box.appendChild(d);
+    d.appendChild(t);
+    if (table === "cvs") {
+      /* CVthèque : accord du candidat, CV par CV. Pas encore consultable par les recruteurs. */
+      var lab = document.createElement("label"); lab.className = "sp-cvt";
+      var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!r.cvtheque;
+      lab.appendChild(cb); lab.appendChild(document.createTextNode(" Visible des recruteurs (CVthèque)"));
+      cb.addEventListener("change", function () {
+        cb.disabled = true;
+        A.sb.from("cvs").update({ cvtheque: cb.checked, cvtheque_at: cb.checked ? new Date().toISOString() : null }).eq("id", r.id).then(function (x) {
+          cb.disabled = false; if (x.error) cb.checked = !cb.checked;
+          else try { window.CVSTAT && window.CVSTAT(cb.checked ? "cvt_on" : "cvt_off"); } catch (e) {}
+        });
+      });
+      t.appendChild(lab);
+    }
+    d.appendChild(del); box.appendChild(d);
   }
   function empty(box, table) {
     var p = document.createElement("p"); p.className = "hint";
@@ -24,7 +39,7 @@
   }
   function fill(box, table, openBase, label) {
     box.textContent = "";
-    A.sb.from(table).select("id,title,updated_at").order("updated_at", { ascending: false }).then(function (r) {
+    A.sb.from(table).select(table === "cvs" ? "id,title,updated_at,cvtheque" : "id,title,updated_at").order("updated_at", { ascending: false }).then(function (r) {
       if (r.error) { var p = document.createElement("p"); p.className = "hint"; p.textContent = "Chargement impossible pour le moment."; box.appendChild(p); return; }
       if (!r.data.length) { empty(box, table); return; }
       r.data.forEach(function (x) { row(box, table, x, openBase + x.id, label); });

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261112o" defer></script>
+<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261113a" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Offres d'emploi près de chez vous : trouvez et postulez gratuitement | CVLibre</title>
 <meta name="description" content="Cherchez parmi des milliers d'offres d'emploi par métier et par ville, puis adaptez votre CV et rédigez votre lettre de motivation pour chaque offre, gratuitement.">
@@ -17,9 +17,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261112o">
-<link rel="stylesheet" href="/assets/letter.css?v=20261112o">
-<link rel="stylesheet" href="/assets/offres.css?v=20261112o">
+<link rel="stylesheet" href="/assets/style.css?v=20261113a">
+<link rel="stylesheet" href="/assets/letter.css?v=20261113a">
+<link rel="stylesheet" href="/assets/offres.css?v=20261113a">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,14 +47,16 @@
   <p class="lead">Cherchez un métier et une ville. Pour chaque offre, CVLibre vous aide à adapter votre CV et à rédiger votre lettre de motivation, gratuitement.</p>
   <form class="jb-form lt-card" id="jb-form" role="search">
     <div class="fld"><label for="jb-q">Métier ou mot-clé</label><input id="jb-q" maxlength="80" placeholder="Ex. vendeur, aide-soignant, cariste" autocomplete="off" enterkeyhint="search"></div>
-    <div class="fld"><label for="jb-ville">Ville ou n° de département</label><input id="jb-ville" maxlength="60" placeholder="Ex. Lyon ou 69" autocomplete="address-level2"></div>
+    <div class="fld"><label for="jb-ville">Ville ou n° de département</label><input id="jb-ville" maxlength="60" placeholder="Ex. Lyon ou 69" autocomplete="address-level2"><button type="button" class="link-btn jb-geo" id="jb-geo">📍 Autour de moi</button></div>
     <div class="fld"><label for="jb-contrat">Contrat</label><select id="jb-contrat"><option value="">Tous</option><option value="CDI">CDI</option><option value="CDD">CDD</option><option value="MIS">Intérim</option><option value="SAI">Saisonnier</option><option value="ALT">Alternance</option></select></div>
     <button type="submit" class="btn" id="jb-go">Voir les offres</button>
   </form>
+  <p class="jb-count" id="jb-count" hidden></p>
   <p class="hint" id="jb-msg" role="status" aria-live="polite"></p>
   <div class="jb-list" id="jb-list"></div>
   <p><button type="button" class="btn btn-ghost" id="jb-more" hidden>Voir plus d'offres</button></p>
   <p class="jb-src">Offres fournies par <a href="https://www.careerjet.fr/" target="_blank" rel="noopener">Careerjet</a>, moteur de recherche d'emploi, et, pour l'alternance, par <a href="https://labonnealternance.apprentissage.beta.gouv.fr/" target="_blank" rel="noopener">La bonne alternance</a>, service public de l'apprentissage. La date de publication est indiquée sur chaque offre. CVLibre n'est pas l'employeur et ne reçoit pas les candidatures : vous postulez directement sur le site de l'offre.</p>
+  <p class="jb-rc">Vous recrutez ? <a href="/recruteurs/">Publiez votre offre gratuitement</a> : elle apparaîtra en tête des résultats.</p>
   <section class="jb-how">
     <h2>Postuler plus vite avec CVLibre</h2>
     <p><strong>Adapter mon CV</strong> ouvre votre CV avec l'offre déjà collée : l'IA reformule votre titre, votre profil et vos missions avec les mots de l'annonce et repère les compétences qui manquent. Vous choisissez ce que vous gardez.</p>
@@ -70,6 +72,7 @@
       <a href="/blog/">Conseils CV</a>
       <a href="/courriers/">Courriers emploi</a>
       <a href="/offres-emploi/">Offres d'emploi</a>
+      <a href="/recruteurs/">Recruteurs : publier une offre</a>
       <a href="/mentions-legales/">Mentions légales</a>
       <a href="/confidentialite/">Confidentialité</a>
       <a href="/cgv/">Conditions d'utilisation</a>
@@ -77,9 +80,9 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=20261112o" defer></script>
-<script src="/assets/support.js?v=20261112o" defer></script>
-<script src="/assets/stats.js?v=20261112o" defer></script>
+<script src="/assets/nav.js?v=20261113a" defer></script>
+<script src="/assets/support.js?v=20261113a" defer></script>
+<script src="/assets/stats.js?v=20261113a" defer></script>
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
   <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
@@ -108,8 +111,8 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/pass.js?v=20261112o"></script>
-<script src="/assets/auth.js?v=20261112o"></script>
-<script src="/assets/offres.js?v=20261112o" defer></script>
+<script src="/assets/pass.js?v=20261113a"></script>
+<script src="/assets/auth.js?v=20261113a"></script>
+<script src="/assets/offres.js?v=20261113a" defer></script>
 </body>
 </html>

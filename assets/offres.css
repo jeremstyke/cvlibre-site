@@ -13,3 +13,7 @@
 .jb-how{margin:28px 0}
 @media(max-width:520px){.jb-act .btn{flex:1 1 100%;text-align:center}}
 .jb-card .link-btn{display:inline-block;width:auto;margin:0;text-align:left;padding:0}
+.jb-geo{display:inline-block;width:auto;margin:6px 0 0;padding:0;text-align:left}
+.jb-own{border:2px solid #1f4fd8}.jb-badge{display:inline-block;margin:0 0 8px;font-size:.82rem;font-weight:700;color:#1f4fd8;background:#eef2fb;border-radius:6px;padding:2px 8px}
+.jb-rc{margin:6px 0 18px;font-weight:600}
+.jb-count{font-size:1.15rem;margin:16px 0 4px}.jb-count strong{font-size:1.6rem;color:#1f4fd8}
