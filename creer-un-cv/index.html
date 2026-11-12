@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261112j" defer></script>
+<meta charset="utf-8"><script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script><script src="/assets/consent.js?v=20261112k" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Créer mon CV avec l'IA, gratuit | CVLibre</title>
 <meta name="description" content="L'IA remplit votre CV depuis votre ancien CV, reformule vos expériences et l'adapte à une offre d'emploi. Aperçu en direct, 33 modèles gratuits, PDF sans inscription.">
@@ -17,8 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261112j">
-<link rel="stylesheet" href="/assets/cv.css?v=20261112j">
+<link rel="stylesheet" href="/assets/style.css?v=20261112k">
+<link rel="stylesheet" href="/assets/cv.css?v=20261112k">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -101,13 +101,14 @@
       <details class="fs" open>
         <summary>Remplir avec l'IA (gratuit)</summary>
         <div class="fs-body">
+          <div class="ai-budget" aria-live="polite"></div>
           <div class="fld"><label for="ai-text">Racontez votre parcours en quelques lignes</label>
             <textarea id="ai-text" maxlength="8000" placeholder="Ex. Serveur 3 ans au Bistrot du Port à Nantes, un an de caisse chez Carrefour, bac pro commerce en 2019. Anglais courant. Je vise un poste de responsable de salle."></textarea>
             <span class="hint">Ou ajoutez votre ancien CV ci-dessous : l'IA le lit et remplit le formulaire.</span>
           </div>
           <div class="fld"><label for="ai-file">Ancien CV (PDF ou photo, facultatif)</label><input type="file" id="ai-file" accept="application/pdf,image/jpeg,image/png,image/webp"></div>
           <div class="ai-actions"><button type="button" class="btn btn-sm" id="ai-go">Remplir mon CV</button><button type="button" class="link-btn" id="ai-undo" hidden>Annuler</button></div>
-          <p class="hint" id="ai-msg" role="status" aria-live="polite">Gratuit, sans inscription : 5 essais par jour. L'IA ne rajoute rien : vérifiez le résultat avant d'envoyer votre CV. Ce que vous envoyez est traité par une IA (voir <a href="/confidentialite/">confidentialité</a>).</p>
+          <p class="hint" id="ai-msg" role="status" aria-live="polite">Gratuit, sans inscription : 5 utilisations par jour. L'IA ne rajoute rien : vérifiez le résultat avant d'envoyer votre CV. Ce que vous envoyez est traité par une IA (voir <a href="/confidentialite/">confidentialité</a>).</p>
         </div>
       </details>
       <details class="fs" id="tailor">
@@ -118,7 +119,7 @@
             <textarea id="tl-ad" maxlength="5000" placeholder="Collez ici le texte de l'annonce (intitulé, missions, profil recherché)."></textarea>
           </div>
           <div class="ai-actions"><button type="button" class="btn btn-sm" id="tl-go">Adapter mon CV</button><button type="button" class="link-btn" id="tl-undo" hidden>Annuler l'adaptation</button></div>
-          <p class="hint" id="tl-msg" role="status" aria-live="polite">Compte pour 1 essai IA sur vos 5 gratuits du jour. Remplissez d'abord votre CV.</p>
+          <p class="hint" id="tl-msg" role="status" aria-live="polite">Compte pour 1 de vos 5 utilisations gratuites du jour. Remplissez d'abord votre CV.</p>
           <div class="tl-res" id="tl-res" hidden></div>
         </div>
       </details>
@@ -267,14 +268,15 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=20261112j" defer></script>
-<script src="/assets/support.js?v=20261112j" defer></script>
-<script src="/assets/stats.js?v=20261112j" defer></script>
+<script src="/assets/nav.js?v=20261112k" defer></script>
+<script src="/assets/support.js?v=20261112k" defer></script>
+<script src="/assets/stats.js?v=20261112k" defer></script>
 
-<script src="/assets/render.js?v=20261112j"></script>
-<script src="/assets/pass.js?v=20261112j"></script>
-<script src="/assets/builder.js?v=20261112j"></script>
+<script src="/assets/render.js?v=20261112k"></script>
+<script src="/assets/pass.js?v=20261112k"></script>
+<script src="/assets/builder.js?v=20261112k"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/account.js?v=20261112j"></script>
+<script src="/assets/account.js?v=20261112k"></script>
+<script src="/assets/aibar.js?v=20261112k" defer></script>
 </body>
 </html>

@@ -267,7 +267,7 @@
   /* ---------- IA : remplir le CV et reformuler ---------- */
   var AI = "https://cvlibre-ai-production.up.railway.app";
   var ERR = {
-    limit: "Vous avez utilisé vos 5 essais IA gratuits du jour. Revenez demain. Chaque utilisation de l'IA nous coûte : si CVLibre vous aide, pensez à nous soutenir (lien en bas de page).",
+    limit: "Vous avez utilisé vos 5 utilisations gratuites de l'IA pour aujourd'hui. Revenez demain. Chaque utilisation de l'IA nous coûte : si CVLibre vous aide, pensez à nous soutenir (lien en bas de page).",
     busy: "Le service est très demandé en ce moment. Réessayez un peu plus tard.",
     empty: "Écrivez quelques lignes sur votre parcours ou ajoutez votre ancien CV.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez."
@@ -278,7 +278,7 @@
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; }); })
       .catch(function () { return { error: "net" }; });
   }
-  var leftTxt = function (n) { return typeof n === "number" ? " Il vous reste " + n + " essai" + (n > 1 ? "s" : "") + " aujourd'hui." : ""; };
+  var leftTxt = function (n) { return typeof n === "number" ? " Il vous reste " + n + " utilisation" + (n > 1 ? "s" : "") + " aujourd'hui." : ""; };
   var aiMsg = $("#ai-msg"), aiGo = $("#ai-go"), aiUndo = $("#ai-undo"), aiPrev = null;
   function str(x) { return typeof x === "string" ? x.trim() : ""; }
   function normCV(cv) {
@@ -326,7 +326,7 @@
       return aiPost("/fill", { text: text, file: file });
     }, function (m) { return { error: "local", msg: m }; }).then(function (j) {
       aiGo.disabled = false; aiGo.textContent = "Remplir mon CV";
-      if (j.error || !j.cv) { aiMsg.textContent = j.msg || ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté."; return; }
+      if (j.error || !j.cv) { aiMsg.textContent = j.msg || ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessayez, cette utilisation n'est pas décomptée."; return; }
       aiPrev = clone(S); setState(normCV(j.cv)); aiUndo.hidden = false;
       aiMsg.textContent = "C'est rempli. Relisez tout et corrigez : l'IA peut se tromper." + leftTxt(j.left);
       $("#f-name").scrollIntoView({ block: "nearest" });
@@ -349,7 +349,7 @@
       tlGo.disabled = true; tlGo.textContent = "L'IA analyse l'offre..."; tlMsg.textContent = "Cela prend 5 à 20 secondes."; tlRes.hidden = true;
       aiPost("/tailor", { ad: ad, cv: JSON.stringify(cv) }).then(function (j) {
         tlGo.disabled = false; tlGo.textContent = "Adapter mon CV";
-        if (j.error || !j.tailor) { tlMsg.textContent = ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté."; return; }
+        if (j.error || !j.tailor) { tlMsg.textContent = ERR[j.error] || "L'IA n'a pas réussi cette fois. Réessayez, cette utilisation n'est pas décomptée."; return; }
         showTailor(j.tailor); tlMsg.textContent = "Voici les propositions. Cochez ce que vous gardez, puis appliquez." + leftTxt(j.left);
       });
     });
@@ -393,7 +393,7 @@
     aiPost("/rewrite", { text: t, field: field }).then(function (j) {
       btn.disabled = false;
       if (j.error || !j.text) { btn.textContent = ERR[j.error] ? ERR[j.error].split(".")[0] : "Échec, réessayez"; setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 3500); return; }
-      set(j.text); btn.textContent = "Reformulé" + (typeof j.left === "number" ? " (reste " + j.left + " essai" + (j.left > 1 ? "s" : "") + ")" : "");
+      set(j.text); btn.textContent = "Reformulé" + (typeof j.left === "number" ? " (reste " + j.left + " utilisation" + (j.left > 1 ? "s" : "") + ")" : "");
       setTimeout(function () { btn.textContent = "Reformuler avec l'IA"; }, 4000);
     });
   }

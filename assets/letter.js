@@ -40,11 +40,11 @@
   var gen = $("#lt-gen"), msg = $("#lt-msg");
   var ERR = {
     pass: "Le service IA est momentanément indisponible. Réessayez dans un instant.",
-    limit: "Vous avez utilisé vos 5 essais IA gratuits du jour. Revenez demain. L'IA nous coûte à chaque utilisation : si CVLibre vous aide, vous pouvez nous soutenir sur /soutenir/.",
+    limit: "Vous avez utilisé vos 5 utilisations gratuites de l'IA pour aujourd'hui. Revenez demain. L'IA nous coûte à chaque utilisation : si CVLibre vous aide, vous pouvez nous soutenir sur /soutenir/.",
     busy: "Le service est très demandé. Réessayez dans quelques minutes.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez.",
-    parse: "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté.",
-    api: "L'IA n'a pas réussi cette fois. Réessayez, votre essai n'est pas décompté."
+    parse: "L'IA n'a pas réussi cette fois. Réessayez, cette utilisation n'est pas décomptée.",
+    api: "L'IA n'a pas réussi cette fois. Réessayez, cette utilisation n'est pas décomptée."
   };
   function passKey() { try { var o = JSON.parse(localStorage.getItem("cvlibre.pass")); return o && o.key ? o.key : ""; } catch (e) { return ""; } }
   function compact(d) {
@@ -80,7 +80,7 @@
           if (!(S.city || "").trim()) S.city = cv.data.city || "";
         }
         fillFields(); store(); paint();
-        msg.textContent = "Votre lettre est prête. Relisez-la et corrigez-la : l'IA peut se tromper." + (typeof j.left === "number" ? " Il vous reste " + j.left + " essai" + (j.left > 1 ? "s" : "") + " aujourd'hui." : "");
+        msg.textContent = "Votre lettre est prête. Relisez-la et corrigez-la : l'IA peut se tromper." + (typeof j.left === "number" ? " Il vous reste " + j.left + " utilisation" + (j.left > 1 ? "s" : "") + " aujourd'hui." : "");
         $("#lt-result").scrollIntoView({ behavior: "smooth", block: "start" });
       });
   });

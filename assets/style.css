@@ -387,3 +387,16 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 @media (max-width: 520px) { .ai-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .gal-thumb { transition: none; } }
 @media (max-width: 520px) { .hero-shot { display: none; } }
+/* Jauge du budget IA (12 nov 2026) */
+.ai-budget { margin: 0 0 16px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 12px; background: var(--sheet); }
+.aib-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.aib-t { font-weight: 800; font-size: .95rem; }
+.aib-v { font-size: .85rem; color: var(--ink-2); font-weight: 600; }
+.aib-bar { height: 12px; border-radius: 999px; background: #e6ebf5; overflow: hidden; }
+.aib-bar i { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, #3b82f6, var(--blue)); transition: width .8s ease; }
+.ai-budget.hot .aib-bar i { background: linear-gradient(90deg, #f59e0b, #ea580c); }
+.ai-budget.full .aib-bar i { background: #dc2626; }
+.aib-msg { margin: 10px 0 0; font-size: .9rem; color: var(--ink-2); line-height: 1.5; }
+.aib-msg a { font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .aib-bar i { transition: none; } }
+@media print { .ai-budget { display: none !important; } }
