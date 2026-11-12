@@ -95,6 +95,7 @@ a:hover { color: var(--blue-dark); }
 .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
 .foot p { margin: 0; color: var(--ink-2); font-size: .95rem; }
 .foot nav { display: flex; gap: 20px; font-size: .95rem; }
+.foot .foot-ai { order: 3; flex-basis: 100%; font-size: .85rem; line-height: 1.5; max-width: 70ch; }
 
 /* créateur de CV */
 .app-bar { background: var(--sheet); border-bottom: 1px solid var(--rule); position: sticky; top: 62px; z-index: 15; }
