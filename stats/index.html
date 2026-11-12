@@ -8,8 +8,8 @@
 <link rel="canonical" href="https://cvlibre.com/stats/">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261112m">
-<link rel="stylesheet" href="/assets/letter.css?v=20261112m">
+<link rel="stylesheet" href="/assets/style.css?v=20261112n">
+<link rel="stylesheet" href="/assets/letter.css?v=20261112n">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head>
@@ -20,6 +20,7 @@
     <a class="brand" href="/" aria-label="CVLibre, accueil"><span class="b1">CV</span><span class="b2">libre</span></a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="/lettre-de-motivation/">Lettre de motivation</a>
+      <a href="/courriers/">Courriers</a>
       <a href="/blog/">Conseils</a>
       <a href="/#questions">Questions fréquentes</a>
       <a class="btn btn-ghost btn-sm" id="nav-acc" href="/creer-un-cv/?connexion=1" rel="nofollow">Se connecter</a>
@@ -41,21 +42,23 @@
     <p class="hint" id="st-err" hidden></p>
     <div class="st-kpis" id="st-kpis"></div>
     <section class="lt-card sp-sec"><h2>Pages vues par jour</h2><div class="st-chart" id="st-chart" role="img" aria-label="Pages vues par jour"></div></section>
-    <section class="lt-card sp-sec"><h2>Parcours d'achat</h2><div id="st-funnel"></div></section>
+    <section class="lt-card sp-sec"><h2>Parcours des visiteurs</h2><div id="st-funnel"></div></section>
+    <section class="lt-card sp-sec"><h2>Courriers emploi</h2><div id="st-courriers"></div></section>
     <div class="st-two">
       <section class="lt-card sp-sec"><h2>Pages les plus vues</h2><div id="st-pages"></div></section>
       <section class="lt-card sp-sec"><h2>Sources des visites</h2><div id="st-refs"></div></section>
       <section class="lt-card sp-sec"><h2>Modèles choisis</h2><div id="st-tpl"></div></section>
-      <section class="lt-card sp-sec"><h2>Assistant IA</h2><div id="st-ai"></div></section>
+      <section class="lt-card sp-sec"><h2>Utilisations de l'IA</h2><div id="st-ai"></div></section>
     </div>
   </div>
 </main>
 <footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand"><strong>CVLibre</strong> est 100 % gratuit. Le site est financé par la publicité et le soutien volontaire de ses utilisateurs. <a href="/soutenir/">Merci de votre soutien ❤️</a></p>
-    <p class="foot-ai">CVLibre s'aide de l'intelligence artificielle : pour remplir, reformuler et adapter un CV à une offre, rédiger une lettre de motivation (vous relisez et corrigez toujours le résultat) et pour écrire une partie des guides du blog.</p>
+    <p class="foot-ai">CVLibre s'aide de l'intelligence artificielle : pour remplir, reformuler et adapter un CV à une offre, rédiger une lettre de motivation et des courriers emploi (vous relisez et corrigez toujours le résultat) et pour écrire une partie des guides du blog.</p>
     <nav aria-label="Pages légales">
       <a href="/blog/">Conseils CV</a>
+      <a href="/courriers/">Courriers emploi</a>
       <a href="/mentions-legales/">Mentions légales</a>
       <a href="/confidentialite/">Confidentialité</a>
       <a href="/cgv/">Conditions d'utilisation</a>
@@ -63,9 +66,9 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/nav.js?v=20261112m" defer></script>
-<script src="/assets/support.js?v=20261112m" defer></script>
-<script src="/assets/stats.js?v=20261112m" defer></script>
+<script src="/assets/nav.js?v=20261112n" defer></script>
+<script src="/assets/support.js?v=20261112n" defer></script>
+<script src="/assets/stats.js?v=20261112n" defer></script>
 
 <dialog class="pass-dlg" id="acc-dlg" aria-labelledby="acc-title">
   <button type="button" class="dlg-x" id="acc-close" aria-label="Fermer">&times;</button>
@@ -109,7 +112,7 @@
 .st-note { color: var(--ink-2); font-size: .88rem; margin: 0; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="/assets/auth.js?v=20261112m"></script>
-<script src="/assets/stats-page.js?v=20261112m"></script>
+<script src="/assets/auth.js?v=20261112n"></script>
+<script src="/assets/stats-page.js?v=20261112n"></script>
 </body>
 </html>

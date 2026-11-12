@@ -16,8 +16,7 @@
     if (us) { SRC = "pub:" + us.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40); sessionStorage.setItem("cvlibre.src", SRC); }
     else SRC = sessionStorage.getItem("cvlibre.src") || "";
   } catch (e) {}
-  var paidBack = path === "/mon-espace/" && /[?&]paiement=ok/.test(location.search);
-  if (/^\/(mon-espace|stats)\//.test(path) && !paidBack) return;
+  if (/^\/(mon-espace|stats)\//.test(path)) return;
   var URL_ = "https://zltqrnflowxkycrjmhbx.supabase.co/rest/v1/rpc/track", KEY = "sb_publishable_KVXGhm7oHvaymjzOZyfp6A_03X6EcXr";
   var of = window.fetch ? window.fetch.bind(window) : null;
   if (!of) return;
@@ -28,11 +27,6 @@
   function send(ev, x) {
     try { of(URL_, { method: "POST", keepalive: true, headers: { "content-type": "application/json", apikey: KEY }, body: JSON.stringify({ p: path, e: ev, r: ref, d: dev, x: x || null }) }).catch(function () {}); } catch (e) {}
   }
-  if (paidBack) {
-    /* Retour de Stripe : un seul "paid" par session, avec la source de la visite (pub, recherche...). */
-    try { if (!sessionStorage.getItem("cvlibre.paid")) { sessionStorage.setItem("cvlibre.paid", "1"); send("paid"); } } catch (e) { send("paid"); }
-    return;
-  }
   send("view");
 
   // Appels à l'IA : on compte l'action (remplir, reformuler, lettre...), jamais le contenu.
@@ -40,7 +34,7 @@
     var p = of.apply(window, arguments);
     try {
       var s = String(u && u.url ? u.url : u);
-      if (s.indexOf("cvlibre-ai-production") > -1 && s.indexOf("/pass/") === -1 && !/\/health/.test(s)) {
+      if (s.indexOf("cvlibre-ai-production") > -1 && !/\/(health|usage)/.test(s) && s.indexOf("/pass/") === -1) {
         var rt = s.split("?")[0].split("/").pop();
         send("ai", rt);
         p.then(function (r) { if (r && r.status === 402) send("ai_402", rt); }).catch(function () {});
@@ -49,27 +43,24 @@
     return p;
   };
 
-  function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
+  var CT = (document.querySelector("main[data-type]") || { getAttribute: function () { return null; } }).getAttribute("data-type");
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target : null;
     if (!t) return;
     var el;
-    if ((el = t.closest("#print"))) return send("pdf", paid() ? "clean" : "wm");
-    if (t.closest("#wm-remove")) return send("wm_remove");
-    if (t.closest("#wm-go")) return send("wm_go");
-    if (t.closest("#pass-btn")) return send("pass_open");
-    if (t.closest("#pass-buy, #sp-add")) return send("buy_pass");
+    if (t.closest("#print")) return send("pdf");
+    if (t.closest("#lt-print")) return send("letter_pdf");
+    if (t.closest("#ct-gen")) return send("courrier_ia", CT);
+    if (t.closest("#ct-model")) return send("courrier_modele", CT);
+    if ((el = t.closest("#ct-copy, #ct-mail, #ct-print"))) return send("courrier_export", CT);
     if (t.closest("#after-acc-go")) return send("after_account");
     if (t.closest("#after-don")) return send("after_don");
     if (t.closest("#acc-google")) return send("login_google");
     if (t.closest("#acc-mail-go")) return send("login_mail");
-    if ((el = t.closest(".tpl-card"))) return send(el.getAttribute("data-locked") === "1" ? "tpl_locked" : "tpl_pick", el.getAttribute("data-tpl"));
+    if (t.closest('a[href*="tipeee.com"]')) return send("don");
+    if ((el = t.closest(".gal-card"))) return send("gal_pick", el.getAttribute("data-tpl"));
+    if ((el = t.closest(".tpl-card"))) return send("tpl_pick", el.getAttribute("data-tpl"));
     if ((el = t.closest("#tpls button[data-tpl]"))) return send("tpl_pick", el.getAttribute("data-tpl"));
   }, true);
 
-  window.addEventListener("load", function () {
-    if (!window.CVPASS) return;
-    var was = paid();
-    window.CVPASS.onChange(function () { var now = paid(); if (now && !was) send("key_ok", window.CVPASS.plan()); was = now; });
-  });
 })();

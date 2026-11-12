@@ -20,36 +20,45 @@
   }
   function kpi(box, n, label) { var d = document.createElement("div"); d.className = "st-kpi"; var b = document.createElement("b"); b.textContent = n; var s = document.createElement("span"); s.textContent = label; d.appendChild(b); d.appendChild(s); box.appendChild(d); }
   var TPL = { classique: "Classique", moderne: "Moderne", sobre: "Sobre", elegant: "Élégant", bandeau: "Bandeau", chrono: "Chronologie", marge: "Marge", nuit: "Nuit", cadre: "Cadre", ruban: "Ruban", journal: "Journal", bandes: "Bandes", cartes: "Cartes" };
-  var AI = { fill: "Remplir avec l'IA", rewrite: "Reformuler", letter: "Lettre de motivation", support: "Aide du site" };
+  var AI = { fill: "Remplir le CV", rewrite: "Reformuler", tailor: "Adapter à une offre", letter: "Lettre de motivation", courrier: "Courriers emploi", support: "Aide du site" };
+  var CTN = { demission: "Lettre de démission", rupture: "Rupture conventionnelle", relance: "Relance après entretien", candidature: "E-mail de candidature" };
   function show(d) {
     var ev = d.ev || {};
     var e = function (k) { return Number(ev[k] || 0); };
     var entries = (d.days || []).reduce(function (s, r) { return s + Number(r.entries || 0); }, 0);
+    var ai = (d.ai || []).filter(function (r) { return r.k !== "usage"; });
+    var aiN = ai.reduce(function (s, r) { return s + Number(r.c || 0); }, 0);
+    var dons = e("don") + e("after_don");
     var k = $("#st-kpis"); k.textContent = "";
     kpi(k, N(entries), "Visites (entrées sur le site)");
     kpi(k, N(e("view")), "Pages vues");
-    kpi(k, N(e("pdf")), "PDF téléchargés");
-    kpi(k, pct(e("pass_open"), e("pdf")), "Ouvertures du Pass / PDF");
-    kpi(k, N(e("buy_pass") + e("buy_pro")), "Clics vers le paiement");
-    kpi(k, N(e("key_ok")), "Clés activées");
-    kpi(k, N(e("paid")), "Retours de paiement");
+    kpi(k, N(e("pdf")), "CV téléchargés en PDF");
+    kpi(k, N(e("letter_pdf")), "Lettres téléchargées en PDF");
+    kpi(k, N(aiN), "Utilisations de l'IA");
+    kpi(k, N(e("courrier_ia") + e("courrier_modele")), "Courriers rédigés");
+    kpi(k, N(dons), "Clics vers Tipeee (dons)");
     kpi(k, N(d.users), "Comptes (+" + N(d.users_new) + ")");
-    kpi(k, N(d.passes), "Pass et abonnements enregistrés");
     var ch = $("#st-chart"); ch.textContent = "";
     var mx = Math.max.apply(null, (d.days || []).map(function (r) { return Number(r.views || 0); }).concat([1]));
     (d.days || []).forEach(function (r) { var i = document.createElement("i"); i.style.height = Math.max(2, Math.round((Number(r.views || 0) / mx) * 130)) + "px"; i.title = r.day + " : " + N(r.views) + " pages vues"; ch.appendChild(i); });
     rows($("#st-funnel"), [
-      { k: "Pages vues", c: e("view") }, { k: "PDF téléchargés (avec bandeau : " + N(d.pdf_wm) + ")", c: e("pdf") },
-      { k: "Fenêtre « Retirer le bandeau » : clic sur Retirer", c: e("wm_remove") }, { k: "Fenêtre du Pass ouverte", c: e("pass_open") },
-      { k: "Clic Acheter le Pass", c: e("buy_pass") }, { k: "Retour de paiement", c: e("paid") }, { k: "Clé activée", c: e("key_ok") },
-      { k: "Modèle réservé touché sans Pass", c: e("tpl_locked") }
+      { k: "Pages vues", c: e("view") }, { k: "Modèle choisi (créateur ou galerie de l'accueil)", c: e("tpl_pick") + e("gal_pick") },
+      { k: "CV téléchargé en PDF", c: e("pdf") }, { k: "Après le PDF : clic Créer mon compte", c: e("after_account") },
+      { k: "Après le PDF : clic Faire un don", c: e("after_don") }, { k: "Connexion demandée (e-mail ou Google)", c: e("login_mail") + e("login_google") },
+      { k: "Tous les clics vers Tipeee", c: dons }
     ]);
+    var cb = $("#st-courriers"); cb.textContent = "";
+    (d.courriers || []).forEach(function (r) {
+      var p = document.createElement("p"); p.className = "st-row st-ct";
+      var b = document.createElement("strong"); b.textContent = CTN[r.k] || r.k; p.appendChild(b);
+      p.appendChild(document.createTextNode(" : " + N(r.vues) + " pages vues, " + N(r.ia) + " avec l'IA, " + N(r.modele) + " modèle sans IA, " + N(r["export"]) + " copiés, envoyés ou imprimés"));
+      cb.appendChild(p);
+    });
     rows($("#st-pages"), d.pages || []);
     rows($("#st-refs"), (d.refs || []).map(function (r) { return { k: r.k || "(direct ou inconnu)", c: r.c }; }));
-    rows($("#st-tpl"), d.tpl || [], function (x) { return TPL[x] || x; });
-    var ai = (d.ai || []).map(function (r) { return { k: r.k, c: r.c }; });
+    rows($("#st-tpl"), d.tpl || [], function (x) { return TPL[x] || (x.charAt(0).toUpperCase() + x.slice(1)); });
     rows($("#st-ai"), ai, function (x) { return AI[x] || x; });
-    var n = document.createElement("p"); n.className = "st-note"; n.textContent = "Appareils : " + N(d.mobile) + " mobile, " + N(d.desktop) + " ordinateur. Blocages IA (accès réservé) : " + N(e("ai_402")) + ". Données anonymes, sans cookie.";
+    var n = document.createElement("p"); n.className = "st-note"; n.textContent = "Appareils : " + N(d.mobile) + " mobile, " + N(d.desktop) + " ordinateur. Données anonymes, sans cookie.";
     $("#st-ai").appendChild(n);
   }
   function load() {
