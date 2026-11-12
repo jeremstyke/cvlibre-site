@@ -385,6 +385,142 @@
 .t-pop .c-sec h2 { display: inline-block; font-size: 11pt; color: #111827; background: linear-gradient(rgba(255,255,255,0) 55%, #b9cdf8 55%); background: linear-gradient(rgba(255,255,255,0) 55%, color-mix(in srgb, var(--acc) 45%, #fff) 55%); padding: 0 1.5mm; margin-left: -1.5mm; }
 .t-pop .c-tags li { border: .35mm solid #111827; border-radius: 1mm; box-shadow: .7mm .7mm 0 #111827; background: #fff; margin: 0 .8mm .8mm 0; }
 
+/* 12 nov 2026 (Jeremy, "il faut des modèles différents, originaux") : huit modèles au caractère marqué.
+   Même HTML que les autres (render.js), tout se joue en CSS. Pas de "transparent" dans les dégradés (PDF noir sur iPhone). */
+
+/* affiche : grand bloc noir, nom immense, rubriques numérotées */
+.sheet.t-affiche { padding: 0; }
+.t-affiche .c-head { background: #111827; color: #fff; padding: 16mm 16mm 9mm; display: flex; align-items: flex-end; gap: 8mm; flex-wrap: wrap; }
+.t-affiche .c-id { flex: 1; min-width: 0; }
+.t-affiche .c-id h1 { font: 800 38pt/.95 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: -.03em; text-transform: uppercase; color: #fff; }
+.t-affiche .c-title { display: inline-block; margin-top: 4mm; background: var(--acc); color: #fff; font-weight: 700; font-size: 11.5pt; padding: 1mm 3mm; }
+.t-affiche .c-photo-h { width: 32mm; height: 32mm; border-radius: 0; border: 1mm solid var(--acc); }
+.t-affiche .c-contact-h { flex-basis: 100%; }
+.t-affiche .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.5pt; color: #d1d5db; }
+.t-affiche .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 58mm; column-gap: 10mm; padding: 10mm 16mm 14mm; }
+.t-affiche .c-main { counter-reset: aff; }
+.t-affiche .c-main .c-sec h2::before { counter-increment: aff; content: "0" counter(aff); display: inline-block; margin-right: 3mm; color: var(--acc); font-size: 15pt; }
+.t-affiche .c-sec h2 { font-size: 12pt; text-transform: uppercase; letter-spacing: .04em; color: #111827; border-bottom: .8mm solid #111827; padding-bottom: 1.2mm; }
+.t-affiche .c-side { border-top: 2.5mm solid var(--acc); padding-top: 4mm; }
+.t-affiche .c-side .c-sec h2 { border-bottom-width: .3mm; font-size: 10pt; }
+.t-affiche .c-tags li { border: 0; background: #111827; color: #fff; border-radius: 0; }
+
+/* monogramme : grande initiale dans un rond, tout centré, infos en trois colonnes en bas */
+.sheet.t-monogramme { padding: 15mm 18mm; }
+.t-monogramme .c-head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.t-monogramme .c-photo-h { order: -1; width: 28mm; height: 28mm; margin-bottom: 4mm; border: .8mm solid var(--acc); }
+.t-monogramme .c-id h1 { font: 400 26pt/1.1 "CVF Playfair", Georgia, serif; color: #111827; }
+.t-monogramme .c-id { border: .5mm solid var(--acc); border-radius: 50% / 40%; padding: 5mm 14mm 4mm; }
+.t-monogramme .c-id h1::first-letter { font-weight: 700; font-style: italic; color: var(--acc); font-size: 1.55em; }
+.t-monogramme .c-title { margin-top: 2.5mm; font-size: 10pt; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); font-weight: 700; }
+.t-monogramme .c-contact-h { margin-top: 4mm; padding: 2.5mm 0; border-top: .25mm solid #c9ced8; border-bottom: .25mm solid #c9ced8; width: 100%; }
+.t-monogramme .c-contact-h .c-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6mm; font-size: 9.3pt; }
+.t-monogramme .c-cols { margin-top: 7mm; }
+.t-monogramme .c-sec h2 { font: 400 13pt/1.2 "CVF Playfair", Georgia, serif; color: #111827; text-align: center; margin-bottom: 3.5mm; }
+.t-monogramme .c-sec h2::after { content: ""; display: block; width: 12mm; height: .7mm; background: var(--acc); margin: 1.5mm auto 0; }
+.t-monogramme .c-side { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8mm; border-top: .25mm solid #c9ced8; padding-top: 6mm; }
+.t-monogramme .c-side .c-tags { justify-content: center; }
+.t-monogramme .c-side .c-desc { text-align: center; }
+
+/* sombre : page sombre, accents lumineux */
+.sheet.t-sombre { padding: 15mm 16mm; background: #111827; color: #e5e7eb; }
+.t-sombre .c-head { display: flex; align-items: center; gap: 8mm; flex-wrap: wrap; }
+.t-sombre .c-id { flex: 1; min-width: 0; }
+.t-sombre .c-id h1 { font: 800 28pt/1.02 "CVF Montserrat", Arial, sans-serif; color: #fff; letter-spacing: -.01em; }
+.t-sombre .c-title { margin-top: 2mm; font-size: 12pt; font-weight: 600; color: color-mix(in srgb, var(--acc) 55%, #fff); }
+.t-sombre .c-photo-h { border: .8mm solid color-mix(in srgb, var(--acc) 55%, #fff); }
+.t-sombre .c-contact-h { flex-basis: 100%; }
+.t-sombre .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.5pt; color: #cbd5e1; }
+.t-sombre .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 56mm; column-gap: 9mm; margin-top: 8mm; }
+.t-sombre .c-sec h2 { color: color-mix(in srgb, var(--acc) 55%, #fff); text-transform: uppercase; letter-spacing: .1em; font-size: 9.5pt; }
+.t-sombre .c-sec h2::after { content: ""; display: block; height: .4mm; margin-top: 1.2mm; background: #374151; }
+.t-sombre .c-date, .t-sombre .c-lang li span { color: #9ca3af; }
+.t-sombre .c-sub { color: #cbd5e1; }
+.t-sombre .c-line strong { color: #fff; }
+.t-sombre .c-side { background: #1f2937; border-radius: 3mm; padding: 6mm 5mm; }
+.t-sombre .c-tags li { border-color: #4b5563; color: #e5e7eb; }
+
+/* vertical : le nom écrit à la verticale dans une bande à gauche */
+.sheet.t-vertical { padding: 0; }
+.t-vertical .cv { display: grid; grid-template-columns: 26mm 1fr; grid-template-areas: "band body"; min-height: 297mm; }
+.t-vertical .c-head { display: contents; }
+.t-vertical .c-id { grid-area: band; background: var(--acc); color: #fff; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2mm; padding: 14mm 0; }
+.t-vertical .c-id h1 { font: 800 30pt/1 "Bricolage Grotesque", "Source Sans 3", Arial, sans-serif; letter-spacing: .02em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.t-vertical .c-title { font-size: 10pt; font-weight: 600; color: #fff; opacity: .92; white-space: nowrap; }
+.t-vertical .c-photo-h, .t-vertical .c-contact-h { display: none; }
+.t-vertical .c-cols { grid-area: body; display: grid; grid-template-columns: minmax(0, 1fr) 56mm; column-gap: 8mm; padding: 16mm 14mm 14mm 11mm; align-content: start; }
+.t-vertical .c-cols::before { content: none; }
+.t-vertical .c-side { grid-column: 2; grid-row: 1; }
+.t-vertical .c-main { grid-column: 1; grid-row: 1; }
+.t-vertical .c-photo-s { display: block; width: 34mm; height: 34mm; margin: 0 0 6mm; border-radius: 3mm; }
+.t-vertical .c-contact-s { display: block; }
+.t-vertical .c-sec h2 { color: var(--acc); font-size: 11pt; }
+.t-vertical .c-main .c-sec h2 { font-size: 13pt; }
+.t-vertical .c-side .c-sec { padding-left: 4mm; border-left: .6mm solid var(--acc); }
+
+/* retro : machine à écrire sur papier crème */
+.sheet.t-retro { padding: 16mm 18mm; background: #fbf6ea; color: #2b2620; font-family: "Courier New", Courier, monospace; font-size: 9.6pt; }
+.t-retro .c-head { border: .6mm solid #2b2620; padding: 6mm 7mm; display: flex; align-items: center; gap: 7mm; flex-wrap: wrap; background: #fff; box-shadow: 1.5mm 1.5mm 0 var(--acc); }
+.t-retro .c-id { flex: 1; min-width: 0; }
+.t-retro .c-id h1 { font: 700 23pt/1.05 "Courier New", Courier, monospace; text-transform: uppercase; color: #2b2620; letter-spacing: .02em; }
+.t-retro .c-title { margin-top: 1.5mm; font-size: 10.5pt; color: var(--acc); font-weight: 700; }
+.t-retro .c-photo-h { border-radius: 0; filter: grayscale(1); border: .5mm solid #2b2620; }
+.t-retro .c-contact-h { flex-basis: 100%; border-top: .3mm dashed #2b2620; padding-top: 2.5mm; }
+.t-retro .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 5mm; font-size: 9pt; }
+.t-retro .c-cols { margin-top: 8mm; display: grid; grid-template-columns: minmax(0, 1fr) 52mm; column-gap: 9mm; }
+.t-retro .c-sec h2 { font: 700 10.5pt/1.2 "Courier New", Courier, monospace; text-transform: uppercase; color: #2b2620; border-bottom: .3mm dashed #2b2620; padding-bottom: 1mm; }
+.t-retro .c-sec h2::before { content: "> "; color: var(--acc); }
+.t-retro .c-line strong { font-size: 10pt; }
+.t-retro .c-date, .t-retro .c-sub, .t-retro .c-lang li span { color: #5a5248; }
+.t-retro .c-tags li { border: .3mm solid #2b2620; border-radius: 0; background: #fff; }
+
+/* duo : grand bloc de couleur arrondi, colonne blanche qui le chevauche */
+.sheet.t-duo { padding: 0; }
+.t-duo .c-head { background: var(--acc); color: #fff; padding: 16mm 82mm 22mm 16mm; border-radius: 0 0 14mm 0; display: flex; flex-direction: column; gap: 2mm; }
+.t-duo .c-id h1 { font: 800 30pt/1 "CVF Nunito", Arial, sans-serif; color: #fff; }
+.t-duo .c-title { font-size: 12pt; font-weight: 700; color: #fff; opacity: .92; }
+.t-duo .c-photo-h { display: none; }
+.t-duo .c-contact-h { margin-top: 3mm; }
+.t-duo .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 5mm; font-size: 9.3pt; color: #fff; }
+.t-duo .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 62mm; column-gap: 9mm; padding: 0 14mm 14mm 16mm; }
+.t-duo .c-main { padding-top: 9mm; }
+.t-duo .c-side { margin-top: -38mm; background: #fff; border-radius: 6mm; padding: 7mm 6mm; box-shadow: 0 1.5mm 5mm rgba(17, 24, 39, .18); border: .3mm solid #e5e7eb; position: relative; }
+.t-duo .c-photo-s { display: block; width: 34mm; height: 34mm; margin: 0 auto 5mm; border: 1mm solid var(--acc); }
+.t-duo .c-sec h2 { font: 800 11pt/1.2 "CVF Nunito", Arial, sans-serif; color: var(--acc); }
+.t-duo .c-tags li { border: 0; background: color-mix(in srgb, var(--acc) 12%, #fff); border-radius: 99px; padding: .8mm 2.5mm; }
+
+/* géométrie : formes de couleur en haut à droite, titres en pastilles */
+.sheet.t-geometrie { padding: 16mm 16mm 14mm; overflow: hidden; }
+.t-geometrie .c-head { position: relative; display: flex; align-items: center; gap: 7mm; flex-wrap: wrap; padding-right: 40mm; }
+.t-geometrie .c-head::before { content: ""; position: absolute; top: -40mm; right: -42mm; width: 82mm; height: 82mm; border-radius: 50%; background: var(--acc); }
+.t-geometrie .c-head::after { content: ""; position: absolute; top: 34mm; right: 4mm; width: 11mm; height: 11mm; background: color-mix(in srgb, var(--acc) 35%, #fff); transform: rotate(45deg); }
+.t-geometrie .c-id { flex: 1; min-width: 0; position: relative; }
+.t-geometrie .c-id h1 { font: 800 27pt/1.03 "CVF Montserrat", Arial, sans-serif; color: #111827; }
+.t-geometrie .c-title { margin-top: 2mm; font-size: 12pt; font-weight: 600; color: var(--acc); }
+.t-geometrie .c-photo-h { position: relative; border-radius: 4mm; }
+.t-geometrie .c-contact-h { flex-basis: 100%; position: relative; }
+.t-geometrie .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; }
+.t-geometrie .c-cols { display: grid; grid-template-columns: minmax(0, 1fr) 56mm; column-gap: 9mm; margin-top: 9mm; }
+.t-geometrie .c-sec h2 { display: inline-block; background: var(--acc); color: #fff; border-radius: 99px; padding: .8mm 4mm; font-size: 10pt; }
+.t-geometrie .c-item { border-left: .6mm solid color-mix(in srgb, var(--acc) 30%, #fff); padding-left: 3.5mm; }
+.t-geometrie .c-tags li { border-radius: 99px; border-color: var(--acc); color: var(--acc); }
+
+/* éditorial : allure de magazine, grand titre en italique, filets fins */
+.sheet.t-editorial { padding: 16mm 17mm; }
+.t-editorial .c-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8mm; align-items: end; border-bottom: 1.2mm double #111827; padding-bottom: 5mm; }
+.t-editorial .c-id h1 { font: italic 600 34pt/1 "CVF Playfair", Georgia, serif; color: #111827; letter-spacing: -.01em; }
+.t-editorial .c-title { margin-top: 2.5mm; font: 600 10pt/1.3 "Source Sans 3", Arial, sans-serif; text-transform: uppercase; letter-spacing: .18em; color: var(--acc); }
+.t-editorial .c-photo-h { grid-row: span 2; width: 30mm; height: 38mm; border-radius: 0; }
+.t-editorial .c-contact-h { grid-column: 1; margin-top: 3mm; }
+.t-editorial .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 5mm; font-size: 9.2pt; color: #374151; }
+.t-editorial .c-cols { display: grid; grid-template-columns: 54mm minmax(0, 1fr); column-gap: 9mm; margin-top: 7mm; }
+.t-editorial .c-side { grid-column: 1; grid-row: 1; border-right: .25mm solid #d1d5db; padding-right: 7mm; }
+.t-editorial .c-main { grid-column: 2; grid-row: 1; }
+.t-editorial .c-sec h2 { font: italic 600 14pt/1.2 "CVF Playfair", Georgia, serif; color: #111827; border-bottom: .25mm solid #111827; padding-bottom: 1mm; }
+.t-editorial .c-main .c-sec:first-child .c-desc p:first-child::first-letter { float: left; font: 700 28pt/.85 "CVF Playfair", Georgia, serif; color: var(--acc); margin: 1mm 2mm 0 0; }
+.t-editorial .c-tags li { border: 0; padding: 0; }
+.t-editorial .c-tags li:not(:last-child)::after { content: " ·"; color: var(--acc); }
+
 /* Filigrane de la version gratuite : bandeau image (pas de texte, donc rien dans le texte lu par les logiciels de recrutement) */
 .sheet .wm { position: absolute; left: 0; right: 0; bottom: 0; height: 16mm; background: #dfe6f1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 60'%3E%3Ctext x='260' y='41' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' font-weight='700' fill='%231d4ed8'%3Ecvlibre.com%3C/text%3E%3C/svg%3E") center / auto 70% no-repeat; border-top: .4mm solid #9aa8bf; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
@@ -394,6 +530,8 @@
   .sheet, .sheet .cv, .sheet .c-main, .sheet .c-side, .sheet .c-cols { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   /* colonnes colorées : le fond est porté par la grille, donc il couvre toute la hauteur de chaque page */
   .t-moderne .cv { background: linear-gradient(90deg, var(--acc) 0 68mm, #fff 68mm); }
+  .t-vertical .cv { background: linear-gradient(90deg, var(--acc) 0 26mm, #fff 26mm); }
+  .t-vertical .c-id { background: none; }
   .t-nuit .cv { background: linear-gradient(90deg, #1a2233 0 70mm, #fff 70mm); }
   .t-pastel .cv { background: linear-gradient(90deg, #eef2fb 0 66mm, #fff 66mm); background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 11%, #fff) 0 66mm, #fff 66mm); }
   .t-chrono .cv { background: linear-gradient(90deg, #fff calc(100% - 64mm), #eef2fb calc(100% - 64mm)); background: linear-gradient(90deg, #fff calc(100% - 64mm), color-mix(in srgb, var(--acc) 10%, #fff) calc(100% - 64mm)); }

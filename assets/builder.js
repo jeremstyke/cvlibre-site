@@ -35,7 +35,7 @@
   /* ---------- aperçu ---------- */
   var sheet = $("#sheet"), pbox = $("#pbox"), warn = $("#pages-warn"), forceWm = false;
   function wmOn() { return forceWm || !(window.CVPASS && window.CVPASS.paid()); }
-  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1, aurore: 1, horizon: 1, minimal: 1, pastel: 1, atelier: 1, prestige: 1, standard: 1, compact: 1, diagonale: 1, bulle: 1, papier: 1, pop: 1 };
+  var PREMIUM = { elegant: 1, bandeau: 1, chrono: 1, marge: 1, nuit: 1, cadre: 1, ruban: 1, journal: 1, bandes: 1, cartes: 1, aurore: 1, horizon: 1, minimal: 1, pastel: 1, atelier: 1, prestige: 1, standard: 1, compact: 1, diagonale: 1, bulle: 1, papier: 1, pop: 1, affiche: 1, monogramme: 1, sombre: 1, vertical: 1, retro: 1, duo: 1, geometrie: 1, editorial: 1 };
   var FONTS = { inter: '"CVF Inter", Arial, Helvetica, sans-serif', nunito: '"CVF Nunito", Arial, Helvetica, sans-serif', montserrat: '"CVF Montserrat", Arial, Helvetica, sans-serif', sourcesans: '"Source Sans 3", Arial, Helvetica, sans-serif', bricolage: '"Bricolage Grotesque", "Source Sans 3", Arial, sans-serif', lora: '"CVF Lora", Georgia, "Times New Roman", serif', playfair: '"CVF Playfair", Georgia, "Times New Roman", serif', sourceserif: '"Source Serif 4", Georgia, "Times New Roman", serif' };
   /* Mise en forme du Pass : une police par élément (n nom, i intitulé, r rubriques, p postes et diplômes, t texte), taille et espacement */
   var FMT_KEYS = ["n", "i", "r", "p", "t"], SIZES = { s: 1, l: 1 }, SPACES = { t: 1, a: 1 };
@@ -53,7 +53,7 @@
     $$("#fmt-dlg [data-space]").forEach(function (x) { x.setAttribute("aria-pressed", String((on && S.space || "") === x.dataset.space)); });
     var fb = $("#fmt-btn"); if (fb) fb.textContent = on ? "Personnaliser" : "Personnaliser (Pass)";
   }
-  var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"], ["aurore", "Aurore"], ["horizon", "Horizon"], ["minimal", "Minimal"], ["pastel", "Pastel"], ["atelier", "Atelier"], ["prestige", "Prestige"], ["standard", "Standard"], ["compact", "Compact"], ["diagonale", "Diagonale"], ["bulle", "Bulle"], ["papier", "Papier"], ["pop", "Pop"]];
+  var TPLS = [["classique", "Classique"], ["moderne", "Moderne"], ["sobre", "Sobre"], ["affiche", "Affiche"], ["duo", "Duo"], ["vertical", "Vertical"], ["editorial", "Éditorial"], ["geometrie", "Géométrie"], ["monogramme", "Monogramme"], ["sombre", "Sombre"], ["retro", "Rétro"], ["elegant", "Élégant"], ["bandeau", "Bandeau"], ["chrono", "Chronologie"], ["marge", "Marge"], ["nuit", "Nuit"], ["cadre", "Cadre"], ["ruban", "Ruban"], ["journal", "Journal"], ["bandes", "Bandes"], ["cartes", "Cartes"], ["aurore", "Aurore"], ["horizon", "Horizon"], ["minimal", "Minimal"], ["pastel", "Pastel"], ["atelier", "Atelier"], ["prestige", "Prestige"], ["standard", "Standard"], ["compact", "Compact"], ["diagonale", "Diagonale"], ["bulle", "Bulle"], ["papier", "Papier"], ["pop", "Pop"]];
   function paid() { return !!(window.CVPASS && window.CVPASS.paid()); }
   function paint() {
     lockName();
