@@ -242,7 +242,7 @@
   }
   window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint();
     /* 12 nov 2026 : site 100 % gratuit, un petit mot de soutien après le PDF */
-    if (passMsg) { passMsg.innerHTML = 'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Faire un don en 1 clic (paiement sécurisé Stripe) ❤️</a>'; passMsg.hidden = false; }
+    if (passMsg) { passMsg.innerHTML = 'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Soutenir CVLibre sur Tipeee ❤️</a>'; passMsg.hidden = false; }
   });
   if (window.CVPASS) window.CVPASS.onChange(function () { paint(); });
 

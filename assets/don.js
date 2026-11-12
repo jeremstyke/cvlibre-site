@@ -1,6 +1,6 @@
-/* 12 nov 2026 (Jeremy) : don en 1 clic via Stripe (lien de paiement, montant libre). Mettre le lien Stripe ici, une seule fois. */
+/* 12 nov 2026 (Jeremy) : dons via Tipeee. Lien de don ici, une seule fois. */
 (function () {
-  var DON = "";
+  var DON = "https://fr.tipeee.com/cvlibre/";
   var go = function () {
     document.querySelectorAll("a.don-btn").forEach(function (a) {
       if (DON) { a.href = DON; a.target = "_blank"; a.rel = "noopener"; a.hidden = false; }
