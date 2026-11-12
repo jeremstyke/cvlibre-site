@@ -36,7 +36,7 @@
       P.plan() === "pro" ? "Offre Pro active : CV de plusieurs personnes, 30 PDF et 60 utilisations IA par jour, jusqu'à 200 CV et 200 lettres." :
       "Pass 1 an actif jusqu'au " + new Date(P.until()).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) + " : PDF sans bandeau, lettres IA, jusqu'à 20 CV et 30 lettres.";
   }
-  /* Liste des pass du compte : un pass par personne, on choisit celui à utiliser sur cet appareil. */
+  /* Liste des pass du compte : un pass par personne, un pass par personne. */
   function passes() {
     var P = window.CVPASS, box = $("#sp-passes"), add = $("#sp-add");
     if (!P || !box || !A.user()) return Promise.resolve(0);
@@ -52,12 +52,12 @@
         var s = document.createElement("span"); s.textContent = (ok ? "Valable jusqu'au " : "Expiré le ") + fmt(x.until);
         t.appendChild(a); t.appendChild(s); d.appendChild(t);
         if (ok) {
-          var b = document.createElement("button"); b.type = "button"; b.className = "btn btn-ghost btn-sm";
           var cur = P.paid() && P.key() === x.key;
-          if (cur && !x.holder_p) { b.textContent = "Définir le nom"; b.className = "btn btn-sm"; b.addEventListener("click", function () { P.askHolder(); }); }
-          else { b.textContent = cur ? "Utilisé sur cet appareil" : "Utiliser sur cet appareil"; b.disabled = cur; }
-          if (!cur) b.addEventListener("click", function () { b.disabled = true; P.activate(x.key).then(function () { passes(); offer(); }); });
-          d.appendChild(b);
+          if (cur && !x.holder_p) {
+            var b = document.createElement("button"); b.type = "button"; b.className = "btn btn-sm"; b.textContent = "Définir le nom";
+            b.addEventListener("click", function () { P.askHolder(); });
+            d.appendChild(b);
+          }
         }
         box.appendChild(d);
       });
