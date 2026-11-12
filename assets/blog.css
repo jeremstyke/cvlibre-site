@@ -147,3 +147,13 @@ mark.ph { background: var(--wash); color: var(--acc-ink); padding: 1px 6px; bord
 .ex.letter { border-left: 0; }
 
 .post-hero .pill { background: #fff; box-shadow: 0 0 0 1px color-mix(in srgb, var(--acc) 22%, #fff); }
+/* Tableaux comparatifs (12 nov 2026) */
+.tbl { margin: 1.6em 0; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #dbe1ec; border-radius: 12px; background: #fff; }
+.tbl table { border-collapse: collapse; width: 100%; min-width: 600px; font: .95rem/1.45 var(--body); }
+.tbl th, .tbl td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid #e6eaf2; }
+.tbl thead th { background: #f3f5f8; font-weight: 800; color: var(--ink); }
+.tbl tbody th { font-weight: 700; white-space: nowrap; }
+.tbl tr.us { background: #eef3ff; }
+.tbl tr:last-child td, .tbl tr:last-child th { border-bottom: 0; }
+.note-src { font-size: .9rem; color: #5a6478; }
+.tbl table.t3 { min-width: 0; }
