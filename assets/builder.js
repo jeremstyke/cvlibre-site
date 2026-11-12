@@ -186,6 +186,9 @@
   if (more) {
     more.addEventListener("click", function (e) { var it = e.target.closest && e.target.closest(".tbm-item"); if (!it) return; if (it.id === "reset" && it.dataset.arm === "1") return; setTimeout(function () { more.open = false; }, 0); });
     document.addEventListener("click", function (e) { if (more.open && !more.contains(e.target)) more.open = false; });
+    /* sur mobile le menu est fixé à l'écran : on le place juste sous le bouton Plus */
+    var place = function () { var m = more.querySelector(".tbm-menu"); if (!more.open || !m) return; if (getComputedStyle(m).position === "fixed") m.style.top = (more.querySelector("summary").getBoundingClientRect().bottom + 6) + "px"; else m.style.top = ""; };
+    more.addEventListener("toggle", place); window.addEventListener("scroll", place, { passive: true }); window.addEventListener("resize", place);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && more.open) { more.open = false; more.querySelector("summary").focus(); } });
   }
   $$("#tpls button").forEach(function (b) { b.addEventListener("click", function () {

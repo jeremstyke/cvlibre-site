@@ -347,7 +347,7 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
   .app-actions #print { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 40; min-height: 52px; font-size: 1.05rem; box-shadow: 0 10px 28px rgba(31,79,216,.35); justify-content: center; }
   body[data-tab] .foot { padding-bottom: 90px; }
   body[data-tab] main { padding-bottom: 80px; }
-  .tbm-menu { right: 0; left: auto; max-width: calc(100vw - 32px); }
+  .tbm-menu { position: fixed; left: 16px; right: 16px; top: auto; min-width: 0; max-width: none; }
 }
 @media screen and (max-width: 960px) { body[data-tab] .sup { bottom: calc(80px + env(safe-area-inset-bottom)); } }
 .tbm:not([open]) > .tbm-menu { display: none; }
