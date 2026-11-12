@@ -369,7 +369,7 @@
 .t-papier .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.3pt; color: #4a3f31; }
 .t-papier .c-cols { margin-top: 6mm; }
 .t-papier .c-sec h2 { font: 700 11.5pt/1.2 "Source Serif 4", Georgia, serif; color: #2a2118; }
-.t-papier .c-sec h2::after { content: ""; display: block; height: .5mm; margin-top: 1mm; background: repeating-linear-gradient(90deg, var(--acc) 0 2mm, transparent 2mm 3.4mm); }
+.t-papier .c-sec h2::after { content: ""; display: block; height: .5mm; margin-top: 1mm; background: repeating-linear-gradient(90deg, var(--acc) 0 2mm, rgba(255,255,255,0) 2mm 3.4mm); }
 .t-papier .c-tags li { background: #fff; border-color: #d9ceb7; }
 .t-papier .c-date, .t-papier .c-sub { color: #5a4d3a; }
 
@@ -382,7 +382,7 @@
 .t-pop .c-contact-h { flex-basis: 100%; margin-top: 3mm; }
 .t-pop .c-contact-h .c-list { display: flex; flex-wrap: wrap; gap: 0 6mm; font-size: 9.4pt; font-weight: 600; }
 .t-pop .c-cols { margin-top: 6mm; }
-.t-pop .c-sec h2 { display: inline-block; font-size: 11pt; color: #111827; background: linear-gradient(transparent 55%, #b9cdf8 55%); background: linear-gradient(transparent 55%, color-mix(in srgb, var(--acc) 45%, #fff) 55%); padding: 0 1.5mm; margin-left: -1.5mm; }
+.t-pop .c-sec h2 { display: inline-block; font-size: 11pt; color: #111827; background: linear-gradient(rgba(255,255,255,0) 55%, #b9cdf8 55%); background: linear-gradient(rgba(255,255,255,0) 55%, color-mix(in srgb, var(--acc) 45%, #fff) 55%); padding: 0 1.5mm; margin-left: -1.5mm; }
 .t-pop .c-tags li { border: .35mm solid #111827; border-radius: 1mm; box-shadow: .7mm .7mm 0 #111827; background: #fff; margin: 0 .8mm .8mm 0; }
 
 /* Filigrane de la version gratuite : bandeau image (pas de texte, donc rien dans le texte lu par les logiciels de recrutement) */
@@ -390,10 +390,11 @@
 
 /* Impression sur plusieurs pages : marges, cadres et colonnes colorées se répètent sur chaque page */
 @media print {
+  /* 12 nov 2026 : sur iPhone, « transparent » dans un dégradé sortait en NOIR dans le PDF : on met du blanc */
   .sheet, .sheet .cv, .sheet .c-main, .sheet .c-side, .sheet .c-cols { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   /* colonnes colorées : le fond est porté par la grille, donc il couvre toute la hauteur de chaque page */
-  .t-moderne .cv { background: linear-gradient(90deg, var(--acc) 0 68mm, transparent 68mm); }
-  .t-nuit .cv { background: linear-gradient(90deg, #1a2233 0 70mm, transparent 70mm); }
-  .t-pastel .cv { background: linear-gradient(90deg, #eef2fb 0 66mm, transparent 66mm); background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 11%, #fff) 0 66mm, transparent 66mm); }
-  .t-chrono .cv { background: linear-gradient(90deg, transparent calc(100% - 64mm), #eef2fb calc(100% - 64mm)); background: linear-gradient(90deg, transparent calc(100% - 64mm), color-mix(in srgb, var(--acc) 10%, #fff) calc(100% - 64mm)); }
+  .t-moderne .cv { background: linear-gradient(90deg, var(--acc) 0 68mm, #fff 68mm); }
+  .t-nuit .cv { background: linear-gradient(90deg, #1a2233 0 70mm, #fff 70mm); }
+  .t-pastel .cv { background: linear-gradient(90deg, #eef2fb 0 66mm, #fff 66mm); background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 11%, #fff) 0 66mm, #fff 66mm); }
+  .t-chrono .cv { background: linear-gradient(90deg, #fff calc(100% - 64mm), #eef2fb calc(100% - 64mm)); background: linear-gradient(90deg, #fff calc(100% - 64mm), color-mix(in srgb, var(--acc) 10%, #fff) calc(100% - 64mm)); }
 }

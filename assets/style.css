@@ -22,7 +22,7 @@
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* 12 nov 2026 : sur iPhone, Safari grossissait certaines lignes de l'aperçu du CV */
 body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 var(--body); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; }
 a { color: var(--blue); text-underline-offset: 3px; }
@@ -317,3 +317,6 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .tpl-thumb .sheet { position: absolute; left: 0; top: 0; transform-origin: 0 0; transform: scale(.2015); pointer-events: none; }
 .tpl-name { font-weight: 700; font-size: .92rem; display: flex; align-items: center; gap: 6px; }
 .tpl-badge { padding: 1px 6px; border-radius: 999px; background: var(--blue); color: #fff; font-size: .68rem; font-weight: 700; }
+
+/* 12 nov 2026 : la publicité n'apparaît jamais dans les PDF */
+@media print { ins.adsbygoogle, .google-auto-placed, .adsbygoogle, iframe[id^="aswift"], #cvl-ck { display: none !important; } }
