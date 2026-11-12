@@ -4,6 +4,11 @@
   try { if (localStorage.getItem("cvlibre.nostats") === "1") return; } catch (e) {}
   if (/[?&]nostats=1/.test(location.search)) { try { localStorage.setItem("cvlibre.nostats", "1"); } catch (e) {} return; }
   if (navigator.doNotTrack === "1" || /^(localhost|127\.)/.test(location.hostname)) return;
+  /* Robots (Google, Bing, outils d'audit) : on ne les compte pas. */
+  try {
+    var ua = navigator.userAgent || "";
+    if (navigator.webdriver || /bot|crawl|spider|slurp|mediapartners|adsbot|google-inspectiontool|googleother|storebot|lighthouse|pagespeed|headlesschrome|phantomjs|facebookexternalhit|preview|monitor|uptime|wget|curl|python-requests/i.test(ua)) return;
+  } catch (e) {}
   var path = location.pathname;
   var SRC = "";
   try {
