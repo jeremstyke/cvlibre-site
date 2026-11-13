@@ -34,3 +34,21 @@ for f in files + homes:
         if i >= 0:
             open(f, "w", encoding="utf-8").write(s[:i] + "  " + RAD + s[i:]); m += 1; break
 print("responsive ajouté dans", m, "pages")
+
+# Bloc "In-feed" (slot 6195574268) : dans la grille des pages d'accueil des blogs, après la 3e carte (et après la 12e s'il y en a au moins 18).
+FSLOT = "6195574268"
+FAD = ('<div class="ad-in b-ad"><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-5n+c2-23-51+w1" '
+       'data-ad-client="ca-pub-8638687738606649" data-ad-slot="' + FSLOT + '"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n')
+k = 0
+for d in ["blog", "en/blog", "de/ratgeber", "us/blog", "ca/blog", "au/blog", "nz/blog"]:
+    f = os.path.join(ROOT, d, "index.html")
+    s = open(f, encoding="utf-8").read()
+    if FSLOT in s or "googlesyndication" not in s: continue
+    g = s.find('<div class="b-grid">')
+    if g < 0: continue
+    ends = [g + m.end() for m in re.finditer(r"</a>\n", s[g:])]
+    spots = [ends[2]] if len(ends) > 3 else []
+    if len(ends) >= 18: spots.append(ends[11])
+    for i in reversed(spots): s = s[:i] + "    " + FAD + s[i:]
+    if spots: open(f, "w", encoding="utf-8").write(s); k += 1
+print("in-feed ajouté dans", k, "pages de blog")

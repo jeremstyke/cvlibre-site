@@ -161,3 +161,4 @@ mark.ph { background: var(--wash); color: var(--acc-ink); padding: 1px 6px; bord
 /* Bloc AdSense in-article (13 nov 2026) : espace seulement quand une annonce s affiche */
 .ad-in { margin: 28px 0; clear: both; }
 .ad-in:has(ins[data-ad-status="unfilled"]), .ad-in:not(:has(ins iframe)) { margin: 0; }
+.b-ad { grid-column: 1 / -1; }

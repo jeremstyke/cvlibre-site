@@ -5,11 +5,11 @@
   var $ = function (s) { return document.querySelector(s); };
   var API = "https://cvlibre-ai-production.up.railway.app/jobs", OK = "cvlibre.offre", LAST = "cvlibre.ca.jobsearch";
   var list = $("#jb-list"), msg = $("#jb-msg"), more = $("#jb-more"), go = $("#jb-go");
-  /* 13 nov 2026 (Jeremy) : bloc AdSense "Display responsive" (slot 6295471606) toutes les 8 offres, 3 au maximum, seulement si la page charge AdSense. */
+  /* 13 nov 2026 (Jeremy) : bloc AdSense "In-feed" (slot 6195574268) toutes les 8 offres, 3 au maximum, seulement si la page charge AdSense. */
   function adAfter(n) {
     if (n % 8 || n > 24 || !document.querySelector('script[src*="adsbygoogle.js"]')) return;
     var d = document.createElement("div"); d.className = "ad-in jb-ad";
-    d.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8638687738606649" data-ad-slot="6295471606" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+    d.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-5n+c2-23-51+w1" data-ad-client="ca-pub-8638687738606649" data-ad-slot="6195574268"></ins>';
     list.appendChild(d); try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
   }
   var cur = { q: "", ville: "", contrat: "", page: 0 }, shown = 0, total = 0, offres = {};
