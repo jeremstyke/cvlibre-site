@@ -3,7 +3,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113i"
+V = "20261113j"
 PAYPAL = "https://www.paypal.me/jeremyjury"
 DON_BOX = '''    <div class="after-box">
       <h3>CVLibre unterstützen</h3>
