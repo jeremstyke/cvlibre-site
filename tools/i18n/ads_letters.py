@@ -11,6 +11,8 @@ TAG = ('<script>(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1</s
 SLOT = "6295471606"
 AD = ('<div class="ad-in"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8638687738606649" data-ad-slot="' + SLOT + '" '
       'data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n    ')
+TOP = ('  <div class="ad-in ad-top"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8638687738606649" data-ad-slot="' + SLOT + '" '
+       'data-ad-format="horizontal" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n')
 pages = set()
 for r in ALT:
     if r[0] in ("/lettre-de-demission/", "/relance-apres-entretien/", "/mail-de-candidature/"):
@@ -27,5 +29,9 @@ for p in sorted(pages):
         i = s.rfind("<h2>", a, e) if a >= 0 else -1
         if i > a: s = s[:i] + AD + s[i:]
         else: print("pas de guide", p)
+    # 13 nov 2026 (Jeremy) : bannière bien visible en haut, sous le titre, avant le formulaire
+    if 'class="ad-in ad-top"' not in s:
+        g = s.find('  <div class="lt-grid">')
+        if g >= 0: s = s[:g] + TOP + s[g:]
     if s != o: open(f, "w", encoding="utf-8").write(s); n += 1
 print("pub lettres types :", n, "pages sur", len(pages))
