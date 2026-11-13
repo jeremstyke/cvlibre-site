@@ -5,22 +5,13 @@
     var K = "cvlibre.consent", c = null;
     try { var v = JSON.parse(localStorage.getItem(K) || "null"); if (v && v.t && Date.now() - v.t < 15552000000) c = v.v; } catch (e) {}
     var A = window.adsbygoogle = window.adsbygoogle || [];
-    /* 13 nov 2026 (Jeremy) : Infolinks, seulement après « Tout accepter » et seulement sur les pages de contenu (accueil, blog, offres).
-       Jamais sur les outils (CV, lettres, courriers) : les liens dans le texte se glisseraient dans les documents des visiteurs. */
-    function infolinks() {
-      try {
-        if (window.infolinks_pid || !/^\/(blog\/|offres-emploi\/|$)/.test(location.pathname)) return;
-        window.infolinks_pid = 3449556; window.infolinks_wsid = 0;
-        var s = document.createElement("script"); s.async = true; s.src = "https://resources.infolinks.com/js/infolinks_main.js"; document.body.appendChild(s);
-      } catch (e) {}
-    }
-    function apply(v) { try { A.requestNonPersonalizedAds = v === "yes" ? 0 : 1; A.pauseAdRequests = 0; } catch (e) {} if (v === "yes") infolinks(); }
+    function apply(v) { try { A.requestNonPersonalizedAds = v === "yes" ? 0 : 1; A.pauseAdRequests = 0; } catch (e) {} }
     function hide() { var b = document.getElementById("cvl-ck"); if (b) b.parentNode.removeChild(b); }
     function show() {
       hide();
       var b = document.createElement("div"); b.id = "cvl-ck"; b.setAttribute("role", "dialog"); b.setAttribute("aria-label", "Cookies");
       b.innerHTML = '<style>#cvl-ck{position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483646;max-width:620px;margin:0 auto;background:#fff;color:#1b1f27;border:1px solid #d5dbe6;border-radius:14px;padding:16px 18px;font:15px/1.5 "Source Sans 3",Arial,sans-serif;box-shadow:0 10px 40px rgba(16,24,40,.18)}#cvl-ck p{margin:0 0 12px}#cvl-ck a{color:#1f4fd8}#cvl-ck .r{display:flex;gap:10px;flex-wrap:wrap}#cvl-ck button{flex:1;min-width:130px;cursor:pointer;font:700 15px "Source Sans 3",Arial,sans-serif;padding:10px 14px;border-radius:10px;border:2px solid #1f4fd8;background:#fff;color:#1f4fd8}#cvl-ck button:focus-visible{outline:3px solid #1f4fd8;outline-offset:2px}@media print{#cvl-ck{display:none!important}}</style>'
-        + '<p>CVLibre est 100 % gratuit grâce à la publicité (Google AdSense, Infolinks). Acceptez-vous les cookies publicitaires pour des annonces personnalisées ? Si vous refusez, vous verrez des annonces non personnalisées. <a href="/confidentialite/">En savoir plus</a></p>'
+        + '<p>CVLibre est 100 % gratuit grâce à la publicité (Google AdSense). Acceptez-vous les cookies publicitaires pour des annonces personnalisées ? Si vous refusez, vous verrez des annonces non personnalisées. <a href="/confidentialite/">En savoir plus</a></p>'
         + '<div class="r"><button type="button" data-v="no">Tout refuser</button><button type="button" data-v="yes">Tout accepter</button></div>';
       b.addEventListener("click", function (e) {
         var v = e.target && e.target.getAttribute ? e.target.getAttribute("data-v") : null; if (!v) return;
