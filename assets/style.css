@@ -412,3 +412,9 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .lt-card .rc-ok input[type=checkbox],.lt-card .sp-cvt input[type=checkbox],.rc-ok input[type=checkbox],.sp-cvt input[type=checkbox]{width:20px;height:20px;min-width:20px;flex:0 0 20px;padding:0;margin:2px 0 0;border-radius:4px}
 .rc-ok{min-width:0}.rc-ok>span{flex:1;min-width:0}
 #rc-form .fld{min-width:0}
+
+/* Bascule Candidat / Recruteur dans l'espace connecté */
+.mode-sw{display:flex;gap:4px;padding:4px;margin:0 0 18px;border-radius:999px;background:var(--blue-wash);max-width:360px}
+.mode-sw a{flex:1;text-align:center;padding:9px 12px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;color:inherit;opacity:.7}
+.mode-sw a[aria-current]{background:var(--sheet);color:var(--blue-dark);opacity:1;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.rc-stats{display:block;margin-top:4px;font-size:.9rem;opacity:.8}

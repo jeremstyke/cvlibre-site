@@ -18,7 +18,7 @@
   function card(o) {
     offres[o.id] = o;
     var c = el("article", "jb-card lt-card");
-    if (o.own) { c.classList.add("jb-own"); c.appendChild(el("p", "jb-badge", "Publiée sur CVLibre · offre vérifiée")); }
+    if (o.own) { hit(o.id, "view"); c.classList.add("jb-own"); c.appendChild(el("p", "jb-badge", "Publiée sur CVLibre · offre vérifiée")); }
     var h = el("h2", "jb-t", o.titre); c.appendChild(h);
     var m = el("p", "jb-meta", [o.entreprise, o.lieu].filter(Boolean).join(" · ") || "Entreprise non précisée"); c.appendChild(m);
     var tags = el("p", "jb-tags");
@@ -32,7 +32,7 @@
     }
     var a = el("div", "jb-act");
     var see = el("a", "btn btn-sm", "Voir l'offre et postuler"); see.href = o.url; see.target = "_blank"; see.rel = "noopener nofollow";
-    see.addEventListener("click", function () { stat("job_open", o.id); });
+    see.addEventListener("click", function () { stat("job_open", o.id); if (o.own) hit(o.id, "click"); });
     var cv = el("a", "btn btn-sm btn-ghost", "Adapter mon CV"); cv.href = "/creer-un-cv/?offre=1";
     cv.addEventListener("click", function () { handoff(o); stat("job_tailor", o.id); });
     var lt = el("a", "btn btn-sm btn-ghost", "Lettre de motivation"); lt.href = "/lettre-de-motivation/?offre=1";
@@ -40,6 +40,20 @@
     a.appendChild(see); a.appendChild(cv); a.appendChild(lt); c.appendChild(a);
     var dt = ago(o.date); if (dt) c.appendChild(el("p", "jb-date", dt));
     return c;
+  }
+  /* Compteur de vues et de clics des offres recruteurs (une vue par offre et par session). */
+  var hq = { view: [], click: [] }, ht = null;
+  function hit(id, k) {
+    id = String(id).replace(/^cvl-/, "");
+    if (k === "view") { var sk = "cvl_v_" + id; try { if (sessionStorage.getItem(sk)) return; sessionStorage.setItem(sk, "1"); } catch (e) {} }
+    if (hq[k].indexOf(id) < 0) hq[k].push(id);
+    clearTimeout(ht); ht = setTimeout(flush, k === "click" ? 0 : 1500);
+  }
+  function flush() {
+    ["view", "click"].forEach(function (k) {
+      if (!hq[k].length) return; var ids = hq[k].splice(0, 60);
+      try { fetch(SB.replace("/job_posts", "/rpc/job_hit"), { method: "POST", keepalive: true, headers: { apikey: KEY, "Content-Type": "application/json" }, body: JSON.stringify({ p_ids: ids, p_kind: k }) }).catch(function () {}); } catch (e) {}
+    });
   }
   /* Offres publiées par les recruteurs sur CVLibre (validées), affichées en premier. */
   var SB = "https://zltqrnflowxkycrjmhbx.supabase.co/rest/v1/job_posts", KEY = "sb_publishable_KVXGhm7oHvaymjzOZyfp6A_03X6EcXr", ownAll = null;

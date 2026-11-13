@@ -37,7 +37,7 @@
   });
   function load() {
     var box = $("#rc-list"); box.textContent = "";
-    A.sb.from("job_posts").select("*").eq("user_id", A.user().id).order("created_at", { ascending: false }).then(function (r) {
+    A.sb.from("job_posts").select("*, job_post_stats(views, clicks)").eq("user_id", A.user().id).order("created_at", { ascending: false }).then(function (r) {
       if (r.error) { box.appendChild(Object.assign(document.createElement("p"), { className: "hint", textContent: "Chargement impossible pour le moment." })); return; }
       if (!r.data.length) { box.appendChild(Object.assign(document.createElement("p"), { className: "hint", textContent: "Aucune offre pour l'instant." })); return; }
       r.data.forEach(function (o) {
@@ -48,6 +48,13 @@
         var s = document.createElement("span");
         s.textContent = (expired ? "Expirée" : ST[o.status] || o.status) + (o.status === "approved" && !expired ? " jusqu'au " + new Date(o.expires_at).toLocaleDateString("fr-FR") : "") + (o.status === "rejected" && o.reject_reason ? " : " + o.reject_reason : "");
         t.appendChild(a); t.appendChild(s);
+        var js = o.job_post_stats; js = Array.isArray(js) ? js[0] : js;
+        if (o.approved_at || js) {
+          var v = (js && js.views) || 0, k = (js && js.clicks) || 0;
+          var n = document.createElement("span"); n.className = "rc-stats";
+          n.textContent = "👁 Vue " + v + " fois · 👆 " + k + " clic" + (k > 1 ? "s" : "") + " sur Postuler";
+          t.appendChild(n);
+        }
         var acts = document.createElement("div"); acts.className = "rc-acts";
         var ed = document.createElement("button"); ed.type = "button"; ed.className = "btn btn-ghost btn-sm"; ed.textContent = o.status === "closed" || expired ? "Republier" : "Modifier";
         ed.addEventListener("click", function () {
