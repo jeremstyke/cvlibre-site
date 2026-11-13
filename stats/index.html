@@ -41,6 +41,20 @@
   <div id="st-in" hidden>
     <div class="st-bar"><div class="seg" id="st-days"><button type="button" data-d="7">7 jours</button><button type="button" data-d="30" aria-pressed="true">30 jours</button><button type="button" data-d="90">90 jours</button></div></div>
     <p class="hint" id="st-err" hidden></p>
+    <section class="lt-card sp-sec" id="gr">
+      <div class="gr-head"><h2>Croissance ou déclin</h2><div class="seg" id="gr-days"><button type="button" data-d="1" aria-pressed="true">24 h</button><button type="button" data-d="7">7 jours</button><button type="button" data-d="30">30 jours</button></div></div>
+      <p class="st-note" id="gr-sub"></p>
+      <div class="gr-kpis" id="gr-kpis"></div>
+      <h3 class="gr-h3">Visites par jour</h3>
+      <div class="st-chart gr-chart" id="gr-chart" role="img" aria-label="Visites par jour, période en cours et période précédente"></div>
+      <p class="st-note"><span class="gr-dot gr-dot-prev"></span> période précédente <span class="gr-dot"></span> période en cours</p>
+      <div class="st-two">
+        <div><h3 class="gr-h3">📈 Pages en hausse</h3><div id="gr-pup"></div></div>
+        <div><h3 class="gr-h3">📉 Pages en baisse</h3><div id="gr-pdown"></div></div>
+        <div><h3 class="gr-h3">📈 Sources en hausse</h3><div id="gr-rup"></div></div>
+        <div><h3 class="gr-h3">📉 Sources en baisse</h3><div id="gr-rdown"></div></div>
+      </div>
+    </section>
     <section class="lt-card sp-sec" id="st-mod"><h2>Offres de recruteurs à valider</h2><div id="st-mod-list"></div></section>
     <div class="st-kpis" id="st-kpis"></div>
     <section class="lt-card sp-sec"><h2>Pages vues par jour</h2><div class="st-chart" id="st-chart" role="img" aria-label="Pages vues par jour"></div></section>
@@ -114,9 +128,27 @@
 .st-row u { grid-column: 1 / -1; display: block; height: 5px; background: #e6ebf5; border-radius: 3px; text-decoration: none; }
 .st-row u i { display: block; height: 100%; background: var(--blue); border-radius: 3px; }
 .st-note { color: var(--ink-2); font-size: .88rem; margin: 0; }
+.gr-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.gr-head h2 { margin: 0; }
+.gr-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin: 12px 0 6px; }
+.gr-k { border: 1px solid var(--rule); border-radius: 10px; padding: 12px; background: var(--sheet); }
+.gr-k b { display: block; font: 800 1.35rem/1.1 var(--head); }
+.gr-k { padding: 10px !important; }
+.gr-k .gr-l { color: var(--ink-2); font-size: .86rem; display: block; margin-top: 2px; }
+.gr-d { display: inline-block; margin-top: 6px; font-weight: 700; font-size: .9rem; padding: 2px 8px; border-radius: 999px; }
+.gr-up { color: #166534; background: #dcfce7; } .gr-down { color: #9a1c1c; background: #fde2e2; } .gr-eq { color: var(--ink-2); background: #eef1f6; }
+.gr-h3 { font-size: 1rem; margin: 16px 0 6px; }
+.gr-chart i.prev { background: #c9d3e6; }
+.gr-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--blue); vertical-align: middle; margin: 0 2px 0 10px; }
+.gr-dot-prev { background: #c9d3e6; margin-left: 0; }
+.gr-row { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-top: 1px solid var(--rule); font-size: .93rem; }
+.gr-row:first-child { border-top: 0; }
+.gr-row span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gr-row span:last-child { font-weight: 700; white-space: nowrap; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="/assets/auth.js?v=20261113c"></script>
 <script src="/assets/stats-page.js?v=20261113b"></script>
+<script src="/assets/stats-growth.js?v=20261113a"></script>
 </body>
 </html>
