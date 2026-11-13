@@ -5,9 +5,9 @@
   var $ = function (s) { return document.querySelector(s); };
   var API = "https://cvlibre-ai-production.up.railway.app/jobs", OK = "cvlibre.offre", LAST = "cvlibre.en.jobsearch";
   var list = $("#jb-list"), msg = $("#jb-msg"), more = $("#jb-more"), go = $("#jb-go");
-  /* 13 nov 2026 (Jeremy) : bloc AdSense "In-feed" (slot 6195574268) toutes les 8 offres, 3 au maximum, seulement si la page charge AdSense. */
+  /* 13 nov 2026 (Jeremy) : une pub toutes les 8 offres, sans limite */
   function adAfter(n) {
-    if (n % 8 || n > 24 || !document.querySelector('script[src*="adsbygoogle.js"]')) return;
+    if (n % 8 || !document.querySelector('script[src*="adsbygoogle.js"]')) return;
     var d = document.createElement("div"); d.className = "ad-in jb-ad";
     d.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-5n+c2-23-51+w1" data-ad-client="ca-pub-8638687738606649" data-ad-slot="6195574268"></ins>';
     list.appendChild(d); try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
@@ -32,7 +32,7 @@
     var tags = el("p", "jb-tags");
     [o.contrat, o.duree, String(o.salaire || "")].filter(Boolean).forEach(function (t) { tags.appendChild(el("span", "jb-tag", t)); });
     if (tags.childNodes.length) c.appendChild(tags);
-    var d = el("p", "jb-desc", o.desc.length > 260 ? o.desc.slice(0, 260).replace(/\s+\S*$/, "") + "..." : o.desc); c.appendChild(d);
+    var ds = String(o.desc || ""), d = el("p", "jb-desc", ds.length > 260 ? ds.slice(0, 260).replace(/\s+\S*$/, "") + "..." : ds); c.appendChild(d);
     if (o.desc.length > 260) {
       var tg = el("button", "link-btn", "Read the full advert"); tg.type = "button";
       tg.addEventListener("click", function () { var full = d.dataset.full === "1"; d.textContent = full ? o.desc.slice(0, 260).replace(/\s+\S*$/, "") + "..." : o.desc; d.dataset.full = full ? "" : "1"; tg.textContent = full ? "Read the full advert" : "Show less"; });
