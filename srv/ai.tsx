@@ -6,7 +6,7 @@
 // 5 generations gratuites par jour et par IP (CV, reformulation et lettre confondus), plafond global de 2,2 $ par jour (compteurs en memoire, remis a zero au redemarrage).
 const AKEY = Bun.env.ANTHROPIC_API_KEY!;
 const ORIGINS = ["https://jeremstyke.github.io", "https://cvlibre.com", "https://www.cvlibre.com"];
-const IP_DAILY = 5, DAY_USD = 1; // 13 nov 2026 (Jeremy) : budget IA gratuit ramené à 1 $ par jour (le Pass n'est pas limité par ce budget)
+const IP_DAILY = 5, DAY_USD = 1, PASS_STRONG_USD = 0.3; // 13 nov 2026 (Jeremy) : budget IA gratuit ramené à 1 $ par jour (le Pass n'est pas limité par ce budget)
 // Ancien Pass 1 an (Gumroad / Stripe). Garde pour les cles deja vendues, plus vendu depuis le 12 nov 2026.
 const PRODUCT_IDS = (Bun.env.PASS_PRODUCT_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
 const PRO_IDS = (Bun.env.PRO_PRODUCT_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
@@ -153,7 +153,7 @@ IMPORTANT: this person is on the German version of CVLibre (cvlibre.com/de/). An
 
 const SUPPORT_SYS = `Tu es l'assistant d'aide de CVLibre (cvlibre.com), un createur de CV 100 % gratuit en francais. Reponds en francais, en vouvoyant, en 2 a 5 phrases courtes, sans markdown ni listes longues. Utilise uniquement les faits ci-dessous. Si la reponse n'y est pas, ou si la personne parle d'un ancien achat, d'un remboursement, d'un bug, de donnees personnelles ou d'un probleme de compte, ne devine pas: invite a ecrire a contact@cvlibre.com et termine ta reponse par le marqueur exact [HUMAIN].
 Faits:
-- CVLibre est gratuit pour tout le monde: 33 modeles de CV, le bouton Personnaliser (une police pour chaque element, taille du texte, espacement), les PDF sans bandeau ni filigrane, le remplissage et la reformulation par IA et la lettre de motivation par IA. Le gratuit garde 5 utilisations de l'IA par jour et 1 CV enregistre (30 lettres). Option payante, facultative: le Pass CVLibre, 4,99 euros TTC pour 3 mois (4,99 $ sur les sites anglophones), paiement unique sans abonnement, vendu par Gumroad qui fournit le recu et la facture. Le Pass donne 50 utilisations de l'IA par jour, l'adaptation du CV a une offre, le score ATS, la traduction du CV, 20 CV enregistres et aucune publicite. On le prend depuis Mon espace (connecte a son compte gratuit), ou depuis le lien Pass CVLibre en bas de chaque page; il s'active en quelques secondes apres le paiement. Si un Pass paye ne s'active pas, ou pour un remboursement: contact@cvlibre.com, reponds [HUMAIN]. Il n'y a plus de dons: le site est finance par la publicite (Google AdSense) et le Pass.
+- CVLibre est gratuit pour tout le monde: 33 modeles de CV, le bouton Personnaliser (une police pour chaque element, taille du texte, espacement), les PDF sans bandeau ni filigrane, le remplissage et la reformulation par IA et la lettre de motivation par IA. Le gratuit garde 5 utilisations de l'IA par jour et 1 CV enregistre (30 lettres). Option payante, facultative: le Pass CVLibre, 4,99 euros TTC pour 3 mois (4,99 $ sur les sites anglophones), paiement unique sans abonnement, vendu par Gumroad qui fournit le recu et la facture. Le Pass donne une IA plus puissante (ne cite jamais le nom du modele), 50 utilisations de l'IA par jour, l'adaptation du CV a une offre, le score ATS, la traduction du CV, 20 CV enregistres et aucune publicite. On le prend depuis Mon espace (connecte a son compte gratuit), ou depuis le lien Pass CVLibre en bas de chaque page; il s'active en quelques secondes apres le paiement. Si un Pass paye ne s'active pas, ou pour un remboursement: contact@cvlibre.com, reponds [HUMAIN]. Il n'y a plus de dons: le site est finance par la publicite (Google AdSense) et le Pass.
 - Le PDF se telecharge sans compte. Creer un compte gratuit (une adresse e-mail ou Google, lien de connexion recu par e-mail, sans mot de passe) permet de garder jusqu'a 20 CV et 30 lettres en ligne, avec un nom chacun, et de les retrouver sur tous ses appareils. On peut les supprimer depuis Mon espace, se deconnecter ou supprimer tout le compte (CV et lettres effaces definitivement).
 - Le brouillon reste dans le navigateur; on peut aussi l'exporter et l'importer en fichier.
 - IA: l'IA remplit le formulaire a partir d'un texte ou d'un ancien CV (PDF ou photo), reformule un texte, adapte le CV a une offre d'emploi collee (titre, profil, competences et missions reformules, mots-cles manquants reperes; on choisit ce qu'on garde), ou redige une lettre de motivation, ainsi que des courriers emploi (lettre de demission, demande de rupture conventionnelle, e-mail de relance apres entretien, e-mail de candidature). 5 utilisations IA gratuites par jour, partagees entre ces fonctions. L'IA a un budget quotidien commun a tous les utilisateurs, affiche par une jauge sur le site: quand il est epuise, l'IA revient le lendemain. L'IA peut se tromper: il faut relire.
@@ -468,11 +468,11 @@ Bun.serve({
       const en = body.lang === "en", de = body.lang === "de", ccNote = en && CC_EN[String(body.cc || "")] ? CC_EN[String(body.cc)].note : "";
       const d = parisDay(); if (d !== day) { day = d; cost = 0; uses = 0; ips.clear(); limHit.clear(); }
       const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "?";
-      let used = ips.get(ip) || 0, limit = IP_DAILY, pu: { pdf: number; ai: number } | null = null, isPass = false;
+      let used = ips.get(ip) || 0, limit = IP_DAILY, pu: { pdf: number; ai: number } | null = null, isPass = false, ph = "";
       if (body.key) {
         const v = await verifyKey(body.key);
         // 13 nov 2026: le compteur du Pass suit le compte (sub du jeton), pas le jeton qui change toutes les heures
-        if (v.ok) { isPass = true; let id = String(body.key).trim(); if (id.startsWith("eyJ")) { try { id = "u:" + JSON.parse(atob(id.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).sub; } catch {} } pu = dayUse(await sha(id)); used = pu.ai; limit = lim(v.plan).ai; }
+        if (v.ok) { isPass = true; let id = String(body.key).trim(); if (id.startsWith("eyJ")) { try { id = "u:" + JSON.parse(atob(id.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).sub; } catch {} } ph = await sha(id); pu = dayUse(ph); used = pu.ai; limit = lim(v.plan).ai; }
       }
       // 13 nov 2026 (Jeremy): adaptation a une offre, score ATS et traduction reserves au Pass CVLibre
       if ((kind === "tailor" || kind === "ats" || kind === "translate") && !isPass) return out({ error: "pass" }, 402);
@@ -521,13 +521,20 @@ Bun.serve({
       if (pu) pu.ai = used + 1; else ips.set(ip, used + 1);
       const sys = kind === "ats" ? ATS_SYS : kind === "translate" ? TRANSLATE_SYS : kind === "fill" ? FILL_SYS : kind === "letter" ? (en ? LETTER_SYS_EN : de ? LETTER_SYS_DE : LETTER_SYS) : kind === "tailor" ? TAILOR_SYS : kind === "courrier" ? (en ? COURRIER_SYS_EN : de ? COURRIER_SYS_DE : COURRIER_SYS) : REWRITE_SYS;
       const note = (kind === "ats" || kind === "translate") ? "" : (kind === "letter" || kind === "courrier") ? ccNote : en ? EN_NOTE + ccNote : de ? DE_NOTE : "";
+      // 13 nov 2026 (Jeremy): IA plus puissante (Sonnet) pour le Pass sur les fonctions importantes, plafonnee a PASS_STRONG_USD par compte et par jour,
+      // puis retour au modele habituel sans rien bloquer. Depense du jour gardee dans ips sous "s:<hash>" (en millioniemes de dollar), donc sauvee avec le reste.
+      const strongKind = kind !== "rewrite", sk = "s:" + ph;
+      const strong = isPass && ph !== "" && strongKind && (ips.get(sk) || 0) < PASS_STRONG_USD * 1e6;
+      const model = strong ? "claude-sonnet-5-5" : "claude-haiku-5-5";
       const r = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST", headers: { "x-api-key": AKEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-        body: JSON.stringify({ model: "claude-haiku-5-5", max_tokens: kind === "translate" ? 4000 : kind === "ats" ? 1200 : kind === "fill" ? 2500 : kind === "letter" ? 1300 : kind === "tailor" ? 2200 : kind === "courrier" ? 2500 : 900, system: sys + note, messages: [{ role: "user", content }] }),
+        body: JSON.stringify({ model, max_tokens: kind === "translate" ? 4000 : kind === "ats" ? 1200 : kind === "fill" ? 2500 : kind === "letter" ? 1300 : kind === "tailor" ? 2200 : kind === "courrier" ? 2500 : 900, system: sys + note, messages: [{ role: "user", content }] }),
       });
       if (!r.ok) { console.log("anthropic", r.status, (await r.text()).slice(0, 300)); if (pu) pu.ai = used; else ips.set(ip, used); return out({ error: "api" }, 502); }
       const j: any = await r.json();
-      cost += ((j.usage?.input_tokens || 0) * 0.1 + (j.usage?.output_tokens || 0) * 0.5) / 1e6;
+      const it = j.usage?.input_tokens || 0, ot = j.usage?.output_tokens || 0;
+      if (strong) ips.set(sk, (ips.get(sk) || 0) + Math.round(it * 2 + ot * 10));
+      else if (!isPass) cost += (it * 0.1 + ot * 0.5) / 1e6;
       uses++;
       const raw = String(((j.content || []).find((b: any) => b && b.type === "text") || {}).text || "").trim(), left = limit - (used + 1);
       if (kind === "rewrite") return out({ text: raw, left });
