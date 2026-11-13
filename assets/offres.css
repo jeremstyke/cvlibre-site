@@ -17,3 +17,11 @@
 .jb-own{border:2px solid #1f4fd8}.jb-badge{display:inline-block;margin:0 0 8px;font-size:.82rem;font-weight:700;color:#1f4fd8;background:#eef2fb;border-radius:6px;padding:2px 8px}
 .jb-rc{margin:6px 0 18px;font-weight:600}
 .jb-count{font-size:1.15rem;margin:16px 0 4px}.jb-count strong{font-size:1.6rem;color:#1f4fd8}
+
+/* 13 nov 2026 : encart recruteurs visible en haut de la page des offres */
+.jb-rcb{display:flex;align-items:center;gap:12px;margin:4px 0 16px;padding:12px 14px;border:1px solid var(--blue);border-radius:var(--r);background:var(--blue-wash);color:var(--ink);text-decoration:none}
+.jb-rcb:hover{background:#dbe4fb}
+.jb-rcb-i{font-size:22px;flex:none}
+.jb-rcb-t{flex:1;line-height:1.35}
+.jb-rcb-go{flex:none;background:var(--blue);color:#fff;font-weight:700;padding:8px 14px;border-radius:var(--r);white-space:nowrap}
+@media (max-width:560px){.jb-rcb{flex-wrap:wrap}.jb-rcb-go{width:100%;text-align:center}}
