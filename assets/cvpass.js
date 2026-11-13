@@ -14,6 +14,9 @@
   var ACC = CC === "fr" ? "/mon-espace/" : CC === "de" ? "/de/mein-konto/" : "/" + CC + "/my-account/";
   var BUY = { fr: "https://jeremstyke.gumroad.com/l/pass-cvlibre", de: "https://jeremstyke.gumroad.com/l/cvlibre-pass-de", en: "https://jeremstyke.gumroad.com/l/cvlibre-pass" }[L];
   var PRICE = L === "en" ? "$4.99" : "4,99 €";
+  /* 13 nov 2026 (Jeremy) : Pass 1 an à 9,99 € TTC (9,99 $), sans promo */
+  var BUY_Y = { fr: "https://jeremstyke.gumroad.com/l/pass-cvlibre-1an", de: "https://jeremstyke.gumroad.com/l/cvlibre-pass-1jahr", en: "https://jeremstyke.gumroad.com/l/cvlibre-pass-1year" }[L];
+  var YEAR = { fr: "Ou 1 an pour 9,99 € : 12 mois pour le prix de 6", en: "Or 1 year for $9.99: 12 months for the price of 6", de: "Oder 1 Jahr für 9,99 €: 12 Monate zum Preis von 6" }[L];
   /* 13 nov 2026 (Jeremy) : offre de lancement -40 % jusqu'au 31 décembre 2026 (codes Gumroad LANCEMENT / LAUNCH / START, appliqués tout seuls dans le lien d'achat) */
   var PROMO_END = Date.parse("2026-12-31T23:59:00+01:00"), PROMO = Date.now() < PROMO_END;
   var PCODE = { fr: "LANCEMENT", en: "LAUNCH", de: "START" }[L], PNEW = L === "en" ? "$2.99" : "2,99 €";
@@ -38,17 +41,18 @@
     return sb.rpc("my_cv_pass").then(function (r) { if (!r.error) { var u = r.data ? Date.parse(r.data) : 0; save(u > Date.now() ? u : 0); } return paid(); });
   }
   function fmtD(t) { return new Date(t).toLocaleDateString(L === "fr" ? "fr-FR" : L === "de" ? "de-DE" : "en-GB", { day: "numeric", month: "long", year: "numeric" }); }
-  function buyUrl() {
-    var u = BUY + (PROMO ? "/" + PCODE : "") + "?wanted=true";
+  function buyUrl(y) {
+    var u = y ? BUY_Y + "?wanted=true" : BUY + (PROMO ? "/" + PCODE : "") + "?wanted=true";
     if (user) u += "&cvl=" + encodeURIComponent(user.id) + (user.email ? "&email=" + encodeURIComponent(user.email) : "");
     return u;
   }
   function track(ev) { try { if (window.CVSTATS && window.CVSTATS.track) window.CVSTATS.track(ev); } catch (e) {} }
-  function buy() {
-    track("pass_buy");
+  function buy(ev) {
+    var y = !!(ev && ev.currentTarget && ev.currentTarget.classList && ev.currentTarget.classList.contains("cvp-buy-y"));
+    track(y ? "pass_buy_year" : "pass_buy");
     if (!user) { location.href = ACC + "?connexion=1&pass=1"; return; }
     try { localStorage.setItem("cvlibre.passbuy", String(Date.now())); } catch (e) {}
-    window.open(buyUrl(), "_blank", "noopener");
+    window.open(buyUrl(y), "_blank", "noopener");
     watch();
   }
   var watching = 0;
@@ -64,12 +68,12 @@
   function css() {
     if (document.getElementById("cvp-css")) return;
     var s = document.createElement("style"); s.id = "cvp-css";
-    s.textContent = ".cvp-old{color:#8a93a8;font-weight:600;font-size:16px}.cvp-promo{display:inline-block;margin:2px 0 6px;padding:2px 8px;border-radius:999px;background:#ffe9a8;color:#5a4300;font-size:13px;font-weight:700}" + ".cvp-claim{margin-top:12px;border-top:1px solid #d6dff5;padding-top:10px}.cvp-claim summary{cursor:pointer;font-size:14px;color:#1f4fd8}.cvp-claim label{display:block;font-size:13.5px;margin:8px 0}.cvp-claim input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px 10px;border:1px solid #c5cfe6;border-radius:8px;font:inherit}" + ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
+    s.textContent = ".cvp-buy-y{display:block;margin:10px 0 2px;padding:0;background:none;border:0;color:#1f4fd8;font:inherit;font-size:14.5px;font-weight:600;text-decoration:underline;cursor:pointer;text-align:left}" + ".cvp-old{color:#8a93a8;font-weight:600;font-size:16px}.cvp-promo{display:inline-block;margin:2px 0 6px;padding:2px 8px;border-radius:999px;background:#ffe9a8;color:#5a4300;font-size:13px;font-weight:700}" + ".cvp-claim{margin-top:12px;border-top:1px solid #d6dff5;padding-top:10px}.cvp-claim summary{cursor:pointer;font-size:14px;color:#1f4fd8}.cvp-claim label{display:block;font-size:13.5px;margin:8px 0}.cvp-claim input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px 10px;border:1px solid #c5cfe6;border-radius:8px;font:inherit}" + ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
     document.head.appendChild(s);
   }
   function boxHtml(h) {
     if (paid()) return "<" + h + ">" + T.name + "</" + h + "><p class='cvp-on'>" + T.active + fmtD(st.u) + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul>";
-    return "<" + h + ">" + T.name + " " + priceHtml() + "</" + h + ">" + (PROMO ? "<p class='cvp-promo'>" + PNOTE + "</p>" : "") + "<p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
+    return "<" + h + ">" + T.name + " " + priceHtml() + "</" + h + ">" + (PROMO ? "<p class='cvp-promo'>" + PNOTE + "</p>" : "") + "<p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><button type='button' class='link-btn cvp-buy-y'>" + YEAR + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
   }
   /* 13 nov 2026 : Pass payé avec une autre adresse e-mail (ou sans être connecté) : activation par numéro de commande Gumroad + e-mail d'achat */
   var CL = {
@@ -96,7 +100,7 @@
       }, function () { b.disabled = false; m.textContent = CL.no; });
     });
   }
-  function wire(el) { var b = el.querySelector(".cvp-buy"); if (b) b.addEventListener("click", buy); }
+  function wire(el) { var b = el.querySelector(".cvp-buy"); if (b) b.addEventListener("click", buy); var y = el.querySelector(".cvp-buy-y"); if (y) y.addEventListener("click", buy); }
   function offer(msg) {
     css(); var d = document.createElement("dialog"); d.className = "cvp-dlg";
     d.innerHTML = "<div class='cvp-box'><button type='button' class='cvp-x' aria-label='" + T.close + "'>×</button>" + (msg ? "<p><b>" + tx(msg) + "</b></p>" : "") + boxHtml("h3") + "</div>";

@@ -4,7 +4,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113v"
+V = "20261113w"
 # Dons des versions étrangères : page Ko-fi de CVLibre (13 nov 2026, remplace PayPal).
 PAYPAL = "https://ko-fi.com/cvlibrecom"
 DON_BOX = '''    <div class="after-box">
@@ -627,7 +627,7 @@ text_page("/en/terms/", "Terms of use | CVLibre", "Terms of use of CVLibre, the 
   <p>CVLibre lets you create a CV and a cover letter and download them as PDFs, for free, with no card. Everything is open to everyone: the 33 CV templates, customisation (fonts, size, spacing), PDFs with no banner or watermark, and the AI tools.</p>
   <p>CVLibre is funded by advertising and by the optional CVLibre Pass.</p>
   <h2>The CVLibre Pass</h2>
-  <p>The Pass is a one-time payment for 3 months, with no subscription and no automatic renewal. It gives you 50 AI uses a day instead of 5, CV tailoring to a job ad, an ATS score, CV translation, up to 20 saved CVs instead of one, and browsing with no ads. It is linked to the CVLibre account used to buy it and is activated as soon as payment is received.</p>
+  <p>The Pass is a one-time payment for 3 months or 1 year, with no subscription and no automatic renewal. It gives you 50 AI uses a day instead of 5, CV tailoring to a job ad, an ATS score, CV translation, up to 20 saved CVs instead of one, and browsing with no ads. It is linked to the CVLibre account used to buy it and is activated as soon as payment is received.</p>
   <p>Payment is handled by Gumroad, which sells the Pass as merchant of record: Gumroad takes the payment, applies any sales tax or VAT and provides the receipt and invoice. For any question about the Pass or a refund request: contact@cvlibre.com.</p>
   <h2>The free account</h2>
   <p>An account is optional. It keeps up to 20 CVs and 30 cover letters online so you can find them on all your devices. You can delete each document, or your whole account, at any time.</p>

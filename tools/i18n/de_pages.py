@@ -3,7 +3,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113v"
+V = "20261113w"
 PAYPAL = "https://ko-fi.com/cvlibrecom"  # page Ko-fi de CVLibre (13 nov 2026, remplace PayPal)
 DON_BOX = '''    <div class="after-box">
       <h3>Mehr mit dem CVLibre Pass</h3>
@@ -623,7 +623,7 @@ text_page("/de/nutzungsbedingungen/", "Nutzungsbedingungen | CVLibre", "Nutzungs
   <p>Mit CVLibre erstellen Sie einen Lebenslauf und ein Anschreiben und laden sie kostenlos als PDF herunter, ohne Kreditkarte. Alles steht allen offen: die 33 Vorlagen, die Anpassung (Schriften, Größe, Abstand), PDFs ohne Banner oder Wasserzeichen und die KI-Werkzeuge. Auf der Seite wird nichts verkauft.</p>
   <p>CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert.</p>
   <h2>Der CVLibre Pass</h2>
-  <p>Der Pass kostet 4,99 € inkl. MwSt. für 3 Monate, als Einmalzahlung, ohne Abo und ohne automatische Verlängerung. Er bietet 50 KI-Nutzungen pro Tag statt 5, die Anpassung des Lebenslaufs an eine Stellenanzeige, einen ATS-Score, die Übersetzung des Lebenslaufs, bis zu 20 gespeicherte Lebensläufe statt einem und Surfen ohne Werbung. Er ist an das CVLibre-Konto gebunden, mit dem er gekauft wurde, und wird aktiviert, sobald die Zahlung eingegangen ist.</p>
+  <p>Der Pass kostet 4,99 € inkl. MwSt. für 3 Monate oder 9,99 € für 1 Jahr, als Einmalzahlung, ohne Abo und ohne automatische Verlängerung. Er bietet 50 KI-Nutzungen pro Tag statt 5, die Anpassung des Lebenslaufs an eine Stellenanzeige, einen ATS-Score, die Übersetzung des Lebenslaufs, bis zu 20 gespeicherte Lebensläufe statt einem und Surfen ohne Werbung. Er ist an das CVLibre-Konto gebunden, mit dem er gekauft wurde, und wird aktiviert, sobald die Zahlung eingegangen ist.</p>
   <p>Die Zahlung wird von Gumroad abgewickelt, das den Pass als Händler (Merchant of Record) verkauft: Gumroad nimmt die Zahlung entgegen, wendet die Mehrwertsteuer an und stellt Beleg und Rechnung aus. Für Fragen zum Pass oder eine Erstattung: contact@cvlibre.com.</p>
   <h2>Das kostenlose Konto</h2>
   <p>Ein Konto ist freiwillig. Es speichert bis zu 20 Lebensläufe und 30 Anschreiben online, damit Sie sie auf all Ihren Geräten wiederfinden. Sie können jedes Dokument oder Ihr ganzes Konto jederzeit löschen.</p>

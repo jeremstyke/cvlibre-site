@@ -10,7 +10,7 @@
 - Des offres d'emploi (Careerjet, La bonne alternance, et des offres publiées gratuitement par des recruteurs et vérifiées par CVLibre).
 
 ## Pass CVLibre (facultatif)
-- 4,99 € TTC pour 3 mois (4,99 $ sur les sites anglophones), paiement unique, sans abonnement ni renouvellement automatique. Vendu par Gumroad, qui fournit le reçu et la facture.
+- 4,99 € TTC pour 3 mois ou 9,99 € pour 1 an (4,99 $ / 9,99 $ sur les sites anglophones), paiement unique, sans abonnement ni renouvellement automatique. Vendu par Gumroad, qui fournit le reçu et la facture.
 - Contenu : une IA plus puissante, 50 utilisations de l'IA par jour, l'adaptation du CV à une offre en un clic, le score ATS, la traduction du CV, jusqu'à 20 CV enregistrés et aucune publicité.
 - Il se prend depuis Mon espace (https://cvlibre.com/mon-espace/), connecté à son compte gratuit.
 
@@ -26,10 +26,10 @@
 - Contact : contact@cvlibre.com
 
 ## English versions
-CVLibre is a free CV and resume builder with AI, with local versions for the UK (https://cvlibre.com/en/), the United States (https://cvlibre.com/us/), Canada (https://cvlibre.com/ca/), Australia (https://cvlibre.com/au/) and New Zealand (https://cvlibre.com/nz/). Each has a CV or resume builder, a free AI cover letter generator, letter templates, local job listings and a blog. Free: every template, PDF with no watermark, 5 AI uses a day. The optional CVLibre Pass costs $4.99 for 3 months (one-time payment): a more powerful AI, 50 AI uses a day, CV tailoring to a job ad, ATS score, CV translation, 20 saved CVs and no ads. No donations.
+CVLibre is a free CV and resume builder with AI, with local versions for the UK (https://cvlibre.com/en/), the United States (https://cvlibre.com/us/), Canada (https://cvlibre.com/ca/), Australia (https://cvlibre.com/au/) and New Zealand (https://cvlibre.com/nz/). Each has a CV or resume builder, a free AI cover letter generator, letter templates, local job listings and a blog. Free: every template, PDF with no watermark, 5 AI uses a day. The optional CVLibre Pass costs $4.99 for 3 months or $9.99 for 1 year (one-time payment): a more powerful AI, 50 AI uses a day, CV tailoring to a job ad, ATS score, CV translation, 20 saved CVs and no ads. No donations.
 - [UK CV builder](https://cvlibre.com/en/cv-builder/), [US resume builder](https://cvlibre.com/us/resume-builder/)
 - [ATS guide (US)](https://cvlibre.com/us/blog/ats-resume-applicant-tracking-systems/)
 - [Advertising and partnerships](https://cvlibre.com/en/advertise/)
 
 ## Deutsche Version
-CVLibre auf Deutsch (https://cvlibre.com/de/): kostenloser Lebenslauf-Generator mit KI (https://cvlibre.com/de/lebenslauf-erstellen/), Anschreiben mit KI, Kündigungsschreiben und weitere Briefe, Stellenangebote und Ratgeber. Kostenlos: alle Vorlagen, PDF ohne Wasserzeichen, 5 KI-Nutzungen pro Tag. Der freiwillige CVLibre Pass kostet 4,99 € für 3 Monate (Einmalzahlung) und bietet eine leistungsstärkere KI, 50 KI-Nutzungen pro Tag, Anpassung an Stellenanzeigen, ATS-Score, Übersetzung, 20 gespeicherte Lebensläufe und keine Werbung.
+CVLibre auf Deutsch (https://cvlibre.com/de/): kostenloser Lebenslauf-Generator mit KI (https://cvlibre.com/de/lebenslauf-erstellen/), Anschreiben mit KI, Kündigungsschreiben und weitere Briefe, Stellenangebote und Ratgeber. Kostenlos: alle Vorlagen, PDF ohne Wasserzeichen, 5 KI-Nutzungen pro Tag. Der freiwillige CVLibre Pass kostet 4,99 € für 3 Monate oder 9,99 € für 1 Jahr (Einmalzahlung) und bietet eine leistungsstärkere KI, 50 KI-Nutzungen pro Tag, Anpassung an Stellenanzeigen, ATS-Score, Übersetzung, 20 gespeicherte Lebensläufe und keine Werbung.
