@@ -1,4 +1,4 @@
-# 14 nov 2026 (Jeremy): Notifpush (Adrenalead) SDK before </body> on every page, re-applied after each build
+# 14 nov 2026 (Jeremy): Notifpush (Adrenalead) on every page, re-applied after each build
 import os, re
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SNIP = """<script type="text/javascript">
@@ -14,6 +14,8 @@ SNIP = """<script type="text/javascript">
   s.parentNode.insertBefore(t,s)})();
 </script>
 """
+# the SDK is loaded later by assets/push.js; SNIP is the old inline version, removed where found
+TAG = '<script src="/assets/push.js?v=20261114a" defer></script>'
 n = 0
 for d, dirs, files in os.walk(ROOT):
     dirs[:] = [x for x in dirs if not x.startswith(".") and x not in ("tools", "node_modules", "content", "stats")]
@@ -21,7 +23,8 @@ for d, dirs, files in os.walk(ROOT):
         if not f.endswith(".html"): continue
         p = os.path.join(d, f)
         s = open(p, encoding="utf-8").read()
-        if "nadz-sdk.js" in s or "</body>" not in s: continue
+        if TAG in s or "</body>" not in s: continue
+        s = s.replace(SNIP, "")
         i = s.rfind("</body>")
-        open(p, "w", encoding="utf-8").write(s[:i] + SNIP + s[i:]); n += 1
+        open(p, "w", encoding="utf-8").write(s[:i] + TAG + "\n" + s[i:]); n += 1
 print("notifpush:", n, "pages")
