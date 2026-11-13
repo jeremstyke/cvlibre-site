@@ -60,7 +60,7 @@
   var fold = function (t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); };
   function own() {
     if (ownAll) return Promise.resolve(ownAll);
-    return fetch(SB + "?select=id,company,title,city,contract,hours,salary,description,apply_url,apply_email,approved_at&status=eq.approved&expires_at=gt." + encodeURIComponent(new Date().toISOString()) + "&order=approved_at.desc&limit=200", { headers: { apikey: KEY } })
+    return fetch(SB + "?select=id,company,title,city,contract,hours,salary,description,apply_url,apply_email,approved_at&country=eq.FR&status=eq.approved&expires_at=gt." + encodeURIComponent(new Date().toISOString()) + "&order=approved_at.desc&limit=200", { headers: { apikey: KEY } })
       .then(function (r) { return r.ok ? r.json() : []; }, function () { return []; })
       .then(function (l) { ownAll = (l || []).map(function (o) { return { id: "cvl-" + o.id, own: true, titre: o.title, entreprise: o.company, lieu: o.city, contrat: o.contract, duree: o.hours || "", salaire: o.salary || "", date: o.approved_at, desc: o.description, url: o.apply_url || ("mailto:" + o.apply_email + "?subject=" + encodeURIComponent("Candidature : " + o.title)) }; }); return ownAll; });
   }

@@ -7,7 +7,7 @@
   function show(on) {
     var nav = document.querySelector(".nav"), a = document.getElementById("nav-acc"), o = document.getElementById("nav-out");
     if (nav) nav.classList.toggle("in", !!on);
-    if (a) { a.textContent = on ? "My account" : "Sign in"; a.setAttribute("href", on ? "/en/cv-builder/?account=1" : "/en/cv-builder/?connexion=1"); }
+    if (a) { a.textContent = on ? "My account" : "Sign in"; a.setAttribute("href", on ? "/en/my-account/" : "/en/cv-builder/?connexion=1"); }
     if (o) o.hidden = !on;
     var sw = document.querySelector(".mode-sw"); if (sw) sw.hidden = !on;
   }

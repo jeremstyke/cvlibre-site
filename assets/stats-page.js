@@ -74,7 +74,7 @@
       if (!r.data.length) { var p0 = document.createElement("p"); p0.className = "st-note"; p0.textContent = "Aucune offre en attente."; box.appendChild(p0); return; }
       r.data.forEach(function (o) {
         var c = document.createElement("div"); c.className = "st-job";
-        var h = document.createElement("p"); var b = document.createElement("strong"); b.textContent = o.title + " · " + o.company + " · " + o.city + " · " + o.contract; h.appendChild(b); c.appendChild(h);
+        var h = document.createElement("p"); var b = document.createElement("strong"); b.textContent = (o.country === "GB" ? "🇬🇧 " : "") + o.title + " · " + o.company + " · " + o.city + " · " + o.contract; h.appendChild(b); c.appendChild(h);
         var meta = document.createElement("p"); meta.className = "st-note";
         meta.textContent = [o.salary, o.hours, o.siret ? "SIRET " + o.siret : "Sans SIRET", o.contact_name, "Postuler : " + (o.apply_url || o.apply_email), "Reçue le " + new Date(o.created_at).toLocaleString("fr-FR")].filter(Boolean).join(" · ");
         c.appendChild(meta);
