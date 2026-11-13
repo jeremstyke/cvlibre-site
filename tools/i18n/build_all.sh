@@ -16,3 +16,4 @@ python3 ads_letters.py
 python3 ads_top.py
 python3 no_dons.py
 python3 notifpush.py
+python3 pwa.py
