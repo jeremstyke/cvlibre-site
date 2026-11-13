@@ -4,7 +4,10 @@ import os, re, glob, json, datetime
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CCS = ["en", "de", "us", "ca", "au", "nz"]
 sm = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
-keep = [u for u in re.findall(r"  <url>.*?</url>\n", sm, flags=re.S) if not re.search(r"<loc>https://cvlibre\.com/(%s)/" % "|".join(CCS), u)]
+def noindex(u):
+    m = re.search(r"<loc>https://cvlibre\.com(/[^<]*)</loc>", u); f = os.path.join(ROOT, m.group(1).strip("/"), "index.html")
+    return os.path.exists(f) and 'content="noindex' in open(f, encoding="utf-8").read(3000)
+keep = [u for u in re.findall(r"  <url>.*?</url>\n", sm, flags=re.S) if not re.search(r"<loc>https://cvlibre\.com/(%s)/" % "|".join(CCS), u) and not noindex(u)]
 dates = {}
 for f in glob.glob(os.path.join(ROOT, "content/blog/*/*.json")):
     P = json.load(open(f, encoding="utf-8")); cc = os.path.basename(os.path.dirname(f))

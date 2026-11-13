@@ -147,10 +147,10 @@ def common(s, cc, c, js=False):
         ('"BA (Hons) Media and Communication", school: "University of Leeds"', '"' + c["deg2"] + '", school: "' + c["uni2"] + '"'),
         # courriers (letters.js)
         ("Could you please confirm my last working day, and arrange for my final payslip and P45 to be sent to me?", c["final"]),
-        ("cvlibre.com/en/support/", "cvlibre.com" + anglo_path("/en/support/", cc)),
     ]
     for a, b in R: s = s.replace(a, b)
     s = re.sub(r'(?<!hreflang=")en-GB', c["lang"], s)
+    s = re.sub(r'(?<!https://)cvlibre\.com/en/support/', "cvlibre.com" + anglo_path("/en/support/", cc), s)
     ad = "job posting" if (c.get("us_spell") or c.get("ca_spell")) else "job ad"
     s = re.sub(r"\b(?:[Jj]ob )?([Aa])dverts?\b|\b([Aa])dvertised\b", lambda m: ("Posted" if m.group(2) == "A" else "posted") if m.group(0).lower().startswith("advertised") else ((ad[0].upper() + ad[1:]) if (m.group(1) == "A" or m.group(0).startswith("Job")) else ad) + ("s" if m.group(0).endswith("s") else ""), s)
     if c.get("us_spell") or c.get("ca_spell"):

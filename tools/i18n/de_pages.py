@@ -132,7 +132,7 @@ def fmt_row(lab, k): return f'      <label class="fmt-row"><span>{lab}</span><se
 
 # ---------------- Lebenslauf erstellen ----------------
 builder = head("Lebenslauf erstellen kostenlos mit KI, als PDF | CVLibre",
-    "Kostenloser Lebenslauf-Generator: die KI füllt Ihren Lebenslauf aus Ihrem alten aus, verbessert Formulierungen und passt ihn an die Stellenanzeige an. 33 Vorlagen, PDF, ohne Anmeldung.",
+    "Kostenloser Lebenslauf-Generator mit KI: ausfüllen, Formulierungen verbessern, an die Stellenanzeige anpassen. 33 Vorlagen, PDF, ohne Anmeldung.",
     "/de/lebenslauf-erstellen/",
     extra='''<style>
 @media print {
@@ -409,8 +409,8 @@ FAQ = [
     ("Wie speichere ich das PDF?", "Klicken Sie auf \"PDF herunterladen\", wählen Sie \"Als PDF speichern\" statt eines Druckers und deaktivieren Sie \"Kopf- und Fußzeilen\" für ein sauberes Ergebnis."),
 ]
 TPL = [("moderne", "Modern"), ("classique", "Klassisch"), ("duo", "Duo"), ("affiche", "Plakat"), ("editorial", "Editorial"), ("sobre", "Schlicht"), ("vertical", "Vertikal"), ("monogramme", "Monogramm"), ("geometrie", "Geometrisch"), ("sombre", "Dunkel"), ("retro", "Retro"), ("elegant", "Elegant")]
-home = head("Lebenslauf erstellen kostenlos mit KI: online, PDF, ohne Anmeldung | CVLibre",
-    "Erstellen Sie Ihren Lebenslauf kostenlos mit KI: sie füllt ihn aus Ihrem alten aus, verbessert Formulierungen und passt ihn an jede Stelle an. 33 Vorlagen, PDF ohne Wasserzeichen, ohne Anmeldung.",
+home = head("Lebenslauf kostenlos mit KI erstellen, ohne Anmeldung | CVLibre",
+    "Lebenslauf kostenlos mit KI erstellen: die KI füllt ihn aus, verbessert Formulierungen und passt ihn an jede Stelle an. 33 Vorlagen, PDF, ohne Anmeldung.",
     "/de/",
     ld={"@context": "https://schema.org", "@graph": [
         {"@type": "WebApplication", "name": "CVLibre", "url": "https://cvlibre.com/de/", "applicationCategory": "BusinessApplication", "operatingSystem": "All", "inLanguage": "de-DE", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "description": "Kostenloser Online-Lebenslauf-Generator mit KI: ATS-freundliche Vorlagen, PDF-Download, Daten bleiben im Browser."},

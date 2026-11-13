@@ -46,7 +46,7 @@ write("/de/mein-konto/", head("Mein Konto | CVLibre", "Ihre gespeicherten Lebens
 
 # ---------------- Arbeitgeber ----------------
 CONTRACTS = "".join("<option>%s</option>" % c for c in ["Unbefristet", "Befristet", "Zeitarbeit", "Saisonarbeit", "Ausbildung", "Praktikum", "Minijob", "Freiberuflich"])
-write("/de/arbeitgeber/", head("Stellenanzeige kostenlos veröffentlichen | CVLibre", "Arbeitgeber in Deutschland: veröffentlichen Sie Ihre Stellenanzeigen kostenlos auf CVLibre. Jede Stelle wird vor der Freischaltung geprüft und bleibt 60 Tage online. Bewerber melden sich direkt bei Ihnen.", "/de/arbeitgeber/", extra=LETTER_CSS) + "<body>\n" + HEADER + '''
+write("/de/arbeitgeber/", head("Stellenanzeige kostenlos veröffentlichen | CVLibre", "Stellenanzeigen kostenlos veröffentlichen: jede Stelle wird vor der Freischaltung geprüft und bleibt 60 Tage online. Bewerber melden sich direkt bei Ihnen.", "/de/arbeitgeber/", extra=LETTER_CSS) + "<body>\n" + HEADER + '''
 <main id="main" class="wrap sp rc">
 ''' + MODE("r") + '''  <h1>Arbeitgeber: Stellen kostenlos veröffentlichen</h1>
   <p class="lead">Ihre Stellen erscheinen oben in den Suchergebnissen von CVLibre, vor Bewerbern, die gerade ihren Lebenslauf und ihr Anschreiben vorbereiten. Jeder Bewerber kann seinen Lebenslauf mit einem Klick an Ihre Anzeige anpassen.</p>
