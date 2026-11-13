@@ -336,7 +336,7 @@ async function jobs(q: string, ville: string, contrat: string, page: number): Pr
   jcache.set(key, { at: Date.now(), v }); if (jcache.size > 500) jcache.delete(jcache.keys().next().value!);
   return v;
 }
-const sup = new Map<string, number>();
+const sup = new Map<string, number>(), limHit = new Set<string>();
 Bun.serve({
   port: Number(Bun.env.PORT || 3000),
   idleTimeout: 120,
@@ -442,7 +442,7 @@ Bun.serve({
     try {
       const body: any = await req.json().catch(() => ({}));
       const en = body.lang === "en", de = body.lang === "de", ccNote = en && CC_EN[String(body.cc || "")] ? CC_EN[String(body.cc)].note : "";
-      const d = parisDay(); if (d !== day) { day = d; cost = 0; uses = 0; ips.clear(); }
+      const d = parisDay(); if (d !== day) { day = d; cost = 0; uses = 0; ips.clear(); limHit.clear(); }
       const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "?";
       let used = ips.get(ip) || 0, limit = IP_DAILY, pu: { pdf: number; ai: number } | null = null, isPass = false;
       if (body.key) {
@@ -452,7 +452,8 @@ Bun.serve({
       }
       // 13 nov 2026 (Jeremy): adaptation a une offre, score ATS et traduction reserves au Pass CVLibre
       if ((kind === "tailor" || kind === "ats" || kind === "translate") && !isPass) return out({ error: "pass" }, 402);
-      if (used >= limit) return out({ error: "limit", left: 0 }, 429);
+      // 13 nov 2026 (Jeremy): compteur des visiteurs gratuits qui atteignent la limite du jour (stats CVLibre, evenement ai_limit, 1 par IP et par jour)
+      if (used >= limit) { if (!isPass && !limHit.has(ip)) { limHit.add(ip); rpc("track", { p: "/ia", e: "ai_limit", x: kind }).catch(() => {}); } return out({ error: "limit", left: 0 }, 429); }
       if (cost >= DAY_USD && !isPass) return out({ error: "busy" }, 503);
       const text = String(body.text || "").slice(0, 8000).trim();
       let content: any[] = [];
