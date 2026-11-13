@@ -11,7 +11,13 @@
   }
   window.CVNAV = { show: show };
   try {
-    if (/access_token=|error_code=/.test(location.hash) && location.pathname.indexOf("/creer-un-cv/") !== 0) { location.replace("/creer-un-cv/" + location.hash); return; }
+    /* 13 nov 2026 : le lien de connexion ramène sur la page d'où la personne s'est connectée (recruteurs, mon espace...), sinon sur le créateur de CV */
+    if (/access_token=|error_code=/.test(location.hash)) {
+      var back = ""; try { var b = JSON.parse(localStorage.getItem("cv_back") || "null"); if (b && b.p && Date.now() - b.t < 3 * 3600e3) back = b.p; } catch (x) {}
+      var to = back || "/creer-un-cv/";
+      if (location.pathname !== to) { location.replace(to + location.hash); return; }
+      try { localStorage.removeItem("cv_back"); } catch (x) {}
+    }
     show(keys().some(function (k) { return !!localStorage.getItem(k); }));
     var o = document.getElementById("nav-out");
     if (o) o.addEventListener("click", function (e) {

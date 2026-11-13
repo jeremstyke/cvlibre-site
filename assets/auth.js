@@ -9,12 +9,13 @@
   var note = $("#acc-note");
   function say(t, bad) { note.textContent = t || ""; note.className = "pass-note" + (bad ? " bad" : ""); }
   function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
+  function back() { try { localStorage.setItem("cv_back", JSON.stringify({ p: location.pathname, t: Date.now() })); } catch (e) {} }
   function open() { say(""); step(1); if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", ""); $("#acc-mail-open").focus({ preventScroll: true }); }
   function close() { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
   function fire() { linkPass(); findPass(); if (window.CVNAV) window.CVNAV.show(!!user); cbs.forEach(function (f) { f(user); }); }
   var gb = $("#acc-google");
   if (gb) gb.addEventListener("click", function () {
-    say("Redirection vers Google...");
+    say("Redirection vers Google..."); back();
     sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
       if (r.error) say("Connexion Google impossible. Essayez avec votre e-mail.", true);
     });
@@ -26,7 +27,7 @@
   $("#acc-mail-go").addEventListener("click", function () {
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Saisissez une adresse email valide.", true); return; }
-    say("Envoi en cours...");
+    say("Envoi en cours..."); back();
     sb.auth.signInWithOtp({ email: m, options: { emailRedirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
       say(r.error ? "Envoi impossible. Réessayez dans un instant." : "Un lien de connexion vient de vous être envoyé. Ouvrez-le sur cet appareil.", !!r.error);
     });
