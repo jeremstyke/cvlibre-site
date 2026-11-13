@@ -68,7 +68,7 @@ FILES["assets/builder.js"] = [
     ('document.title = n ? "CV " + n : "CV";', 'document.title = n ? "CV " + n : "CV";'),
     ('passMsg.innerHTML = \'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\\\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Soutenir CVLibre sur Tipeee ❤️</a>\';',
      'passMsg.innerHTML = \'Your CV is ready. CVLibre is 100% free, funded by advertising and donations: every AI use costs us money. <a href="' + SUP + '">Support CVLibre ❤️</a>\';'),
-    ('logged = ab && /compte/i.test(ab.textContent || "")', 'logged = ab && /account/i.test(ab.textContent || "")'),
+    ('logged = ab && /compte/i.test(ab.textContent || "")', 'logged = ab && /my account/i.test(ab.textContent || "")'),
     ('limit: "Vous avez utilisé vos 5 utilisations gratuites de l\'IA pour aujourd\'hui. Revenez demain. Chaque utilisation de l\'IA nous coûte : si CVLibre vous aide, pensez à nous soutenir (lien en bas de page).",',
      'limit: "You have used your 5 free AI uses for today. Come back tomorrow. Every AI use costs us money: if CVLibre helps you, please consider supporting us (link at the bottom of the page).",'),
     ('busy: "Le service est très demandé en ce moment. Réessayez un peu plus tard.",', 'busy: "The service is very busy right now. Please try again a little later.",'),

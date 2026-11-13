@@ -1,8 +1,10 @@
 """Pages anglaises de CVLibre (cvlibre.com/en/). Lancer : python3 tools/i18n/en_pages.py
 En-tête, pied de page et fenêtre de compte communs, puis le contenu de chaque page."""
-import os, json
+import os, sys, json
+sys.path.insert(0, os.path.dirname(__file__))
+from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113h"
+V = "20261113i"
 # Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
 PAYPAL = "https://www.paypal.me/jeremyjury"
 DON_BOX = ('''    <div class="after-box">
@@ -16,10 +18,7 @@ DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donat
 
 def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
     url = "https://cvlibre.com" + path
-    alt = ""
-    if fr:
-        alt = ('<link rel="alternate" hreflang="en" href="%s">\n<link rel="alternate" hreflang="fr" href="https://cvlibre.com%s">\n'
-               '<link rel="alternate" hreflang="x-default" href="https://cvlibre.com%s">\n') % (url, fr, fr)
+    alt = links(path) if fr else ""
     return f'''<!doctype html>
 <html lang="en-GB">
 <head>
@@ -40,7 +39,7 @@ def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og-en.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261113g">
+<link rel="stylesheet" href="/assets/style.css?v=20261113i">
 <link rel="stylesheet" href="/assets/cv.css?v=20261113b">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">

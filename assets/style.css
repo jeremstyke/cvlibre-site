@@ -430,3 +430,16 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 .cty-m a { display: block; padding: 9px 12px; border-radius: 8px; color: var(--ink); text-decoration: none; font-weight: 600; white-space: nowrap; }
 .cty-m a:hover, .cty-m a[aria-current] { background: var(--blue-wash); }
 @media print { .cty { display: none !important; } }
+/* 13 nov 2026 : en-tête mobile avec le sélecteur de pays, tout doit tenir sur une ligne (iPhone 375-430 px). */
+@media (max-width: 520px) {
+  .top-in { gap: 6px; }
+  .brand { font-size: 1.3rem; }
+  .cty summary { padding: 5px 7px; gap: 0; }
+  .cty-c { display: none; }
+  .nav { gap: 6px; }
+  .nav .btn-sm { padding-inline: 9px; font-size: .86rem; }
+}
+@media (max-width: 400px) { .nav #nav-acc:not([hidden]) + #nav-out[hidden] + .btn:not(.btn-ghost) { display: none; } }
+/* Allemand : mots très longs (Datenschutzerklärung...), coupure automatique pour éviter le débordement sur mobile. */
+html[lang^="de"] body { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
+html[lang^="de"] .btn, html[lang^="de"] .nav, html[lang^="de"] .brand { -webkit-hyphens: manual; hyphens: manual; }

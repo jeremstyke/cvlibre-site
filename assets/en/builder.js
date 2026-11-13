@@ -270,7 +270,7 @@
     if (!adlg || asked || !adlg.showModal) return;
     try { var t = +localStorage.getItem("cvlibre.afterAsk") || 0; if (Date.now() - t < 864e5) return; localStorage.setItem("cvlibre.afterAsk", String(Date.now())); } catch (e) {}
     asked = true;
-    var ab = $("#acc-btn"), logged = ab && /account/i.test(ab.textContent || "");
+    var ab = $("#acc-btn"), logged = ab && /my account/i.test(ab.textContent || "");
     $("#after-acc").hidden = !ab || ab.hidden || logged;
     setTimeout(function () { if (!adlg.open) adlg.showModal(); }, 400);
   }

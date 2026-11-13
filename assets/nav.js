@@ -13,12 +13,15 @@
   window.CVNAV = { show: show };
   /* 13 nov 2026 (Jeremy) : choix du pays en haut de chaque page (France / Royaume-Uni), vers la page équivalente quand elle existe. */
   try {
-    var tin = document.querySelector(".top-in"), isEn = (document.documentElement.lang || "").indexOf("en") === 0;
+    var tin = document.querySelector(".top-in"), hl = (document.documentElement.lang || "fr").slice(0, 2);
     if (tin && !document.getElementById("cty")) {
-      var alt = function (l) { var x = document.querySelector('link[rel="alternate"][hreflang="' + l + '"]'); return x ? x.getAttribute("href").replace(/^https:\/\/cvlibre\.com/, "") : (l === "en" ? "/en/" : "/"); };
+      /* Pays disponibles : chaque page déclare ses équivalents dans <link rel="alternate" hreflang="..."> */
+      var C = [["fr", "🇫🇷", "FR", "France", "/"], ["en", "🇬🇧", "UK", "United Kingdom", "/en/"], ["de", "🇩🇪", "DE", "Deutschland", "/de/"]];
+      var alt = function (c) { var x = document.querySelector('link[rel="alternate"][hreflang="' + c[0] + '"]'); return x ? x.getAttribute("href").replace(/^https:\/\/cvlibre\.com/, "") : c[4]; };
+      var me = C.filter(function (c) { return c[0] === hl; })[0] || C[0];
       var cty = document.createElement("details"); cty.className = "cty"; cty.id = "cty";
-      cty.innerHTML = '<summary aria-label="Pays / Country"><span class="cty-f" aria-hidden="true">' + (isEn ? "🇬🇧" : "🇫🇷") + '</span><span class="cty-c">' + (isEn ? "UK" : "FR") + '</span></summary>' +
-        '<div class="cty-m"><a href="' + alt("fr") + '" hreflang="fr" lang="fr"' + (isEn ? "" : ' aria-current="true"') + '>🇫🇷 France</a><a href="' + alt("en") + '" hreflang="en" lang="en"' + (isEn ? ' aria-current="true"' : "") + '>🇬🇧 United Kingdom</a></div>';
+      cty.innerHTML = '<summary aria-label="Pays / Country / Land"><span class="cty-f" aria-hidden="true">' + me[1] + '</span><span class="cty-c">' + me[2] + '</span></summary>' +
+        '<div class="cty-m">' + C.map(function (c) { return '<a href="' + alt(c) + '" hreflang="' + c[0] + '" lang="' + c[0] + '"' + (c === me ? ' aria-current="true"' : "") + '>' + c[1] + " " + c[3] + "</a>"; }).join("") + "</div>";
       tin.insertBefore(cty, tin.children[1] || null);
       document.addEventListener("click", function (e) { if (cty.open && !cty.contains(e.target)) cty.open = false; });
     }
