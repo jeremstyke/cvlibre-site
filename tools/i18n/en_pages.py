@@ -4,15 +4,15 @@ import os, json
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 V = "20261113e"
 # Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
-PAYPAL = ""
+PAYPAL = "https://www.paypal.me/jeremyjury"
 DON_BOX = ('''    <div class="after-box">
       <h3>Support CVLibre</h3>
       <p>CVLibre is 100% free, but every AI use costs us money. A small donation, even £1, helps keep it free for everyone.</p>
       <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Donate with PayPal ❤️</a>
     </div>
-''' % PAYPAL) if PAYPAL else ""
+'''.replace("%s", PAYPAL)) if PAYPAL else ""
 DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donate with PayPal ❤️</a></p>
-  <p class="hint">Payment is handled entirely by PayPal: CVLibre never sees your bank details.</p>''' % PAYPAL) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
+  <p class="hint">Payment is handled entirely by PayPal: CVLibre never sees your bank details.</p>'''.replace("%s", PAYPAL)) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
 
 def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
     url = "https://cvlibre.com" + path
