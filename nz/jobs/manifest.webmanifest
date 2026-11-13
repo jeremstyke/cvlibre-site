@@ -1,7 +1,7 @@
 {
  "id": "/nz/jobs/",
- "name": "CVLibre Jobs",
- "short_name": "Jobs",
+ "name": "Jobs CVLibre",
+ "short_name": "Jobs CVLibre",
  "description": "Jobs near you, with free help to tailor your CV and cover letter.",
  "lang": "en-NZ",
  "start_url": "/nz/jobs/?src=app",
@@ -25,6 +25,11 @@
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "maskable"
+  },
+  {
+   "src": "/assets/app-touch-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
   }
  ]
 }

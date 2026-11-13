@@ -1,15 +1,15 @@
-/* 14 nov 2026 (Jeremy): "CVLibre Emploi" app, only for the job pages.
+/* 14 nov 2026 (Jeremy): "Jobs CVLibre" app, only for the job pages.
    Outside the app: a discreet install card. No notifications for now (Notifpush sends ads, not jobs). */
 (function () {
   var lg = (document.documentElement.lang || "fr").slice(0, 2);
   var T = {
-    fr: { t: "<strong>Appli CVLibre Emploi</strong> : les offres en un clic depuis votre écran d'accueil.", b: "Installer", x: "Fermer",
+    fr: { t: "<strong>Appli Jobs CVLibre</strong> : les offres en un clic depuis votre écran d'accueil.", b: "Installer", x: "Fermer",
       ios: "Sur iPhone : appuyez sur <strong>Partager</strong> <span aria-hidden=\"true\">⬆️</span> en bas de l'écran, puis <strong>Sur l'écran d'accueil</strong>.",
       and: "Ouvrez le menu <strong>⋮</strong> du navigateur, puis <strong>Ajouter à l'écran d'accueil</strong> (ou <strong>Installer l'appli</strong>)." },
-    en: { t: "<strong>CVLibre Jobs app</strong>: jobs one tap from your home screen.", b: "Install", x: "Close",
+    en: { t: "<strong>Jobs CVLibre app</strong>: jobs one tap from your home screen.", b: "Install", x: "Close",
       ios: "On iPhone: tap <strong>Share</strong> <span aria-hidden=\"true\">⬆️</span> at the bottom of the screen, then <strong>Add to Home Screen</strong>.",
       and: "Open the browser menu <strong>⋮</strong>, then <strong>Add to Home screen</strong> (or <strong>Install app</strong>)." },
-    de: { t: "<strong>App CVLibre Jobs</strong>: Stellenangebote mit einem Tippen vom Startbildschirm.", b: "Installieren", x: "Schließen",
+    de: { t: "<strong>App Jobs CVLibre</strong>: Stellenangebote mit einem Tippen vom Startbildschirm.", b: "Installieren", x: "Schließen",
       ios: "Auf dem iPhone: Tippen Sie unten auf <strong>Teilen</strong> <span aria-hidden=\"true\">⬆️</span>, dann auf <strong>Zum Home-Bildschirm</strong>.",
       and: "Öffnen Sie das Browsermenü <strong>⋮</strong>, dann <strong>Zum Startbildschirm hinzufügen</strong> (oder <strong>App installieren</strong>)." }
   }[lg] || null;
@@ -28,7 +28,19 @@
     ".cvapp-h{margin:-8px 0 16px;padding:10px 14px;border-radius:10px;background:#fff8e6;font-size:.92rem}";
   document.head.appendChild(st);
 
-  if (standalone) { track("app_open"); return; }
+  if (standalone) {
+    track("app_open");
+    // only the job pages live in the app: every other link opens in the normal browser
+    var scope = location.pathname.replace(/[^/]*$/, "");
+    var fix = function (a) {
+      try {
+        var u = new URL(a.getAttribute("href"), location.href);
+        if (u.origin !== location.origin || u.pathname.indexOf(scope) !== 0) { a.target = "_blank"; a.rel = "noopener"; }
+      } catch (e) {}
+    };
+    document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("a[href]"); if (a) fix(a); }, true);
+    return;
+  }
 
   if (!mobile) return;
   try { if (localStorage.getItem("cvl_app_x")) return; } catch (e) {}

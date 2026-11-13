@@ -1,7 +1,7 @@
 {
  "id": "/offres-emploi/",
- "name": "CVLibre Emploi",
- "short_name": "Emploi",
+ "name": "Jobs CVLibre",
+ "short_name": "Jobs CVLibre",
  "description": "Les offres d'emploi près de chez vous, et de l'aide gratuite pour adapter votre CV et votre lettre.",
  "lang": "fr",
  "start_url": "/offres-emploi/?src=app",
@@ -25,6 +25,11 @@
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "maskable"
+  },
+  {
+   "src": "/assets/app-touch-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "id": "/de/jobs/",
- "name": "CVLibre Jobs",
- "short_name": "Jobs",
+ "name": "Jobs CVLibre",
+ "short_name": "Jobs CVLibre",
  "description": "Stellenangebote in Ihrer Nähe, mit kostenloser Hilfe für Lebenslauf und Anschreiben.",
  "lang": "de-DE",
  "start_url": "/de/jobs/?src=app",
@@ -25,6 +25,11 @@
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "maskable"
+  },
+  {
+   "src": "/assets/app-touch-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
   }
  ]
 }
