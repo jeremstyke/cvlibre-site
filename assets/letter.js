@@ -51,7 +51,7 @@
   var gen = $("#lt-gen"), msg = $("#lt-msg");
   var ERR = {
     pass: "Le service IA est momentanément indisponible. Réessayez dans un instant.",
-    limit: "Vous avez utilisé vos 5 utilisations gratuites de l'IA pour aujourd'hui. Revenez demain. L'IA nous coûte à chaque utilisation : si CVLibre vous aide, vous pouvez nous soutenir sur /soutenir/.",
+    limit: "Vous avez utilisé vos 5 utilisations gratuites de l'IA pour aujourd'hui. Revenez demain, ou prenez le Pass CVLibre : 50 utilisations par jour.",
     busy: "Le service est très demandé. Réessayez dans quelques minutes.",
     net: "Connexion impossible. Vérifiez votre connexion et réessayez.",
     parse: "L'IA n'a pas réussi cette fois. Réessayez, cette utilisation n'est pas décomptée.",

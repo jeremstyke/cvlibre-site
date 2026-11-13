@@ -3,14 +3,14 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113p"
+V = "20261113q"
 PAYPAL = "https://ko-fi.com/cvlibrecom"  # page Ko-fi de CVLibre (13 nov 2026, remplace PayPal)
 DON_BOX = '''    <div class="after-box">
-      <h3>CVLibre unterstützen</h3>
-      <p>CVLibre ist 100 % kostenlos, aber jede KI-Nutzung kostet uns Geld. Eine kleine Spende, schon ab 1 €, hilft, es für alle kostenlos zu halten.</p>
-      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Auf Ko-fi spenden ❤️</a>
+      <h3>Mehr mit dem CVLibre Pass</h3>
+      <p>Ohne Werbung, 50 KI-Nutzungen pro Tag, Ihr Lebenslauf an jede Stelle angepasst, ATS-Score und Übersetzung. 4,99 € für 3 Monate, Einmalzahlung.</p>
+      <a class="btn btn-sm btn-ghost" href="/de/mein-konto/?pass=1" data-pass id="after-don">Pass entdecken</a>
     </div>
-'''.replace("%s", PAYPAL)
+'''
 DON_BTN = '''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Auf Ko-fi spenden ❤️</a></p>
   <p class="hint">Die Zahlung läuft vollständig über Ko-fi: CVLibre sieht Ihre Bankdaten nie.</p>'''.replace("%s", PAYPAL)
 
@@ -65,7 +65,7 @@ HEADER = '''<a class="skip" href="#main">Zum Inhalt springen</a>
 
 FOOTER = f'''<footer class="foot">
   <div class="wrap foot-in">
-    <p class="foot-brand"><strong>CVLibre</strong> ist 100 % kostenlos. Die Seite wird durch Werbung und freiwillige Unterstützung ihrer Nutzer finanziert. <a href="/de/unterstuetzen/">Danke für Ihre Unterstützung ❤️</a></p>
+    <p class="foot-brand"><strong>CVLibre</strong> ist kostenlos. Die Seite wird durch Werbung und den <a href="/de/mein-konto/?pass=1" data-pass>CVLibre Pass</a> finanziert: ohne Werbung, 50 KI-Nutzungen pro Tag, 4,99 € für 3 Monate.</p>
     <p class="foot-ai">CVLibre nutzt künstliche Intelligenz, um einen Lebenslauf auszufüllen, zu verbessern und an eine Stellenanzeige anzupassen und um Anschreiben zu verfassen. Sie lesen und korrigieren das Ergebnis immer selbst.</p>
     <nav aria-label="Rechtliches">
       <a href="/de/ratgeber/">Bewerbungsratgeber</a>
@@ -75,7 +75,7 @@ FOOTER = f'''<footer class="foot">
       <a href="/de/impressum/">Impressum</a>
       <a href="/de/datenschutz/">Datenschutz</a>
       <a href="/de/nutzungsbedingungen/">Nutzungsbedingungen</a>
-      <a href="/de/unterstuetzen/">CVLibre unterstützen</a>
+      <a href="/de/mein-konto/?pass=1" data-pass>CVLibre Pass</a>
     </nav>
   </div>
 </footer>
@@ -386,7 +386,7 @@ letter = head("Anschreiben mit KI kostenlos erstellen | CVLibre",
     </div>
     <div class="lt-prev"><div class="lt-box" id="lt-box"><div class="lt-sheet" id="lt-sheet" aria-label="Vorschau des Anschreibens"></div></div></div>
   </div>
-  <div class="free-note"><p><strong>CVLibre ist 100 % kostenlos.</strong> Die Seite wird durch Werbung und freiwillige Spenden finanziert. Jede KI-Nutzung (Lebenslauf ausfüllen, umformulieren, Anschreiben schreiben) kostet uns wirklich Geld: Spenden helfen, es für alle kostenlos zu halten. Danke ❤️</p><p><a class="btn btn-sm" href="/de/unterstuetzen/">CVLibre unterstützen</a></p></div>
+  <div class="free-note"><p><strong>CVLibre ist kostenlos.</strong> Die Seite wird durch Werbung und den freiwilligen CVLibre Pass finanziert: ohne Werbung und 50 KI-Nutzungen pro Tag statt 5, 4,99 € für 3 Monate.</p><p><a class="btn btn-sm" href="/de/mein-konto/?pass=1" data-pass>Pass entdecken</a></p></div>
 </main>
 ''' + FOOTER + "\n" + acc_dlg("Behalten Sie Ihre Dokumente und finden Sie sie auf all Ihren Geräten", False) + f'''
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -401,7 +401,7 @@ write("/de/anschreiben/", letter)
 
 # ---------------- Startseite ----------------
 FAQ = [
-    ("Ist es wirklich kostenlos?", "Ja, zu 100 %. Alle Vorlagen, PDFs ohne Wasserzeichen und die KI-Werkzeuge sind kostenlos, ohne Kreditkarte. Ein kostenloses Konto (eine E-Mail-Adresse, kein Passwort) ist freiwillig: es speichert Ihre Lebensläufe und Anschreiben online. CVLibre wird durch Werbung und freiwillige Spenden finanziert."),
+    ("Ist es wirklich kostenlos?", "Ja, zu 100 %. Alle Vorlagen, PDFs ohne Wasserzeichen und die KI-Werkzeuge sind kostenlos, ohne Kreditkarte. Ein kostenloses Konto (eine E-Mail-Adresse, kein Passwort) ist freiwillig: es speichert Ihre Lebensläufe und Anschreiben online. CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert."),
     ("Werden meine Daten irgendwohin gesendet?", "Nein, außer Sie nutzen die KI. Ihr Lebenslauf entsteht auf Ihrem Gerät. Nur der Text oder die Datei, die Sie bewusst an die KI senden, wird zur Verarbeitung übertragen, und wir speichern sie nicht."),
     ("Gehört ein Foto in den Lebenslauf?", "In Deutschland ist ein Bewerbungsfoto verbreitet, aber freiwillig: nach dem Allgemeinen Gleichbehandlungsgesetz darf es nicht verlangt werden. Bei CVLibre ist das Foto optional, und die Vorlagen sehen auch ohne Foto gut aus."),
     ("Wie lang sollte ein Lebenslauf sein?", "In Deutschland sind ein bis zwei Seiten üblich. Für Berufseinsteiger reicht oft eine Seite. CVLibre warnt Sie, wenn Ihr Lebenslauf länger als zwei Seiten wird."),
@@ -502,9 +502,9 @@ home = head("Lebenslauf kostenlos mit KI erstellen, ohne Anmeldung | CVLibre",
         </div>
         <div class="plan">
           <h3>Wie wird das finanziert?</h3>
-          <p>CVLibre wird durch Werbung und durch freiwillige Spenden seiner Nutzer finanziert.</p>
-          <p>Jede KI-Nutzung kostet uns wirklich Geld: Spenden, auch kleine, helfen, es für alle kostenlos zu halten. Danke ❤️</p>
-          <a class="btn btn-ghost" href="/de/unterstuetzen/">CVLibre unterstützen</a>
+          <p>CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert: 4,99 € für 3 Monate, Einmalzahlung.</p>
+          <p>Der Pass entfernt die Werbung und bietet 50 KI-Nutzungen pro Tag, den an jede Stelle angepassten Lebenslauf, einen ATS-Score, die Übersetzung und 20 gespeicherte Lebensläufe.</p>
+          <a class="btn btn-ghost" href="/de/mein-konto/?pass=1" data-pass>Pass entdecken</a>
         </div>
       </div>
     </div>
@@ -595,7 +595,7 @@ text_page("/de/datenschutz/", "Datenschutz | CVLibre", "Wie CVLibre mit Ihren Da
   <h2>Was auf Ihrem Gerät gespeichert wird</h2>
   <p>Damit Sie zu Ihrem Entwurf zurückkehren können, bleibt eine Kopie im lokalen Speicher Ihres Browsers (localStorage), ebenso Ihre Sitzung, wenn Sie angemeldet sind, und Ihre Wahl zu Werbe-Cookies. Sie können den Entwurf mit "Neu beginnen" löschen oder die Daten der Seite in Ihrem Browser entfernen. Denken Sie an einem gemeinsam genutzten Computer daran.</p>
   <h2>Werbung und Cookies</h2>
-  <p>CVLibre ist dank Werbung, ausgespielt von Google AdSense, und freiwilliger Spenden über Ko-fi 100 % kostenlos. Die Zahlung läuft vollständig über Ko-fi (mit PayPal oder Stripe): CVLibre erhält Ihre Bankdaten nie. Beim ersten Besuch fragt ein Banner, ob Sie Werbe-Cookies akzeptieren. Vor Ihrer Wahl werden keine Anzeigen angefordert. Wenn Sie zustimmen, kann Google Cookies nutzen, um personalisierte Anzeigen auszuspielen und zu messen. Wenn Sie ablehnen, zeigt Google nur nicht personalisierte Anzeigen. Ihre Wahl wird 6 Monate in Ihrem Browser gespeichert, und Sie können sie jederzeit über den Link "Cookies" unten auf jeder Seite ändern. Anzeigen erscheinen nie in Ihren PDFs und haben keinen Zugriff auf den Inhalt Ihres Lebenslaufs. Für die Verarbeitung durch Google gilt dessen eigene Datenschutzerklärung.</p>
+  <p>CVLibre ist dank Werbung, ausgespielt von Google AdSense, und dem freiwilligen CVLibre Pass kostenlos. Die Zahlung des Passes läuft vollständig über Gumroad: CVLibre erhält Ihre Bankdaten nie, nur die Kaufbestätigung, die verwendete E-Mail-Adresse und Ihre Konto-ID, um den Pass zu aktivieren. Beim ersten Besuch fragt ein Banner, ob Sie Werbe-Cookies akzeptieren. Vor Ihrer Wahl werden keine Anzeigen angefordert. Wenn Sie zustimmen, kann Google Cookies nutzen, um personalisierte Anzeigen auszuspielen und zu messen. Wenn Sie ablehnen, zeigt Google nur nicht personalisierte Anzeigen. Ihre Wahl wird 6 Monate in Ihrem Browser gespeichert, und Sie können sie jederzeit über den Link "Cookies" unten auf jeder Seite ändern. Anzeigen erscheinen nie in Ihren PDFs und haben keinen Zugriff auf den Inhalt Ihres Lebenslaufs. Für die Verarbeitung durch Google gilt dessen eigene Datenschutzerklärung.</p>
   <p>Unsere Nutzungsstatistik verwendet keine Cookies. Die Schriften liegen auf unserer Seite. Die anderen Dienste (KI, Supabase, Resend) werden nur aufgerufen, wenn Sie die entsprechende Funktion nutzen.</p>
   <h2>Ihre Rechte</h2>
   <p>Nach der DSGVO können Sie jederzeit Auskunft, Berichtigung oder Löschung Ihrer Daten verlangen: direkt unter "Mein Konto" für Ihre Lebensläufe und Ihr Konto, oder per E-Mail an contact@cvlibre.com. Sie können sich außerdem bei der französischen Datenschutzbehörde CNIL (cnil.fr) oder bei der Datenschutzaufsichtsbehörde Ihres Bundeslandes beschweren.</p>''')
@@ -603,7 +603,10 @@ text_page("/de/datenschutz/", "Datenschutz | CVLibre", "Wie CVLibre mit Ihren Da
 text_page("/de/nutzungsbedingungen/", "Nutzungsbedingungen | CVLibre", "Nutzungsbedingungen von CVLibre, dem kostenlosen Online-Lebenslauf-Generator mit KI.", "Nutzungsbedingungen", '''  <p>Stand: 13. November 2026.</p>
   <h2>Ein 100 % kostenloser Dienst</h2>
   <p>Mit CVLibre erstellen Sie einen Lebenslauf und ein Anschreiben und laden sie kostenlos als PDF herunter, ohne Kreditkarte. Alles steht allen offen: die 33 Vorlagen, die Anpassung (Schriften, Größe, Abstand), PDFs ohne Banner oder Wasserzeichen und die KI-Werkzeuge. Auf der Seite wird nichts verkauft.</p>
-  <p>CVLibre wird durch Werbung und freiwillige Spenden seiner Nutzer finanziert (über Ko-fi auf der deutschen Seite). Eine Spende schaltet keine zusätzliche Funktion frei: sie hilft einfach, die Seite zu betreiben.</p>
+  <p>CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert.</p>
+  <h2>Der CVLibre Pass</h2>
+  <p>Der Pass kostet 4,99 € inkl. MwSt. für 3 Monate, als Einmalzahlung, ohne Abo und ohne automatische Verlängerung. Er bietet 50 KI-Nutzungen pro Tag statt 5, die Anpassung des Lebenslaufs an eine Stellenanzeige, einen ATS-Score, die Übersetzung des Lebenslaufs, bis zu 20 gespeicherte Lebensläufe statt einem und Surfen ohne Werbung. Er ist an das CVLibre-Konto gebunden, mit dem er gekauft wurde, und wird aktiviert, sobald die Zahlung eingegangen ist.</p>
+  <p>Die Zahlung wird von Gumroad abgewickelt, das den Pass als Händler (Merchant of Record) verkauft: Gumroad nimmt die Zahlung entgegen, wendet die Mehrwertsteuer an und stellt Beleg und Rechnung aus. Für Fragen zum Pass oder eine Erstattung: contact@cvlibre.com.</p>
   <h2>Das kostenlose Konto</h2>
   <p>Ein Konto ist freiwillig. Es speichert bis zu 20 Lebensläufe und 30 Anschreiben online, damit Sie sie auf all Ihren Geräten wiederfinden. Sie können jedes Dokument oder Ihr ganzes Konto jederzeit löschen.</p>
   <h2>Künstliche Intelligenz</h2>

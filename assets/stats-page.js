@@ -28,7 +28,7 @@
     var entries = (d.days || []).reduce(function (s, r) { return s + Number(r.entries || 0); }, 0);
     var ai = (d.ai || []).filter(function (r) { return r.k !== "usage"; });
     var aiN = ai.reduce(function (s, r) { return s + Number(r.c || 0); }, 0);
-    var dons = e("don") + e("after_don");
+    var dons = e("pass_link") + e("after_don");
     var k = $("#st-kpis"); k.textContent = "";
     kpi(k, N(entries), "Visites (entrées sur le site)");
     kpi(k, N(e("view")), "Pages vues");
@@ -40,7 +40,7 @@
     kpi(k, N(e("job_open")), "Clics vers une offre (Careerjet paie au clic)");
     kpi(k, N(e("job_tailor") + e("job_letter")), "Offre vers CV ou lettre");
     kpi(k, N(e("rc_post")), "Offres envoyées par des recruteurs");
-    kpi(k, N(dons), "Clics vers Tipeee (dons)");
+    kpi(k, N(dons), "Clics vers le Pass");
     kpi(k, N(d.users), "Comptes (+" + N(d.users_new) + ")");
     var ch = $("#st-chart"); ch.textContent = "";
     var mx = Math.max.apply(null, (d.days || []).map(function (r) { return Number(r.views || 0); }).concat([1]));
@@ -48,8 +48,8 @@
     rows($("#st-funnel"), [
       { k: "Pages vues", c: e("view") }, { k: "Modèle choisi (créateur ou galerie de l'accueil)", c: e("tpl_pick") + e("gal_pick") },
       { k: "CV téléchargé en PDF", c: e("pdf") }, { k: "Après le PDF : clic Créer mon compte", c: e("after_account") },
-      { k: "Après le PDF : clic Faire un don", c: e("after_don") }, { k: "Connexion demandée (e-mail ou Google)", c: e("login_mail") + e("login_google") },
-      { k: "Tous les clics vers Tipeee", c: dons }
+      { k: "Après le PDF : clic Découvrir le Pass", c: e("after_don") }, { k: "Connexion demandée (e-mail ou Google)", c: e("login_mail") + e("login_google") },
+      { k: "Tous les clics vers le Pass", c: dons }, { k: "Clics Acheter le Pass", c: e("pass_buy") }
     ]);
     var cb = $("#st-courriers"); cb.textContent = "";
     (d.courriers || []).forEach(function (r) {

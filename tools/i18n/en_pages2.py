@@ -19,8 +19,8 @@ write("/en/my-account/", head("My account | CVLibre", "Your saved CVs and cover 
   </div>
   <div id="sp-in" hidden>
     <section class="lt-card sp-sec" id="sp-offer">
-      <div class="sp-head"><h2>CVLibre is free</h2><a class="btn btn-sm" href="/en/support/">Support CVLibre</a></div>
-      <p class="hint">Everything is open: 33 templates, customisation, PDFs with no watermark, AI cover letters, and up to 20 CVs and 30 cover letters kept online. The site is funded by advertising and voluntary donations. Every AI use costs us money: donations really help. Thank you ❤️</p>
+      <div class="sp-head"><h2>CVLibre is free</h2><a class="btn btn-sm" href="/en/my-account/?pass=1" data-pass>CVLibre Pass</a></div>
+      <p class="hint">Everything is open: 33 templates, customisation, PDFs with no watermark, AI cover letters, 1 CV and 30 cover letters kept online. The site is funded by advertising and by the optional CVLibre Pass: no ads, 50 AI uses a day and 20 saved CVs.</p>
     </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>My CVs</h2><a class="btn btn-sm" href="/en/cv-builder/">Create a CV</a></div>

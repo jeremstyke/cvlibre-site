@@ -4,15 +4,15 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113p"
+V = "20261113q"
 # Dons des versions étrangères : page Ko-fi de CVLibre (13 nov 2026, remplace PayPal).
 PAYPAL = "https://ko-fi.com/cvlibrecom"
-DON_BOX = ('''    <div class="after-box">
-      <h3>Support CVLibre</h3>
-      <p>CVLibre is 100% free, but every AI use costs us money. A small donation, even £1, helps keep it free for everyone.</p>
-      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Donate on Ko-fi ❤️</a>
+DON_BOX = '''    <div class="after-box">
+      <h3>Go further with the CVLibre Pass</h3>
+      <p>No ads, 50 AI uses a day, your CV tailored to every job, ATS score and translation. One-time payment for 3 months.</p>
+      <a class="btn btn-sm btn-ghost" href="/en/my-account/?pass=1" data-pass id="after-don">Discover the Pass</a>
     </div>
-'''.replace("%s", PAYPAL)) if PAYPAL else ""
+'''
 DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donate on Ko-fi ❤️</a></p>
   <p class="hint">Payment is handled entirely by Ko-fi: CVLibre never sees your bank details.</p>'''.replace("%s", PAYPAL)) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
 
@@ -68,7 +68,7 @@ HEADER = '''<a class="skip" href="#main">Skip to content</a>
 
 FOOTER = f'''<footer class="foot">
   <div class="wrap foot-in">
-    <p class="foot-brand"><strong>CVLibre</strong> is 100% free. The site is funded by advertising and by voluntary support from its users. <a href="/en/support/">Thank you for your support ❤️</a></p>
+    <p class="foot-brand"><strong>CVLibre</strong> is free. The site is funded by advertising and by the <a href="/en/my-account/?pass=1" data-pass>CVLibre Pass</a>: no ads, 50 AI uses a day, one payment for 3 months.</p>
     <p class="foot-ai">CVLibre uses artificial intelligence to fill in, improve and tailor a CV to a job advert, and to write cover letters. You always read and correct the result.</p>
     <nav aria-label="Legal pages">
       <a href="/en/blog/">CV advice</a>
@@ -78,7 +78,7 @@ FOOTER = f'''<footer class="foot">
       <a href="/en/legal-notice/">Legal notice</a>
       <a href="/en/privacy/">Privacy</a>
       <a href="/en/terms/">Terms of use</a>
-      <a href="/en/support/">Support CVLibre</a>
+      <a href="/en/my-account/?pass=1" data-pass>CVLibre Pass</a>
       <a href="/" hreflang="fr" lang="fr">Version française</a>
     </nav>
   </div>
@@ -390,7 +390,7 @@ letter = head("Free AI Cover Letter Generator (UK) | CVLibre",
     </div>
     <div class="lt-prev"><div class="lt-box" id="lt-box"><div class="lt-sheet" id="lt-sheet" aria-label="Cover letter preview"></div></div></div>
   </div>
-  <div class="free-note"><p><strong>CVLibre is 100% free.</strong> The site is funded by advertising and voluntary donations. Every AI use (filling in a CV, rewording, writing a letter) really costs us money: donations help keep it free for everyone. Thank you ❤️</p><p><a class="btn btn-sm" href="/en/support/">Support CVLibre</a></p></div>
+  <div class="free-note"><p><strong>CVLibre is free.</strong> The site is funded by advertising and by the optional CVLibre Pass: no ads and 50 AI uses a day instead of 5, one payment for 3 months.</p><p><a class="btn btn-sm" href="/en/my-account/?pass=1" data-pass>Discover the Pass</a></p></div>
 </main>
 ''' + FOOTER + "\n" + acc_dlg("Keep your documents and find them on all your devices", False) + f'''
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -405,7 +405,7 @@ write("/en/cover-letter/", letter)
 
 # ---------------- Home ----------------
 FAQ = [
-    ("Is it really free?", "Yes, 100%. All templates, PDFs without a watermark and the AI tools are free, with no card needed. A free account (an email address, no password) is optional: it keeps your CVs and cover letters online. CVLibre is funded by advertising and voluntary donations."),
+    ("Is it really free?", "Yes, 100%. All templates, PDFs without a watermark and the AI tools are free, with no card needed. A free account (an email address, no password) is optional: it keeps your CVs and cover letters online. CVLibre is funded by advertising and by the optional CVLibre Pass."),
     ("Is my information sent anywhere?", "No, unless you choose to use the AI. Your CV is built on your device. Only the text or file you choose to send to the AI is sent off to be processed, and we do not keep it."),
     ("Should I put a photo on my CV?", "In the UK, Ireland and the US, no: most employers prefer CVs without a photo, to avoid any bias. The photo is optional in CVLibre and the templates look good without one."),
     ("How long should a CV be?", "Two A4 pages is the usual maximum in the UK. One page is fine for students, school leavers and people with little experience. CVLibre warns you if your CV goes over two pages."),
@@ -506,9 +506,9 @@ home = head("Free CV Builder with AI: Make a CV Online, Download PDF | CVLibre",
         </div>
         <div class="plan">
           <h3>How is it funded?</h3>
-          <p>CVLibre is funded by advertising and by voluntary donations from its users.</p>
-          <p>Every AI use really costs us money: donations, even small ones, help keep it free for everyone. Thank you ❤️</p>
-          <a class="btn btn-ghost" href="/en/support/">Support CVLibre</a>
+          <p>CVLibre is funded by advertising and by the optional CVLibre Pass, a one-time payment for 3 months.</p>
+          <p>The Pass removes ads and gives you 50 AI uses a day, your CV tailored to each job, an ATS score, CV translation and 20 saved CVs.</p>
+          <a class="btn btn-ghost" href="/en/my-account/?pass=1" data-pass>Discover the Pass</a>
         </div>
       </div>
     </div>
@@ -599,15 +599,18 @@ text_page("/en/privacy/", "Privacy | CVLibre", "How CVLibre handles your data: y
   <h2>What is stored on your device</h2>
   <p>So that you can come back to your draft, a copy is kept in your browser's local storage (localStorage), along with your session if you are signed in, and your choice about advertising cookies. You can clear the draft with the "Start from scratch" button, or by clearing the site's data in your browser. If you use a shared computer, remember to do so.</p>
   <h2>Advertising and cookies</h2>
-  <p>CVLibre is 100% free thanks to advertising, shown by Google AdSense, and to voluntary donations made through Ko-fi. Payment is handled entirely by Ko-fi (with PayPal or Stripe): CVLibre never receives your bank details. On your first visit, a banner asks whether you accept advertising cookies. No ads are requested before you choose. If you accept, Google may use cookies to show and measure personalised ads. If you decline, Google only shows non-personalised ads. Your choice is kept for 6 months in your browser and you can change it at any time with the "Cookies" link at the bottom of each page. Ads never appear in your PDFs and never have access to the content of your CV. Processing by Google is subject to its own privacy policy.</p>
+  <p>CVLibre is free thanks to advertising, shown by Google AdSense, and to the optional CVLibre Pass. Payment for the Pass is handled entirely by Gumroad: CVLibre never receives your bank details, only the purchase confirmation, the email address used and your account ID to activate the Pass. On your first visit, a banner asks whether you accept advertising cookies. No ads are requested before you choose. If you accept, Google may use cookies to show and measure personalised ads. If you decline, Google only shows non-personalised ads. Your choice is kept for 6 months in your browser and you can change it at any time with the "Cookies" link at the bottom of each page. Ads never appear in your PDFs and never have access to the content of your CV. Processing by Google is subject to its own privacy policy.</p>
   <p>Our usage statistics use no cookies. Fonts are hosted on the site. The other services (AI, Supabase, Resend) are only called if you use the matching feature.</p>
   <h2>Your rights</h2>
   <p>Under the GDPR (and the UK GDPR), you can access, correct or delete your data at any time: directly from "My account" for your CVs and your account, or by writing to contact@cvlibre.com. You can also complain to the French data protection authority, the CNIL (cnil.fr), or, in the UK, to the ICO (ico.org.uk).</p>''', fr="/confidentialite/")
 
 text_page("/en/terms/", "Terms of use | CVLibre", "Terms of use of CVLibre, the free online CV builder with AI.", "Terms of use", '''  <p>Last updated: 13 November 2026.</p>
-  <h2>A 100% free service</h2>
-  <p>CVLibre lets you create a CV and a cover letter and download them as PDFs, for free, with no card. Everything is open to everyone: the 33 CV templates, customisation (fonts, size, spacing), PDFs with no banner or watermark, and the AI tools. Nothing is sold on the site.</p>
-  <p>CVLibre is funded by advertising and by voluntary donations from its users (through Ko-fi on the English-language sites). A donation does not give access to any extra feature: it simply helps keep the site running.</p>
+  <h2>A free service</h2>
+  <p>CVLibre lets you create a CV and a cover letter and download them as PDFs, for free, with no card. Everything is open to everyone: the 33 CV templates, customisation (fonts, size, spacing), PDFs with no banner or watermark, and the AI tools.</p>
+  <p>CVLibre is funded by advertising and by the optional CVLibre Pass.</p>
+  <h2>The CVLibre Pass</h2>
+  <p>The Pass is a one-time payment for 3 months, with no subscription and no automatic renewal. It gives you 50 AI uses a day instead of 5, CV tailoring to a job ad, an ATS score, CV translation, up to 20 saved CVs instead of one, and browsing with no ads. It is linked to the CVLibre account used to buy it and is activated as soon as payment is received.</p>
+  <p>Payment is handled by Gumroad, which sells the Pass as merchant of record: Gumroad takes the payment, applies any sales tax or VAT and provides the receipt and invoice. For any question about the Pass or a refund request: contact@cvlibre.com.</p>
   <h2>The free account</h2>
   <p>An account is optional. It keeps up to 20 CVs and 30 cover letters online so you can find them on all your devices. You can delete each document, or your whole account, at any time.</p>
   <h2>Artificial intelligence</h2>

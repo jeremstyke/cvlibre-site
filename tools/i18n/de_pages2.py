@@ -19,8 +19,8 @@ write("/de/mein-konto/", head("Mein Konto | CVLibre", "Ihre gespeicherten Lebens
   </div>
   <div id="sp-in" hidden>
     <section class="lt-card sp-sec" id="sp-offer">
-      <div class="sp-head"><h2>CVLibre ist kostenlos</h2><a class="btn btn-sm" href="/de/unterstuetzen/">CVLibre unterstützen</a></div>
-      <p class="hint">Alles ist offen: 33 Vorlagen, Anpassung, PDFs ohne Wasserzeichen, Anschreiben mit KI und bis zu 20 Lebensläufe und 30 Anschreiben online. Die Seite wird durch Werbung und freiwillige Spenden finanziert. Jede KI-Nutzung kostet uns Geld: Spenden helfen wirklich. Danke ❤️</p>
+      <div class="sp-head"><h2>CVLibre ist kostenlos</h2><a class="btn btn-sm" href="/de/mein-konto/?pass=1" data-pass>CVLibre Pass</a></div>
+      <p class="hint">Alles ist offen: 33 Vorlagen, Anpassung, PDFs ohne Wasserzeichen, Anschreiben mit KI 1 Lebenslauf und 30 Anschreiben online. Die Seite wird durch Werbung und den freiwilligen CVLibre Pass finanziert: ohne Werbung, 50 KI-Nutzungen pro Tag und 20 gespeicherte Lebensläufe.</p>
     </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>Meine Lebensläufe</h2><a class="btn btn-sm" href="/de/lebenslauf-erstellen/">Lebenslauf erstellen</a></div>

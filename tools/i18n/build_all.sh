@@ -14,3 +14,4 @@ python3 ads_pages.py
 python3 ads_inarticle.py
 python3 ads_letters.py
 python3 ads_top.py
+python3 no_dons.py

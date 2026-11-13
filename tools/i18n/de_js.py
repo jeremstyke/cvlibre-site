@@ -57,9 +57,9 @@ DE["assets/builder.js"] = [
     r'rw.textContent = "Mit KI verbessern";',
     r'bd.textContent = "";',
     r'document.title = n ? "Lebenslauf " + n : "Lebenslauf";',
-    r"""passMsg.innerHTML = 'Ihr Lebenslauf ist fertig. CVLibre ist 100 % kostenlos und wird durch Werbung und Spenden finanziert: jede KI-Nutzung kostet uns Geld. <a href="/de/unterstuetzen/">CVLibre unterstützen ❤️</a>';""",
+    r"""passMsg.innerHTML = 'Ihr Lebenslauf ist fertig. Für jede Stelle angepasst und ohne Werbung? <a href="/de/mein-konto/?pass=1" data-pass>CVLibre Pass entdecken</a>';""",
     r'logged = ab && /mein konto/i.test(ab.textContent || "")',
-    r'limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder. Jede KI-Nutzung kostet uns Geld: wenn CVLibre Ihnen hilft, unterstützen Sie uns gern (Link unten auf der Seite).",',
+    r'limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder, oder holen Sie sich den CVLibre Pass: 50 Nutzungen pro Tag.",',
     r'busy: "Der Dienst ist gerade sehr ausgelastet. Bitte versuchen Sie es etwas später noch einmal.",',
     r'empty: "Schreiben Sie ein paar Zeilen über Ihre Erfahrung oder fügen Sie Ihren alten Lebenslauf hinzu.",',
     r'net: "Verbindung fehlgeschlagen. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."',
@@ -113,7 +113,7 @@ DE["assets/letter.js"] = [
     r'today()',
     r'o.appendChild(node("strong", "", ""));',
     r'pass: "Der KI-Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es gleich noch einmal.",',
-    r'limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder. Jede KI-Nutzung kostet uns Geld: wenn CVLibre Ihnen hilft, können Sie uns unter cvlibre.com/de/unterstuetzen/ unterstützen",',
+    r'limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder, oder holen Sie sich den CVLibre Pass: 50 Nutzungen pro Tag.",',
     r'busy: "Der Dienst ist sehr ausgelastet. Bitte versuchen Sie es in ein paar Minuten erneut.",',
     r'net: "Verbindung fehlgeschlagen. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",',
     r'parse: "Die KI hat es diesmal nicht geschafft. Versuchen Sie es erneut, dieser Versuch zählt nicht.",',
@@ -195,9 +195,9 @@ DE["assets/support.js"] = [
 DE["assets/aibar.js"] = [
     r'<span class="aib-t">KI-Budget von heute</span>',
     r'aria-label="Verbrauchtes KI-Budget von heute"',
-    r'<p class="aib-msg">Jede KI-Nutzung kostet uns Geld, und unser Budget ist pro Tag begrenzt. Ist der Balken voll, pausiert die KI bis zum nächsten Tag. <a href="/de/unterstuetzen/">Helfen Sie mit einer Spende, sie kostenlos zu halten ❤️</a></p>',
+    r'<p class="aib-msg">Jede KI-Nutzung kostet uns Geld, und unser Budget ist pro Tag begrenzt. Ist der Balken voll, pausiert die KI bis zum nächsten Tag. <a href="/de/mein-konto/?pass=1" data-pass>Der CVLibre Pass bietet 50 Nutzungen pro Tag</a></p>',
     r'shown + " % verbraucht" + (d.uses ? " · " + d.uses + " KI-Nutzung" + (d.uses > 1 ? "en" : "") + " heute" : "")',
-    r'"Das KI-Budget von heute ist aufgebraucht: die KI ist morgen wieder da. Der Rest der Seite funktioniert normal. <a href=\"/de/unterstuetzen/\">Eine Spende hilft uns, dieses Budget zu erhöhen ❤️</a>"',
+    r'"Das KI-Budget von heute ist aufgebraucht: die KI ist morgen wieder da. Der Rest der Seite funktioniert normal. <a href=\"/de/mein-konto/?pass=1\" data-pass>Mit dem CVLibre Pass bleibt die KI verfügbar</a>"',
 ]
 
 DE["assets/space.js"] = [

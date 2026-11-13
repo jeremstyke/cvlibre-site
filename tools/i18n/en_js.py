@@ -1,6 +1,7 @@
 # Paires FR -> EN pour générer assets/en/*.js depuis les scripts français (source unique).
 # Lancer : python3 tools/i18n/build.py  (échoue si une chaîne française n'est plus trouvée)
 SUP = "/en/support/"
+PASS = "/en/my-account/?pass=1"
 
 FILES = {}
 
@@ -66,11 +67,11 @@ FILES["assets/builder.js"] = [
     ('rw.textContent = "Reformuler avec l\'IA";', 'rw.textContent = "Improve with AI";'),
     ('bd.textContent = "Pass";', 'bd.textContent = "";'),
     ('document.title = n ? "CV " + n : "CV";', 'document.title = n ? "CV " + n : "CV";'),
-    ('passMsg.innerHTML = \'Votre CV est prêt. CVLibre est 100 % gratuit, financé par la publicité et vos dons : l\\\'IA nous coûte à chaque utilisation. <a href="/soutenir/">Soutenir CVLibre sur Tipeee ❤️</a>\';',
-     'passMsg.innerHTML = \'Your CV is ready. CVLibre is 100% free, funded by advertising and donations: every AI use costs us money. <a href="' + SUP + '">Support CVLibre ❤️</a>\';'),
+    ('passMsg.innerHTML = \'Votre CV est prêt. Envie de l\\\'adapter à chaque offre, sans pub ? <a href="/mon-espace/?pass=1" data-pass>Découvrir le Pass CVLibre</a>\';',
+     'passMsg.innerHTML = \'Your CV is ready. Want it tailored to every job, with no ads? <a href="' + PASS + '" data-pass>Discover the CVLibre Pass</a>\';'),
     ('logged = ab && /compte/i.test(ab.textContent || "")', 'logged = ab && /my account/i.test(ab.textContent || "")'),
-    ('limit: "Vous avez utilisé vos 5 utilisations gratuites de l\'IA pour aujourd\'hui. Revenez demain. Chaque utilisation de l\'IA nous coûte : si CVLibre vous aide, pensez à nous soutenir (lien en bas de page).",',
-     'limit: "You have used your 5 free AI uses for today. Come back tomorrow. Every AI use costs us money: if CVLibre helps you, please consider supporting us (link at the bottom of the page).",'),
+    ('limit: "Vous avez utilisé vos 5 utilisations gratuites de l\'IA pour aujourd\'hui. Revenez demain, ou prenez le Pass CVLibre : 50 utilisations par jour.",',
+     'limit: "You have used your 5 free AI uses for today. Come back tomorrow, or get the CVLibre Pass: 50 uses a day.",'),
     ('busy: "Le service est très demandé en ce moment. Réessayez un peu plus tard.",', 'busy: "The service is very busy right now. Please try again a little later.",'),
     ('empty: "Écrivez quelques lignes sur votre parcours ou ajoutez votre ancien CV.",', 'empty: "Write a few lines about your experience or add your old CV.",'),
     ('net: "Connexion impossible. Vérifiez votre connexion et réessayez."', 'net: "Connection failed. Check your internet connection and try again."'),
@@ -125,8 +126,8 @@ FILES["assets/letter.js"] = [
     ('((S.city || "").trim() ? "Fait à " + S.city.trim() + ", le " : "Le ") + today()', 'today()'),
     ('o.appendChild(node("strong", "", "Objet : "));', 'o.appendChild(node("strong", "", "Re: "));'),
     ('pass: "Le service IA est momentanément indisponible. Réessayez dans un instant.",', 'pass: "The AI service is temporarily unavailable. Please try again in a moment.",'),
-    ('limit: "Vous avez utilisé vos 5 utilisations gratuites de l\'IA pour aujourd\'hui. Revenez demain. L\'IA nous coûte à chaque utilisation : si CVLibre vous aide, vous pouvez nous soutenir sur /soutenir/.",',
-     'limit: "You have used your 5 free AI uses for today. Come back tomorrow. Every AI use costs us money: if CVLibre helps you, you can support us at cvlibre.com' + SUP + '",'),
+    ('limit: "Vous avez utilisé vos 5 utilisations gratuites de l\'IA pour aujourd\'hui. Revenez demain, ou prenez le Pass CVLibre : 50 utilisations par jour.",',
+     'limit: "You have used your 5 free AI uses for today. Come back tomorrow, or get the CVLibre Pass: 50 uses a day.",'),
     ('busy: "Le service est très demandé. Réessayez dans quelques minutes.",', 'busy: "The service is very busy. Please try again in a few minutes.",'),
     ('net: "Connexion impossible. Vérifiez votre connexion et réessayez.",', 'net: "Connection failed. Check your internet connection and try again.",'),
     ('parse: "L\'IA n\'a pas réussi cette fois. Réessayez, cette utilisation n\'est pas décomptée.",', 'parse: "The AI did not manage it this time. Try again, this attempt does not count.",'),
@@ -224,11 +225,11 @@ FILES["assets/support.js"] = [
 FILES["assets/aibar.js"] = [
     ('<span class="aib-t">Budget IA du jour</span>', '<span class="aib-t">Today\\\'s AI budget</span>'),
     ('aria-label="Budget IA du jour utilisé"', 'aria-label="Today\\\'s AI budget used"'),
-    ('<p class="aib-msg">Chaque utilisation de l\\\'IA nous coûte de l\\\'argent, et notre budget est limité chaque jour. Quand la jauge est pleine, l\\\'IA s\\\'arrête jusqu\\\'au lendemain. <a href="/soutenir/">Aidez-nous à la garder gratuite avec un don ❤️</a></p>',
-     '<p class="aib-msg">Every AI use costs us money, and our budget is limited each day. When the bar is full, the AI stops until the next day. <a href="' + SUP + '">Help us keep it free with a donation ❤️</a></p>'),
+    ('<p class="aib-msg">Chaque utilisation de l\\\'IA nous coûte de l\\\'argent, et notre budget est limité chaque jour. Quand la jauge est pleine, l\\\'IA s\\\'arrête jusqu\\\'au lendemain. <a href="/mon-espace/?pass=1" data-pass>Le Pass CVLibre donne 50 utilisations par jour</a></p>',
+     '<p class="aib-msg">Every AI use costs us money, and our budget is limited each day. When the bar is full, the AI stops until the next day. <a href="' + PASS + '" data-pass>The CVLibre Pass gives you 50 uses a day</a></p>'),
     ('shown + " % utilisé" + (d.uses ? " · " + d.uses + " aide" + (d.uses > 1 ? "s" : "") + " de l\'IA aujourd\'hui" : "")', 'shown + "% used" + (d.uses ? " · " + d.uses + " AI use" + (d.uses > 1 ? "s" : "") + " today" : "")'),
-    ('"Le budget IA du jour est épuisé : l\'IA revient demain. Le reste du site fonctionne normalement. <a href=\\"/soutenir/\\">Un don nous aide à augmenter ce budget ❤️</a>"',
-     '"Today\'s AI budget is used up: the AI will be back tomorrow. The rest of the site works as normal. <a href=\\"' + SUP + '\\">A donation helps us raise this budget ❤️</a>"'),
+    ('"Le budget IA du jour est épuisé : l\'IA revient demain. Le reste du site fonctionne normalement. <a href=\\"/mon-espace/?pass=1\\" data-pass>Avec le Pass CVLibre, l\'IA reste disponible</a>"',
+     '"Today\'s AI budget is used up: the AI will be back tomorrow. The rest of the site works as normal. <a href=\\"' + PASS + '\\" data-pass>With the CVLibre Pass, the AI stays available</a>"'),
 ]
 
 FILES["assets/space.js"] = [

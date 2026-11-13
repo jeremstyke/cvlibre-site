@@ -141,10 +141,17 @@
       document.addEventListener("visibilitychange", function () { if (!document.hidden) refresh().then(ui); });
     };
     ui();
+    if (/[?&]pass=1/.test(location.search) && !/connexion=1/.test(location.search) && !paid()) offer();
     if (window.supabase) return go();
     if (!document.getElementById("sp-offer") && !document.getElementById("tailor") && !(st && st.u)) return; /* pages sans Pass : rien à charger */
     var s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"; s.onload = go; document.head.appendChild(s);
   }
   window.CVP = { paid: paid, until: function () { return st ? st.u : 0; }, tok: function () { return paid() ? tok : ""; }, buy: buy, offer: offer, refresh: refresh, on: function (f) { cbs.push(f); } };
+  /* 13 nov 2026 : les liens "Pass CVLibre" du site (data-pass) ouvrent l'offre sur place */
+  document.addEventListener("click", function (ev) {
+    var a = ev.target && ev.target.closest && ev.target.closest("a[data-pass]");
+    if (!a || ev.defaultPrevented || ev.ctrlKey || ev.metaKey || ev.shiftKey) return;
+    ev.preventDefault(); var d = document.querySelector("dialog[open]"); if (d && d.close && !d.classList.contains("cvp-dlg")) d.close(); offer();
+  });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 0); }); else setTimeout(start, 0);
 })();

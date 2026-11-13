@@ -260,11 +260,11 @@
     $("#wm-remove").addEventListener("click", function () { wmd.close(); var b = $("#pass-btn"); if (b) b.click(); });
   }
   window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint();
-    /* 12 nov 2026 : site 100 % gratuit, un petit mot de soutien après le PDF */
-    if (passMsg) { passMsg.innerHTML = 'Ihr Lebenslauf ist fertig. CVLibre ist 100 % kostenlos und wird durch Werbung und Spenden finanziert: jede KI-Nutzung kostet uns Geld. <a href="/de/unterstuetzen/">CVLibre unterstützen ❤️</a>'; passMsg.hidden = false; }
+    /* 13 nov 2026 : après le PDF, un mot sur le Pass (sauf si déjà pris) */
+    if (passMsg && !(window.CVP && window.CVP.paid())) { passMsg.innerHTML = 'Ihr Lebenslauf ist fertig. Für jede Stelle angepasst und ohne Werbung? <a href="/de/mein-konto/?pass=1" data-pass>CVLibre Pass entdecken</a>'; passMsg.hidden = false; }
     afterAsk();
   });
-  /* après le téléchargement : proposer le compte gratuit et le don (au plus une fois par jour) */
+  /* après le téléchargement : proposer le compte gratuit et le Pass (au plus une fois par jour) */
   var adlg = $("#after-dlg"), asked = false;
   function afterAsk() {
     if (!adlg || asked || !adlg.showModal) return;
@@ -285,7 +285,7 @@
   /* ---------- IA : remplir le CV et reformuler ---------- */
   var AI = "https://cvlibre-ai-production.up.railway.app";
   var ERR = {
-    limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder. Jede KI-Nutzung kostet uns Geld: wenn CVLibre Ihnen hilft, unterstützen Sie uns gern (Link unten auf der Seite).",
+    limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder, oder holen Sie sich den CVLibre Pass: 50 Nutzungen pro Tag.",
     busy: "Der Dienst ist gerade sehr ausgelastet. Bitte versuchen Sie es etwas später noch einmal.",
     empty: "Schreiben Sie ein paar Zeilen über Ihre Erfahrung oder fügen Sie Ihren alten Lebenslauf hinzu.",
     net: "Verbindung fehlgeschlagen. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."

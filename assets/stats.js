@@ -59,7 +59,7 @@
     if (t.closest("#after-don")) return send("after_don");
     if (t.closest("#acc-google")) return send("login_google");
     if (t.closest("#acc-mail-go")) return send("login_mail");
-    if (t.closest('a[href*="tipeee.com"]')) return send("don");
+    if (t.closest('a[data-pass]') && !t.closest("#after-don")) return send("pass_link");
     if ((el = t.closest(".gal-card"))) return send("gal_pick", el.getAttribute("data-tpl"));
     if ((el = t.closest(".tpl-card"))) return send("tpl_pick", el.getAttribute("data-tpl"));
     if ((el = t.closest("#tpls button[data-tpl]"))) return send("tpl_pick", el.getAttribute("data-tpl"));

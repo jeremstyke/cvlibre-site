@@ -260,11 +260,11 @@
     $("#wm-remove").addEventListener("click", function () { wmd.close(); var b = $("#pass-btn"); if (b) b.click(); });
   }
   window.addEventListener("afterprint", function () { document.title = oldTitle; forceWm = false; paint();
-    /* 12 nov 2026 : site 100 % gratuit, un petit mot de soutien après le PDF */
-    if (passMsg) { passMsg.innerHTML = 'Your CV is ready. CVLibre is 100% free, funded by advertising and donations: every AI use costs us money. <a href="/au/support/">Support CVLibre ❤️</a>'; passMsg.hidden = false; }
+    /* 13 nov 2026 : après le PDF, un mot sur le Pass (sauf si déjà pris) */
+    if (passMsg && !(window.CVP && window.CVP.paid())) { passMsg.innerHTML = 'Your CV is ready. Want it tailored to every job, with no ads? <a href="/au/my-account/?pass=1" data-pass>Discover the CVLibre Pass</a>'; passMsg.hidden = false; }
     afterAsk();
   });
-  /* après le téléchargement : proposer le compte gratuit et le don (au plus une fois par jour) */
+  /* après le téléchargement : proposer le compte gratuit et le Pass (au plus une fois par jour) */
   var adlg = $("#after-dlg"), asked = false;
   function afterAsk() {
     if (!adlg || asked || !adlg.showModal) return;
@@ -285,7 +285,7 @@
   /* ---------- IA : remplir le CV et reformuler ---------- */
   var AI = "https://cvlibre-ai-production.up.railway.app";
   var ERR = {
-    limit: "You have used your 5 free AI uses for today. Come back tomorrow. Every AI use costs us money: if CVLibre helps you, please consider supporting us (link at the bottom of the page).",
+    limit: "You have used your 5 free AI uses for today. Come back tomorrow, or get the CVLibre Pass: 50 uses a day.",
     busy: "The service is very busy right now. Please try again a little later.",
     empty: "Write a few lines about your experience or add your old resume.",
     net: "Connection failed. Check your internet connection and try again."

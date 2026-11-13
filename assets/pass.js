@@ -1,4 +1,4 @@
-/* 12 nov 2026 (Jeremy, "rends tout 100 % libre") : CVLibre est entièrement gratuit, financé par la publicité et le soutien volontaire.
+/* 12 nov 2026 (Jeremy, "rends tout 100 % libre") : CVLibre est entièrement gratuit, financé par la publicité (et depuis le 13 nov 2026 par le Pass CVLibre, voir cvpass.js).
    Plus de Pass ni de paiement : tout est ouvert à tout le monde (25 modèles, Personnaliser, PDF sans bandeau, lettres IA).
    Ce fichier garde l'objet CVPASS pour que les autres scripts fonctionnent sans changement : il répond toujours « tout est ouvert ». */
 (function () {
@@ -9,6 +9,6 @@
     paid: function () { return true; }, key: function () { return ""; }, until: function () { return 0; }, plan: function () { return "free"; },
     activate: function () { return Promise.resolve({ ok: true }); }, forget: noop, holder: function () { return null; },
     bind: function () { return Promise.resolve({ ok: true }); }, askHolder: noop, exportPdf: function () { return Promise.resolve({ wm: false }); },
-    onChange: noop, buyUrl: function () { return "/soutenir/"; }, resumeBuy: noop, setUser: noop, setLogin: noop
+    onChange: noop, buyUrl: function () { return "/mon-espace/?pass=1"; }, resumeBuy: noop, setUser: noop, setLogin: noop
   };
 })();

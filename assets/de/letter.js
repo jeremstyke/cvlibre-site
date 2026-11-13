@@ -52,7 +52,7 @@
   var gen = $("#lt-gen"), msg = $("#lt-msg");
   var ERR = {
     pass: "Der KI-Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es gleich noch einmal.",
-    limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder. Jede KI-Nutzung kostet uns Geld: wenn CVLibre Ihnen hilft, können Sie uns unter cvlibre.com/de/unterstuetzen/ unterstützen",
+    limit: "Sie haben Ihre 5 kostenlosen KI-Nutzungen für heute verbraucht. Kommen Sie morgen wieder, oder holen Sie sich den CVLibre Pass: 50 Nutzungen pro Tag.",
     busy: "Der Dienst ist sehr ausgelastet. Bitte versuchen Sie es in ein paar Minuten erneut.",
     net: "Verbindung fehlgeschlagen. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
     parse: "Die KI hat es diesmal nicht geschafft. Versuchen Sie es erneut, dieser Versuch zählt nicht.",

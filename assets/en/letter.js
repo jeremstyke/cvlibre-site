@@ -52,7 +52,7 @@
   var gen = $("#lt-gen"), msg = $("#lt-msg");
   var ERR = {
     pass: "The AI service is temporarily unavailable. Please try again in a moment.",
-    limit: "You have used your 5 free AI uses for today. Come back tomorrow. Every AI use costs us money: if CVLibre helps you, you can support us at cvlibre.com/en/support/",
+    limit: "You have used your 5 free AI uses for today. Come back tomorrow, or get the CVLibre Pass: 50 uses a day.",
     busy: "The service is very busy. Please try again in a few minutes.",
     net: "Connection failed. Check your internet connection and try again.",
     parse: "The AI did not manage it this time. Try again, this attempt does not count.",
