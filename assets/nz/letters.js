@@ -90,7 +90,7 @@
     var fields = {}; Object.keys(S.f).forEach(function (k) { if (String(S.f[k] || "").trim()) fields[k] = S.f[k]; });
     if (S.name.trim()) fields.name = S.name.trim();
     gen.disabled = true; gen.textContent = "AI is writing..."; msg.textContent = "This takes 5 to 10 seconds.";
-    fetch(AI + "/courrier", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ lang: "en", cc: "NZ", type: TYPE, fields: fields }) })
+    fetch(AI + "/courrier", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ lang: "en", type: TYPE, fields: fields, key: (window.CVP && window.CVP.tok()) || undefined }) })
       .then(function (r) { return r.json().catch(function () { return {}; }); }, function () { return { error: "net" }; })
       .then(function (j) {
         gen.disabled = false; gen.textContent = "Write it with AI";

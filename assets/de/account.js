@@ -90,13 +90,13 @@
     });
   }
   var FREE_CVS = 1;
-  var maxCvs = function () { return window.CVPASS && window.CVPASS.paid() ? (window.CVPASS.plan() === "pro" ? 200 : 20) : FREE_CVS; };
+  var maxCvs = function () { return window.CVP && window.CVP.paid() ? 20 : FREE_CVS; };
   function saveCv(asNew) {
     var creating = !curId || asNew;
     if (creating) {
       sb.from("cvs").select("id", { count: "exact", head: true }).then(function (c) {
         var m = maxCvs();
-        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "Sie können 1 Lebenslauf online speichern." : "Sie haben das Limit von " + m + " Lebensläufen erreicht. Löschen Sie zuerst einen.", true); return; }
+        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "Das kostenlose Konto speichert 1 Lebenslauf online. Mit dem CVLibre Pass können Sie bis zu 20 speichern. Sie können Ihren bestehenden Lebenslauf bearbeiten oder ersetzen." : "Sie haben das Limit von " + m + " Lebensläufen erreicht. Löschen Sie zuerst einen.", true); return; }
         doSave(asNew);
       });
       return;

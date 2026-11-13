@@ -2,6 +2,14 @@
    Refus : annonces non personnalisées. Choix gardé 6 mois. Le lien « Cookies » en bas de page rouvre la fenêtre. */
 (function () {
   try {
+    /* 13 nov 2026 (Jeremy) : Pass CVLibre = aucune pub. Le Pass est gardé dans localStorage par assets/cvpass.js (chargé ici sur toutes les pages). */
+    var PASS = false; try { var pv = JSON.parse(localStorage.getItem("cvlibre.cvpass") || "null"); PASS = !!(pv && pv.u > Date.now()); } catch (e) {}
+    try { var cs = document.createElement("script"); cs.src = "/assets/cvpass.js?v=20261113a"; cs.defer = true; document.head.appendChild(cs); } catch (e) {}
+    if (PASS) {
+      document.documentElement.classList.add("cvl-pass");
+      var hs = document.createElement("style"); hs.textContent = ".ad-in,ins.adsbygoogle,.adsbygoogle{display:none!important}"; document.head.appendChild(hs);
+      return;
+    }
     var K = "cvlibre.consent", c = null;
     try { var v = JSON.parse(localStorage.getItem(K) || "null"); if (v && v.t && Date.now() - v.t < 15552000000) c = v.v; } catch (e) {}
     var A = window.adsbygoogle = window.adsbygoogle || [];

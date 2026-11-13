@@ -76,7 +76,7 @@
     if (!cv && (S.profile || "").trim().length < 20) { msg.textContent = "Décrivez votre parcours en quelques lignes, ou partez d'un de vos CV."; el("profile").focus(); return; }
     gen.disabled = true; gen.textContent = "Rédaction en cours..."; msg.textContent = "";
     var payload = { job: { title: job, company: (S.company || "").trim(), ad: (S.ad || "").slice(0, 4000) }, tone: S.tone || "classique", profile: (S.profile || "").slice(0, 2500), cv: cv ? compact(cv.data) : null };
-    var k = (P && P.key()) || passKey(); if (k) payload.key = k;
+    var k = (window.CVP && window.CVP.tok()) || (P && P.key()) || passKey(); if (k) payload.key = k;
     fetch(AI + "/letter", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }); }).catch(function () { return { error: "net" }; })
       .then(function (j) {

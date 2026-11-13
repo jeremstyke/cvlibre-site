@@ -89,13 +89,13 @@
     });
   }
   var FREE_CVS = 1;
-  var maxCvs = function () { return window.CVPASS && window.CVPASS.paid() ? (window.CVPASS.plan() === "pro" ? 200 : 20) : FREE_CVS; };
+  var maxCvs = function () { return window.CVP && window.CVP.paid() ? 20 : FREE_CVS; };
   function saveCv(asNew) {
     var creating = !curId || asNew;
     if (creating) {
       sb.from("cvs").select("id", { count: "exact", head: true }).then(function (c) {
         var m = maxCvs();
-        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "Le compte gratuit garde 1 CV en ligne. Le Pass 1 an permet d'en garder jusqu'à 20. Vous pouvez modifier ou remplacer votre CV existant." : "Vous avez atteint la limite de " + m + " CV. Supprimez-en un.", true); return; }
+        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "Le compte gratuit garde 1 CV en ligne. Le Pass CVLibre permet d'en garder jusqu'à 20. Vous pouvez modifier ou remplacer votre CV existant." : "Vous avez atteint la limite de " + m + " CV. Supprimez-en un.", true); return; }
         doSave(asNew);
       });
       return;

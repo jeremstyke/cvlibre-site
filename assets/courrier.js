@@ -102,7 +102,7 @@
     var fields = {}; Object.keys(S.f).forEach(function (k) { if (String(S.f[k] || "").trim()) fields[k] = S.f[k]; });
     if (S.name.trim()) fields.nom = S.name.trim();
     gen.disabled = true; gen.textContent = "L'IA rédige..."; msg.textContent = "Cela prend 5 à 10 secondes.";
-    fetch(AI + "/courrier", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ type: TYPE, fields: fields }) })
+    fetch(AI + "/courrier", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ type: TYPE, fields: fields, key: (window.CVP && window.CVP.tok()) || undefined }) })
       .then(function (r) { return r.json().catch(function () { return {}; }); }, function () { return { error: "net" }; })
       .then(function (j) {
         gen.disabled = false; gen.textContent = "Rédiger avec l'IA";

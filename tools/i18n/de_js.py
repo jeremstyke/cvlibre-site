@@ -153,7 +153,7 @@ DE["assets/account.js"] = ACC_COMMON + [
     r'say("Lebenslauf geöffnet.");',
     r'say("Löschen fehlgeschlagen. Bitte erneut versuchen.", true);',
     r'say("Lebenslauf gelöscht.");',
-    r'"Sie können 1 Lebenslauf online speichern." : "Sie haben das Limit von " + m + " Lebensläufen erreicht. Löschen Sie zuerst einen."',
+    r'"Das kostenlose Konto speichert 1 Lebenslauf online. Mit dem CVLibre Pass können Sie bis zu 20 speichern. Sie können Ihren bestehenden Lebenslauf bearbeiten oder ersetzen." : "Sie haben das Limit von " + m + " Lebensläufen erreicht. Löschen Sie zuerst einen."',
     r'"Lebenslauf " + data.name.trim() : "Mein Lebenslauf"',
     r'"Sie haben das Limit für Lebensläufe erreicht. Löschen Sie zuerst einen." : "Speichern fehlgeschlagen. Bitte erneut versuchen."',
     r'say("Lebenslauf gespeichert.");',

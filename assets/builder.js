@@ -290,7 +290,8 @@
     net: "Connexion impossible. Vérifiez votre connexion et réessayez."
   };
   function aiPost(path, payload) {
-    if (window.CVPASS && window.CVPASS.key()) payload.key = window.CVPASS.key();
+    /* 13 nov 2026 : Pass CVLibre (assets/cvpass.js) : 50 IA par jour, le jeton du compte sert de clé */
+    var PK = window.CVP && window.CVP.tok(); if (PK) payload.key = PK; else if (window.CVPASS && window.CVPASS.key()) payload.key = window.CVPASS.key();
     return fetch(AI + path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; }); })
       .catch(function () { return { error: "net" }; });

@@ -90,13 +90,13 @@
     });
   }
   var FREE_CVS = 1;
-  var maxCvs = function () { return window.CVPASS && window.CVPASS.paid() ? (window.CVPASS.plan() === "pro" ? 200 : 20) : FREE_CVS; };
+  var maxCvs = function () { return window.CVP && window.CVP.paid() ? 20 : FREE_CVS; };
   function saveCv(asNew) {
     var creating = !curId || asNew;
     if (creating) {
       sb.from("cvs").select("id", { count: "exact", head: true }).then(function (c) {
         var m = maxCvs();
-        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "You can keep 1 CV online." : "You have reached the limit of " + m + " CVs. Delete one first.", true); return; }
+        if (!c.error && (c.count || 0) >= m) { say(m === FREE_CVS ? "The free account keeps 1 CV online. The CVLibre Pass lets you keep up to 20. You can edit or replace your existing CV." : "You have reached the limit of " + m + " CVs. Delete one first.", true); return; }
         doSave(asNew);
       });
       return;
