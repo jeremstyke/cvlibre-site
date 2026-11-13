@@ -26,7 +26,17 @@ RAD = ('<div class="wrap ad-in"><ins class="adsbygoogle" style="display:block" d
        'data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n')
 homes = [os.path.join(ROOT, d, "index.html") for d in ["", "en", "de", "us", "ca", "au", "nz"]]
 m = 0
-for f in files + homes:
+# Fin des articles : bloc "Multiplex" (slot 2300386270, contenus recommandés) à la place du responsive.
+MSLOT = "2300386270"
+MAD = ('<div class="wrap ad-in"><ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-8638687738606649" '
+       'data-ad-slot="' + MSLOT + '"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n')
+for f in files:
+    s = open(f, encoding="utf-8").read()
+    if RSLOT in s: s = s.replace("  " + RAD, "")
+    if MSLOT in s or "googlesyndication" not in s: continue
+    i = s.find('  <section class="wrap rel"')
+    if i >= 0: open(f, "w", encoding="utf-8").write(s[:i] + "  " + MAD + s[i:])
+for f in homes:
     s = open(f, encoding="utf-8").read()
     if RSLOT in s or "googlesyndication" not in s: continue
     for mark in ['  <section class="wrap rel"', '  <section class="section" id="faq">', '  <section class="section" id="questions">']:
