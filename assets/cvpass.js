@@ -14,6 +14,11 @@
   var ACC = CC === "fr" ? "/mon-espace/" : CC === "de" ? "/de/mein-konto/" : "/" + CC + "/my-account/";
   var BUY = { fr: "https://jeremstyke.gumroad.com/l/pass-cvlibre", de: "https://jeremstyke.gumroad.com/l/cvlibre-pass-de", en: "https://jeremstyke.gumroad.com/l/cvlibre-pass" }[L];
   var PRICE = L === "en" ? "$4.99" : "4,99 €";
+  /* 13 nov 2026 (Jeremy) : offre de lancement -40 % jusqu'au 31 décembre 2026 (codes Gumroad LANCEMENT / LAUNCH / START, appliqués tout seuls dans le lien d'achat) */
+  var PROMO_END = Date.parse("2026-12-31T23:59:00+01:00"), PROMO = Date.now() < PROMO_END;
+  var PCODE = { fr: "LANCEMENT", en: "LAUNCH", de: "START" }[L], PNEW = L === "en" ? "$2.99" : "2,99 €";
+  var PNOTE = { fr: "Offre de lancement jusqu'au 31 décembre", en: "Launch offer until 31 December", de: "Einführungsangebot bis 31. Dezember" }[L];
+  function priceHtml() { return PROMO ? "<s class='cvp-old'>" + PRICE + "</s> <span class='cvp-price'>" + PNEW + "</span>" : "<span class='cvp-price'>" + PRICE + "</span>"; }
   /* 13 nov 2026 : article ATS de chaque pays, lié depuis l'offre et l'outil score ATS */
   var ATSU = CC === "fr" ? "/blog/cv-logiciel-recrutement-ats/" : CC === "de" ? "/de/ratgeber/ats-lebenslauf-bewerbermanagementsystem/" : "/" + CC + "/blog/ats-" + (CC === "en" || CC === "nz" ? "cv" : "resume") + "-applicant-tracking-systems/";
   var ATSL = { fr: "C'est quoi un ATS ?", en: "What is an ATS?", de: "Was ist ein ATS?" }[L];
@@ -34,7 +39,7 @@
   }
   function fmtD(t) { return new Date(t).toLocaleDateString(L === "fr" ? "fr-FR" : L === "de" ? "de-DE" : "en-GB", { day: "numeric", month: "long", year: "numeric" }); }
   function buyUrl() {
-    var u = BUY + "?wanted=true";
+    var u = BUY + (PROMO ? "/" + PCODE : "") + "?wanted=true";
     if (user) u += "&cvl=" + encodeURIComponent(user.id) + (user.email ? "&email=" + encodeURIComponent(user.email) : "");
     return u;
   }
@@ -59,12 +64,12 @@
   function css() {
     if (document.getElementById("cvp-css")) return;
     var s = document.createElement("style"); s.id = "cvp-css";
-    s.textContent = ".cvp-claim{margin-top:12px;border-top:1px solid #d6dff5;padding-top:10px}.cvp-claim summary{cursor:pointer;font-size:14px;color:#1f4fd8}.cvp-claim label{display:block;font-size:13.5px;margin:8px 0}.cvp-claim input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px 10px;border:1px solid #c5cfe6;border-radius:8px;font:inherit}" + ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
+    s.textContent = ".cvp-old{color:#8a93a8;font-weight:600;font-size:16px}.cvp-promo{display:inline-block;margin:2px 0 6px;padding:2px 8px;border-radius:999px;background:#ffe9a8;color:#5a4300;font-size:13px;font-weight:700}" + ".cvp-claim{margin-top:12px;border-top:1px solid #d6dff5;padding-top:10px}.cvp-claim summary{cursor:pointer;font-size:14px;color:#1f4fd8}.cvp-claim label{display:block;font-size:13.5px;margin:8px 0}.cvp-claim input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px 10px;border:1px solid #c5cfe6;border-radius:8px;font:inherit}" + ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
     document.head.appendChild(s);
   }
   function boxHtml(h) {
     if (paid()) return "<" + h + ">" + T.name + "</" + h + "><p class='cvp-on'>" + T.active + fmtD(st.u) + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul>";
-    return "<" + h + ">" + T.name + " <span class='cvp-price'>" + PRICE + "</span></" + h + "><p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
+    return "<" + h + ">" + T.name + " " + priceHtml() + "</" + h + ">" + (PROMO ? "<p class='cvp-promo'>" + PNOTE + "</p>" : "") + "<p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
   }
   /* 13 nov 2026 : Pass payé avec une autre adresse e-mail (ou sans être connecté) : activation par numéro de commande Gumroad + e-mail d'achat */
   var CL = {
