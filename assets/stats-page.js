@@ -40,7 +40,6 @@
     kpi(k, N(e("job_open")), "Clics vers une offre (Careerjet paie au clic)");
     kpi(k, N(e("job_tailor") + e("job_letter")), "Offre vers CV ou lettre");
     kpi(k, N(e("rc_post")), "Offres envoyées par des recruteurs");
-    kpi(k, N(e("cvt_on")), "Accords CVthèque");
     kpi(k, N(dons), "Clics vers Tipeee (dons)");
     kpi(k, N(d.users), "Comptes (+" + N(d.users_new) + ")");
     var ch = $("#st-chart"); ch.textContent = "";

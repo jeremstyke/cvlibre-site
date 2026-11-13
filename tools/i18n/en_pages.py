@@ -4,7 +4,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113j"
+V = "20261113k"
 # Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
 PAYPAL = "https://www.paypal.me/jeremyjury"
 DON_BOX = ('''    <div class="after-box">

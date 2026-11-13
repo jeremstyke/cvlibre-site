@@ -18,8 +18,9 @@
       A.sb.from(table).delete().eq("id", r.id).then(function (x) { if (!x.error) { d.remove(); if (!box.children.length) empty(box, table); } else del.textContent = "Failed"; });
     });
     d.appendChild(t);
-    if (table === "cvs") {
-      /* CVthèque : accord du candidat, CV par CV. Pas encore consultable par les recruteurs. */
+    /* CVthèque : mise en pause le 13 nov 2026 (Jeremy), case cachée. Remettre CVT à true pour la réactiver. */
+    var CVT = false;
+    if (CVT && table === "cvs") {
       var lab = document.createElement("label"); lab.className = "sp-cvt";
       var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!r.cvtheque;
       lab.appendChild(cb); lab.appendChild(document.createTextNode(" Visible to recruiters (CV database)"));

@@ -25,10 +25,6 @@ write("/de/mein-konto/", head("Mein Konto | CVLibre", "Ihre gespeicherten Lebens
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>Meine Lebensläufe</h2><a class="btn btn-sm" href="/de/lebenslauf-erstellen/">Lebenslauf erstellen</a></div>
       <div class="sp-list" id="sp-cvs"></div>
-      <div class="sp-cvt-info">
-        <p><strong>Von Arbeitgebern kontaktiert werden (Lebenslauf-Datenbank, bald verfügbar)</strong></p>
-        <p class="hint">Haken Sie bei einem Lebenslauf "Für Arbeitgeber sichtbar" an, damit er in die künftige Lebenslauf-Datenbank von CVLibre aufgenommen wird: geprüfte Arbeitgeber können ihn dann ansehen und Sie kontaktieren. Im Moment ist nichts sichtbar: wir sammeln nur Ihre Einwilligung. Sie können den Haken jederzeit entfernen, und wir informieren Sie per E-Mail, bevor die Datenbank startet.</p>
-      </div>
     </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>Meine Anschreiben</h2><a class="btn btn-sm" href="/de/anschreiben/">Anschreiben verfassen</a></div>

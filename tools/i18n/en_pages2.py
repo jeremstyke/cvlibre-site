@@ -25,10 +25,6 @@ write("/en/my-account/", head("My account | CVLibre", "Your saved CVs and cover 
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>My CVs</h2><a class="btn btn-sm" href="/en/cv-builder/">Create a CV</a></div>
       <div class="sp-list" id="sp-cvs"></div>
-      <div class="sp-cvt-info">
-        <p><strong>Be contacted by recruiters (CV database, coming soon)</strong></p>
-        <p class="hint">Tick "Visible to recruiters" on a CV so it joins the future CVLibre CV database: verified recruiters will be able to view it and contact you. For now nothing is visible: we are only collecting your consent. You can untick it at any time, and we will email you before it opens.</p>
-      </div>
     </section>
     <section class="lt-card sp-sec">
       <div class="sp-head"><h2>My cover letters</h2><a class="btn btn-sm" href="/en/cover-letter/">Write a cover letter</a></div>
