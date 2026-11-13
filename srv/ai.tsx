@@ -337,10 +337,34 @@ async function jobs(q: string, ville: string, contrat: string, page: number): Pr
   return v;
 }
 const sup = new Map<string, number>(), limHit = new Set<string>();
+// 13 nov 2026 (Jeremy) : la jauge du budget IA du jour (et les 5 IA gratuites par IP) ne repartent plus a zero quand le serveur redemarre.
+// Etat du jour garde dans la table cv_ai_day (RPC protegees par le meme secret que careerjet_search), sauve toutes les 10 s s'il a change.
+let lastSaved = "";
+const daySnap = () => JSON.stringify([day, cost, uses, [...ips]]);
+const dayLoaded = (async () => {
+  if (!CJS) return;
+  try {
+    const d = parisDay(); const r = await rpc("cv_ai_day_get", { s: CJS, d });
+    const row = Array.isArray(r) ? r[0] : null;
+    day = d;
+    if (row) {
+      cost = Math.max(cost, Number(row.cost) || 0); uses = Math.max(uses, Number(row.uses) || 0);
+      for (const [k, v] of Object.entries(row.ips || {})) ips.set(k, Math.max(ips.get(k) || 0, Number(v) || 0));
+    }
+    lastSaved = daySnap();
+  } catch (e) { console.log("ai_day load", String(e)); }
+})();
+setInterval(() => {
+  if (!CJS || !day) return;
+  const snap = daySnap(); if (snap === lastSaved) return;
+  rpc("cv_ai_day_put", { s: CJS, d: day, c: cost, u: uses, i: Object.fromEntries(ips) }).then(() => { lastSaved = snap; }).catch((e) => console.log("ai_day save", String(e)));
+}, 10000);
+
 Bun.serve({
   port: Number(Bun.env.PORT || 3000),
   idleTimeout: 120,
   async fetch(req) {
+    await dayLoaded;
     const url = new URL(req.url);
     const o = req.headers.get("origin") || "";
     const cors = { "Access-Control-Allow-Origin": ORIGINS.includes(o) ? o : ORIGINS[0], "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "content-type", "Vary": "Origin" };
