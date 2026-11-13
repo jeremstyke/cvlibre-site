@@ -9,6 +9,7 @@ ALT = [
     ("/cgv/", "/en/terms/", "/de/nutzungsbedingungen/"),
     ("/mon-espace/", "/en/my-account/", "/de/mein-konto/"),
     ("/recruteurs/", "/en/recruiters/", "/de/arbeitgeber/"),
+    ("/publicite/", "/en/advertise/", "/de/werbung/"),
     ("/offres-emploi/", "/en/jobs/", "/de/jobs/"),
     ("/courriers/", "/en/letters/", "/de/briefe/"),
     ("/lettre-de-demission/", "/en/resignation-letter/", "/de/kuendigungsschreiben/"),

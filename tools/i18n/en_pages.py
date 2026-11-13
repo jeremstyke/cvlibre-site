@@ -75,6 +75,7 @@ FOOTER = f'''<footer class="foot">
       <a href="/en/letters/">Letters</a>
       <a href="/en/jobs/">Jobs</a>
       <a href="/en/recruiters/">Recruiters: post a job</a>
+      <a href="/en/advertise/">Advertising and partnerships</a>
       <a href="/en/legal-notice/">Legal notice</a>
       <a href="/en/privacy/">Privacy</a>
       <a href="/en/terms/">Terms of use</a>
@@ -574,6 +575,23 @@ text_page("/en/support/", "Support CVLibre | CVLibre", "CVLibre is a 100% free C
   <p>The site is funded by advertising and by your support. Every AI use (filling in a CV, improving a text, tailoring a CV, writing a cover letter) really costs us money. A donation, even £1, helps us keep the AI free for everyone.</p>
   <p>A donation does not unlock anything: everything stays free, whether you donate or not. Thank you ❤️</p>
 {DON_BTN}''', fr="/soutenir/")
+
+# 13 nov 2026 (Jeremy) : page Publicité et partenariats, contact par e-mail
+text_page("/en/advertise/", "Advertising and partnerships | CVLibre", "Advertisers, schools, training providers, HR tools: reach job seekers while they write their CV. Advertising, sponsored articles and partnerships on CVLibre.",
+    "Advertising and partnerships", '''  <p class="lead">CVLibre is a free CV and cover letter builder used in the UK, the United States, Canada, Australia, New Zealand, Germany and France. Our visitors are looking for a job, an apprenticeship or a course, and they are with us at the moment they take action.</p>
+  <h2>What we offer</h2>
+  <ul>
+    <li><strong>Sponsored article</strong>: a genuinely useful guide on our blog, written with you and clearly labelled as a partnership.</li>
+    <li><strong>Featured placement</strong>: your offer or service shown on the pages that match it (jobs, cover letters, CV advice).</li>
+    <li><strong>Partnership</strong>: schools, training providers, recruitment agencies, job boards, tools for job seekers. We build an offer together that really helps our visitors.</li>
+    <li><strong>Affiliate</strong>: a tracked link to your service, paid on performance.</li>
+  </ul>
+  <h2>Our rules</h2>
+  <p>Sponsored content is always labelled as such. We turn down misleading offers, jobs or courses that charge candidates to apply, and anything unlawful. We never sell or share our users' CVs or data.</p>
+  <h2>Contact us</h2>
+  <p>Write us a few lines: your company, what you would like to promote, the countries you are targeting and an indicative budget. We will reply with a proposal and up-to-date audience figures.</p>
+  <p><a class="btn" href="mailto:contact@cvlibre.com?subject=Advertising%20%2F%20partnership%20CVLibre&body=Hello%2C%0A%0ACompany%3A%20%0AWebsite%3A%20%0AType%20of%20partnership%3A%20%0ACountries%3A%20%0AIndicative%20budget%3A%20%0A%0A">Email contact@cvlibre.com</a></p>
+  <p class="hint">Hiring? Posting jobs is free on the <a href="/en/recruiters/">Recruiters</a> page.</p>''', fr="/publicite/")
 
 text_page("/en/legal-notice/", "Legal notice | CVLibre", "Legal notice for CVLibre, the free online CV builder.", "Legal notice", '''  <h2>Publisher</h2>
   <p>CVLibre is published on a personal basis by Jérémy Dacier-Jury.<br>Address: 9 passage des Tisserands, 38790 Charantonnay, France<br>Contact email: contact@cvlibre.com</p>

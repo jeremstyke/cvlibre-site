@@ -72,6 +72,7 @@ FOOTER = f'''<footer class="foot">
       <a href="/de/briefe/">Briefe</a>
       <a href="/de/jobs/">Jobs</a>
       <a href="/de/arbeitgeber/">Arbeitgeber: Stelle veröffentlichen</a>
+      <a href="/de/werbung/">Werbung und Partnerschaften</a>
       <a href="/de/impressum/">Impressum</a>
       <a href="/de/datenschutz/">Datenschutz</a>
       <a href="/de/nutzungsbedingungen/">Nutzungsbedingungen</a>
@@ -570,6 +571,23 @@ text_page("/de/unterstuetzen/", "CVLibre unterstützen | CVLibre", "CVLibre ist 
   <p>Die Seite wird durch Werbung und durch Ihre Unterstützung finanziert. Jede KI-Nutzung (Lebenslauf ausfüllen, Text verbessern, Lebenslauf anpassen, Anschreiben verfassen) kostet uns wirklich Geld. Eine Spende, schon ab 1 €, hilft uns, die KI für alle kostenlos zu halten.</p>
   <p>Eine Spende schaltet nichts frei: alles bleibt kostenlos, ob Sie spenden oder nicht. Danke ❤️</p>
 {DON_BTN}''')
+
+# 13 nov 2026 (Jeremy) : Seite Werbung und Partnerschaften, Kontakt per E-Mail
+text_page("/de/werbung/", "Werbung und Partnerschaften | CVLibre", "Werbetreibende, Schulen, Bildungsträger, HR-Tools: Erreichen Sie Bewerber, während sie ihren Lebenslauf schreiben. Werbung, gesponserte Artikel und Partnerschaften auf CVLibre.",
+    "Werbung und Partnerschaften", '''  <p class="lead">CVLibre ist ein kostenloser Generator für Lebenslauf und Anschreiben, verfügbar in Deutschland, Frankreich, Großbritannien, den USA, Kanada, Australien und Neuseeland. Unsere Besucher suchen eine Stelle, eine Ausbildung oder eine Weiterbildung, und sie sind genau dann bei uns, wenn sie aktiv werden.</p>
+  <h2>Unser Angebot</h2>
+  <ul>
+    <li><strong>Gesponserter Artikel</strong>: ein wirklich nützlicher Ratgeber auf unserem Blog, mit Ihnen geschrieben und klar als Partnerschaft gekennzeichnet.</li>
+    <li><strong>Hervorhebung</strong>: Ihr Angebot auf den passenden Seiten (Jobs, Anschreiben, Lebenslauf-Ratgeber).</li>
+    <li><strong>Partnerschaft</strong>: Schulen, Bildungsträger, Personalvermittlungen, Jobbörsen, Tools für Bewerber. Wir entwickeln gemeinsam ein Angebot, das unseren Besuchern wirklich hilft.</li>
+    <li><strong>Affiliate</strong>: ein verfolgter Link zu Ihrem Dienst, erfolgsabhängig vergütet.</li>
+  </ul>
+  <h2>Unsere Regeln</h2>
+  <p>Gesponserte Inhalte sind immer als solche gekennzeichnet. Wir lehnen irreführende Angebote ab, ebenso Stellen oder Kurse, bei denen Bewerber für die Bewerbung zahlen sollen, und alles Rechtswidrige. Wir verkaufen oder teilen niemals die Lebensläufe oder Daten unserer Nutzer.</p>
+  <h2>Kontakt</h2>
+  <p>Schreiben Sie uns ein paar Zeilen: Ihr Unternehmen, was Sie bewerben möchten, die Zielländer und Ihr ungefähres Budget. Wir antworten mit einem Vorschlag und aktuellen Reichweitenzahlen.</p>
+  <p><a class="btn" href="mailto:contact@cvlibre.com?subject=Werbung%20%2F%20Partnerschaft%20CVLibre&body=Guten%20Tag%2C%0A%0AUnternehmen%3A%20%0AWebsite%3A%20%0AArt%20der%20Partnerschaft%3A%20%0AL%C3%A4nder%3A%20%0AUngef%C3%A4hres%20Budget%3A%20%0A%0A">An contact@cvlibre.com schreiben</a></p>
+  <p class="hint">Sie stellen ein? Stellenanzeigen sind auf der Seite <a href="/de/arbeitgeber/">Arbeitgeber</a> kostenlos.</p>''')
 
 text_page("/de/impressum/", "Impressum | CVLibre", "Impressum von CVLibre, dem kostenlosen Online-Lebenslauf-Generator.", "Impressum", '''  <h2>Angaben zum Anbieter</h2>
   <p>CVLibre wird privat betrieben von Jérémy Dacier-Jury.<br>Anschrift: 9 passage des Tisserands, 38790 Charantonnay, Frankreich<br>E-Mail: contact@cvlibre.com</p>
