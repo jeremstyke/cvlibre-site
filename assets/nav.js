@@ -6,13 +6,11 @@
   function show(on) {
     var nav = document.querySelector(".nav"), a = document.getElementById("nav-acc"), o = document.getElementById("nav-out");
     if (nav) nav.classList.toggle("in", !!on);
-    if (a) { a.textContent = on ? "Mon compte" : "Se connecter"; var pro = false; try { pro = localStorage.getItem("cv_mode") === "pro"; } catch (x) {} a.setAttribute("href", on ? (pro ? "/recruteurs/" : "/mon-espace/") : "/creer-un-cv/?connexion=1"); }
+    if (a) { a.textContent = on ? "Mon compte" : "Se connecter"; a.setAttribute("href", on ? "/mon-espace/" : "/creer-un-cv/?connexion=1"); }
     if (o) o.hidden = !on;
     var sw = document.querySelector(".mode-sw"); if (sw) sw.hidden = !on;
   }
   window.CVNAV = { show: show };
-  /* Mémorise le dernier espace ouvert (candidat ou recruteur) pour que « Mon compte » y ramène. */
-  try { if (/^\/recruteurs\//.test(location.pathname)) localStorage.setItem("cv_mode", "pro"); else if (/^\/mon-espace\//.test(location.pathname)) localStorage.setItem("cv_mode", "cand"); } catch (x) {}
   try {
     /* 13 nov 2026 : le lien de connexion ramène sur la page d'où la personne s'est connectée (recruteurs, mon espace...), sinon sur le créateur de CV */
     if (/access_token=|error_code=/.test(location.hash)) {
