@@ -19,3 +19,18 @@ for f in files:
     i = a + h2[1]
     open(f, "w", encoding="utf-8").write(s[:i] + AD + s[i:]); n += 1
 print("in-article ajouté dans", n, "articles sur", len(files))
+
+# Bloc "Display responsive" (slot 6295471606) : fin des articles de blog (avant "À lire aussi") et accueil (avant la FAQ).
+RSLOT = "6295471606"
+RAD = ('<div class="wrap ad-in"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8638687738606649" data-ad-slot="' + RSLOT + '" '
+       'data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>\n')
+homes = [os.path.join(ROOT, d, "index.html") for d in ["", "en", "de", "us", "ca", "au", "nz"]]
+m = 0
+for f in files + homes:
+    s = open(f, encoding="utf-8").read()
+    if RSLOT in s or "googlesyndication" not in s: continue
+    for mark in ['  <section class="wrap rel"', '  <section class="section" id="faq">', '  <section class="section" id="questions">']:
+        i = s.find(mark)
+        if i >= 0:
+            open(f, "w", encoding="utf-8").write(s[:i] + "  " + RAD + s[i:]); m += 1; break
+print("responsive ajouté dans", m, "pages")

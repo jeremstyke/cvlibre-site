@@ -443,3 +443,7 @@ input[type=file]::file-selector-button:hover { background: var(--blue-wash); }
 /* Allemand : mots très longs (Datenschutzerklärung...), coupure automatique pour éviter le débordement sur mobile. */
 html[lang^="de"] body { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
 html[lang^="de"] .btn, html[lang^="de"] .nav, html[lang^="de"] .brand { -webkit-hyphens: manual; hyphens: manual; }
+
+/* Blocs AdSense manuels (13 nov 2026) : espace seulement quand une annonce s affiche */
+.ad-in { margin: 28px 0; clear: both; }
+.ad-in:has(ins[data-ad-status="unfilled"]), .ad-in:not(:has(ins iframe)) { margin: 0; }

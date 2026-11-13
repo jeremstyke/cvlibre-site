@@ -4,7 +4,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113k"
+V = "20261113l"
 # Dons des versions étrangères : page Ko-fi de CVLibre (13 nov 2026, remplace PayPal).
 PAYPAL = "https://ko-fi.com/cvlibrecom"
 DON_BOX = ('''    <div class="after-box">
@@ -39,7 +39,7 @@ def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cvlibre.com/assets/og-en.png">
 <meta name="theme-color" content="#f3f5f8">
-<link rel="stylesheet" href="/assets/style.css?v=20261113i">
+<link rel="stylesheet" href="/assets/style.css?v={V}">
 <link rel="stylesheet" href="/assets/cv.css?v=20261113b">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">

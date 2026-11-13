@@ -5,6 +5,13 @@
   var $ = function (s) { return document.querySelector(s); };
   var API = "https://cvlibre-ai-production.up.railway.app/jobs", OK = "cvlibre.offre", LAST = "cvlibre.de.jobsearch";
   var list = $("#jb-list"), msg = $("#jb-msg"), more = $("#jb-more"), go = $("#jb-go");
+  /* 13 nov 2026 (Jeremy) : bloc AdSense "Display responsive" (slot 6295471606) toutes les 8 offres, 3 au maximum, seulement si la page charge AdSense. */
+  function adAfter(n) {
+    if (n % 8 || n > 24 || !document.querySelector('script[src*="adsbygoogle.js"]')) return;
+    var d = document.createElement("div"); d.className = "ad-in jb-ad";
+    d.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8638687738606649" data-ad-slot="6295471606" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+    list.appendChild(d); try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+  }
   var cur = { q: "", ville: "", contrat: "", page: 0 }, shown = 0, total = 0, offres = {};
   function stat(e, x) { try { window.CVSTAT && window.CVSTAT(e, x); } catch (er) {} }
   function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
@@ -92,7 +99,7 @@
         if (j.lieu === null) { msg.textContent = "Ort nicht gefunden. Prüfen Sie die Schreibweise oder versuchen Sie eine Stadt in der Nähe."; return; }
         total = j.total || 0;
         if (reset && j._own) j._own.forEach(function (o) { list.appendChild(card(o)); shown++; total++; });
-        (j.offres || []).forEach(function (o) { list.appendChild(card(o)); shown++; });
+        (j.offres || []).forEach(function (o) { list.appendChild(card(o)); shown++; adAfter(shown); });
         var cnt = $("#jb-count");
         if (cur.recent && shown) {
           if (cnt && total > 100) { cnt.hidden = false; cnt.textContent = ""; var bn = el("strong", "", total.toLocaleString("de-DE")); cnt.appendChild(bn); cnt.appendChild(document.createTextNode(" Stellen sind gerade in Deutschland verfügbar. Hier sind die neuesten.")); }
