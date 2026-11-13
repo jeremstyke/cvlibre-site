@@ -1,0 +1,86 @@
+{
+ "slug": "ats-lebenslauf-bewerbermanagementsystem",
+ "title": "ATS-Lebenslauf: So kommt Ihre Bewerbung durch die Software",
+ "desc": "Wie Bewerbermanagementsysteme (ATS) Ihren Lebenslauf lesen, welche Regeln für Aufbau und Schlüsselwörter gelten und wie Sie ihn vor dem Absenden prüfen.",
+ "mins": 5,
+ "date": "2026-11-13",
+ "cat": "Lebenslauf",
+ "blocks": [
+  [
+   "p",
+   "Viele mittlere und große Unternehmen und die meisten Personalvermittlungen nutzen ein Bewerbermanagementsystem (ATS), um Bewerbungen zu sammeln und zu sortieren. Bevor ein Mensch Ihren Lebenslauf liest, liest ihn die Software: Sie zieht Ihre Angaben heraus und vergleicht sie mit der Stelle. Ein Lebenslauf, den sie nicht richtig lesen kann, landet unter Umständen nie bei einer Person."
+  ],
+  [
+   "h2",
+   "Was ein ATS wirklich macht"
+  ],
+  [
+   "p",
+   "Ein ATS wandelt Ihren Lebenslauf in reinen Text um, ordnet die Teile (Kontaktdaten, Berufserfahrung, Ausbildung, Kenntnisse) Feldern zu und vergleicht sie mit der Stellenanzeige. Personaler suchen oder filtern oft nach Schlüsselwörtern: einer Berufsbezeichnung, einem Programm, einer Qualifikation. Fehlen diese Wörter oder konnte die Software sie nicht lesen, rutscht Ihre Bewerbung nach unten."
+  ],
+  [
+   "p",
+   "Es gibt keinen geheimen Trick gegen ein ATS. Das Ziel ist einfach, gut lesbar zu sein: für die Software und für die Person, die Ihre Bewerbung danach öffnet."
+  ],
+  [
+   "h2",
+   "Die Regeln für einen ATS-freundlichen Lebenslauf"
+  ],
+  [
+   "ul",
+   [
+    "Übliche Überschriften verwenden: Berufserfahrung, Ausbildung, Kenntnisse.",
+    "Ein einfaches Layout: eine oder zwei Spalten, kein Text in Bildern, Symbolen oder Diagrammen.",
+    "Kontaktdaten im Text der Seite, nicht nur in Kopf- oder Fußzeile.",
+    "Eine gängige Schrift (Arial, Calibri, Lato, Georgia) in gut lesbarer Größe.",
+    "Daten überall gleich schreiben, zum Beispiel 09/2022 bis heute.",
+    "Wichtige Abkürzungen einmal ausschreiben: Suchmaschinenoptimierung (SEO)."
+   ]
+  ],
+  [
+   "h2",
+   "Die Wörter aus der Stellenanzeige übernehmen"
+  ],
+  [
+   "p",
+   "Lesen Sie die Anzeige und notieren Sie die Kenntnisse, Programme und Qualifikationen, die sie wiederholt. Wenn Sie sie wirklich haben, verwenden Sie dieselben Wörter in Ihrem Lebenslauf: im Profil, in den Stichpunkten zur Berufserfahrung und bei den Kenntnissen."
+  ],
+  [
+   "ex",
+   "Gute PC-Kenntnisse.",
+   "Microsoft Excel (Pivot-Tabellen, SVERWEIS), SAP, Microsoft Teams."
+  ],
+  [
+   "p",
+   "Kopieren Sie nie die ganze Anzeige und geben Sie keine Kenntnisse an, die Sie nicht haben. Das fällt sofort auf, spätestens im Vorstellungsgespräch. Passen Sie Ihren Lebenslauf lieber an jede Stelle an."
+  ],
+  [
+   "h2",
+   "Keine versteckten Tricks"
+  ],
+  [
+   "p",
+   "Weiße Schrift voller Schlüsselwörter oder die Anzeige in winziger Schrift sind alte Tricks. Moderne Systeme erkennen sie, und Personaler sortieren solche Bewerbungen aus. Ehrliche, klare Formulierungen wirken besser."
+  ],
+  [
+   "h2",
+   "Dateiname und Format"
+  ],
+  [
+   "p",
+   "Senden Sie ein PDF, das aus einem Textdokument erstellt wurde (kein Scan, kein Foto), außer das Unternehmen verlangt Word. Benennen Sie die Datei eindeutig, zum Beispiel Lebenslauf-Anna-Schmidt.pdf. Wenn Sie ein Bewerbungsfoto verwenden, gehört es als Bild in den Lebenslauf, nicht als Text."
+  ],
+  [
+   "h2",
+   "Prüfen Sie Ihren Lebenslauf vor dem Absenden"
+  ],
+  [
+   "p",
+   "Der <a href=\"/de/mein-konto/?pass=1\" data-pass>CVLibre Pass</a> enthält einen ATS-Score: Die KI liest Ihren Lebenslauf wie eine Bewerbersoftware, sagt Ihnen, was stört, und listet die fehlenden Schlüsselwörter aus der Anzeige auf. Mit dem Pass passen Sie Ihren Lebenslauf außerdem mit einem Klick an jede Stelle an. Alle CVLibre-Vorlagen sind so gebaut, dass ATS-Software sie lesen kann."
+  ],
+  [
+   "p",
+   "<a href=\"/de/lebenslauf-erstellen/\">Erstellen Sie Ihren Lebenslauf kostenlos</a> und prüfen Sie ihn vor dem Absenden mit dem ATS-Score."
+  ]
+ ]
+}

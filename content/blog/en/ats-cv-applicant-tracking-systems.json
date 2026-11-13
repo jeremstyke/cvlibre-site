@@ -1,0 +1,86 @@
+{
+ "slug": "ats-cv-applicant-tracking-systems",
+ "title": "ATS CV: how to get past applicant tracking systems",
+ "desc": "How applicant tracking systems read your CV, the layout and keyword rules that keep you in the running, and how to check your CV before you apply.",
+ "mins": 5,
+ "date": "2026-11-13",
+ "cat": "CV",
+ "blocks": [
+  [
+   "p",
+   "Most medium and large employers, and many recruitment agencies, use an applicant tracking system (ATS) to collect and sort applications. Before a person reads your CV, the software reads it, pulls out your details and ranks you against the job. A CV the software cannot read properly may never reach a human."
+  ],
+  [
+   "h2",
+   "What an ATS actually does"
+  ],
+  [
+   "p",
+   "An ATS turns your CV into plain text, files each part (contact details, experience, education, skills) into fields, then compares it with the job ad. Recruiters often search or filter by keywords: a job title, a tool, a qualification. If those words are missing, or the software could not read them, your application drops down the list."
+  ],
+  [
+   "p",
+   "There is no secret trick that beats an ATS. The goal is simply to be easy to read, for the software and for the recruiter who opens your application next."
+  ],
+  [
+   "h2",
+   "The rules of an ATS-friendly CV"
+  ],
+  [
+   "ul",
+   [
+    "Use standard section headings: Experience, Education, Skills.",
+    "Keep a simple layout: one or two columns, no text inside images, icons or charts.",
+    "Put your contact details in the body of the page, not only in the header or footer.",
+    "Use a common font (Arial, Calibri, Lato, Georgia) and a readable size.",
+    "Write dates the same way everywhere, for example Sep 2022 to Present.",
+    "Spell out key abbreviations once: Search Engine Optimisation (SEO)."
+   ]
+  ],
+  [
+   "h2",
+   "Use the words from the job ad"
+  ],
+  [
+   "p",
+   "Read the ad and note the skills, tools and qualifications it repeats. If you really have them, use the same words in your CV: in your summary, in your experience bullet points and in your skills section. If the ad says customer service, do not only write client care."
+  ],
+  [
+   "ex",
+   "Good with computers.",
+   "Microsoft Excel (pivot tables, VLOOKUP), Salesforce CRM, Google Workspace."
+  ],
+  [
+   "p",
+   "Never copy the whole ad or list skills you do not have. A recruiter will notice in seconds, and it will come up at interview. Tailor your CV for each application instead of sending the same one everywhere."
+  ],
+  [
+   "h2",
+   "No hidden tricks"
+  ],
+  [
+   "p",
+   "White text full of keywords, or the job ad pasted in a tiny font, is an old trick. Modern systems flag it, and recruiters who spot it reject the application. Honest, clear wording works better."
+  ],
+  [
+   "h2",
+   "File name and format"
+  ],
+  [
+   "p",
+   "Send a PDF created from a text document (not a scan or a photo), unless the employer asks for Word. Name the file clearly, for example Jane-Smith-CV.pdf. In the UK, there is no need for a photo or date of birth, and leaving them out also keeps the file simple."
+  ],
+  [
+   "h2",
+   "Check your CV before you apply"
+  ],
+  [
+   "p",
+   "The <a href=\"/en/my-account/?pass=1\" data-pass>CVLibre Pass</a> includes an ATS score: the AI reads your CV the way tracking software does, tells you what blocks it, and lists the keywords from the job ad that are missing. With the Pass you can also tailor your CV to each job in one click. Every CVLibre template is built to stay readable by ATS software."
+  ],
+  [
+   "p",
+   "<a href=\"/en/cv-builder/\">Create your CV for free</a>, then check it with the ATS score before you send it."
+  ]
+ ]
+}
