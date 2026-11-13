@@ -4,7 +4,7 @@ import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113y"
+V = "20261113z"
 # Dons des versions étrangères : page Ko-fi de CVLibre (13 nov 2026, remplace PayPal).
 PAYPAL = "https://ko-fi.com/cvlibrecom"
 DON_BOX = '''    <div class="after-box">
