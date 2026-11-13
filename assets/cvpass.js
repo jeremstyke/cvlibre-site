@@ -59,12 +59,37 @@
   function css() {
     if (document.getElementById("cvp-css")) return;
     var s = document.createElement("style"); s.id = "cvp-css";
-    s.textContent = ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
+    s.textContent = ".cvp-claim{margin-top:12px;border-top:1px solid #d6dff5;padding-top:10px}.cvp-claim summary{cursor:pointer;font-size:14px;color:#1f4fd8}.cvp-claim label{display:block;font-size:13.5px;margin:8px 0}.cvp-claim input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px 10px;border:1px solid #c5cfe6;border-radius:8px;font:inherit}" + ".cvp-box{border:2px solid #1f4fd8;border-radius:16px;padding:18px;background:#f5f8ff}.cvp-box h2,.cvp-box h3{margin:0 0 4px}.cvp-price{font-size:22px;font-weight:800;color:#1f4fd8}.cvp-per{color:#55607a;font-size:14px;margin:0 0 10px}.cvp-box ul{margin:0 0 12px;padding:0;list-style:none}.cvp-box li{padding:3px 0}.cvp-box li:before{content:'✅ '}.cvp-free{font-size:13.5px;color:#55607a;margin:10px 0 0}.cvp-on{color:#137a3a;font-weight:700}.cvp-dlg{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 24px)}.cvp-dlg::backdrop{background:rgba(16,24,40,.5)}.cvp-dlg .cvp-box{border:0}.cvp-x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:#55607a}.cvp-tag{display:inline-block;background:#1f4fd8;color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:2px}.cvp-score{font-size:34px;font-weight:800;color:#1f4fd8}.cvp-res h4{margin:12px 0 4px}.cvp-res ul{margin:0;padding-left:20px}";
     document.head.appendChild(s);
   }
   function boxHtml(h) {
     if (paid()) return "<" + h + ">" + T.name + "</" + h + "><p class='cvp-on'>" + T.active + fmtD(st.u) + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul>";
     return "<" + h + ">" + T.name + " <span class='cvp-price'>" + PRICE + "</span></" + h + "><p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
+  }
+  /* 13 nov 2026 : Pass payé avec une autre adresse e-mail (ou sans être connecté) : activation par numéro de commande Gumroad + e-mail d'achat */
+  var CL = {
+    fr: { q: "Déjà payé avec une autre adresse e-mail ?", hint: "Indiquez le numéro de commande de votre reçu Gumroad et l'adresse e-mail utilisée pour l'achat.", ord: "Numéro de commande", em: "E-mail de l'achat", go: "Activer mon Pass", no: "Achat introuvable. Vérifiez le numéro et l'e-mail, ou écrivez à contact@cvlibre.com.", ok: "Votre Pass est activé." },
+    en: { q: "Already paid with another email address?", hint: "Enter the order number from your Gumroad receipt and the email address used for the purchase.", ord: "Order number", em: "Purchase email", go: "Activate my Pass", no: "Purchase not found. Check the number and the email, or write to contact@cvlibre.com.", ok: "Your Pass is active." },
+    de: { q: "Schon mit einer anderen E-Mail-Adresse bezahlt?", hint: "Geben Sie die Bestellnummer aus Ihrem Gumroad-Beleg und die beim Kauf verwendete E-Mail-Adresse ein.", ord: "Bestellnummer", em: "E-Mail des Kaufs", go: "Pass aktivieren", no: "Kauf nicht gefunden. Prüfen Sie Nummer und E-Mail oder schreiben Sie an contact@cvlibre.com.", ok: "Ihr Pass ist aktiv." }
+  }[L];
+  function claimHtml() {
+    return "<details class='cvp-claim'><summary>" + CL.q + "</summary><p class='cvp-free'>" + CL.hint + "</p>"
+      + "<label>" + CL.ord + "<input type='text' class='cvp-ord' inputmode='numeric' autocomplete='off' maxlength='40'></label>"
+      + "<label>" + CL.em + "<input type='email' class='cvp-em' autocomplete='email' maxlength='160'></label>"
+      + "<button type='button' class='btn btn-ghost btn-sm cvp-claim-go'>" + CL.go + "</button><p class='cvp-free cvp-claim-msg' role='status'></p></details>";
+  }
+  function wireClaim(el) {
+    var b = el.querySelector(".cvp-claim-go"); if (!b) return;
+    b.addEventListener("click", function () {
+      var o = el.querySelector(".cvp-ord").value.trim(), e = el.querySelector(".cvp-em").value.trim(), m = el.querySelector(".cvp-claim-msg");
+      if (!o || !e || !sb) { m.textContent = CL.no; return; }
+      b.disabled = true;
+      sb.rpc("claim_cv_pass", { sid: o, em: e }).then(function (r) {
+        b.disabled = false;
+        var u = r && !r.error && r.data ? Date.parse(r.data) : 0;
+        if (u > Date.now()) { save(u); track("pass_claim"); m.textContent = CL.ok; setTimeout(ui, 900); } else m.textContent = CL.no;
+      }, function () { b.disabled = false; m.textContent = CL.no; });
+    });
   }
   function wire(el) { var b = el.querySelector(".cvp-buy"); if (b) b.addEventListener("click", buy); }
   function offer(msg) {
@@ -77,7 +102,7 @@
   /* Mon espace : encadré du Pass à la place de "CVLibre est gratuit" */
   function space() {
     var s = document.getElementById("sp-offer"); if (!s) return;
-    css(); s.classList.add("cvp-box"); s.innerHTML = boxHtml("h2"); wire(s);
+    css(); s.classList.add("cvp-box"); s.innerHTML = boxHtml("h2") + (user && !paid() ? claimHtml() : ""); wire(s); wireClaim(s);
     if (/[?&]pass=1/.test(location.search) && user && !paid()) { var b = s.querySelector(".cvp-buy"); if (b) { b.focus(); s.scrollIntoView({ block: "center" }); } }
   }
   /* Créateur de CV : adaptation à une offre réservée au Pass, score ATS et traduction en plus */

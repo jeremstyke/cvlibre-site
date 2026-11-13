@@ -370,6 +370,18 @@ Bun.serve({
     const cors = { "Access-Control-Allow-Origin": ORIGINS.includes(o) ? o : ORIGINS[0], "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "content-type", "Vary": "Origin" };
     const out = (b: any, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { "Content-Type": "application/json", ...cors } });
     if (url.pathname === "/health") return out({ ok: true });
+    if (url.pathname === "/gumroad" && req.method === "POST") {
+      // 13 nov 2026 (Jeremy): webhook Gumroad (vente, remboursement, litige) du Pass CVLibre. Le secret passe dans l'adresse (?s=) et c'est la base qui le verifie.
+      const s = url.searchParams.get("s") || "";
+      const f = await req.formData().catch(() => null);
+      if (!f) return new Response("bad", { status: 400 });
+      const sale: any = {}; f.forEach((v, k) => { sale[k] = String(v); });
+      const pl = String(sale.product_permalink || sale.permalink || "");
+      if (!/cvlibre/i.test(String(sale.product_name || "") + " " + pl) && !/(aovvg|iugaj|kpfjhy)/.test(pl)) return new Response("ignored");
+      if (sale.resource_name === "refund" || sale.resource_name === "dispute") sale.refunded = "true";
+      const r = await rpc("cv_pass_sale_in", { s, sale }).catch((e) => { console.log("gumroad hook", String(e)); return null; });
+      return new Response(String(r || "error"), { status: r === "forbidden" ? 403 : r ? 200 : 500 });
+    }
     if (url.pathname === "/usage") {
       // Jauge publique du budget IA du jour (pourcentage et nombre d'utilisations, rien de personnel).
       const d = parisDay(); if (d !== day) { day = d; cost = 0; uses = 0; ips.clear(); sup.clear(); }
