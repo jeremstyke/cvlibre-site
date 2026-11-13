@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://cvlibre.com/sitemap.xml
-
-User-agent: *
 Disallow: /srv/
+
+Sitemap: https://cvlibre.com/sitemap.xml
