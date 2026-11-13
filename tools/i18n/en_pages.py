@@ -3,7 +3,16 @@ En-tête, pied de page et fenêtre de compte communs, puis le contenu de chaque 
 import os, json
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 V = "20261113e"
-PAYPAL = "https://www.paypal.com/donate/?business=juryjeremy%40gmail.com&no_recurring=0&item_name=Support+CVLibre&currency_code=GBP"
+# Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
+PAYPAL = ""
+DON_BOX = ('''    <div class="after-box">
+      <h3>Support CVLibre</h3>
+      <p>CVLibre is 100% free, but every AI use costs us money. A small donation, even £1, helps keep it free for everyone.</p>
+      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Donate with PayPal ❤️</a>
+    </div>
+''' % PAYPAL) if PAYPAL else ""
+DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donate with PayPal ❤️</a></p>
+  <p class="hint">Payment is handled entirely by PayPal: CVLibre never sees your bank details.</p>''' % PAYPAL) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
 
 def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
     url = "https://cvlibre.com" + path
@@ -293,12 +302,7 @@ builder = head("Free CV Builder with AI, Download as PDF | CVLibre",
       <p>With a free account, find and edit your CVs and cover letters on all your devices. No password: a sign-in link arrives by email.</p>
       <button type="button" class="btn btn-sm btn-ghost" id="after-acc-go">Create my free account</button>
     </div>
-    <div class="after-box">
-      <h3>Support CVLibre</h3>
-      <p>CVLibre is 100% free, but every AI use costs us money. A small donation, even £1, helps keep it free for everyone.</p>
-      <a class="btn btn-sm btn-ghost" href="{PAYPAL}" target="_blank" rel="noopener" id="after-don">Donate with PayPal ❤️</a>
-    </div>
-    <div class="pass-end"><button type="submit" class="btn btn-ghost btn-sm">No thanks</button></div>
+{DON_BOX}    <div class="pass-end"><button type="submit" class="btn btn-ghost btn-sm">No thanks</button></div>
   </form>
 </dialog>
 
@@ -566,8 +570,7 @@ text_page("/en/support/", "Support CVLibre | CVLibre", "CVLibre is a 100% free C
     "Support CVLibre", f'''  <p class="lead">CVLibre is 100% free, for everyone: all templates, PDFs with no watermark and the AI tools. Nothing is for sale.</p>
   <p>The site is funded by advertising and by your support. Every AI use (filling in a CV, improving a text, tailoring a CV, writing a cover letter) really costs us money. A donation, even £1, helps us keep the AI free for everyone.</p>
   <p>A donation does not unlock anything: everything stays free, whether you donate or not. Thank you ❤️</p>
-  <p><a class="btn" href="{PAYPAL}" target="_blank" rel="noopener">Donate with PayPal ❤️</a></p>
-  <p class="hint">Payment is handled entirely by PayPal: CVLibre never sees your bank details.</p>''', fr="/soutenir/")
+{DON_BTN}''', fr="/soutenir/")
 
 text_page("/en/legal-notice/", "Legal notice | CVLibre", "Legal notice for CVLibre, the free online CV builder.", "Legal notice", '''  <h2>Publisher</h2>
   <p>CVLibre is published on a personal basis by Jérémy Dacier-Jury.<br>Address: 9 passage des Tisserands, 38790 Charantonnay, France<br>Contact email: contact@cvlibre.com</p>
