@@ -19,3 +19,6 @@ L'ancien « Pass » payant de CVLibre n'existe plus depuis novembre 2026 : tout 
 - [Offres d'emploi](https://cvlibre.com/offres-emploi/)
 - [Recruteurs : publier une offre gratuitement](https://cvlibre.com/recruteurs/)
 - [Blog](https://cvlibre.com/blog/)
+
+## English version
+CVLibre also has an English (UK) version at https://cvlibre.com/en/ : a free CV builder with AI (https://cvlibre.com/en/cv-builder/) and a free AI cover letter generator (https://cvlibre.com/en/cover-letter/). Everything is free; donations are made through PayPal.
