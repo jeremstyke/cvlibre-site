@@ -49,7 +49,7 @@
     if (user) u += "&cvl=" + encodeURIComponent(user.id) + (user.email ? "&email=" + encodeURIComponent(user.email) : "");
     return u;
   }
-  function track(ev) { try { if (window.CVSTATS && window.CVSTATS.track) window.CVSTATS.track(ev); } catch (e) {} }
+  function track(ev) { try { if (window.CVSTAT) window.CVSTAT(ev); } catch (e) {} }
   function buy(ev) {
     var y = !!(ev && ev.currentTarget && ev.currentTarget.classList && ev.currentTarget.classList.contains("cvp-buy-y"));
     track(y ? "pass_buy_year" : "pass_buy");

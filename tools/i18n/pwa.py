@@ -1,7 +1,7 @@
 # 14 nov 2026 (Jeremy): "CVLibre Emploi / Jobs" installable app, only on the job pages; re-applied after each build
 import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-V = "20261114c"
+V = "20261114d"
 DIRS = ["offres-emploi", "en/jobs", "us/jobs", "ca/jobs", "au/jobs", "nz/jobs", "de/jobs"]
 n = 0
 for d in DIRS:

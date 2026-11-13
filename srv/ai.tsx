@@ -1,3 +1,4 @@
+import ncrypto from "node:crypto";
 // CVlibre AI: remplit un CV avec l'IA (texte, PDF ou photo d'un ancien CV), reformule des textes, adapte le CV a une offre et redige des lettres de motivation. Sans compte.
 // 12 nov 2026 (Jeremy, "rends tout 100 % libre"): CVLibre est entierement gratuit (pub + dons). Plus de Pass: la lettre IA est ouverte a tous. 13 nov 2026 : retour d'un Pass (Gumroad) et fin des dons.
 // 13 nov 2026 (Jeremy): version anglaise (UK) sur cvlibre.com/en/ : le site envoie lang "en", l'IA repond alors en anglais britannique, les offres viennent de Careerjet UK et les courriers sont au format britannique.
@@ -360,6 +361,99 @@ setInterval(() => {
   rpc("cv_ai_day_put", { s: CJS, d: day, c: cost, u: uses, i: Object.fromEntries(ips) }).then(() => { lastSaved = snap; }).catch((e) => console.log("ai_day save", String(e)));
 }, 10000);
 
+// ---------- 14 nov 2026 (Jeremy): job alerts by web push ----------
+// Our own notifications (not Adrenalead): the person picks a job search in the "Jobs CVLibre" app or on the jobs page,
+// and every morning gets the new jobs for that search. Data in Supabase job_alerts (secret RPCs, deleted with the alert).
+const VAPID_JWK = Bun.env.VAPID_JWK || "", VAPID_SUB = "mailto:contact@cvlibre.com";
+const b64u = (b: any) => Buffer.from(b).toString("base64url");
+const hmac = (k: Buffer, d: Buffer) => ncrypto.createHmac("sha256", k).update(d).digest();
+let vapid: { key: ncrypto.KeyObject; pub: string } | null = null;
+try { if (VAPID_JWK) { const j = JSON.parse(VAPID_JWK); vapid = { key: ncrypto.createPrivateKey({ key: j, format: "jwk" }), pub: b64u(Buffer.concat([Buffer.from([4]), Buffer.from(j.x, "base64url"), Buffer.from(j.y, "base64url")])) }; } } catch (e) { console.log("vapid", String(e)); }
+function wpEncrypt(payload: string, p256dh: string, auth: string) {
+  const ua = Buffer.from(p256dh, "base64url"), sec = Buffer.from(auth, "base64url");
+  const e = ncrypto.createECDH("prime256v1"); e.generateKeys();
+  const asPub = e.getPublicKey(), shared = e.computeSecret(ua);
+  const ikm = hmac(hmac(sec, shared), Buffer.concat([Buffer.from("WebPush: info\0"), ua, asPub, Buffer.from([1])]));
+  const salt = ncrypto.randomBytes(16), prk = hmac(salt, ikm);
+  const cek = hmac(prk, Buffer.from("Content-Encoding: aes128gcm\0\x01")).subarray(0, 16);
+  const nonce = hmac(prk, Buffer.from("Content-Encoding: nonce\0\x01")).subarray(0, 12);
+  const ci = ncrypto.createCipheriv("aes-128-gcm", cek, nonce);
+  const ct = Buffer.concat([ci.update(Buffer.concat([Buffer.from(payload), Buffer.from([2])])), ci.final(), ci.getAuthTag()]);
+  const rs = Buffer.alloc(4); rs.writeUInt32BE(4096);
+  return Buffer.concat([salt, rs, Buffer.from([asPub.length]), asPub, ct]);
+}
+function derToRaw(sig: Buffer) { // in case the runtime returns a DER signature
+  if (sig.length === 64) return sig;
+  let i = 2; const rl = sig[i + 1]; let r = sig.subarray(i + 2, i + 2 + rl); i = i + 2 + rl; const sl = sig[i + 1]; let s = sig.subarray(i + 2, i + 2 + sl);
+  const fix = (x: Buffer) => (x.length > 32 ? x.subarray(x.length - 32) : Buffer.concat([Buffer.alloc(32 - x.length), x]));
+  return Buffer.concat([fix(r), fix(s)]);
+}
+async function wpSend(a: any, data: any): Promise<number> {
+  if (!vapid) return 0;
+  const aud = new URL(a.endpoint).origin;
+  const h = b64u(JSON.stringify({ typ: "JWT", alg: "ES256" })), c = b64u(JSON.stringify({ aud, exp: Math.floor(Date.now() / 1000) + 12 * 3600, sub: VAPID_SUB }));
+  const sig = derToRaw(Buffer.from(ncrypto.sign("sha256", Buffer.from(h + "." + c), { key: vapid.key, dsaEncoding: "ieee-p1363" } as any)));
+  const r = await fetch(a.endpoint, { method: "POST", headers: { authorization: "vapid t=" + h + "." + c + "." + b64u(sig) + ", k=" + vapid.pub, "content-encoding": "aes128gcm", "content-type": "application/octet-stream", ttl: "86400", urgency: "normal" }, body: wpEncrypt(JSON.stringify(data), a.p256dh, a.auth) }).catch(() => null);
+  return r ? r.status : 0;
+}
+const PUSH_HOSTS = /^(fcm\.googleapis\.com|android\.googleapis\.com|updates\.push\.services\.mozilla\.com|push\.services\.mozilla\.com|web\.push\.apple\.com|[a-z0-9.-]+\.notify\.windows\.com)$/;
+const JOB_PATH: Record<string, string> = { fr: "/offres-emploi/", de: "/de/jobs/", en: "/en/jobs/", US: "/us/jobs/", CA: "/ca/jobs/", AU: "/au/jobs/", NZ: "/nz/jobs/" };
+const alertPath = (a: any) => (a.lang === "en" && JOB_PATH[a.cc]) || JOB_PATH[a.lang] || JOB_PATH.fr;
+const AL_UA = "Mozilla/5.0 (CVLibre job alerts)";
+async function alertSearch(a: any): Promise<any[]> {
+  const q = a.q, ville = a.ville, ct = a.contrat, ip = a.uip || "", ua = AL_UA;
+  if (a.lang === "en" || a.lang === "de") {
+    const lc = a.lang === "de" ? "de_DE" : (CC_EN[a.cc] || { lc: "en_GB" }).lc;
+    const jh: Record<string, string> = { de_DE: "de.jooble.org", en_GB: "uk.jooble.org", en_US: "jooble.org", en_CA: "ca.jooble.org", en_AU: "au.jooble.org", en_NZ: "nz.jooble.org" };
+    let r: any = null;
+    try { r = await careerjet(q, ville, ct, 0, ip, ua, lc); } catch (e) { r = null; }
+    if ((!r || !r.offres || !r.offres.length) && JKEY && q) { try { const j = await jooble(q, ville, "", 0, jh[lc] || "jooble.org"); if (j.offres.length) r = j; } catch (e) {} }
+    return (r && r.offres) || [];
+  }
+  const r: any = ct === "ALT" && LBA ? await lba(q, ville, 0) : CJS ? await careerjet(q, ville, ct, 0, ip, ua) : JKEY ? await jooble(q, ville, ct, 0) : await jobs(q, ville, ct, 0);
+  return (r && r.offres) || [];
+}
+function alertText(a: any, n: number, titles: string[]) {
+  const what = a.q || "", where = a.ville || "";
+  if (a.lang === "de") return { title: n + (n > 1 ? " neue Stellenangebote" : " neues Stellenangebot") + (what ? ": " + what : ""), body: (where ? "In " + where + " · " : "") + titles.join(" · ") };
+  if (a.lang === "en") return { title: n + " new job" + (n > 1 ? "s" : "") + (what ? ": " + what : ""), body: (where ? "Near " + where + " · " : "") + titles.join(" · ") };
+  return { title: n + (n > 1 ? " nouvelles offres" : " nouvelle offre") + (what ? " : " + what : ""), body: (where ? "Autour de " + where + " · " : "") + titles.join(" · ") };
+}
+// one alert: search, keep only jobs not seen yet, send one notification
+async function alertRun(a: any, force = false): Promise<string> {
+  let offres: any[] = [];
+  try { offres = await alertSearch(a); } catch (e) { return "search"; }
+  const seen: string[] = Array.isArray(a.seen) ? a.seen : [];
+  const fresh = offres.filter((o) => o.id && !seen.includes(String(o.id)));
+  const nseen = [...offres.map((o) => String(o.id)), ...seen.filter((x) => !offres.some((o) => String(o.id) === x))].slice(0, 300);
+  if (!fresh.length && !force) { await rpc("job_alert_done", { s: CJS, aid: a.id, sn: nseen, sent: false, gone: false }).catch(() => {}); return "none"; }
+  const list = fresh.length ? fresh : offres;
+  const t = alertText(a, fresh.length || list.length, list.slice(0, 2).map((o) => String(o.titre).slice(0, 60)));
+  const url = alertPath(a) + "?" + new URLSearchParams({ q: a.q, ville: a.ville, src: "alert" }).toString();
+  const st = await wpSend(a, { title: t.title, body: t.body.slice(0, 180), url, tag: "cvl-alert-" + a.id });
+  const gone = st === 404 || st === 410;
+  await rpc("job_alert_done", { s: CJS, aid: a.id, sn: nseen, sent: st >= 200 && st < 300, gone }).catch(() => {});
+  return gone ? "gone" : st >= 200 && st < 300 ? "sent" : "err" + st;
+}
+let alertsBusy = false;
+async function alertsDaily() {
+  if (alertsBusy || !vapid || !CJS) return;
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+  if (now.getHours() < 8) return; // every morning from 8 am, Paris time
+  const ok = await rpc("job_alert_claim", { s: CJS, d: parisDay() }).catch(() => false);
+  if (!ok) return;
+  alertsBusy = true;
+  try {
+    const all: any[] = (await rpc("job_alerts_all", { s: CJS }).catch(() => [])) || [];
+    const res: Record<string, number> = {};
+    for (const a of all) { const r = await alertRun(a); res[r] = (res[r] || 0) + 1; await new Promise((z) => setTimeout(z, 300)); }
+    console.log("job alerts", parisDay(), JSON.stringify(res));
+  } finally { alertsBusy = false; }
+}
+setInterval(() => { alertsDaily().catch((e) => console.log("alerts", String(e))); }, 10 * 60 * 1000);
+setTimeout(() => { alertsDaily().catch(() => {}); }, 60 * 1000);
+const alIps = new Map<string, number>(); let alDay = "";
+
 Bun.serve({
   port: Number(Bun.env.PORT || 3000),
   idleTimeout: 120,
@@ -423,6 +517,36 @@ Bun.serve({
         u.pdf++;
       }
       return out({ ok: true, until: v.until, plan: v.plan, holder: v.hp ? { p: v.hp, n: v.hn } : null, pdfLeft: L.pdf - u.pdf, aiLeft: L.ai - u.ai });
+    }
+    // 14 nov 2026 (Jeremy): job alerts (add / delete). Public key for the browser: GET /alerts/key
+    if (url.pathname === "/alerts/key") return out({ key: vapid ? vapid.pub : "" });
+    if (url.pathname === "/alerts/add" || url.pathname === "/alerts/del") {
+      if (!vapid || !CJS) return out({ error: "off" }, 503);
+      const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "?";
+      const b: any = await req.json().catch(() => ({}));
+      if (url.pathname === "/alerts/del") { const ok = await rpc("job_alert_del", { s: CJS, aid: Number(b.id) || 0, t: String(b.tok || "") }).catch(() => false); return out({ ok: !!ok }); }
+      const d = parisDay(); if (d !== alDay) { alDay = d; alIps.clear(); }
+      const n = alIps.get(ip) || 0; if (n >= 10) return out({ error: "limit" }, 429); alIps.set(ip, n + 1);
+      const sub = b.sub || {}, keys = sub.keys || {};
+      let host = ""; try { const u = new URL(String(sub.endpoint || "")); host = u.protocol === "https:" ? u.hostname : ""; } catch (e) {}
+      if (!PUSH_HOSTS.test(host) || !keys.p256dh || !keys.auth || String(sub.endpoint).length > 800) return out({ error: "sub" }, 400);
+      const q = String(b.q || "").replace(/[^\p{L}\p{N} '+-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 80);
+      const ville = String(b.ville || "").replace(/[^\p{L}\p{N} '-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 60);
+      if (!q && !ville) return out({ error: "empty" }, 400);
+      const lang = b.lang === "en" || b.lang === "de" ? b.lang : "fr", cc = ["US", "CA", "AU", "NZ"].includes(b.cc) ? b.cc : "";
+      const a: any = { q, ville, contrat: String(b.contrat || "").slice(0, 3), lang, cc, uip: ip };
+      let seen: string[] = []; try { seen = (await alertSearch(a)).map((o: any) => String(o.id)); } catch (e) {}
+      const tok = ncrypto.randomBytes(16).toString("hex");
+      try {
+        const id = await rpc("job_alert_put", { s: CJS, a: { ...a, tok, endpoint: String(sub.endpoint), p256dh: String(keys.p256dh).slice(0, 200), auth: String(keys.auth).slice(0, 100), seen } });
+        return out({ ok: true, id, tok });
+      } catch (e) { return out({ error: /too_many/.test(String(e)) ? "too_many" : "db" }, 400); }
+    }
+    // manual run for tests: /alerts/run?k=<secret>&id=<alert id> sends that alert now, even with no new job
+    if (url.pathname === "/alerts/run" && CJS && url.searchParams.get("k") === CJS) {
+      const all: any[] = (await rpc("job_alerts_all", { s: CJS }).catch(() => [])) || [];
+      const a = all.find((x) => String(x.id) === url.searchParams.get("id"));
+      return out(a ? { r: await alertRun(a, true) } : { error: "id" });
     }
     if (url.pathname === "/jobs") {
       const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "?";
