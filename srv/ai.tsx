@@ -6,7 +6,7 @@
 // 5 generations gratuites par jour et par IP (CV, reformulation et lettre confondus), plafond global de 2,2 $ par jour (compteurs en memoire, remis a zero au redemarrage).
 const AKEY = Bun.env.ANTHROPIC_API_KEY!;
 const ORIGINS = ["https://jeremstyke.github.io", "https://cvlibre.com", "https://www.cvlibre.com"];
-const IP_DAILY = 5, DAY_USD = 2.2;
+const IP_DAILY = 5, DAY_USD = 1; // 13 nov 2026 (Jeremy) : budget IA gratuit ramené à 1 $ par jour (le Pass n'est pas limité par ce budget)
 // Ancien Pass 1 an (Gumroad / Stripe). Garde pour les cles deja vendues, plus vendu depuis le 12 nov 2026.
 const PRODUCT_IDS = (Bun.env.PASS_PRODUCT_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
 const PRO_IDS = (Bun.env.PRO_PRODUCT_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
