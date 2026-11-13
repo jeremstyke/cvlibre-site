@@ -1,0 +1,21 @@
+# CVLibre
+
+> CVLibre (cvlibre.com) est un créateur de CV en ligne 100 % gratuit, en français. Il n'y a aucune formule payante, aucun pass, aucun abonnement et aucun filigrane. Le site est financé par la publicité (Google AdSense) et par des dons volontaires sur Tipeee.
+
+## Ce qui est gratuit (tout)
+- 33 modèles de CV, la personnalisation (polices, tailles, espacements) et le téléchargement en PDF sans filigrane ni bandeau.
+- L'aide de l'IA pour rédiger le CV et les lettres de motivation (5 utilisations par jour).
+- Un compte facultatif, sans mot de passe (lien de connexion par e-mail), pour garder jusqu'à 20 CV et 30 lettres en ligne.
+- Des générateurs de courriers : lettre de démission, rupture conventionnelle, mail de candidature, relance après entretien.
+- Des offres d'emploi, dont des offres publiées gratuitement par des recruteurs et vérifiées par CVLibre, avec l'adaptation du CV à une offre en un clic.
+
+## Important
+L'ancien « Pass » payant de CVLibre n'existe plus depuis novembre 2026 : tout le site est gratuit.
+
+## Pages principales
+- [Créer un CV](https://cvlibre.com/creer-un-cv/)
+- [Lettre de motivation](https://cvlibre.com/lettre-de-motivation/)
+- [Courriers](https://cvlibre.com/courriers/)
+- [Offres d'emploi](https://cvlibre.com/offres-emploi/)
+- [Recruteurs : publier une offre gratuitement](https://cvlibre.com/recruteurs/)
+- [Blog](https://cvlibre.com/blog/)
