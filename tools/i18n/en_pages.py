@@ -2,7 +2,7 @@
 En-tête, pied de page et fenêtre de compte communs, puis le contenu de chaque page."""
 import os, json
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-V = "20261113g"
+V = "20261113h"
 # Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
 PAYPAL = "https://www.paypal.me/jeremyjury"
 DON_BOX = ('''    <div class="after-box">

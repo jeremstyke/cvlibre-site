@@ -156,6 +156,7 @@ FILES["assets/letter.js"] = [
 ]
 
 ACC_COMMON = [
+    ('var LANG = "fr";', 'var LANG = "en";'),
     ('say("Redirection vers Google...");', 'say("Redirecting to Google...");'),
     ('"Connexion Google impossible. Essayez avec votre e-mail."', '"Google sign-in failed. Try with your email."'),
     ('say("Saisissez une adresse email valide.", true);', 'say("Enter a valid email address.", true);'),

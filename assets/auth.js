@@ -28,7 +28,7 @@
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Saisissez une adresse email valide.", true); return; }
     say("Envoi en cours..."); back();
-    sb.auth.signInWithOtp({ email: m, options: { emailRedirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
+    sb.auth.signInWithOtp({ email: m, options: { data: { lang: LANG }, emailRedirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
       say(r.error ? "Envoi impossible. Réessayez dans un instant." : "Un lien de connexion vient de vous être envoyé. Ouvrez-le sur cet appareil.", !!r.error);
     });
   });
@@ -56,7 +56,10 @@
     on: function (f) { cbs.push(f); if (ready) f(user); },
     signOut: function () { return sb.auth.signOut(); }
   };
-  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_OUT") { passTried = false; if (window.CVPASS) window.CVPASS.forget(); } if (ready) fire(); });
+  /* Langue des e-mails de connexion (modele Supabase bilingue, lu dans user_metadata.lang). */
+  var LANG = "fr";
+  function syncLang() { if (!user) return; var l = (user.user_metadata || {}).lang; if (l !== LANG && !(LANG === "fr" && !l)) sb.auth.updateUser({ data: { lang: LANG } }); }
+  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_IN" || ev === "INITIAL_SESSION") syncLang(); if (ev === "SIGNED_OUT") { passTried = false; if (window.CVPASS) window.CVPASS.forget(); } if (ready) fire(); });
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ready = true; fire();
     if (/[?&]connexion=1/.test(location.search)) { if (!user) open(); try { history.replaceState(null, "", location.pathname); } catch (e) {} }

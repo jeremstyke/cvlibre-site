@@ -120,7 +120,7 @@
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Enter a valid email address.", true); return; }
     say("Sending...");
-    sb.auth.signInWithOtp({ email: m, options: { emailRedirectTo: location.origin + location.pathname } }).then(function (r) {
+    sb.auth.signInWithOtp({ email: m, options: { data: { lang: LANG }, emailRedirectTo: location.origin + location.pathname } }).then(function (r) {
       say(r.error ? "Could not send. Please try again in a moment." : "A sign-in link has been sent to you. Open it on this device.", !!r.error);
     });
   });
@@ -137,7 +137,10 @@
     delAcc.dataset.arm = ""; delAcc.textContent = "Delete my account";
   });
   closeBtn.addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
-  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_OUT") { passTried = false; if (window.CVPASS) window.CVPASS.forget(); } ui(); });
+  /* Langue des e-mails de connexion (modele Supabase bilingue, lu dans user_metadata.lang). */
+  var LANG = "en";
+  function syncLang() { if (!user) return; var l = (user.user_metadata || {}).lang; if (l !== LANG && !(LANG === "fr" && !l)) sb.auth.updateUser({ data: { lang: LANG } }); }
+  sb.auth.onAuthStateChange(function (ev, s) { user = s && s.user ? s.user : null; if (ev === "SIGNED_IN" || ev === "INITIAL_SESSION") syncLang(); if (ev === "SIGNED_OUT") { passTried = false; if (window.CVPASS) window.CVPASS.forget(); } ui(); });
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null; ui();
     /* lien « Se connecter » de l'en-tête (visiteurs qui reviennent) */
