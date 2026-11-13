@@ -276,7 +276,7 @@
   }
   if (adlg) {
     $("#after-acc-go").addEventListener("click", function () { adlg.close(); var ab = $("#acc-btn"); if (ab) ab.click(); });
-    $("#after-don").addEventListener("click", function () { setTimeout(function () { adlg.close(); }, 300); });
+    if ($("#after-don")) $("#after-don").addEventListener("click", function () { setTimeout(function () { adlg.close(); }, 300); });
   }
   /* sur iPhone, "afterprint" n'arrive pas toujours : on propose aussi peu après le clic sur le PDF */
   $("#print").addEventListener("click", function () { setTimeout(function () { if (!document.hidden) afterAsk(); }, 2500); });

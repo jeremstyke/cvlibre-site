@@ -110,7 +110,8 @@ FILES["assets/builder.js"] = [
     ('"Échec, réessayez"', '"Failed, try again"'),
     ('"Reformulé" + (typeof j.left === "number" ? " (reste " + j.left + " utilisation" + (j.left > 1 ? "s" : "") + ")" : "")', '"Improved" + (typeof j.left === "number" ? " (" + j.left + " use" + (j.left > 1 ? "s" : "") + " left)" : "")'),
     ('rst.textContent = "Confirmer l\'effacement";', 'rst.textContent = "Confirm: clear everything";'),
-    ('rst.textContent = "Repartir de zéro";', 'rst.textContent = "Start from scratch";'),
+    ('$("#after-don").addEventListener("click", function () {', 'if ($("#after-don")) $("#after-don").addEventListener("click", function () {'),
+    ('rst.textContent = "Repartir de zéro";','rst.textContent = "Start from scratch";'),
     ('"Ce fichier est trop volumineux pour être un CV CVLibre."', '"This file is too large to be a CVLibre CV."'),
     ('"Ce fichier n\'est pas un CV exporté depuis CVLibre."', '"This file is not a CV exported from CVLibre."'),
 ]
