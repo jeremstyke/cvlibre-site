@@ -14,7 +14,7 @@
   var ACC = CC === "fr" ? "/mon-espace/" : CC === "de" ? "/de/mein-konto/" : "/" + CC + "/my-account/";
   var BUY = { fr: "https://jeremstyke.gumroad.com/l/pass-cvlibre", de: "https://jeremstyke.gumroad.com/l/cvlibre-pass-de", en: "https://jeremstyke.gumroad.com/l/cvlibre-pass" }[L];
   var PRICE = L === "en" ? "$4.99" : "4,99 €";
-  /* 13 nov 2026 (Jeremy) : Pass 1 an à 9,99 € TTC (9,99 $), sans promo */
+  /* 13 nov 2026 (Jeremy) : Pass 1 an à 9,99 € TTC (9,99 $), proposé seulement en upsell au paiement Gumroad (pas de bouton sur le site) */
   var BUY_Y = { fr: "https://jeremstyke.gumroad.com/l/pass-cvlibre-1an", de: "https://jeremstyke.gumroad.com/l/cvlibre-pass-1jahr", en: "https://jeremstyke.gumroad.com/l/cvlibre-pass-1year" }[L];
   var YEAR = { fr: "Ou 1 an pour 9,99 € : 12 mois pour le prix de 6", en: "Or 1 year for $9.99: 12 months for the price of 6", de: "Oder 1 Jahr für 9,99 €: 12 Monate zum Preis von 6" }[L];
   /* 13 nov 2026 (Jeremy) : offre de lancement -40 % jusqu'au 31 décembre 2026 (codes Gumroad LANCEMENT / LAUNCH / START, appliqués tout seuls dans le lien d'achat) */
@@ -73,7 +73,7 @@
   }
   function boxHtml(h) {
     if (paid()) return "<" + h + ">" + T.name + "</" + h + "><p class='cvp-on'>" + T.active + fmtD(st.u) + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul>";
-    return "<" + h + ">" + T.name + " " + priceHtml() + "</" + h + ">" + (PROMO ? "<p class='cvp-promo'>" + PNOTE + "</p>" : "") + "<p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><button type='button' class='link-btn cvp-buy-y'>" + YEAR + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
+    return "<" + h + ">" + T.name + " " + priceHtml() + "</" + h + ">" + (PROMO ? "<p class='cvp-promo'>" + PNOTE + "</p>" : "") + "<p class='cvp-per'>" + T.per + "</p><ul>" + T.f.map(function (x, i) { return "<li>" + tx(x) + (i === 2 ? atsA() : "") + "</li>"; }).join("") + "</ul><button type='button' class='btn cvp-buy'>" + T.buy + "</button><p class='cvp-free'>" + tx(T.free) + "</p>";
   }
   /* 13 nov 2026 : Pass payé avec une autre adresse e-mail (ou sans être connecté) : activation par numéro de commande Gumroad + e-mail d'achat */
   var CL = {
