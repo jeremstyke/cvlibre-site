@@ -7,7 +7,7 @@ import os, sys, re, json, glob, datetime
 sys.path.insert(0, os.path.dirname(__file__))
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 COVER = open(os.path.join(os.path.dirname(__file__), "cover.svg"), encoding="utf-8").read()
-BLOG_CSS = '<link rel="stylesheet" href="/assets/blog.css?v=20261113b">\n'
+BLOG_CSS = '<link rel="stylesheet" href="/assets/blog.css?v=20261113k">\n'
 MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 MONTHS_DE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
 

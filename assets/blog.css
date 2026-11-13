@@ -157,3 +157,7 @@ mark.ph { background: var(--wash); color: var(--acc-ink); padding: 1px 6px; bord
 .tbl tr:last-child td, .tbl tr:last-child th { border-bottom: 0; }
 .note-src { font-size: .9rem; color: #5a6478; }
 .tbl table.t3 { min-width: 0; }
+
+/* Bloc AdSense in-article (13 nov 2026) : espace seulement quand une annonce s affiche */
+.ad-in { margin: 28px 0; clear: both; }
+.ad-in:has(ins[data-ad-status="unfilled"]), .ad-in:not(:has(ins iframe)) { margin: 0; }
