@@ -5,7 +5,7 @@ import os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import ALT, ANGLO, anglo_path
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-TOOLS = ["/creer-un-cv/", "/lettre-de-motivation/", "/lettre-de-demission/", "/relance-apres-entretien/", "/mail-de-candidature/", "/mon-espace/", "/recruteurs/"]
+TOOLS = ["/creer-un-cv/", "/lettre-de-motivation/", "/mon-espace/", "/recruteurs/"]  # 13 nov 2026 (Jeremy) : lettres types avec un bloc pub, voir ads_letters.py
 NOADS = {"/stats/", "/rupture-conventionnelle/"}
 for r in ALT:
     if r[0] in TOOLS:
