@@ -4,15 +4,15 @@ sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 V = "20261113k"
-PAYPAL = "https://www.paypal.me/jeremyjury"
+PAYPAL = "https://ko-fi.com/cvlibrecom"  # page Ko-fi de CVLibre (13 nov 2026, remplace PayPal)
 DON_BOX = '''    <div class="after-box">
       <h3>CVLibre unterstützen</h3>
       <p>CVLibre ist 100 % kostenlos, aber jede KI-Nutzung kostet uns Geld. Eine kleine Spende, schon ab 1 €, hilft, es für alle kostenlos zu halten.</p>
-      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Mit PayPal spenden ❤️</a>
+      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Auf Ko-fi spenden ❤️</a>
     </div>
 '''.replace("%s", PAYPAL)
-DON_BTN = '''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Mit PayPal spenden ❤️</a></p>
-  <p class="hint">Die Zahlung läuft vollständig über PayPal: CVLibre sieht Ihre Bankdaten nie.</p>'''.replace("%s", PAYPAL)
+DON_BTN = '''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Auf Ko-fi spenden ❤️</a></p>
+  <p class="hint">Die Zahlung läuft vollständig über Ko-fi: CVLibre sieht Ihre Bankdaten nie.</p>'''.replace("%s", PAYPAL)
 
 def head(title, desc, path, extra="", ld=None, robots="index, follow"):
     url = "https://cvlibre.com" + path
@@ -595,7 +595,7 @@ text_page("/de/datenschutz/", "Datenschutz | CVLibre", "Wie CVLibre mit Ihren Da
   <h2>Was auf Ihrem Gerät gespeichert wird</h2>
   <p>Damit Sie zu Ihrem Entwurf zurückkehren können, bleibt eine Kopie im lokalen Speicher Ihres Browsers (localStorage), ebenso Ihre Sitzung, wenn Sie angemeldet sind, und Ihre Wahl zu Werbe-Cookies. Sie können den Entwurf mit "Neu beginnen" löschen oder die Daten der Seite in Ihrem Browser entfernen. Denken Sie an einem gemeinsam genutzten Computer daran.</p>
   <h2>Werbung und Cookies</h2>
-  <p>CVLibre ist dank Werbung, ausgespielt von Google AdSense, und freiwilliger Spenden über PayPal 100 % kostenlos. Die Zahlung läuft vollständig über PayPal: CVLibre erhält Ihre Bankdaten nie. Beim ersten Besuch fragt ein Banner, ob Sie Werbe-Cookies akzeptieren. Vor Ihrer Wahl werden keine Anzeigen angefordert. Wenn Sie zustimmen, kann Google Cookies nutzen, um personalisierte Anzeigen auszuspielen und zu messen. Wenn Sie ablehnen, zeigt Google nur nicht personalisierte Anzeigen. Ihre Wahl wird 6 Monate in Ihrem Browser gespeichert, und Sie können sie jederzeit über den Link "Cookies" unten auf jeder Seite ändern. Anzeigen erscheinen nie in Ihren PDFs und haben keinen Zugriff auf den Inhalt Ihres Lebenslaufs. Für die Verarbeitung durch Google gilt dessen eigene Datenschutzerklärung.</p>
+  <p>CVLibre ist dank Werbung, ausgespielt von Google AdSense, und freiwilliger Spenden über Ko-fi 100 % kostenlos. Die Zahlung läuft vollständig über Ko-fi (mit PayPal oder Stripe): CVLibre erhält Ihre Bankdaten nie. Beim ersten Besuch fragt ein Banner, ob Sie Werbe-Cookies akzeptieren. Vor Ihrer Wahl werden keine Anzeigen angefordert. Wenn Sie zustimmen, kann Google Cookies nutzen, um personalisierte Anzeigen auszuspielen und zu messen. Wenn Sie ablehnen, zeigt Google nur nicht personalisierte Anzeigen. Ihre Wahl wird 6 Monate in Ihrem Browser gespeichert, und Sie können sie jederzeit über den Link "Cookies" unten auf jeder Seite ändern. Anzeigen erscheinen nie in Ihren PDFs und haben keinen Zugriff auf den Inhalt Ihres Lebenslaufs. Für die Verarbeitung durch Google gilt dessen eigene Datenschutzerklärung.</p>
   <p>Unsere Nutzungsstatistik verwendet keine Cookies. Die Schriften liegen auf unserer Seite. Die anderen Dienste (KI, Supabase, Resend) werden nur aufgerufen, wenn Sie die entsprechende Funktion nutzen.</p>
   <h2>Ihre Rechte</h2>
   <p>Nach der DSGVO können Sie jederzeit Auskunft, Berichtigung oder Löschung Ihrer Daten verlangen: direkt unter "Mein Konto" für Ihre Lebensläufe und Ihr Konto, oder per E-Mail an contact@cvlibre.com. Sie können sich außerdem bei der französischen Datenschutzbehörde CNIL (cnil.fr) oder bei der Datenschutzaufsichtsbehörde Ihres Bundeslandes beschweren.</p>''')
@@ -603,7 +603,7 @@ text_page("/de/datenschutz/", "Datenschutz | CVLibre", "Wie CVLibre mit Ihren Da
 text_page("/de/nutzungsbedingungen/", "Nutzungsbedingungen | CVLibre", "Nutzungsbedingungen von CVLibre, dem kostenlosen Online-Lebenslauf-Generator mit KI.", "Nutzungsbedingungen", '''  <p>Stand: 13. November 2026.</p>
   <h2>Ein 100 % kostenloser Dienst</h2>
   <p>Mit CVLibre erstellen Sie einen Lebenslauf und ein Anschreiben und laden sie kostenlos als PDF herunter, ohne Kreditkarte. Alles steht allen offen: die 33 Vorlagen, die Anpassung (Schriften, Größe, Abstand), PDFs ohne Banner oder Wasserzeichen und die KI-Werkzeuge. Auf der Seite wird nichts verkauft.</p>
-  <p>CVLibre wird durch Werbung und freiwillige Spenden seiner Nutzer finanziert (über PayPal auf der deutschen Seite). Eine Spende schaltet keine zusätzliche Funktion frei: sie hilft einfach, die Seite zu betreiben.</p>
+  <p>CVLibre wird durch Werbung und freiwillige Spenden seiner Nutzer finanziert (über Ko-fi auf der deutschen Seite). Eine Spende schaltet keine zusätzliche Funktion frei: sie hilft einfach, die Seite zu betreiben.</p>
   <h2>Das kostenlose Konto</h2>
   <p>Ein Konto ist freiwillig. Es speichert bis zu 20 Lebensläufe und 30 Anschreiben online, damit Sie sie auf all Ihren Geräten wiederfinden. Sie können jedes Dokument oder Ihr ganzes Konto jederzeit löschen.</p>
   <h2>Künstliche Intelligenz</h2>

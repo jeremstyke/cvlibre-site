@@ -5,16 +5,16 @@ sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 V = "20261113k"
-# Lien PayPal.me de Jeremy : vide tant qu'il n'est pas créé (le bouton « Donate » PayPal refuse les comptes personnels).
-PAYPAL = "https://www.paypal.me/jeremyjury"
+# Dons des versions étrangères : page Ko-fi de CVLibre (13 nov 2026, remplace PayPal).
+PAYPAL = "https://ko-fi.com/cvlibrecom"
 DON_BOX = ('''    <div class="after-box">
       <h3>Support CVLibre</h3>
       <p>CVLibre is 100% free, but every AI use costs us money. A small donation, even £1, helps keep it free for everyone.</p>
-      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Donate with PayPal ❤️</a>
+      <a class="btn btn-sm btn-ghost" href="%s" target="_blank" rel="noopener" id="after-don">Donate on Ko-fi ❤️</a>
     </div>
 '''.replace("%s", PAYPAL)) if PAYPAL else ""
-DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donate with PayPal ❤️</a></p>
-  <p class="hint">Payment is handled entirely by PayPal: CVLibre never sees your bank details.</p>'''.replace("%s", PAYPAL)) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
+DON_BTN = ('''  <p><a class="btn" href="%s" target="_blank" rel="noopener">Donate on Ko-fi ❤️</a></p>
+  <p class="hint">Payment is handled entirely by Ko-fi: CVLibre never sees your bank details.</p>'''.replace("%s", PAYPAL)) if PAYPAL else "  <p><strong>Online donations will open very soon.</strong> Thank you for your patience!</p>"
 
 def head(title, desc, path, fr=None, extra="", ld=None, robots="index, follow"):
     url = "https://cvlibre.com" + path
@@ -599,7 +599,7 @@ text_page("/en/privacy/", "Privacy | CVLibre", "How CVLibre handles your data: y
   <h2>What is stored on your device</h2>
   <p>So that you can come back to your draft, a copy is kept in your browser's local storage (localStorage), along with your session if you are signed in, and your choice about advertising cookies. You can clear the draft with the "Start from scratch" button, or by clearing the site's data in your browser. If you use a shared computer, remember to do so.</p>
   <h2>Advertising and cookies</h2>
-  <p>CVLibre is 100% free thanks to advertising, shown by Google AdSense, and to voluntary donations made through PayPal. Payment is handled entirely by PayPal: CVLibre never receives your bank details. On your first visit, a banner asks whether you accept advertising cookies. No ads are requested before you choose. If you accept, Google may use cookies to show and measure personalised ads. If you decline, Google only shows non-personalised ads. Your choice is kept for 6 months in your browser and you can change it at any time with the "Cookies" link at the bottom of each page. Ads never appear in your PDFs and never have access to the content of your CV. Processing by Google is subject to its own privacy policy.</p>
+  <p>CVLibre is 100% free thanks to advertising, shown by Google AdSense, and to voluntary donations made through Ko-fi. Payment is handled entirely by Ko-fi (with PayPal or Stripe): CVLibre never receives your bank details. On your first visit, a banner asks whether you accept advertising cookies. No ads are requested before you choose. If you accept, Google may use cookies to show and measure personalised ads. If you decline, Google only shows non-personalised ads. Your choice is kept for 6 months in your browser and you can change it at any time with the "Cookies" link at the bottom of each page. Ads never appear in your PDFs and never have access to the content of your CV. Processing by Google is subject to its own privacy policy.</p>
   <p>Our usage statistics use no cookies. Fonts are hosted on the site. The other services (AI, Supabase, Resend) are only called if you use the matching feature.</p>
   <h2>Your rights</h2>
   <p>Under the GDPR (and the UK GDPR), you can access, correct or delete your data at any time: directly from "My account" for your CVs and your account, or by writing to contact@cvlibre.com. You can also complain to the French data protection authority, the CNIL (cnil.fr), or, in the UK, to the ICO (ico.org.uk).</p>''', fr="/confidentialite/")
@@ -607,7 +607,7 @@ text_page("/en/privacy/", "Privacy | CVLibre", "How CVLibre handles your data: y
 text_page("/en/terms/", "Terms of use | CVLibre", "Terms of use of CVLibre, the free online CV builder with AI.", "Terms of use", '''  <p>Last updated: 13 November 2026.</p>
   <h2>A 100% free service</h2>
   <p>CVLibre lets you create a CV and a cover letter and download them as PDFs, for free, with no card. Everything is open to everyone: the 33 CV templates, customisation (fonts, size, spacing), PDFs with no banner or watermark, and the AI tools. Nothing is sold on the site.</p>
-  <p>CVLibre is funded by advertising and by voluntary donations from its users (through PayPal on the English site). A donation does not give access to any extra feature: it simply helps keep the site running.</p>
+  <p>CVLibre is funded by advertising and by voluntary donations from its users (through Ko-fi on the English-language sites). A donation does not give access to any extra feature: it simply helps keep the site running.</p>
   <h2>The free account</h2>
   <p>An account is optional. It keeps up to 20 CVs and 30 cover letters online so you can find them on all your devices. You can delete each document, or your whole account, at any time.</p>
   <h2>Artificial intelligence</h2>
