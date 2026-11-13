@@ -4,7 +4,7 @@
   try {
     /* 13 nov 2026 (Jeremy) : Pass CVLibre = aucune pub. Le Pass est gardé dans localStorage par assets/cvpass.js (chargé ici sur toutes les pages). */
     var PASS = false; try { var pv = JSON.parse(localStorage.getItem("cvlibre.cvpass") || "null"); PASS = !!(pv && pv.u > Date.now()); } catch (e) {}
-    try { var cs = document.createElement("script"); cs.src = "/assets/cvpass.js?v=20261113x"; cs.defer = true; document.head.appendChild(cs); } catch (e) {}
+    try { var cs = document.createElement("script"); cs.src = "/assets/cvpass.js?v=20261113y"; cs.defer = true; document.head.appendChild(cs); } catch (e) {}
     if (PASS) {
       document.documentElement.classList.add("cvl-pass");
       var hs = document.createElement("style"); hs.textContent = ".ad-in,ins.adsbygoogle,.adsbygoogle{display:none!important}"; document.head.appendChild(hs);
