@@ -107,6 +107,7 @@
     clear: function () { return store('readwrite', function (s) { return s.clear(); }); },
     blob: function (d) { return new Blob([d.buf], { type: d.type }); }
   };
+  window.PDFDemDocs = Docs;
 
   /* ---------- lecture des sources en images de page ---------- */
   function imageFileToCanvas(file) {
