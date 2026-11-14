@@ -5,7 +5,7 @@ a{color:var(--brand)}.wrap{max-width:980px;margin:0 auto;padding:0 18px}
 header.top{background:#fff;border-bottom:1px solid var(--line)}
 .top-in{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:19px;color:var(--ink);text-decoration:none}.logo svg{width:30px;height:30px}.logo b{color:var(--brand)}
-nav.main{display:flex;align-items:center;gap:12px}nav.main a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+nav.main{display:flex;align-items:center;gap:12px;flex-wrap:wrap}nav.main a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
 .lang{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:#fff}
 .crumbs{font-size:13px;color:var(--muted);margin:16px 0 0}.crumbs a{color:var(--muted)}
 h1{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:14px 0 8px}h2{font-size:23px;margin:34px 0 10px}
