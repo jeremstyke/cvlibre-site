@@ -70,7 +70,7 @@
 /* 14 nov 2026 (Jeremy): job alerts. After a search, "get the new jobs every morning" button.
    Our own notifications (not Adrenalead), sent by the CVLibre server, deleted with the alert. */
 (function () {
-  var ALERTS_ON = false; // turned on once the job_alerts table exists in Supabase (tools/sql/job_alerts.sql)
+  var ALERTS_ON = true; // turned on once the job_alerts table exists in Supabase (tools/sql/job_alerts.sql)
   if (!ALERTS_ON) return;
   var form = document.getElementById("jb-form"), msg = document.getElementById("jb-msg"), list = document.getElementById("jb-list");
   if (!form || !msg || !list) return;
