@@ -155,7 +155,7 @@
     var done = function (perm) {
       if (once) return; once = true;
       if (perm !== "granted") { b.disabled = false; b.textContent = T.b; note(T.no); return; }
-      Promise.all([navigator.serviceWorker.register(path + "sw.js", { scope: path }).then(ready), fetch(API + "key").then(function (r) { return r.json(); })])
+      Promise.all([navigator.serviceWorker.register(path + "sw.js", { scope: path }).then(ready), fetch(API + "key", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" }).then(function (r) { return r.json(); })])
         .then(function (r) {
           var reg = r[0], key = r[1] && r[1].key; if (!key) throw new Error("key");
           var raw = atob(key.replace(/-/g, "+").replace(/_/g, "/")), arr = new Uint8Array(raw.length);
