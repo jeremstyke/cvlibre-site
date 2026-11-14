@@ -16,7 +16,7 @@ for d in DIRS:
                 '<meta name="apple-mobile-web-app-status-bar-style" content="default">\n') % (d, title)
         s = s.replace("</head>", head + "</head>", 1)
     # the installed app uses the "CV jobs" icon on these pages
-    s = s.replace('<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/assets/app-touch-180.png?v=2">')
+    s = s.replace('<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/assets/app-touch-180.png?v=3">')
     s = s.replace('content="CVLibre Emploi"', 'content="Jobs CVLibre"').replace('<meta name="apple-mobile-web-app-title" content="CVLibre Jobs">', '<meta name="apple-mobile-web-app-title" content="Jobs CVLibre">')
     if "/assets/app.js" not in s:
         i = s.rfind("</body>")
