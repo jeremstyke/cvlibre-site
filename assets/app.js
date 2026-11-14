@@ -48,7 +48,7 @@
   window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; });
   var card = document.createElement("div");
   card.className = "cvapp";
-  card.innerHTML = '<img src="/assets/app-192.png" alt=""><p>' + T.t + '</p><button type="button" class="btn">' + T.b + '</button><button type="button" class="cvapp-x" aria-label="' + T.x + '">×</button>';
+  card.innerHTML = '<img src="/assets/app-192.png?v=2" alt=""><p>' + T.t + '</p><button type="button" class="btn">' + T.b + '</button><button type="button" class="cvapp-x" aria-label="' + T.x + '">×</button>';
   lead.insertAdjacentElement("afterend", card);
   var help = null;
   card.querySelector(".btn").addEventListener("click", function () {

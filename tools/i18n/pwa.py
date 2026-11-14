@@ -1,7 +1,7 @@
 # 14 nov 2026 (Jeremy): "CVLibre Emploi / Jobs" installable app, only on the job pages; re-applied after each build
 import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-V = "20261114f"
+V = "20261114g"
 DIRS = ["offres-emploi", "en/jobs", "us/jobs", "ca/jobs", "au/jobs", "nz/jobs", "de/jobs"]
 n = 0
 for d in DIRS:
@@ -16,7 +16,7 @@ for d in DIRS:
                 '<meta name="apple-mobile-web-app-status-bar-style" content="default">\n') % (d, title)
         s = s.replace("</head>", head + "</head>", 1)
     # the installed app uses the "CV jobs" icon on these pages
-    s = s.replace('<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/assets/app-touch-180.png">')
+    s = s.replace('<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/assets/app-touch-180.png?v=2">')
     s = s.replace('content="CVLibre Emploi"', 'content="Jobs CVLibre"').replace('<meta name="apple-mobile-web-app-title" content="CVLibre Jobs">', '<meta name="apple-mobile-web-app-title" content="Jobs CVLibre">')
     if "/assets/app.js" not in s:
         i = s.rfind("</body>")
