@@ -9,7 +9,7 @@ header.top{background:#fff;border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
 .logo svg{width:30px;height:30px}
-nav.main a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+nav.main a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;white-space:nowrap;display:inline-block}
 nav.main a:hover{color:var(--brand)}
 .crumbs{font-size:13px;color:var(--muted);margin:16px 0 0}
 .crumbs a{color:var(--muted)}
