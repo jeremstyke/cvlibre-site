@@ -11,7 +11,7 @@ nav.main{display:flex;align-items:center;gap:12px}nav.main a{text-decoration:non
 h1{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:14px 0 8px}h2{font-size:23px;margin:34px 0 10px}
 .hero{text-align:center;padding:16px 0 4px}.hero h1{font-size:clamp(28px,6vw,44px)}
 .lead{font-size:18px;color:var(--muted);margin:0 0 18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:14px 0}
 .card{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink);transition:.15s}
 .card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 6px 18px rgba(20,33,61,.08)}
 .card i{font-style:normal;font-size:26px;display:block}.card b{display:block;font-size:17px;margin-top:4px}.card span{display:block;font-size:14px;color:var(--muted)}
@@ -55,3 +55,4 @@ details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:
 .foot .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}.foot b{color:var(--ink)}
 .foot a{color:var(--muted);display:block;text-decoration:none;margin:3px 0}.foot a:hover{color:var(--brand)}.disc{margin-top:18px;font-size:13px}
 @media(max-width:560px){.res .row{flex-direction:column}.opt select,.opt input{min-width:0;width:100%}}
+@media(max-width:560px){.card{padding:12px}.card b{font-size:15px}.card span{font-size:13px}}
