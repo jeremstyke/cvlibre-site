@@ -406,7 +406,7 @@ write("/en/cover-letter/", letter)
 
 # ---------------- Home ----------------
 FAQ = [
-    ("Is it really free?", "Yes, 100%. All templates, PDFs without a watermark and the AI tools are free, with no card needed. A free account (an email address, no password) is optional: it keeps your CVs and cover letters online. CVLibre is funded by advertising and by the optional CVLibre Pass."),
+    ("Is it really free?", "Yes, 100%. All templates, PDFs without a watermark and the AI (5 uses a day) are free, with no card needed. A free account (an email address, no password) is optional: it keeps 1 CV and 30 cover letters online. CVLibre is funded by advertising and by the optional CVLibre Pass."),
     ("Is my information sent anywhere?", "No, unless you choose to use the AI. Your CV is built on your device. Only the text or file you choose to send to the AI is sent off to be processed, and we do not keep it."),
     ("Should I put a photo on my CV?", "In the UK, Ireland and the US, no: most employers prefer CVs without a photo, to avoid any bias. The photo is optional in CVLibre and the templates look good without one."),
     ("How long should a CV be?", "Two A4 pages is the usual maximum in the UK. One page is fine for students, school leavers and people with little experience. CVLibre warns you if your CV goes over two pages."),
@@ -500,8 +500,8 @@ home = head("Free CV Builder with AI: Make a CV Online, Download PDF | CVLibre",
           <ul>
             <li>33 CV templates and customisation (fonts, size, spacing)</li>
             <li>PDFs with no banner or watermark</li>
-            <li>AI: fill in, improve, tailor to a job and write cover letters (5 uses a day)</li>
-            <li>Up to 20 CVs and 30 cover letters kept online with a free account</li>
+            <li>AI: fill in, improve and write cover letters (5 uses a day)</li>
+            <li>1 CV and 30 cover letters kept online with a free account</li>
           </ul>
           <a class="btn" href="/en/cv-builder/">Create my CV</a>
         </div>
@@ -632,7 +632,7 @@ text_page("/en/terms/", "Terms of use | CVLibre", "Terms of use of CVLibre, the 
   <p>The Pass is a one-time payment for 3 months or 1 year, with no subscription and no automatic renewal. It gives you 50 AI uses a day instead of 5, CV tailoring to a job ad, an ATS score, CV translation, up to 20 saved CVs instead of one, and browsing with no ads. It is linked to the CVLibre account used to buy it and is activated as soon as payment is received.</p>
   <p>Payment is handled by Gumroad, which sells the Pass as merchant of record: Gumroad takes the payment, applies any sales tax or VAT and provides the receipt and invoice. For any question about the Pass or a refund request: contact@cvlibre.com.</p>
   <h2>The free account</h2>
-  <p>An account is optional. It keeps up to 20 CVs and 30 cover letters online so you can find them on all your devices. You can delete each document, or your whole account, at any time.</p>
+  <p>An account is optional. It keeps 1 CV (20 with the Pass) and 30 cover letters online so you can find them on all your devices. You can delete each document, or your whole account, at any time.</p>
   <h2>Artificial intelligence</h2>
   <p>The AI helps you fill in a CV, improve a text, tailor a CV to a job advert and write a cover letter. Each use has a real cost for us: to keep the service free, it is limited to 5 uses per day per person, and it may be temporarily unavailable when demand is high. The AI can make mistakes: always read and correct the result. You remain responsible for what you send.</p>
   <h2>Fair use</h2>

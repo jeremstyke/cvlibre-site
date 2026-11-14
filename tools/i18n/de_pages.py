@@ -402,7 +402,7 @@ write("/de/anschreiben/", letter)
 
 # ---------------- Startseite ----------------
 FAQ = [
-    ("Ist es wirklich kostenlos?", "Ja, zu 100 %. Alle Vorlagen, PDFs ohne Wasserzeichen und die KI-Werkzeuge sind kostenlos, ohne Kreditkarte. Ein kostenloses Konto (eine E-Mail-Adresse, kein Passwort) ist freiwillig: es speichert Ihre Lebensläufe und Anschreiben online. CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert."),
+    ("Ist es wirklich kostenlos?", "Ja, zu 100 %. Alle Vorlagen, PDFs ohne Wasserzeichen und die KI (5 Nutzungen pro Tag) sind kostenlos, ohne Kreditkarte. Ein kostenloses Konto (eine E-Mail-Adresse, kein Passwort) ist freiwillig: es speichert 1 Lebenslauf und 30 Anschreiben online. CVLibre wird durch Werbung und den freiwilligen CVLibre Pass finanziert."),
     ("Werden meine Daten irgendwohin gesendet?", "Nein, außer Sie nutzen die KI. Ihr Lebenslauf entsteht auf Ihrem Gerät. Nur der Text oder die Datei, die Sie bewusst an die KI senden, wird zur Verarbeitung übertragen, und wir speichern sie nicht."),
     ("Gehört ein Foto in den Lebenslauf?", "In Deutschland ist ein Bewerbungsfoto verbreitet, aber freiwillig: nach dem Allgemeinen Gleichbehandlungsgesetz darf es nicht verlangt werden. Bei CVLibre ist das Foto optional, und die Vorlagen sehen auch ohne Foto gut aus."),
     ("Wie lang sollte ein Lebenslauf sein?", "In Deutschland sind ein bis zwei Seiten üblich. Für Berufseinsteiger reicht oft eine Seite. CVLibre warnt Sie, wenn Ihr Lebenslauf länger als zwei Seiten wird."),
@@ -496,8 +496,8 @@ home = head("Lebenslauf kostenlos mit KI erstellen, ohne Anmeldung | CVLibre",
           <ul>
             <li>33 Lebenslauf-Vorlagen und Anpassung (Schriften, Größe, Abstand)</li>
             <li>PDFs ohne Banner oder Wasserzeichen</li>
-            <li>KI: ausfüllen, verbessern, an eine Stelle anpassen und Anschreiben verfassen (5 Nutzungen pro Tag)</li>
-            <li>Bis zu 20 Lebensläufe und 30 Anschreiben online mit einem kostenlosen Konto</li>
+            <li>KI: ausfüllen, verbessern und Anschreiben verfassen (5 Nutzungen pro Tag)</li>
+            <li>1 Lebenslauf und 30 Anschreiben online mit einem kostenlosen Konto</li>
           </ul>
           <a class="btn" href="/de/lebenslauf-erstellen/">Lebenslauf erstellen</a>
         </div>
@@ -628,7 +628,7 @@ text_page("/de/nutzungsbedingungen/", "Nutzungsbedingungen | CVLibre", "Nutzungs
   <p>Der Pass kostet 4,99 € inkl. MwSt. für 3 Monate oder 9,99 € für 1 Jahr, als Einmalzahlung, ohne Abo und ohne automatische Verlängerung. Er bietet 50 KI-Nutzungen pro Tag statt 5, die Anpassung des Lebenslaufs an eine Stellenanzeige, einen ATS-Score, die Übersetzung des Lebenslaufs, bis zu 20 gespeicherte Lebensläufe statt einem und Surfen ohne Werbung. Er ist an das CVLibre-Konto gebunden, mit dem er gekauft wurde, und wird aktiviert, sobald die Zahlung eingegangen ist.</p>
   <p>Die Zahlung wird von Gumroad abgewickelt, das den Pass als Händler (Merchant of Record) verkauft: Gumroad nimmt die Zahlung entgegen, wendet die Mehrwertsteuer an und stellt Beleg und Rechnung aus. Für Fragen zum Pass oder eine Erstattung: contact@cvlibre.com.</p>
   <h2>Das kostenlose Konto</h2>
-  <p>Ein Konto ist freiwillig. Es speichert bis zu 20 Lebensläufe und 30 Anschreiben online, damit Sie sie auf all Ihren Geräten wiederfinden. Sie können jedes Dokument oder Ihr ganzes Konto jederzeit löschen.</p>
+  <p>Ein Konto ist freiwillig. Es speichert 1 Lebenslauf (20 mit dem Pass) und 30 Anschreiben online, damit Sie sie auf all Ihren Geräten wiederfinden. Sie können jedes Dokument oder Ihr ganzes Konto jederzeit löschen.</p>
   <h2>Künstliche Intelligenz</h2>
   <p>Die KI hilft Ihnen, einen Lebenslauf auszufüllen, einen Text zu verbessern, einen Lebenslauf an eine Stellenanzeige anzupassen und ein Anschreiben zu verfassen. Jede Nutzung kostet uns wirklich Geld: damit der Dienst kostenlos bleibt, ist er auf 5 Nutzungen pro Tag und Person begrenzt und kann bei hoher Nachfrage vorübergehend nicht verfügbar sein. Die KI kann Fehler machen: lesen und korrigieren Sie das Ergebnis immer. Sie bleiben für das verantwortlich, was Sie versenden.</p>
   <h2>Faire Nutzung</h2>
