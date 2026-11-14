@@ -482,6 +482,12 @@ Bun.serve({
       return new Response(JSON.stringify({ pct: Math.min(100, Math.round((cost / DAY_USD) * 1000) / 10), uses }), { headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Access-Control-Allow-Origin": ORIGINS.includes(o) ? o : ORIGINS[0], "Vary": "Origin" } });
     }
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+    if (url.pathname === "/alerts/key") return out({ key: vapid ? vapid.pub : "" }); // GET allowed
+    if (url.pathname === "/alerts/run" && req.method === "GET" && CJS && url.searchParams.get("k") === CJS) {
+      const all: any[] = (await rpc("job_alerts_all", { s: CJS }).catch(() => [])) || [];
+      const a = all.find((x) => String(x.id) === url.searchParams.get("id"));
+      return out(a ? { r: await alertRun(a, true) } : { error: "id", n: all.length });
+    }
     if (req.method !== "POST") return out({ error: "method" }, 405);
     if (!ORIGINS.includes(o)) return out({ error: "origin" }, 403);
     if (url.pathname === "/pass/bind") {
