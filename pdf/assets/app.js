@@ -63,6 +63,51 @@
     return c;
   }
 
+  /* ---------- Mes documents : stockage uniquement sur l'appareil (IndexedDB) ---------- */
+  var HOME = ASSETS.replace(/assets\/$/, '');
+  var dbp = null;
+  function db() {
+    if (!dbp) {
+      dbp = new Promise(function (res, rej) {
+        if (!window.indexedDB) return rej(new Error('noidb'));
+        var r = indexedDB.open('pdf-demarches', 1);
+        r.onupgradeneeded = function () { r.result.createObjectStore('docs', { keyPath: 'id' }); };
+        r.onsuccess = function () { res(r.result); };
+        r.onerror = function () { rej(r.error); };
+      });
+      dbp.catch(function () { dbp = null; });
+    }
+    return dbp;
+  }
+  function store(mode, fn) {
+    return db().then(function (d) {
+      return new Promise(function (res, rej) {
+        var t = d.transaction('docs', mode), req = fn(t.objectStore('docs'));
+        t.oncomplete = function () { res(req ? req.result : undefined); };
+        t.onerror = function () { rej(t.error); };
+        t.onabort = function () { rej(t.error); };
+      });
+    });
+  }
+  var Docs = {
+    list: function () {
+      return store('readonly', function (s) { return s.getAll(); }).then(function (a) {
+        return (a || []).sort(function (x, y) { return y.date - x.date; });
+      });
+    },
+    add: function (name, blob) {
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+      return readBuf(blob).then(function (buf) {
+        return store('readwrite', function (s) {
+          return s.put({ id: Date.now() + '-' + Math.random().toString(36).slice(2, 8), name: name, type: blob.type || 'application/pdf', size: blob.size, date: Date.now(), buf: buf });
+        });
+      });
+    },
+    del: function (id) { return store('readwrite', function (s) { return s.delete(id); }); },
+    clear: function () { return store('readwrite', function (s) { return s.clear(); }); },
+    blob: function (d) { return new Blob([d.buf], { type: d.type }); }
+  };
+
   /* ---------- lecture des sources en images de page ---------- */
   function imageFileToCanvas(file) {
     var p = isHeic(file)
@@ -292,6 +337,23 @@
     var input = el('input', { type: 'file', class: 'sr' });
     var dropText = el('span', { class: 'drop-text' });
     drop.appendChild(input); drop.appendChild(dropText);
+    var pick = el('div', { class: 'pick' });
+    var pickBtn = el('button', { type: 'button', class: 'pick-btn' }, '📁 Prendre dans Mes documents');
+    var pickList = el('div', { class: 'pick-list' });
+    pick.appendChild(pickBtn); pick.appendChild(pickList); pick.style.display = 'none';
+    function refreshPick() {
+      Docs.list().then(function (a) { pick.style.display = a.length ? '' : 'none'; pickBtn.textContent = '📁 Prendre dans Mes documents (' + a.length + ')'; }).catch(function () {});
+    }
+    pickBtn.onclick = function () {
+      if (pickList.innerHTML) { pickList.innerHTML = ''; return; }
+      Docs.list().then(function (a) {
+        a.forEach(function (d) {
+          var b = el('button', { type: 'button', class: 'pick-item' }, '+ ' + d.name.replace(/</g, '&lt;') + ' <em>' + fmt(d.size) + '</em>');
+          b.onclick = function () { add([new File([Docs.blob(d)], d.name, { type: d.type })]); b.disabled = true; };
+          pickList.appendChild(b);
+        });
+      });
+    };
     var list = el('ul', { class: 'files' });
     var opts = el('div', { class: 'opts' });
     var sel = el('select', { 'aria-label': 'Taille maximale' });
@@ -304,7 +366,8 @@
     var status = el('p', { class: 'status', 'aria-live': 'polite' });
     var results = el('div', { class: 'results' });
     var priv = el('p', { class: 'privacy' }, '🔒 Vos fichiers restent sur votre appareil : rien n\'est envoyé sur Internet.');
-    [tabs, drop, list, opts, go, status, results, priv].forEach(function (n) { root.appendChild(n); });
+    [tabs, drop, pick, list, opts, go, status, results, priv].forEach(function (n) { root.appendChild(n); });
+    refreshPick();
 
     function render() {
       tabs.querySelectorAll('.tab').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-m') === mode); });
@@ -351,6 +414,15 @@
       nameIn.oninput = function () { a.setAttribute('download', nameIn.value || name); };
       var row = el('div', { class: 'row' }); row.appendChild(nameIn); row.appendChild(a); box.appendChild(row);
       if (note) box.appendChild(el('p', { class: 'note' }, note));
+      var keep = el('button', { type: 'button', class: 'keep' }, '💾 Garder dans Mes documents');
+      keep.onclick = function () {
+        keep.disabled = true;
+        Docs.add(nameIn.value || name, blob).then(function () {
+          keep.outerHTML = '<p class="kept">✓ Gardé sur cet appareil, dans <a href="' + HOME + 'mes-documents/">Mes documents</a>. Rien n\'est envoyé sur Internet.</p>';
+          refreshPick();
+        }).catch(function () { keep.textContent = 'Impossible d\'enregistrer sur ce navigateur (navigation privée ?)'; });
+      };
+      box.appendChild(keep);
       results.appendChild(box);
     }
 
@@ -414,5 +486,44 @@
     render();
   }
 
+  function mountDocs(root) {
+    function draw() {
+      Docs.list().then(function (a) {
+        root.innerHTML = '';
+        if (!a.length) {
+          root.innerHTML = '<p class="empty">Aucun document pour l\'instant. Après avoir préparé un fichier avec un outil, touchez « 💾 Garder dans Mes documents ».</p>';
+          return;
+        }
+        var total = a.reduce(function (t, d) { return t + d.size; }, 0);
+        root.appendChild(el('p', { class: 'docs-sum' }, a.length + ' document(s), ' + fmt(total) + ' au total, gardés sur cet appareil.'));
+        var ul = el('ul', { class: 'docs' });
+        a.forEach(function (d) {
+          var li = el('li');
+          var date = new Date(d.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+          li.appendChild(el('span', { class: 'd-name' }, (/pdf/.test(d.type) ? '📄 ' : '🖼️ ') + d.name.replace(/</g, '&lt;') + '<small>' + fmt(d.size) + ' · ' + date + '</small>'));
+          var dl = el('a', { class: 'dl', href: URL.createObjectURL(Docs.blob(d)), download: d.name }, 'Télécharger');
+          var del = el('button', { type: 'button', class: 'del', 'aria-label': 'Supprimer' }, 'Supprimer');
+          del.onclick = function () { if (confirmDel(del)) Docs.del(d.id).then(draw); };
+          li.appendChild(dl); li.appendChild(del); ul.appendChild(li);
+        });
+        root.appendChild(ul);
+        var all = el('button', { type: 'button', class: 'del all' }, 'Tout supprimer');
+        all.onclick = function () { if (confirmDel(all)) Docs.clear().then(draw); };
+        root.appendChild(all);
+      }).catch(function () {
+        root.innerHTML = '<p class="empty">Votre navigateur ne permet pas d\'enregistrer des documents (navigation privée ?). Les outils restent utilisables normalement.</p>';
+      });
+    }
+    // double appui pour confirmer, sans boîte de dialogue
+    function confirmDel(b) {
+      if (b.getAttribute('data-ok')) return true;
+      var t = b.textContent; b.setAttribute('data-ok', '1'); b.textContent = 'Confirmer ?';
+      setTimeout(function () { b.removeAttribute('data-ok'); b.textContent = t; }, 3000);
+      return false;
+    }
+    draw();
+  }
+
   document.querySelectorAll('[data-tool]').forEach(mount);
+  document.querySelectorAll('[data-mydocs]').forEach(mountDocs);
 })();
