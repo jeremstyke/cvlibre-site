@@ -400,8 +400,8 @@ const PUSH_HOSTS = /^(fcm\.googleapis\.com|android\.googleapis\.com|updates\.pus
 const JOB_PATH: Record<string, string> = { fr: "/offres-emploi/", de: "/de/jobs/", en: "/en/jobs/", US: "/us/jobs/", CA: "/ca/jobs/", AU: "/au/jobs/", NZ: "/nz/jobs/" };
 const alertPath = (a: any) => (a.lang === "en" && JOB_PATH[a.cc]) || JOB_PATH[a.lang] || JOB_PATH.fr;
 const AL_UA = "Mozilla/5.0 (CVLibre job alerts)";
-async function alertSearch(a: any): Promise<any[]> {
-  const q = a.q, ville = a.ville, ct = a.contrat, ip = a.uip || "", ua = AL_UA;
+async function alertSearch1(a: any, ct: string): Promise<any[]> {
+  const q = a.q, ville = a.ville, ip = a.uip || "", ua = AL_UA;
   if (a.lang === "en" || a.lang === "de") {
     const lc = a.lang === "de" ? "de_DE" : (CC_EN[a.cc] || { lc: "en_GB" }).lc;
     const jh: Record<string, string> = { de_DE: "de.jooble.org", en_GB: "uk.jooble.org", en_US: "jooble.org", en_CA: "ca.jooble.org", en_AU: "au.jooble.org", en_NZ: "nz.jooble.org" };
@@ -412,6 +412,14 @@ async function alertSearch(a: any): Promise<any[]> {
   }
   const r: any = ct === "ALT" && LBA ? await lba(q, ville, 0) : CJS ? await careerjet(q, ville, ct, 0, ip, ua) : JKEY ? await jooble(q, ville, ct, 0) : await jobs(q, ville, ct, 0);
   return (r && r.offres) || [];
+}
+// 14 nov 2026 (Jeremy): several contracts can be chosen (contrat = "CDI,CDD"): one search per contract, merged
+async function alertSearch(a: any): Promise<any[]> {
+  const cts = String(a.contrat || "").split(",").filter(Boolean);
+  if (!cts.length) return alertSearch1(a, "");
+  const all: any[] = [], ids = new Set<string>();
+  for (const ct of cts.slice(0, 5)) { try { for (const o of await alertSearch1(a, ct)) { if (!ids.has(String(o.id))) { ids.add(String(o.id)); all.push(o); } } } catch (e) {} }
+  return all;
 }
 function alertText(a: any, n: number, titles: string[]) {
   const what = a.q || "", where = a.ville || "";
@@ -446,7 +454,8 @@ async function alertsDaily() {
   try {
     const all: any[] = (await rpc("job_alerts_all", { s: CJS }).catch(() => [])) || [];
     const res: Record<string, number> = {};
-    for (const a of all) { const r = await alertRun(a); res[r] = (res[r] || 0) + 1; await new Promise((z) => setTimeout(z, 300)); }
+    const monday = now.getDay() === 1;
+    for (const a of all) { if (a.freq === "week" && !monday) continue; const r = await alertRun(a); res[r] = (res[r] || 0) + 1; await new Promise((z) => setTimeout(z, 300)); }
     console.log("job alerts", parisDay(), JSON.stringify(res));
   } finally { alertsBusy = false; }
 }
@@ -548,7 +557,9 @@ Bun.serve({
       const ville = String(b.ville || "").replace(/[^\p{L}\p{N} '-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 60);
       if (!q && !ville) return out({ error: "empty" }, 400);
       const lang = b.lang === "en" || b.lang === "de" ? b.lang : "fr", cc = ["US", "CA", "AU", "NZ"].includes(b.cc) ? b.cc : "";
-      const a: any = { q, ville, contrat: String(b.contrat || "").slice(0, 3), lang, cc, uip: ip };
+      const OKC = ["CDI", "CDD", "MIS", "SAI", "ALT"];
+      const contrat = String(b.contrat || "").split(",").map((x) => x.trim().toUpperCase()).filter((x, i, l) => OKC.includes(x) && l.indexOf(x) === i).join(",");
+      const a: any = { q, ville, contrat, lang, cc, uip: ip, freq: b.freq === "week" ? "week" : "day" };
       let seen: string[] = []; try { seen = (await alertSearch(a)).map((o: any) => String(o.id)); } catch (e) {}
       const tok = ncrypto.randomBytes(16).toString("hex");
       try {
