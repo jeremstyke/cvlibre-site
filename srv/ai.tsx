@@ -239,7 +239,9 @@ const fold = (t: string) => String(t || "").toLowerCase().normalize("NFD").repla
 // Careerjet (paye au clic) : appele via la base Supabase CVLibre, dont l'IP de sortie fixe est declaree chez Careerjet. Cache 1 h. lc = fr_FR, en_GB, de_DE, en_US, en_CA, en_AU ou en_NZ.
 const CJS = Bun.env.CJ_RPC_SECRET || "";
 async function careerjet(q: string, ville: string, contrat: string, page: number, uip: string, uag: string, lc = "fr_FR"): Promise<any> {
-  const key = ["c", lc, q, ville, contrat, page].join("|").toLowerCase();
+  // 14 nov 2026 (Jeremy): Careerjet builds each job link for the user's IP and browser. Cache per user, otherwise
+  // everyone gets the links of the first searcher (or of the alerts robot) and Optioncarriere blocks them as a bot.
+  const key = ["c", lc, q, ville, contrat, page].join("|").toLowerCase() + "|" + ncrypto.createHash("sha1").update(uip + "|" + uag).digest("hex").slice(0, 16);
   const c = jcache.get(key); if (c && Date.now() - c.at < 3_600_000) return c.v;
   let loc = ville, lieu: any = ville;
   if (lc !== "fr_FR") { /* Hors France : Careerjet comprend directement le nom de la ville */ }
