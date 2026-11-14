@@ -4,4 +4,5 @@ Disallow: /srv/
 
 Sitemap: https://cvlibre.com/sitemap.xml
 Sitemap: https://cvlibre.com/pdf-demarches-france/sitemap.xml
+Sitemap: https://cvlibre.com/pdf/sitemap.xml
 Sitemap: https://cvlibre-ai-production.up.railway.app/sitemap-offres.xml
