@@ -47,6 +47,7 @@ write("/de/arbeitgeber/", head("Stellenanzeige kostenlos veröffentlichen | CVLi
 ''' + MODE("r") + '''  <h1>Arbeitgeber: Stellen kostenlos veröffentlichen</h1>
   <p class="lead">Ihre Stellen erscheinen oben in den Suchergebnissen von CVLibre, vor Bewerbern, die gerade ihren Lebenslauf und ihr Anschreiben vorbereiten. Jeder Bewerber kann seinen Lebenslauf mit einem Klick an Ihre Anzeige anpassen.</p>
   <ul class="rc-perks">
+    <li><strong>Sichtbar bei Google</strong>: Jede Stelle bekommt eine eigene Seite, die Google in seiner Jobsuche anzeigen kann.</li>
     <li><strong>Kostenlos</strong>: keine Gebühr, 60 Tage online.</li>
     <li><strong>Geprüft</strong>: jede Stelle wird vor der Freischaltung von CVLibre geprüft, zum Schutz der Bewerber.</li>
     <li><strong>Einfach</strong>: Bewerber melden sich direkt bei Ihnen, über Ihren Link oder Ihre E-Mail-Adresse.</li>

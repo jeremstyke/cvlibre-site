@@ -483,6 +483,14 @@ Bun.serve({
     }
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (url.pathname === "/alerts/key") return out({ key: vapid ? vapid.pub : "" }); // GET allowed
+    // 14 nov 2026 (Jeremy): sitemap of the CVLibre recruiter jobs (one page each, read by Google Jobs). Declared in cvlibre.com/robots.txt
+    if (url.pathname === "/sitemap-offres.xml") {
+      const DIR: Record<string, string> = { FR: "offres-emploi/offre", GB: "en/jobs/job", US: "us/jobs/job", CA: "ca/jobs/job", AU: "au/jobs/job", NZ: "nz/jobs/job", DE: "de/jobs/stelle" };
+      const r = await fetch(SB_URL + "/rest/v1/job_posts?select=id,country,approved_at,updated_at&status=eq.approved&expires_at=gt." + encodeURIComponent(new Date().toISOString()) + "&order=approved_at.desc&limit=5000", { headers: { apikey: SB_PUB } }).catch(() => null);
+      const l: any[] = r && r.ok ? await r.json().catch(() => []) : [];
+      const urls = l.filter((o) => DIR[o.country]).map((o) => "<url><loc>https://cvlibre.com/" + DIR[o.country] + "/?id=" + o.id + "</loc><lastmod>" + String(o.updated_at || o.approved_at || "").slice(0, 10) + "</lastmod></url>").join("");
+      return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + urls + "</urlset>", { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
+    }
     if (url.pathname === "/alerts/run" && req.method === "GET" && CJS && url.searchParams.get("k") === CJS) {
       const all: any[] = (await rpc("job_alerts_all", { s: CJS }).catch(() => [])) || [];
       const a = all.find((x) => String(x.id) === url.searchParams.get("id"));

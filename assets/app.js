@@ -175,3 +175,18 @@
     try { var r = Notification.requestPermission(done); if (r && r.then) r.then(done); } catch (e) { done("denied"); }
   }
 })();
+
+/* 14 nov 2026 (Jeremy): the title of a job posted on CVLibre opens its own page (the one Google Jobs reads). */
+(function () {
+  var list = document.getElementById("jb-list"); if (!list) return;
+  var path = location.pathname.replace(/[^/]*$/, ""), seg = path.split("/")[1] || "";
+  var sub = seg === "offres-emploi" ? "offre" : seg === "de" ? "stelle" : "job";
+  function link() {
+    list.querySelectorAll(".jb-own[data-oid] h2:not(.jb-ln)").forEach(function (h) {
+      var id = h.closest(".jb-own").dataset.oid, a = document.createElement("a");
+      a.href = path + sub + "/?id=" + encodeURIComponent(id); a.textContent = h.textContent; a.style.color = "inherit";
+      h.textContent = ""; h.appendChild(a); h.classList.add("jb-ln");
+    });
+  }
+  new MutationObserver(link).observe(list, { childList: true }); link();
+})();

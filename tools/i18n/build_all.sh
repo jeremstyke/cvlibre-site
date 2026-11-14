@@ -17,3 +17,4 @@ python3 ads_top.py
 python3 no_dons.py
 python3 notifpush.py
 python3 pwa.py
+python3 offre_pages.py

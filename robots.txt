@@ -3,3 +3,4 @@ Allow: /
 Disallow: /srv/
 
 Sitemap: https://cvlibre.com/sitemap.xml
+Sitemap: https://cvlibre-ai-production.up.railway.app/sitemap-offres.xml

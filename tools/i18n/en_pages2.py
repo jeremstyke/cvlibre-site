@@ -47,6 +47,7 @@ write("/en/recruiters/", head("Post a Job for Free in the UK | CVLibre", "UK emp
 ''' + MODE("r") + '''  <h1>Recruiters: post your jobs for free</h1>
   <p class="lead">Your jobs appear at the top of the search results on CVLibre, in front of candidates who are preparing their CV and cover letter. Each candidate can tailor their CV to your advert in one click.</p>
   <ul class="rc-perks">
+    <li><strong>Visible on Google</strong>: each job gets its own page that Google can show in its job search results.</li>
     <li><strong>Free</strong>: no fee to post, online for 60 days.</li>
     <li><strong>Checked</strong>: every job is reviewed by CVLibre before it goes live, to protect candidates.</li>
     <li><strong>Simple</strong>: candidates apply directly to you, through your link or your email.</li>

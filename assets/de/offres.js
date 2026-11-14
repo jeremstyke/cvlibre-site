@@ -26,7 +26,7 @@
   function card(o) {
     offres[o.id] = o;
     var c = el("article", "jb-card lt-card");
-    if (o.own) { hit(o.id, "view"); c.classList.add("jb-own"); c.appendChild(el("p", "jb-badge", "Auf CVLibre veröffentlicht · geprüfte Stelle")); }
+    if (o.own) { hit(o.id, "view"); c.classList.add("jb-own"); c.dataset.oid = String(o.id).replace(/^cvl-/, ""); c.appendChild(el("p", "jb-badge", "Auf CVLibre veröffentlicht · geprüfte Stelle")); }
     var h = el("h2", "jb-t", o.titre); c.appendChild(h);
     var m = el("p", "jb-meta", [o.entreprise, o.lieu].filter(Boolean).join(" · ") || "Unternehmen nicht angegeben"); c.appendChild(m);
     var tags = el("p", "jb-tags");
