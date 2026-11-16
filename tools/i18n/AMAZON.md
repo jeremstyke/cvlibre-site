@@ -18,7 +18,7 @@ Identifiant de suivi : cvlibre-21. Uniquement sur le blog français (blog/), jam
 
 Format : - [ ] slug/ | requête visée | ce qu'il faut couvrir
 
-- [ ] meilleurs-livres-entretien-embauche/ | meilleurs livres pour préparer un entretien d'embauche | 6 à 10 livres réels et récents
+- [x] meilleurs-livres-entretien-embauche/ | meilleurs livres pour préparer un entretien d'embauche | 6 à 10 livres réels et récents
 - [ ] meilleure-webcam-entretien-visio/ | meilleure webcam pour un entretien en visio | webcams 1080p ou plus, micro intégré, pour ordinateur portable ou fixe
 - [ ] meilleurs-livres-concours-fonction-publique/ | meilleurs livres pour préparer un concours de la fonction publique | annales et manuels de catégorie C et B des grands éditeurs
 - [ ] meilleurs-livres-reconversion-professionnelle/ | meilleurs livres sur la reconversion professionnelle | 6 à 10 livres réels
