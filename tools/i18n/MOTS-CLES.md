@@ -10,8 +10,8 @@ Règles :
 - Quand il reste moins de 15 lignes « - [ ] », ajoute 30 nouvelles requêtes de longue traîne en fin de fichier, au même format (métiers courants pas encore traités, questions précises tirées des suggestions de recherche et des « autres questions posées »), en évitant tout doublon avec blog/.
 
 ## A. Failles : résiliation et abonnements CV (forte intention, peu de concurrence sérieuse)
-- [ ] resilier-abonnement-zety : résilier abonnement Zety / Zety prélèvement / Zety remboursement
-- [ ] resilier-abonnement-livecareer : résilier LiveCareer / LiveCareer prélèvement
+- [x] resilier-abonnement-zety : résilier abonnement Zety / Zety prélèvement / Zety remboursement
+- [x] resilier-abonnement-livecareer : résilier LiveCareer / LiveCareer prélèvement
 - [ ] resilier-abonnement-moncvparfait : résilier MonCVparfait / MonCVparfait remboursement
 - [ ] resilier-abonnement-cv-express : résilier CV Express / express cv résiliation (vérifier d'abord le nom exact du service)
 - [ ] resilier-cvdesignr-premium : résilier CVDesignR Premium
