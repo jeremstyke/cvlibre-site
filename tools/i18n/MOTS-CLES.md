@@ -12,8 +12,8 @@ Règles :
 ## A. Failles : résiliation et abonnements CV (forte intention, peu de concurrence sérieuse)
 - [x] resilier-abonnement-zety : résilier abonnement Zety / Zety prélèvement / Zety remboursement
 - [x] resilier-abonnement-livecareer : résilier LiveCareer / LiveCareer prélèvement
-- [ ] resilier-abonnement-moncvparfait : résilier MonCVparfait / MonCVparfait remboursement
-- [ ] resilier-abonnement-cv-express : résilier CV Express / express cv résiliation (vérifier d'abord le nom exact du service)
+- [x] resilier-abonnement-moncvparfait : résilier MonCVparfait / MonCVparfait remboursement
+- [x] resilier-abonnement-cv-express : résilier CV Express / express cv résiliation (vérifier d'abord le nom exact du service)
 - [ ] resilier-cvdesignr-premium : résilier CVDesignR Premium
 - [ ] prelevement-cv-inconnu : prélèvement inconnu site de CV que faire / abonnement CV caché 2,70 €
 - [ ] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
