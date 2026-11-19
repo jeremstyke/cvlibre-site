@@ -1,7 +1,8 @@
 """Blogs des versions étrangères de CVLibre, à partir des articles JSON de content/blog/<pays>/.
 Usage : python3 tools/i18n/blog_build.py en de   (sans argument : tous les pays)
 Un article = content/blog/<pays>/<slug>.json :
-  {"slug", "title", "desc", "mins", "date": "AAAA-MM-JJ", "cat": "CV", "blocks": [["p", "html"], ["h2", "titre"], ["ul", ["..."]], ["ex", "avant", "après"]]}
+  {"slug", "title", "desc", "mins", "date": "AAAA-MM-JJ", "cat": "CV", "blocks": [["p", "html"], ["h2", "titre"], ["ul", ["..."]], ["ex", "avant", "après"],
+   ["table", ["col1", "col2"], [["a", "b"]]], ["cta", "encadré html"], ["faq", "Intertitre FAQ", [["question", "réponse"]]]]}
 Ajouter un fichier puis relancer ce script (et tools/i18n/sitemap.py) suffit à publier un article."""
 import os, sys, re, json, glob, datetime
 sys.path.insert(0, os.path.dirname(__file__))
@@ -58,6 +59,9 @@ def render(blocks, lb):
         elif b[0] == "h3": out.append("<h3>%s</h3>" % b[1])
         elif b[0] == "ul": out.append("<ul>" + "".join("<li>%s</li>" % x for x in b[1]) + "</ul>")
         elif b[0] == "ol": out.append("<ol>" + "".join("<li>%s</li>" % x for x in b[1]) + "</ol>")
+        elif b[0] == "table": out.append('<div class="tbl"><table class="t3"><thead><tr>' + "".join("<th>%s</th>" % x for x in b[1]) + "</tr></thead><tbody>" + "".join("<tr>" + "".join("<td>%s</td>" % x for x in r) + "</tr>" for r in b[2]) + "</tbody></table></div>")
+        elif b[0] == "cta": out.append('<div class="callout"><p>%s</p></div>' % b[1])
+        elif b[0] == "faq": out.append('<h2 id="%s">%s</h2>' % (slugid(b[1]), b[1]) + "".join("<h3>%s</h3><p>%s</p>" % (q, a) for q, a in b[2]))
         elif b[0] == "ex": out.append('<div class="ex ba"><p><span class="tag bad">%s</span> %s</p><p><span class="tag good">%s</span> %s</p></div>' % (lb["before"], b[1], lb["after"], b[2]))
     return "\n".join(out)
 
@@ -75,10 +79,12 @@ def build(cc):
     posts.sort(key=lambda P: (P.get("date", ""), P["slug"]), reverse=True)
     for i, P in enumerate(posts):
         d = datetime.date.fromisoformat(P.get("date", "2026-11-13"))
-        toc = "".join('<li><a href="#%s">%s</a></li>' % (slugid(b[1]), b[1]) for b in P["blocks"] if b[0] == "h2")
+        toc = "".join('<li><a href="#%s">%s</a></li>' % (slugid(b[1]), b[1]) for b in P["blocks"] if b[0] in ("h2", "faq"))
         url = lb["base"] + P["slug"] + "/"
         ld = {"@context": "https://schema.org", "@type": "Article", "headline": P["title"], "description": P["desc"], "inLanguage": lb["lang"], "datePublished": P.get("date"), "dateModified": P.get("updated", P.get("date")),
               "author": {"@type": "Organization", "name": "CVLibre"}, "publisher": {"@type": "Organization", "name": "CVLibre", "url": "https://cvlibre.com" + lb["home"]}, "mainEntityOfPage": "https://cvlibre.com" + url}
+        faq = [b for b in P["blocks"] if b[0] == "faq"]
+        if faq: ld = [ld, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": re.sub(r"<[^>]+>", "", q), "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in faq[0][2]]}]
         rel = "".join(card(lb, Q) for Q in (posts[i + 1:] + posts[:i])[:3])
         write(url, head(P["title"] + " | CVLibre", P["desc"], url, extra=BLOG_CSS, ld=ld) + "<body>\n" + HEADER + f'''
 <main id="main" class="blog cat-cv">

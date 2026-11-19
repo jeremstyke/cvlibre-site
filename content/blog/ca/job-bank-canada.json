@@ -1,0 +1,168 @@
+{
+ "slug": "job-bank-canada",
+ "title": "How to use Job Bank Canada to find a job",
+ "desc": "How to use Job Bank Canada: search for free, set up job alerts, try Job Match with a Plus account and apply the way each employer asks. With a checklist.",
+ "mins": 6,
+ "date": "2026-11-19",
+ "cat": "Resume",
+ "blocks": [
+  [
+   "p",
+   "To use Job Bank Canada well, search for free on jobbank.gc.ca, set up job alerts for your search, and apply to each posting with the exact method the employer chose. If you create a Plus account, you can also use Job Match and, on postings that offer it, apply directly through the site."
+  ],
+  [
+   "p",
+   "Job Bank is the Government of Canada's job board, run by Employment and Social Development Canada. It is free, and searching does not require any registration. Here is how to get real results from it, step by step."
+  ],
+  [
+   "h2",
+   "Do you need an account to use Job Bank?"
+  ],
+  [
+   "p",
+   "Not to search. You can browse postings, filter by location and read job details without signing in. An account becomes useful when you want the extra features:"
+  ],
+  [
+   "table",
+   [
+    "Feature",
+    "What it does",
+    "Account needed?"
+   ],
+   [
+    [
+     "Job search",
+     "Search and filter postings across Canada",
+     "No"
+    ],
+    [
+     "Job Alerts",
+     "Email notifications when new jobs match your search",
+     "Registration through the Job Alerts page"
+    ],
+    [
+     "Job Match",
+     "Pairs your profile with jobs that suit your skills and experience",
+     "Yes, a job seeker Plus account"
+    ],
+    [
+     "Direct Apply",
+     "Send your resume through Job Bank on postings that show the Direct Apply flag",
+     "Yes, a job seeker Plus account"
+    ],
+    [
+     "Resume Builder",
+     "Creates a resume from your Job Match profile",
+     "Yes, a job seeker Plus account"
+    ]
+   ]
+  ],
+  [
+   "p",
+   "Source: the <a href=\"https://www.jobbank.gc.ca/findajob/match\" rel=\"noopener\">Job Match page</a> and the <a href=\"https://www.jobbank.gc.ca/support/topic?mtid=2\" rel=\"noopener\">Job Bank help centre</a>. Features change from time to time, so check there if something looks different."
+  ],
+  [
+   "h2",
+   "How do I search for jobs on Job Bank?"
+  ],
+  [
+   "p",
+   "Start with a job title rather than a vague keyword. \"Warehouse associate\" will give you cleaner results than \"warehouse\", which also pulls in managers and drivers. Then narrow the results by city or postal code and distance."
+  ],
+  [
+   "p",
+   "Read the full posting before you decide. Canadian postings on Job Bank usually show the wage, hours, start date, language of work and the education or experience required. If the posting says French and English are both required, believe it."
+  ],
+  [
+   "p",
+   "A tip that saves time: the Job Bank mobile app, described on <a href=\"https://www.canada.ca/en/mobile/job-bank-job-search.html\" rel=\"noopener\">canada.ca</a>, lets you save favourite jobs, mark the ones you applied for and get a reminder before a saved posting expires."
+  ],
+  [
+   "h2",
+   "How do I apply for a job on Job Bank?"
+  ],
+  [
+   "p",
+   "Click <strong>Show how to apply</strong> on the posting. The employer chooses the method: email, online form, mail, phone, in person or Direct Apply. Use that method and only that one. Job Bank's help centre is clear that it does not accept resumes by email on behalf of employers."
+  ],
+  [
+   "ol",
+   [
+    "Open the posting and click <strong>Show how to apply</strong>.",
+    "Note any reference number, screening questions or documents requested.",
+    "Adapt your resume to the posting: match the job title and the main skills it lists.",
+    "Write a short cover letter if the employer asks for one, or if you apply by email.",
+    "Send it using the employer's chosen method, then write down the date and the job in a simple tracking list."
+   ]
+  ],
+  [
+   "p",
+   "If the posting offers <strong>Direct Apply</strong> (shown with a blue flag), you sign in to your Plus account, add a resume, answer any screening questions and agree to share your email and documents with the employer."
+  ],
+  [
+   "h2",
+   "Is Job Match worth setting up?"
+  ],
+  [
+   "p",
+   "My view: yes, if you are open to several kinds of jobs in your area, and no if you are aiming at one specific employer. Job Match asks you to fill in a profile with your education, experience and skills using pre-defined options, then emails you when a posting fits. Employers can also preview your profile and invite you to apply."
+  ],
+  [
+   "p",
+   "The limit is the pre-defined options. They cannot capture everything, so a carefully written resume still matters for the final application. Treat Job Match as a way to hear about jobs, not as your resume."
+  ],
+  [
+   "h2",
+   "What should my resume look like for Job Bank postings?"
+  ],
+  [
+   "p",
+   "The same as for any Canadian employer: one or two pages, reverse chronological, no photo, no date of birth, no marital status. Use Canadian spelling (organize, colour, centre) and list your city and province in the header."
+  ],
+  [
+   "ex",
+   "Objective: to find a job where I can grow and use my skills.",
+   "Warehouse associate with 3 years of order picking and shipping experience, forklift trained, available for evening shifts in the Mississauga area."
+  ],
+  [
+   "p",
+   "The second version is only an example, but notice what it does: it repeats the job title, names a concrete skill and answers the availability question before the employer asks. For the full method, read <a href=\"/ca/blog/how-to-write-a-resume/\">how to write a resume in Canada</a>. If you are new to the country, our <a href=\"/ca/blog/canadian-resume-for-newcomers/\">Canadian resume tips for newcomers</a> cover the conventions that surprise people most."
+  ],
+  [
+   "cta",
+   "<strong>Need a resume before you apply?</strong> Build it for free with the <a href=\"/ca/resume-builder/\">CVLibre resume builder</a>: Canadian layout, live preview and a PDF you can upload to Job Bank or send by email. No sign-up needed."
+  ],
+  [
+   "h2",
+   "What mistakes do people make on Job Bank?"
+  ],
+  [
+   "ul",
+   [
+    "Sending the same resume to fifty postings without changing a word.",
+    "Ignoring the employer's chosen method, for example emailing when the posting says apply in person.",
+    "Applying for jobs that require a language level or certification they do not have.",
+    "Not keeping track of applications, then missing a callback or applying twice.",
+    "Forgetting the basics: to work in Canada, you need a Social Insurance Number (SIN), as Job Bank itself reminds job seekers."
+   ]
+  ],
+  [
+   "faq",
+   "Job Bank questions",
+   [
+    [
+     "Is Job Bank Canada free?",
+     "Yes. Searching and applying cost nothing, and the Government of Canada describes the app as having no hidden fees. Be wary of anyone who asks you to pay to be considered for a job."
+    ],
+    [
+     "Can I upload my own resume to Job Bank?",
+     "Yes, when you use Direct Apply with a Plus account you can add an uploaded resume or one made with the Job Bank Resume Builder. For other postings, follow the employer's instructions."
+    ],
+    [
+     "How do I get notified of new jobs?",
+     "Set up Job Alerts for your search. Job Bank then emails you when new postings that match your criteria are advertised."
+    ]
+   ]
+  ]
+ ]
+}

@@ -1,0 +1,176 @@
+{
+ "slug": "cv-template-nz",
+ "title": "CV template NZ: a simple layout that works",
+ "desc": "A free CV template for NZ: the sections Kiwi employers expect, in the right order, on two pages at most. Copy the layout, then avoid the common template traps.",
+ "mins": 6,
+ "date": "2026-11-19",
+ "cat": "CV",
+ "blocks": [
+  [
+   "p",
+   "A good CV template for NZ is a plain, one-column layout with your contact details, a short personal statement, skills, work experience, education and referees, on no more than two pages. That is the structure New Zealand employers expect, and it is also the one recruitment software reads best."
+  ],
+  [
+   "p",
+   "Many people search for a template because the old CV builder on careers.govt.nz has gone: the site says it stopped being available after 18 September 2025. The good news is that the template itself is the easy part. Below is a layout you can copy, then the mistakes that make even a nice template fail."
+  ],
+  [
+   "h2",
+   "What sections should a New Zealand CV template have?"
+  ],
+  [
+   "p",
+   "<a href=\"https://www.careers.govt.nz/job-hunting/cvs-and-cover-letters/parts-of-a-cv\" rel=\"noopener\">Careers.govt.nz</a> lists the parts a CV must include and the parts it could include. Here they are as a template, in the order I recommend for most people:"
+  ],
+  [
+   "table",
+   [
+    "Section",
+    "Must or optional",
+    "What goes in it"
+   ],
+   [
+    [
+     "Name and contact details",
+     "Must",
+     "Full name, mobile, email, town or suburb. No street address needed."
+    ],
+    [
+     "Personal statement",
+     "Optional, but recommended",
+     "Three or four lines about who you are and the job you want."
+    ],
+    [
+     "Skills",
+     "Must",
+     "Technical and personal skills that match the job advert."
+    ],
+    [
+     "Work experience",
+     "Must",
+     "Paid, community and volunteer roles, newest first, with dates."
+    ],
+    [
+     "Achievements",
+     "Optional",
+     "Results you can back up: awards, targets met, projects finished."
+    ],
+    [
+     "Qualifications and education",
+     "Must",
+     "NCEA, certificates, diplomas, degrees and short courses."
+    ],
+    [
+     "Interests",
+     "Optional",
+     "One line, only if it says something useful about you."
+    ],
+    [
+     "Referees",
+     "Must",
+     "Two or three people, usually a recent manager or supervisor."
+    ]
+   ]
+  ],
+  [
+   "p",
+   "If you have a long work history, put experience before skills. If you are a school leaver or changing careers, skills can come first, as long as your experience still shows dates."
+  ],
+  [
+   "h2",
+   "What does the template look like on the page?"
+  ],
+  [
+   "p",
+   "Here is the skeleton, filled in with a made-up example so you can see the level of detail. Swap every line for your own information."
+  ],
+  [
+   "ul",
+   [
+    "<strong>ARONA TAUFA</strong> | 021 xxx xxxx | arona.taufa@email.com | Hamilton",
+    "<strong>Personal statement:</strong> Reliable warehouse team member with two years of picking and dispatch experience, looking for a permanent role with a forklift licence opportunity.",
+    "<strong>Skills:</strong> RF scanner picking, stock counts, health and safety procedures, teamwork on early shifts.",
+    "<strong>Experience:</strong> Warehouse Assistant, [Company], Hamilton, March 2024 to now. Three bullet points starting with a verb.",
+    "<strong>Education:</strong> NCEA Level 2, [School], 2023. First aid certificate, 2025.",
+    "<strong>Referees:</strong> Name, job title, company, phone, email (with their permission)."
+   ]
+  ],
+  [
+   "h2",
+   "What should I leave off a CV in New Zealand?"
+  ],
+  [
+   "p",
+   "Careers.govt.nz is direct about this: don't put a photo or images, your date of birth or age, your marital status, your religion or bank account details. Many overseas templates include a photo box and a personal details section. Delete both."
+  ],
+  [
+   "p",
+   "Your IRD number does not belong on a CV either. You give it to your employer on a tax code declaration once you are hired."
+  ],
+  [
+   "h2",
+   "Is a fancy CV template better than a plain one?"
+  ],
+  [
+   "p",
+   "No, and this is where most people go wrong. Two-column designs, skill bars, icons and text boxes look good as a thumbnail. In practice, many employers use applicant tracking software that reads your CV as plain text, and complex layouts can come out jumbled or with sections missing. Our guide to <a href=\"/nz/blog/ats-cv-applicant-tracking-systems/\">ATS-friendly CVs</a> explains why."
+  ],
+  [
+   "ex",
+   "A two-column template with a photo, a five-star rating for \"Microsoft Word\" and contact details in a header image.",
+   "One column, clear headings, contact details as text, and skills written as words with evidence in the experience section."
+  ],
+  [
+   "p",
+   "My rule of thumb: if you cannot copy your whole CV into a plain email and still read it in the right order, the template is too complicated."
+  ],
+  [
+   "h2",
+   "How long should a CV be in NZ?"
+  ],
+  [
+   "p",
+   "Careers.govt.nz recommends keeping your CV to two pages. One page is fine for a school leaver or a first job. If you are at three pages, cut older roles down to a single line each and remove duties that do not relate to the job you want."
+  ],
+  [
+   "h2",
+   "What are the common mistakes with CV templates?"
+  ],
+  [
+   "ul",
+   [
+    "Leaving placeholder text in, such as \"Lorem ipsum\" or \"[Company name]\". It happens more than you would think.",
+    "Using a US resume template with an \"Objective\" box and American spelling. Use New Zealand English: organise, programme, licence.",
+    "Forgetting referees, or listing people who have not agreed. See <a href=\"/nz/blog/referees-on-a-cv-nz/\">referees on a CV in New Zealand</a>.",
+    "Sending a Word file that reformats on the employer's computer. Send a PDF unless the advert asks for Word.",
+    "Using one generic version for every job. Change the personal statement and skills each time."
+   ]
+  ],
+  [
+   "p",
+   "Once your template is ready, our step-by-step guide on <a href=\"/nz/blog/how-to-write-a-cv/\">how to write a CV in New Zealand</a> helps you fill each section with strong bullet points."
+  ],
+  [
+   "cta",
+   "<strong>Skip the formatting fight:</strong> the free <a href=\"/nz/cv-builder/\">CVLibre CV builder</a> gives you a clean one-column NZ template, a live preview and a PDF download. Fill in the boxes and the layout takes care of itself. No sign-up needed."
+  ],
+  [
+   "faq",
+   "CV template questions",
+   [
+    [
+     "Is there a free CV template from the NZ government?",
+     "Careers.govt.nz still links to CV templates and examples on its CV pages, but its online CV builder is no longer available since 18 September 2025."
+    ],
+    [
+     "Should my NZ CV have a photo?",
+     "No. Careers.govt.nz advises against photos and images on a CV, and most New Zealand employers do not expect one."
+    ],
+    [
+     "Can I use the same CV template for every job?",
+     "Keep the same layout, but change the personal statement, skills and the order of your bullet points to match each job advert."
+    ]
+   ]
+  ]
+ ]
+}
