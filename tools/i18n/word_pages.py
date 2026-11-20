@@ -6,6 +6,8 @@ import os, re, sys, json, glob
 sys.path.insert(0, os.path.dirname(__file__))
 from alt import links
 from word_docx import FILES, DIRS
+import word_design
+FILES = {cc: word_design.FILES[cc] + FILES[cc] for cc in FILES}  # les 2 modèles graphiques en premier
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 P = {cc: "/" + d + "/" for cc, d in DIRS.items()}
 CSS = ('<style>.wt{max-width:1040px}.wt .lead{font-size:1.12rem}.wt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin:28px 0 8px}'
@@ -18,12 +20,12 @@ CSS = ('<style>.wt{max-width:1040px}.wt .lead{font-size:1.12rem}.wt-grid{display
 # ---------------------------------------------------------------- contenus
 C = {}
 C["fr"] = dict(lang="fr-FR", home="/", homel="Accueil", builder="/creer-un-cv/", dl="Télécharger le modèle Word", fmt="Fichier .docx, 1 page, A4",
- title="Modèle CV Word gratuit : 3 modèles .docx à télécharger | CVLibre",
- desc="Modèle CV Word gratuit à télécharger : 3 CV .docx pensés pour la France (classique, moderne, premier emploi), sans inscription et faciles à modifier dans Word.",
- h1="Modèle CV Word gratuit : 3 CV à télécharger",
- lead="Voici 3 modèles de CV Word gratuits à télécharger, pensés pour candidater en France : un CV classique, un CV moderne et un CV pour un premier emploi. Chaque fichier .docx s'ouvre dans Word, LibreOffice ou Google Docs, sans inscription, sans e-mail et sans filigrane.",
+ title="Modèle CV Word gratuit : 5 modèles .docx à télécharger | CVLibre",
+ desc="Modèle CV Word gratuit à télécharger : 5 CV .docx pensés pour la France (élégant, deux colonnes, classique, moderne, premier emploi), sans inscription.",
+ h1="Modèle CV Word gratuit : 5 CV à télécharger",
+ lead="Voici 5 modèles de CV Word gratuits à télécharger, pensés pour candidater en France : deux CV plus graphiques (élégant et deux colonnes), un CV classique, un CV moderne et un CV pour un premier emploi. Chaque fichier .docx s'ouvre dans Word, LibreOffice ou Google Docs, sans inscription, sans e-mail et sans filigrane.",
  cta='<p>Vous préférez ne pas vous occuper de la mise en page&nbsp;? Le <strong>créateur de CV en ligne CVLibre</strong> remplit les rubriques avec vous, propose 33 modèles et télécharge un PDF propre, gratuitement.</p><a class="btn" href="/creer-un-cv/">Créer mon CV en ligne</a>',
- cards={"classique": ("CV classique", "Pour la plupart des candidatures&nbsp;: profil court, expériences en premier, formation, compétences, langues et centres d'intérêt. Un cadre pour la photo, que vous pouvez supprimer."),
+ cards={"elegant": ("CV élégant", "Un bandeau de couleur en haut avec votre nom et votre poste, puis une frise avec les dates à gauche. Sobre et soigné, avec un cadre photo facultatif."), "deux-colonnes": ("CV deux colonnes", "Une colonne de couleur à gauche pour la photo, le contact, les compétences et les langues, et vos expériences à droite. Le plus moderne des cinq."), "classique": ("CV classique", "Pour la plupart des candidatures&nbsp;: profil court, expériences en premier, formation, compétences, langues et centres d'intérêt. Un cadre pour la photo, que vous pouvez supprimer."),
         "moderne": ("CV moderne", "Pour mettre vos compétences clés en avant dès le haut de la page, avec une couleur d'accent sobre. Adapté aux métiers où l'on vous juge d'abord sur ce que vous savez faire."),
         "premier-emploi": ("CV premier emploi", "Pour un étudiant, un jeune diplômé ou une alternance&nbsp;: la formation passe en premier, puis les stages, les jobs d'été et le bénévolat, qui comptent vraiment.")},
  body='''  <h2 id="remplir">Comment remplir ce modèle de CV Word</h2>
@@ -39,6 +41,7 @@ C["fr"] = dict(lang="fr-FR", home="/", homel="Accueil", builder="/creer-un-cv/",
   </ul>
   <h2 id="choisir">Quel modèle choisir&nbsp;?</h2>
   <p>Le CV classique convient presque partout&nbsp;: commerce, logistique, administration, santé, artisanat. Le CV moderne est utile quand vos compétences comptent plus que vos intitulés de poste, par exemple après une reconversion. Le CV premier emploi est fait pour ceux qui ont surtout une formation et quelques expériences courtes&nbsp;: un stage de trois semaines ou un job d'été y a toute sa place.</p>
+  <p>Les deux modèles graphiques, élégant et deux colonnes, attirent l'œil quand vous envoyez votre CV par e-mail ou que vous le remettez en main propre. Pour un dépôt sur un site de recrutement, le CV classique reste le plus sûr, car certains logiciels lisent mal les colonnes.</p>
   <h2 id="envoyer">Avant d'envoyer votre CV</h2>
   <p>Relisez l'orthographe, puis enregistrez votre CV en PDF (dans Word&nbsp;: Fichier, Enregistrer sous, PDF) pour que la mise en page ne bouge pas chez le recruteur. Donnez au fichier un nom clair, par exemple «&nbsp;CV-Prenom-Nom.pdf&nbsp;». Adaptez le titre, le profil et l'ordre des compétences à chaque offre&nbsp;: c'est souvent ce qui fait la différence, et c'est aussi ce que lisent les logiciels de tri des candidatures.</p>
   <p>Pour aller plus loin, lisez nos conseils pour <a href="/blog/comment-faire-un-cv/">faire un CV</a> et pour un <a href="/blog/cv-sans-experience/">CV sans expérience</a>.</p>''',
@@ -51,12 +54,12 @@ C["fr"] = dict(lang="fr-FR", home="/", homel="Accueil", builder="/creer-un-cv/",
  artp='<p><strong>Modèle à télécharger&nbsp;:</strong> si vous préférez travailler dans Word, prenez un de nos <a href="/modele-cv-word/">modèles de CV Word gratuits</a> (classique, moderne ou premier emploi).</p>')
 
 C["en"] = dict(lang="en-GB", home="/en/", homel="Home", builder="/en/cv-builder/", dl="Download the Word template", fmt=".docx file, A4, fits on 1 page",
- title="Free CV Template for Word (UK): 3 .docx Templates | CVLibre",
- desc="Free CV template for Word: download 3 UK CV templates (.docx), classic, modern and no experience. No photo, British spelling, no sign-up, easy to edit.",
+ title="Free CV Template for Word (UK): 5 .docx Templates | CVLibre",
+ desc="Free CV template for Word: download 5 UK CV templates (.docx), elegant, two column, classic, modern and no experience. No photo, British spelling, no sign-up.",
  h1="Free CV templates for Word (UK)",
- lead="Download a free CV template for Word below: three .docx files built for job applications in the UK, one classic, one modern and one for people with no work experience. They follow UK conventions (no photo, no date of birth, a personal statement at the top) and open in Word, Google Docs or LibreOffice.",
+ lead="Download a free CV template for Word below: five .docx files built for job applications in the UK, an elegant design, a two-column design, a classic, a modern and one for people with no work experience. They follow UK conventions (no photo, no date of birth, a personal statement at the top) and open in Word, Google Docs or LibreOffice.",
  cta='<p>Would you rather not fiddle with formatting? The <strong>CVLibre online CV builder</strong> walks you through each section, offers 33 templates and gives you a clean PDF, for free.</p><a class="btn" href="/en/cv-builder/">Create my CV online</a>',
- cards={"classic": ("Classic CV", "For most jobs: personal statement, work history, education, skills and references. A clear layout that works for retail, care, logistics, office and trade jobs."),
+ cards={"elegant": ("Elegant CV", "A coloured band at the top with your name and target job, then a timeline with dates on the left. Smart and easy to read."), "two-column": ("Two-column CV", "A coloured sidebar for your contact details, skills and languages, with your experience on the right. The most modern of the five."), "classic": ("Classic CV", "For most jobs: personal statement, work history, education, skills and references. A clear layout that works for retail, care, logistics, office and trade jobs."),
         "modern": ("Modern CV", "For people who want their key skills seen first, with a target job title under the name and a discreet accent colour. Good for a career change too."),
         "no-experience": ("CV with no experience", "For school leavers, students and apprenticeship applicants: education comes first, then skills, work experience placements, part-time jobs and volunteering.")},
  body='''  <h2 id="fill">How to fill in this CV template</h2>
@@ -72,6 +75,7 @@ C["en"] = dict(lang="en-GB", home="/en/", homel="Home", builder="/en/cv-builder/
   </ul>
   <h2 id="choose">Which template should I choose?</h2>
   <p>The classic CV suits almost every job. The modern CV is useful when your skills matter more than your job titles, for example after a career break or a change of sector. The template with no experience is for a first job, a Saturday job, an apprenticeship or a placement: school projects, sport and volunteering all count as evidence.</p>
+  <p>The elegant and two-column designs stand out when you email your CV or hand it in. For online application portals, the classic CV is the safest choice, because some applicant tracking systems struggle with columns.</p>
   <h2 id="send">Before you send your CV</h2>
   <p>Check your spelling and grammar, or ask someone to read it for you. Unless the employer asks for a Word file, save it as a PDF (File, Save As, PDF) so the layout stays the same on their screen, and give it a clear name such as "Firstname-Lastname-CV.pdf". Tailor the personal statement and the order of your skills to each job advert: it is the quickest way to stand out, and it helps with applicant tracking systems.</p>
   <p>Read more in our guides on <a href="/en/blog/how-to-write-a-cv/">how to write a CV</a> and <a href="/en/blog/personal-statement-cv/">writing a personal statement</a>.</p>''',
@@ -84,12 +88,12 @@ C["en"] = dict(lang="en-GB", home="/en/", homel="Home", builder="/en/cv-builder/
  artp='<strong>Prefer working in Word?</strong> Download one of our <a href="/en/cv-template-word/">free CV templates for Word</a>: classic, modern or no experience.')
 
 C["us"] = dict(lang="en-US", home="/us/", homel="Home", builder="/us/resume-builder/", dl="Download the Word template", fmt=".docx file, US Letter, 1 page",
- title="Free Resume Template for Word: 3 US Templates (.docx) | CVLibre",
- desc="Free resume template for Word: download 3 US resume templates (.docx), classic, modern and entry-level. One page, no photo, no sign-up, easy to edit in Word.",
+ title="Free Resume Template for Word: 5 US Templates (.docx) | CVLibre",
+ desc="Free resume template for Word: download 5 US resume templates (.docx), elegant, two column, classic, modern and entry-level. One page, no photo, no sign-up.",
  h1="Free resume templates for Word",
- lead="Download a free resume template for Word below: three .docx files built for job applications in the United States, one classic, one modern and one for entry-level jobs. Each one fits on a single US Letter page, has no photo and opens in Word, Google Docs or LibreOffice.",
+ lead="Download a free resume template for Word below: five .docx files built for job applications in the United States: an elegant design, a two-column design, a classic, a modern and one for entry-level jobs. Each one fits on a single US Letter page, has no photo and opens in Word, Google Docs or LibreOffice.",
  cta='<p>Don\'t want to deal with formatting? The <strong>CVLibre online resume builder</strong> guides you section by section, offers 33 templates and downloads a clean PDF, free of charge.</p><a class="btn" href="/us/resume-builder/">Build my resume online</a>',
- cards={"classic": ("Classic resume", "For most jobs: a short summary, experience in reverse chronological order, education and a skills line. Simple, readable and easy for applicant tracking systems."),
+ cards={"elegant": ("Elegant resume", "A navy header band with your name and target job title, then a timeline with dates on the left. Polished and still one page."), "two-column": ("Two-column resume", "A colored sidebar for contact details, skills and languages, with your experience on the right. Best for resumes you hand over or email directly."), "classic": ("Classic resume", "For most jobs: a short summary, experience in reverse chronological order, education and a skills line. Simple, readable and easy for applicant tracking systems."),
         "modern": ("Modern resume", "With a headline under your name, a core skills line and a certifications section. A good fit for office, tech, healthcare and sales jobs."),
         "no-experience": ("Entry-level resume", "For students, recent graduates and first jobs: education comes first, then skills, internships, part-time jobs, volunteering and campus activities.")},
  body='''  <h2 id="fill">How to fill out this resume template</h2>
@@ -105,6 +109,7 @@ C["us"] = dict(lang="en-US", home="/us/", homel="Home", builder="/us/resume-buil
   </ul>
   <h2 id="choose">Which template should I pick?</h2>
   <p>The classic resume works for nearly every job, from retail and warehouse roles to office positions. The modern template suits people who want a target job title and their core skills right at the top. The entry-level template is for a first job, an internship or a summer job: class projects, clubs and volunteer work all count.</p>
+  <p>The elegant and two-column designs look great when you email your resume to a person or bring it to a job fair. For online applications, use the classic template: some applicant tracking systems read columns in the wrong order.</p>
   <h2 id="send">Before you send your resume</h2>
   <p>Proofread it twice, then save it as a PDF (File, Save As, PDF) unless the posting asks for a Word file, so the layout looks the same on the employer's screen. Name the file clearly, for example "Firstname-Lastname-Resume.pdf". Adjust your summary and the order of your skills for each posting.</p>
   <p>For more help, read our guides on <a href="/us/blog/how-to-write-a-resume/">how to write a resume</a> and <a href="/us/blog/resume-summary-examples/">resume summary examples</a>.</p>''',
@@ -117,12 +122,12 @@ C["us"] = dict(lang="en-US", home="/us/", homel="Home", builder="/us/resume-buil
  artp='<strong>Prefer working in Word?</strong> Download one of our <a href="/us/resume-template-word/">free resume templates for Word</a>: classic, modern or entry-level.')
 
 C["ca"] = dict(lang="en-CA", home="/ca/", homel="Home", builder="/ca/resume-builder/", dl="Download the Word template", fmt=".docx file, Letter size, 1 page",
- title="Free Canadian Resume Template for Word: 3 .docx Files | CVLibre",
- desc="Free Canadian resume template for Word: download 3 .docx resumes, classic, modern and no experience. No photo, room for English and French, easy to edit.",
+ title="Free Canadian Resume Template for Word: 5 .docx Files | CVLibre",
+ desc="Free Canadian resume template for Word: 5 .docx resumes, elegant, two column, classic, modern and no experience. No photo, room for English and French.",
  h1="Free Canadian resume templates for Word",
- lead="Download a free Canadian resume template for Word below: three .docx files that follow Canadian hiring practices, one classic, one modern and one for people with no work experience. There is no photo, a clear place for your English and French skills, and each file opens in Word, Google Docs or LibreOffice.",
+ lead="Download a free Canadian resume template for Word below: five .docx files that follow Canadian hiring practices: an elegant design, a two-column design, a classic, a modern and one for people with no work experience. There is no photo, a clear place for your English and French skills, and each file opens in Word, Google Docs or LibreOffice.",
  cta='<p>Rather skip the formatting? The <strong>CVLibre online resume builder</strong> takes you through each section, offers 33 templates and gives you a clean PDF, free.</p><a class="btn" href="/ca/resume-builder/">Build my resume online</a>',
- cards={"classic": ("Classic resume", "For most jobs: profile, work experience, education, skills and languages. Each job line has room for a city and a province or country, which helps newcomers."),
+ cards={"elegant": ("Elegant resume", "A navy header band with your name and target job, then a timeline with dates on the left. Polished and easy to scan."), "two-column": ("Two-column resume", "A coloured sidebar for contact details, skills and both official languages, with your experience on the right."), "classic": ("Classic resume", "For most jobs: profile, work experience, education, skills and languages. Each job line has room for a city and a province or country, which helps newcomers."),
         "modern": ("Modern resume", "With your target job title and your languages under your name, then key skills and certifications. Useful when bilingualism is an asset for the role."),
         "no-experience": ("Resume with no experience", "For students, co-op placements and first jobs: education first, then skills, certificates such as First Aid, part-time jobs and volunteer work.")},
  body='''  <h2 id="fill">How to fill out this resume template</h2>
@@ -138,6 +143,7 @@ C["ca"] = dict(lang="en-CA", home="/ca/", homel="Home", builder="/ca/resume-buil
   </ul>
   <h2 id="choose">Which template should I pick?</h2>
   <p>The classic resume fits most jobs, in any province. The modern template puts your target job and your languages up front, which helps for customer service and public-facing roles. The template with no experience is for a co-op placement, a summer job or your first job after high school or college.</p>
+  <p>The elegant and two-column designs stand out when you email your resume or hand it in. For online application systems, the classic template is the safest choice, because some of them read columns in the wrong order.</p>
   <h2 id="send">Before you send your resume</h2>
   <p>Proofread it several times. Save it as a PDF (File, Save As, PDF) unless the employer asks for Word, and give the file a clear name such as "Firstname-Lastname-Resume.pdf". Adjust your profile and skills to each job posting: the same key words help with applicant tracking systems.</p>
   <p>For more help, read our guides on <a href="/ca/blog/how-to-write-a-resume/">how to write a resume</a> and the <a href="/ca/blog/canadian-resume-for-newcomers/">Canadian resume for newcomers</a>.</p>''',
@@ -150,12 +156,12 @@ C["ca"] = dict(lang="en-CA", home="/ca/", homel="Home", builder="/ca/resume-buil
  artp='<strong>Prefer working in Word?</strong> Download one of our <a href="/ca/resume-template-word/">free Canadian resume templates for Word</a>: classic, modern or no experience.')
 
 C["au"] = dict(lang="en-AU", home="/au/", homel="Home", builder="/au/resume-builder/", dl="Download the Word template", fmt=".docx file, A4, 1 page",
- title="Free Resume Template Word (Australia): 3 .docx Files | CVLibre",
- desc="Free resume template for Word in Australia: download 3 .docx resumes (also called CVs), classic, modern and no experience, with referees. No sign-up needed.",
+ title="Free Resume Template Word (Australia): 5 .docx Files | CVLibre",
+ desc="Free resume template for Word in Australia: 5 .docx resumes (also called CVs), elegant, two column, classic, modern and no experience, all with referees.",
  h1="Free resume templates for Word (Australia)",
- lead="Download a free resume template for Word below: three .docx files built for job applications in Australia, where a resume is also called a CV. You get a classic, a modern and a no-experience template, each with a referees section at the end, and they open in Word, Google Docs or LibreOffice.",
+ lead="Download a free resume template for Word below: five .docx files built for job applications in Australia, where a resume is also called a CV. You get an elegant design, a two-column design, a classic, a modern and a no-experience template, each with a referees section at the end, and they open in Word, Google Docs or LibreOffice.",
  cta='<p>Want to skip the formatting? The <strong>CVLibre online resume builder</strong> guides you through each section, offers 33 templates and gives you a clean PDF, free.</p><a class="btn" href="/au/resume-builder/">Build my resume online</a>',
- cards={"classic": ("Classic resume", "For most jobs: about me, key skills, employment history, education, licences and certificates, then two referees. Clear and easy to scan."),
+ cards={"elegant": ("Elegant resume", "A navy header band with your name and target role, then a timeline with dates on the left, and referees at the end."), "two-column": ("Two-column resume", "A coloured sidebar for contact details, key skills and licences, with your experience and referees on the right."), "classic": ("Classic resume", "For most jobs: about me, key skills, employment history, education, licences and certificates, then two referees. Clear and easy to scan."),
         "modern": ("Modern resume", "With your target job title under your name, a professional summary and key skills with evidence. Suits office, health, trade and retail roles."),
         "no-experience": ("Resume with no experience", "For school leavers, students, traineeships and apprenticeships: career objective, education, skills, work experience placements, volunteering and referees.")},
  body='''  <h2 id="fill">How to fill in this resume template</h2>
@@ -171,6 +177,7 @@ C["au"] = dict(lang="en-AU", home="/au/", homel="Home", builder="/au/resume-buil
   </ul>
   <h2 id="choose">Which template should I pick?</h2>
   <p>The classic resume suits nearly every job. The modern template is handy when you want your target role and strongest skills at the top, for example after a change of career. The no-experience template is for your first casual job, a traineeship or an apprenticeship: school, sport and volunteering all count.</p>
+  <p>The elegant and two-column designs stand out when you email your resume or drop it in. For online application portals, the classic template is the safest choice, because some systems read columns in the wrong order.</p>
   <h2 id="send">Before you send your resume</h2>
   <p>Ask someone to proofread it for spelling and grammar. Save it as a PDF (File, Save As, PDF) unless the job ad asks for Word, and give it a clear name such as "Firstname-Lastname-Resume.pdf". Tailor your summary and skills to each job ad, and address the selection criteria if there are any.</p>
   <p>For more help, read our guides on <a href="/au/blog/how-to-write-a-resume/">how to write a resume</a> and <a href="/au/blog/referees-on-a-resume/">referees on a resume</a>.</p>''',
@@ -183,12 +190,12 @@ C["au"] = dict(lang="en-AU", home="/au/", homel="Home", builder="/au/resume-buil
  artp='<strong>Prefer working in Word?</strong> Download one of our <a href="/au/resume-template-word/">free resume templates for Word</a>: classic, modern or no experience, each with a referees section.')
 
 C["nz"] = dict(lang="en-NZ", home="/nz/", homel="Home", builder="/nz/cv-builder/", dl="Download the Word template", fmt=".docx file, A4, 1 page",
- title="Free CV Template for Word (NZ): 3 .docx Templates | CVLibre",
- desc="Free CV template for Word in New Zealand: download 3 .docx CVs, classic, modern and first job, with referees and no photo. No sign-up, easy to edit in Word.",
+ title="Free CV Template for Word (NZ): 5 .docx Templates | CVLibre",
+ desc="Free CV template for Word in New Zealand: 5 .docx CVs, elegant, two column, classic, modern and first job, with referees and no photo. No sign-up needed.",
  h1="Free CV templates for Word (New Zealand)",
- lead="Download a free CV template for Word below: three .docx files built for job applications in New Zealand, one classic, one modern and one for your first job. They follow Careers New Zealand advice (no photo, no date of birth, two referees) and open in Word, Google Docs or LibreOffice.",
+ lead="Download a free CV template for Word below: five .docx files built for job applications in New Zealand: an elegant design, a two-column design, a classic, a modern and one for your first job. They follow Careers New Zealand advice (no photo, no date of birth, two referees) and open in Word, Google Docs or LibreOffice.",
  cta='<p>Rather not fiddle with formatting? The <strong>CVLibre online CV builder</strong> takes you through each section, offers 33 templates and gives you a clean PDF, free.</p><a class="btn" href="/nz/cv-builder/">Create my CV online</a>',
- cards={"classic": ("Classic CV", "For most jobs: personal statement, skills, work experience, qualifications, interests and two referees. Simple to read and simple to update."),
+ cards={"elegant": ("Elegant CV", "A navy header band with your name and target role, then a timeline with dates on the left, and two referees at the end."), "two-column": ("Two-column CV", "A coloured sidebar for contact details, skills, languages and interests, with your experience and referees on the right."), "classic": ("Classic CV", "For most jobs: personal statement, skills, work experience, qualifications, interests and two referees. Simple to read and simple to update."),
         "modern": ("Modern CV", "With your target job title under your name, key skills backed by evidence and an achievements section. Good for a change of role or sector."),
         "first-job": ("First job CV", "For school leavers and students: skills first, then education and NCEA, part-time work, volunteering and roles in clubs, teams or on the marae.")},
  body='''  <h2 id="fill">How to fill in this CV template</h2>
@@ -204,6 +211,7 @@ C["nz"] = dict(lang="en-NZ", home="/nz/", homel="Home", builder="/nz/cv-builder/
   </ul>
   <h2 id="choose">Which template should I pick?</h2>
   <p>The classic CV works for almost every job. The modern CV suits people who want their target role and strongest skills at the top, for example when moving into a new industry. The first job CV is for school leavers and students: sport, kapa haka, a part-time job or volunteering all show skills an employer wants.</p>
+  <p>The elegant and two-column designs stand out when you email your CV or hand it in. For online application portals, the classic template is the safest choice, because some systems read columns in the wrong order.</p>
   <h2 id="send">Before you send your CV</h2>
   <p>Check the spelling carefully, then save your CV as a PDF (File, Save As, PDF) unless the employer asks for Word. Give it a clear name such as "Firstname-Lastname-CV.pdf", and tailor your personal statement and skills to each job ad.</p>
   <p>For more help, read our guides on <a href="/nz/blog/how-to-write-a-cv/">how to write a CV</a> and <a href="/nz/blog/referees-on-a-cv-nz/">referees on a CV</a>.</p>''',
@@ -216,12 +224,12 @@ C["nz"] = dict(lang="en-NZ", home="/nz/", homel="Home", builder="/nz/cv-builder/
  artp='<strong>Prefer working in Word?</strong> Download one of our <a href="/nz/cv-template-word/">free CV templates for Word</a>: classic, modern or first job, each with a referees section.')
 
 C["de"] = dict(lang="de-DE", home="/de/", homel="Startseite", builder="/de/lebenslauf-erstellen/", dl="Word-Vorlage herunterladen", fmt=".docx-Datei, A4, 1 Seite",
- title="Lebenslauf Vorlage Word kostenlos: 3 Vorlagen (.docx) | CVLibre",
- desc="Lebenslauf Vorlage für Word kostenlos: 3 tabellarische Lebensläufe (.docx), klassisch, modern und ohne Berufserfahrung. Ohne Anmeldung, leicht anzupassen.",
- h1="Lebenslauf Vorlage für Word: 3 Vorlagen kostenlos",
- lead="Hier können Sie eine kostenlose Lebenslauf Vorlage für Word herunterladen: drei tabellarische Lebensläufe als .docx-Datei, klassisch, modern und ohne Berufserfahrung. Jede Vorlage hat Platz für ein freiwilliges Bewerbungsfoto, Ort, Datum und Unterschrift und lässt sich in Word, LibreOffice oder Google Docs bearbeiten.",
+ title="Lebenslauf Vorlage Word kostenlos: 5 Vorlagen (.docx) | CVLibre",
+ desc="Lebenslauf Vorlage für Word kostenlos: 5 Lebensläufe (.docx), elegant, zweispaltig, klassisch, modern und ohne Berufserfahrung. Ohne Anmeldung, editierbar.",
+ h1="Lebenslauf Vorlage für Word: 5 Vorlagen kostenlos",
+ lead="Hier können Sie eine kostenlose Lebenslauf Vorlage für Word herunterladen: fünf Lebensläufe als .docx-Datei, elegant, zweispaltig, klassisch, modern und ohne Berufserfahrung. Jede Vorlage hat Platz für ein freiwilliges Bewerbungsfoto, Ort, Datum und Unterschrift und lässt sich in Word, LibreOffice oder Google Docs bearbeiten.",
  cta='<p>Keine Lust auf Formatierung? Mit dem <strong>Lebenslauf-Generator von CVLibre</strong> füllen Sie Ihren Lebenslauf Schritt für Schritt aus, wählen aus 33 Vorlagen und laden ein sauberes PDF herunter, kostenlos.</p><a class="btn" href="/de/lebenslauf-erstellen/">Lebenslauf online erstellen</a>',
- cards={"klassisch": ("Klassischer Lebenslauf", "Für die meisten Bewerbungen: persönliche Daten, Berufserfahrung, Ausbildung, Kenntnisse und Interessen in zwei Spalten, links die Zeiträume, rechts die Stationen."),
+ cards={"elegant": ("Eleganter Lebenslauf", "Ein farbiger Kopfbereich mit Name, Wunschposition, Kontaktdaten und Foto, darunter die Stationen mit den Zeiträumen links."), "zweispaltig": ("Zweispaltiger Lebenslauf", "Eine farbige Seitenleiste mit Foto, persönlichen Daten, Kenntnissen und Sprachen, rechts Berufserfahrung und Ausbildung."), "klassisch": ("Klassischer Lebenslauf", "Für die meisten Bewerbungen: persönliche Daten, Berufserfahrung, Ausbildung, Kenntnisse und Interessen in zwei Spalten, links die Zeiträume, rechts die Stationen."),
         "modern": ("Moderner Lebenslauf", "Mit Wunschposition unter dem Namen, einem kurzen Profil und einer dezenten Akzentfarbe. Passt gut zu Büro, Vertrieb, IT und Pflege."),
         "ohne-berufserfahrung": ("Lebenslauf ohne Berufserfahrung", "Für Schüler, Ausbildung und Berufseinstieg: Schulbildung zuerst, dann Praktika, Nebenjobs, Kenntnisse sowie Ehrenamt und Interessen.")},
  body='''  <h2 id="ausfuellen">So füllen Sie die Lebenslauf Vorlage aus</h2>
@@ -237,13 +245,14 @@ C["de"] = dict(lang="de-DE", home="/de/", homel="Startseite", builder="/de/leben
   </ul>
   <h2 id="auswahl">Welche Vorlage passt zu mir?</h2>
   <p>Der klassische Lebenslauf passt zu fast jeder Bewerbung, ob Handwerk, Handel, Verwaltung oder Pflege. Der moderne Lebenslauf eignet sich, wenn Sie Ihre Wunschposition und Ihr Profil gleich oben zeigen möchten, etwa nach einem Branchenwechsel. Die Vorlage ohne Berufserfahrung ist für die Bewerbung um einen Ausbildungsplatz, ein Praktikum oder den ersten Job gedacht.</p>
+  <p>Die Vorlagen elegant und zweispaltig fallen auf, wenn Sie Ihre Bewerbung per E-Mail schicken. Für Online-Bewerbungsportale ist der klassische Lebenslauf die sicherere Wahl, weil manche Bewerbermanagementsysteme Spalten falsch auslesen.</p>
   <h2 id="versenden">Bevor Sie den Lebenslauf verschicken</h2>
   <p>Lesen Sie alles noch einmal auf Rechtschreibung. Speichern Sie den Lebenslauf als PDF (Datei, Speichern unter, PDF), wenn das Unternehmen nichts anderes verlangt, und geben Sie der Datei einen klaren Namen wie "Lebenslauf-Vorname-Nachname.pdf". Passen Sie Profil und Kenntnisse an jede Stellenanzeige an.</p>
   <p>Mehr dazu in unseren Ratgebern <a href="/de/ratgeber/lebenslauf-schreiben/">Lebenslauf schreiben</a> und <a href="/de/ratgeber/bewerbungsfoto/">Bewerbungsfoto</a>.</p>''',
  faqh="Häufige Fragen",
  faq=[("Sind die Lebenslauf Vorlagen wirklich kostenlos?", "Ja. Kein Konto, keine E-Mail-Adresse und keine Zahlung: Sie laden die .docx-Datei herunter und nutzen sie für Ihre Bewerbungen."),
       ("Muss ein Foto in den Lebenslauf?", "Nein. Ein Bewerbungsfoto ist freiwillig. Wenn Sie keines verwenden, löschen Sie den Fotorahmen oben rechts in der Vorlage."),
-      ("Wie lang darf ein Lebenslauf sein?", "Höchstens zwei Seiten. Für Schüler und Berufseinsteiger reicht meist eine Seite, und alle drei Vorlagen passen auf eine Seite.")],
+      ("Wie lang darf ein Lebenslauf sein?", "Höchstens zwei Seiten. Für Schüler und Berufseinsteiger reicht meist eine Seite, und alle fünf Vorlagen passen auf eine Seite.")],
  src='Quellen: <a href="https://www.arbeitsagentur.de/bildung/bewerbung/lebenslauf" target="_blank" rel="noopener">Bundesagentur für Arbeit, Lebenslauf</a>.',
  foot=("/de/ratgeber/", "Lebenslauf-Vorlagen für Word"), arts=["lebenslauf-schreiben", "lebenslauf-ohne-berufserfahrung"],
  artp='<strong>Lieber in Word arbeiten?</strong> Laden Sie eine unserer <a href="/de/lebenslauf-vorlage-word/">kostenlosen Lebenslauf Vorlagen für Word</a> herunter: klassisch, modern oder ohne Berufserfahrung.')
