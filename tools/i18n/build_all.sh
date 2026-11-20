@@ -8,6 +8,7 @@ python3 en_pages2.py > /dev/null
 python3 de_pages2.py > /dev/null
 python3 anglo_pages.py | tail -3
 python3 blog_build.py 2>/dev/null | grep articles
+python3 word_pages.py
 python3 fr_alt.py
 python3 sitemap.py
 python3 ads_pages.py

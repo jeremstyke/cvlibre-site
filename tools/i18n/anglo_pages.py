@@ -230,6 +230,7 @@ if __name__ == "__main__":
         for f in glob.glob(os.path.join(ROOT, "en/**/index.html"), recursive=True):
             en_path = "/" + os.path.relpath(os.path.dirname(f), ROOT).replace(os.sep, "/") + "/"
             if en_path.startswith("/en/blog/"): continue
+            if en_path == "/en/cv-template-word/": continue  # page propre à chaque pays, écrite par word_pages.py
             s = convert_html(open(f, encoding="utf-8").read(), cc, en_path)
             write(anglo_path(en_path, cc), s)
             txt = re.sub(r"<script.*?</script>|<link[^>]+>|<a href=\"/en/\" hreflang=\"en-GB\">United Kingdom</a>", "", s, flags=re.S)

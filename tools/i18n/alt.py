@@ -16,12 +16,13 @@ ALT = [
     ("/relance-apres-entretien/", "/en/interview-follow-up-email/", "/de/nachfassen-nach-vorstellungsgespraech/"),
     ("/mail-de-candidature/", "/en/job-application-email/", "/de/bewerbung-per-email/"),
     ("/blog/", "/en/blog/", "/de/ratgeber/"),
+    ("/modele-cv-word/", "/en/cv-template-word/", "/de/lebenslauf-vorlage-word/"),  # 20 nov 2026 : modèles Word (word_pages.py)
 ]
 # Versions anglophones hors Royaume-Uni : mêmes pages que /en/, sous /us/, /ca/, /au/, /nz/ (créateur renommé resume-builder sauf en Nouvelle-Zélande).
 ANGLO = {"us": "en-US", "ca": "en-CA", "au": "en-AU", "nz": "en-NZ"}
 def anglo_path(en_path, cc):
     p = "/" + cc + en_path[3:]
-    if cc != "nz": p = p.replace("/cv-builder/", "/resume-builder/")
+    if cc != "nz": p = p.replace("/cv-builder/", "/resume-builder/").replace("/cv-template-word/", "/resume-template-word/")
     return p
 
 def row(path):
