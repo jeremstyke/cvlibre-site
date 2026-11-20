@@ -7,15 +7,7 @@ ACC_COMMON = [
     r'"Anmeldung mit Google fehlgeschlagen. Versuchen Sie es mit Ihrer E-Mail-Adresse."',
     r'say("Geben Sie eine gültige E-Mail-Adresse ein.", true);',
     r'say("Wird gesendet...");',
-    '"Anmeldecode erhalten"',
-    '"Anmelden"',
-    '"Andere E-Mail-Adresse verwenden"',
-    '"Code erneut senden (" + s + " s)" : "Code erneut senden"',
-    '"Bitte warten Sie eine Minute, bevor Sie einen neuen Code anfordern." : "Senden fehlgeschlagen. Bitte versuchen Sie es gleich noch einmal."',
-    '"Eine Anmelde-E-Mail wurde an " + m + " gesendet. Geben Sie den enthaltenen Code unten ein oder klicken Sie einfach auf die Schaltfläche darin. Schauen Sie auch im Spam-Ordner nach."',
-    'say("Geben Sie den Code aus der E-Mail ein.", true);',
-    'say("Wird geprüft...");',
-    '"Falscher oder abgelaufener Code. Prüfen Sie ihn oder fordern Sie einen neuen an."',
+    r'"Senden fehlgeschlagen. Bitte versuchen Sie es gleich noch einmal." : "Ein Anmeldelink wurde Ihnen gesendet. Öffnen Sie ihn auf diesem Gerät."',
 ]
 
 DE = {}

@@ -162,15 +162,7 @@ ACC_COMMON = [
     ('"Connexion Google impossible. Essayez avec votre e-mail."', '"Google sign-in failed. Try with your email."'),
     ('say("Saisissez une adresse email valide.", true);', 'say("Enter a valid email address.", true);'),
     ('say("Envoi en cours...");', 'say("Sending...");'),
-    ('"Recevoir mon code de connexion"', '"Get my sign-in code"'),
-    ('"Me connecter"', '"Sign in"'),
-    ('"Changer d’adresse e-mail"', '"Use a different email"'),
-    ('"Renvoyer le code (" + s + " s)" : "Renvoyer le code"', '"Resend code (" + s + " s)" : "Resend code"'),
-    ('"Patientez une minute avant de demander un nouveau code." : "Envoi impossible. Réessayez dans un instant."', '"Please wait a minute before asking for a new code." : "Could not send. Please try again in a moment."'),
-    ('"Un e-mail de connexion vient d’être envoyé à " + m + ". Saisissez ci-dessous le code qu’il contient, ou cliquez simplement sur son bouton. Pensez à regarder dans les spams."', '"A sign-in email has just been sent to " + m + ". Enter the code it contains below, or simply click its button. Check your spam folder too."'),
-    ('say("Saisissez le code reçu par e-mail.", true);', 'say("Enter the code from the email.", true);'),
-    ('say("Vérification...");', 'say("Checking...");'),
-    ('"Code incorrect ou expiré. Vérifiez-le ou demandez-en un nouveau."', '"Wrong or expired code. Check it or ask for a new one."'),
+    ('"Envoi impossible. Réessayez dans un instant." : "Un lien de connexion vient de vous être envoyé. Ouvrez-le sur cet appareil."', '"Could not send. Please try again in a moment." : "A sign-in link has been sent to you. Open it on this device."'),
 ]
 
 FILES["assets/account.js"] = ACC_COMMON + [
