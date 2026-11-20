@@ -40,8 +40,8 @@ Règles :
 - [ ] cv-candidature-spontanee : CV candidature spontanée
 
 ## D. Métiers (pages « CV <métier> », beaucoup de candidats, concurrence faible)
-- [ ] cv-agent-de-proprete : CV agent de propreté / agent de nettoyage
-- [ ] cv-ash : CV ASH agent de service hospitalier
+- [x] cv-agent-de-proprete : CV agent de propreté / agent de nettoyage (déjà couvert par blog/cv-agent-entretien)
+- [x] cv-ash : CV ASH agent de service hospitalier
 - [ ] cv-aesh : CV AESH
 - [ ] cv-atsem : CV ATSEM
 - [ ] cv-assistante-maternelle : CV assistante maternelle
