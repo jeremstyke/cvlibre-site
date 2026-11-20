@@ -14,7 +14,7 @@
   function remember(id) { curId = id; try { if (id) localStorage.setItem(CK, id); else localStorage.removeItem(CK); } catch (e) {} }
   function fmt(d) { return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }); }
   var closeBtn = $("#acc-close");
-  function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
+  function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (codeBox) codeBox.hidden = n !== 3; if (n === 2) $("#acc-email").focus(); if (n === 3) $("#acc-code").focus(); }
   function openDlg() {
     say(""); step(1);
     if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", "");
@@ -30,6 +30,34 @@
   $("#acc-mail-open").addEventListener("click", function () { step(2); });
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
+  /* Connexion par code reçu par e-mail (Resend) : le lien de l'e-mail fonctionne toujours aussi. */
+  var codeBox = document.createElement("div"), sentTo = "", waitT = 0;
+  codeBox.id = "acc-step3"; codeBox.hidden = true;
+  codeBox.innerHTML = '<p id="acc-code-txt"></p><input type="text" id="acc-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" style="width:100%;box-sizing:border-box;font-size:1.6rem;letter-spacing:.35em;text-align:center;font-weight:700"><button type="button" class="btn acc-big" id="acc-code-go"></button><button type="button" class="link-btn" id="acc-code-again"></button><button type="button" class="link-btn" id="acc-code-back"></button>';
+  $("#acc-step2").insertAdjacentElement("afterend", codeBox);
+  $("#acc-mail-go").textContent = "Recevoir mon code de connexion";
+  $("#acc-code").placeholder = "Code";
+  $("#acc-code-go").textContent = "Me connecter";
+  $("#acc-code-back").textContent = "Changer d’adresse e-mail";
+  function againLabel() { var b = $("#acc-code-again"), s = Math.ceil((waitT - Date.now()) / 1000); b.disabled = s > 0; b.textContent = s > 0 ? "Renvoyer le code (" + s + " s)" : "Renvoyer le code"; if (s > 0) setTimeout(againLabel, 1000); }
+  function codeSent(m, err) {
+    if (err) { say(/second|rate|limit/i.test(err.message || "") ? "Patientez une minute avant de demander un nouveau code." : "Envoi impossible. Réessayez dans un instant.", true); return; }
+    sentTo = m; $("#acc-code").value = ""; say("");
+    $("#acc-code-txt").textContent = "Un e-mail de connexion vient d’être envoyé à " + m + ". Saisissez ci-dessous le code qu’il contient, ou cliquez simplement sur son bouton. Pensez à regarder dans les spams.";
+    step(3); waitT = Date.now() + 60000; againLabel();
+  }
+  $("#acc-code").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-code-go").click(); } });
+  $("#acc-code-back").addEventListener("click", function () { say(""); step(2); });
+  $("#acc-code-again").addEventListener("click", function () { if (sentTo) { $("#acc-email").value = sentTo; $("#acc-mail-go").click(); } });
+  $("#acc-code-go").addEventListener("click", function () {
+    var c = $("#acc-code").value.replace(/\D/g, "");
+    if (c.length < 6) { say("Saisissez le code reçu par e-mail.", true); return; }
+    say("Vérification...");
+    sb.auth.verifyOtp({ email: sentTo, token: c, type: "email" }).then(function (r) {
+      if (r.error) { say("Code incorrect ou expiré. Vérifiez-le ou demandez-en un nouveau.", true); return; }
+      say(""); step(1);
+    });
+  });
   if (window.CVPASS) { window.CVPASS.setUser(function () { return user && user.email ? user.email : ""; }); window.CVPASS.setLogin(openDlg); }
   window.CVACC = { signOut: function () { return sb.auth.signOut(); } };
   var hl0 = document.getElementById("nav-acc");
@@ -120,7 +148,7 @@
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Saisissez une adresse email valide.", true); return; }
     say("Envoi en cours...");
     sb.auth.signInWithOtp({ email: m, options: { data: { lang: LANG }, emailRedirectTo: location.origin + location.pathname } }).then(function (r) {
-      say(r.error ? "Envoi impossible. Réessayez dans un instant." : "Un lien de connexion vient de vous être envoyé. Ouvrez-le sur cet appareil.", !!r.error);
+      codeSent(m, r.error);
     });
   });
   $("#acc-save").addEventListener("click", function () { saveCv(false); });

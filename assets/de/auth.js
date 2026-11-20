@@ -9,7 +9,7 @@
   var sb = window.supabase.createClient(URL_, PUB, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
   var note = $("#acc-note");
   function say(t, bad) { note.textContent = t || ""; note.className = "pass-note" + (bad ? " bad" : ""); }
-  function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (n === 2) $("#acc-email").focus(); }
+  function step(n) { $("#acc-step1").hidden = n !== 1; $("#acc-step2").hidden = n !== 2; if (codeBox) codeBox.hidden = n !== 3; if (n === 2) $("#acc-email").focus(); if (n === 3) $("#acc-code").focus(); }
   function back() { try { localStorage.setItem("cv_back", JSON.stringify({ p: location.pathname, t: Date.now() })); } catch (e) {} }
   function open() { say(""); step(1); if (dlg.showModal) { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", ""); $("#acc-mail-open").focus({ preventScroll: true }); }
   function close() { dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
@@ -25,12 +25,40 @@
   $("#acc-back").addEventListener("click", function () { say(""); step(1); });
   $("#acc-close").addEventListener("click", close);
   $("#acc-email").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-mail-go").click(); } });
+  /* Connexion par code reçu par e-mail (Resend) : le lien de l'e-mail fonctionne toujours aussi. */
+  var codeBox = document.createElement("div"), sentTo = "", waitT = 0;
+  codeBox.id = "acc-step3"; codeBox.hidden = true;
+  codeBox.innerHTML = '<p id="acc-code-txt"></p><input type="text" id="acc-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" style="width:100%;box-sizing:border-box;font-size:1.6rem;letter-spacing:.35em;text-align:center;font-weight:700"><button type="button" class="btn acc-big" id="acc-code-go"></button><button type="button" class="link-btn" id="acc-code-again"></button><button type="button" class="link-btn" id="acc-code-back"></button>';
+  $("#acc-step2").insertAdjacentElement("afterend", codeBox);
+  $("#acc-mail-go").textContent = "Anmeldecode erhalten";
+  $("#acc-code").placeholder = "Code";
+  $("#acc-code-go").textContent = "Anmelden";
+  $("#acc-code-back").textContent = "Andere E-Mail-Adresse verwenden";
+  function againLabel() { var b = $("#acc-code-again"), s = Math.ceil((waitT - Date.now()) / 1000); b.disabled = s > 0; b.textContent = s > 0 ? "Code erneut senden (" + s + " s)" : "Code erneut senden"; if (s > 0) setTimeout(againLabel, 1000); }
+  function codeSent(m, err) {
+    if (err) { say(/second|rate|limit/i.test(err.message || "") ? "Bitte warten Sie eine Minute, bevor Sie einen neuen Code anfordern." : "Senden fehlgeschlagen. Bitte versuchen Sie es gleich noch einmal.", true); return; }
+    sentTo = m; $("#acc-code").value = ""; say("");
+    $("#acc-code-txt").textContent = "Eine Anmelde-E-Mail wurde an " + m + " gesendet. Geben Sie den enthaltenen Code unten ein oder klicken Sie einfach auf die Schaltfläche darin. Schauen Sie auch im Spam-Ordner nach.";
+    step(3); waitT = Date.now() + 60000; againLabel();
+  }
+  $("#acc-code").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("#acc-code-go").click(); } });
+  $("#acc-code-back").addEventListener("click", function () { say(""); step(2); });
+  $("#acc-code-again").addEventListener("click", function () { if (sentTo) { $("#acc-email").value = sentTo; $("#acc-mail-go").click(); } });
+  $("#acc-code-go").addEventListener("click", function () {
+    var c = $("#acc-code").value.replace(/\D/g, "");
+    if (c.length < 6) { say("Geben Sie den Code aus der E-Mail ein.", true); return; }
+    say("Wird geprüft...");
+    sb.auth.verifyOtp({ email: sentTo, token: c, type: "email" }).then(function (r) {
+      if (r.error) { say("Falscher oder abgelaufener Code. Prüfen Sie ihn oder fordern Sie einen neuen an.", true); return; }
+      say(""); close();
+    });
+  });
   $("#acc-mail-go").addEventListener("click", function () {
     var m = $("#acc-email").value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { say("Geben Sie eine gültige E-Mail-Adresse ein.", true); return; }
     say("Wird gesendet..."); back();
     sb.auth.signInWithOtp({ email: m, options: { data: { lang: LANG }, emailRedirectTo: location.origin + location.pathname + location.search.replace(/[?&]connexion=1/, "") } }).then(function (r) {
-      say(r.error ? "Senden fehlgeschlagen. Bitte versuchen Sie es gleich noch einmal." : "Ein Anmeldelink wurde Ihnen gesendet. Öffnen Sie ihn auf diesem Gerät.", !!r.error);
+      codeSent(m, r.error);
     });
   });
 
