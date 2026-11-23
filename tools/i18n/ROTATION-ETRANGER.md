@@ -16,3 +16,4 @@ Une ligne par publication : date, version, type, slug. La tâche du mercredi s'e
 | 2026-11-20 | au | métier (barista) | barista-resume |
 | 2026-11-20 | nz | métier (retail assistant) | retail-assistant-cv-nz |
 | 2026-11-20 | de | métier (Verkäuferin) | lebenslauf-verkaeuferin |
+| 2026-11-23 | en | métier (teaching assistant) | teaching-assistant-cv |

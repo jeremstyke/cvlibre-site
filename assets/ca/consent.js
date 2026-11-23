@@ -11,6 +11,8 @@
       var hs = document.createElement("style"); hs.textContent = ".ad-in,ins.adsbygoogle,.adsbygoogle{display:none!important}"; document.head.appendChild(hs);
       return;
     }
+    /* 21 nov 2026 : encart partenaire NordVPN dans les articles (pas pour le Pass, d'où sa place après le retour ci-dessus) */
+    try { var ps = document.createElement("script"); ps.src = "/assets/partner.js?v=20261121"; ps.defer = true; (document.body || document.head).appendChild(ps); } catch (e) {}
     var K = "cvlibre.consent", c = null;
     try { var v = JSON.parse(localStorage.getItem(K) || "null"); if (v && v.t && Date.now() - v.t < 15552000000) c = v.v; } catch (e) {}
     var A = window.adsbygoogle = window.adsbygoogle || [];
