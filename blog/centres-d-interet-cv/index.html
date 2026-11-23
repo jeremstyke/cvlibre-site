@@ -113,6 +113,7 @@ var links=[].slice.call(document.querySelectorAll('.toc-d a')),map={};links.forE
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current');});if(map[e.target.id])map[e.target.id].setAttribute('aria-current','true');}});},{rootMargin:'-18% 0px -72% 0px'});
 [].forEach.call(document.querySelectorAll('.prose h2[id]'),function(h){io.observe(h);});}})();
 </script>
+<div class="wrap" style="margin:28px auto"><div style="background:linear-gradient(135deg,#1f4fd1,#5a2fd1);color:#fff;border-radius:14px;padding:18px 20px"><b>Un fichier trop lourd pour France Travail, la CAF ou un employeur ?</b> Compressez votre CV ou vos justificatifs en PDF gratuitement avec <a href="https://demarches.cvlibre.com/?utm_source=cvlibre" style="color:#fff;font-weight:700">PDF Démarches</a> : vos fichiers restent sur votre appareil.</div></div>
 <footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand"><strong>CVLibre</strong> est gratuit. Le site est financé par la publicité et par le <a href="/mon-espace/?pass=1" data-pass>Pass CVLibre</a> : sans pub, 50 IA par jour, 4,99 € pour 3 mois.</p>
