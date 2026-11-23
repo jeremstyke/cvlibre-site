@@ -9,21 +9,28 @@ Règles :
 - Groupe A (résiliation) : uniquement des faits lus sur le site officiel du service (CGV, FAQ, page tarifs). Ton factuel, jamais « arnaque ». Si la procédure n'est pas publiée, dis-le et donne la voie générale (mail, lettre recommandée, opposition bancaire seulement en dernier recours en renvoyant vers sa banque). Termine par l'alternative CVLibre gratuite, sans abonnement.
 - Quand il reste moins de 15 lignes « - [ ] », ajoute 30 nouvelles requêtes de longue traîne en fin de fichier, au même format (métiers courants pas encore traités, questions précises tirées des suggestions de recherche et des « autres questions posées »), en évitant tout doublon avec blog/.
 
+## 0. PRIORITÉ (règle du 23 nov 2026) : les arguments de CVLibre et les concurrents payants, à traiter avant tout autre article
+- [ ] cv-ia-gratuit : faire son CV avec l'IA gratuitement / CV IA gratuit
+- [ ] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
+- [ ] cv-sans-filigrane : CV gratuit sans filigrane / télécharger CV PDF sans filigrane
+- [ ] mettre-a-jour-son-cv : mettre à jour son CV / refaire son ancien CV / modifier un CV PDF
+- [ ] cv-a-partir-de-linkedin : créer son CV à partir de son profil LinkedIn / exporter LinkedIn en CV
+- [ ] resilier-cvdesignr-premium : résilier CVDesignR Premium
+- [ ] resilier-cvwizard : résilier CVwizard / CVwizard prélèvement
+- [ ] resilier-resume-io : résilier Resume.io / Resume.io remboursement
+
 ## A. Failles : résiliation et abonnements CV (forte intention, peu de concurrence sérieuse)
 - [x] resilier-abonnement-zety : résilier abonnement Zety / Zety prélèvement / Zety remboursement
 - [x] resilier-abonnement-livecareer : résilier LiveCareer / LiveCareer prélèvement
 - [x] resilier-abonnement-moncvparfait : résilier MonCVparfait / MonCVparfait remboursement
 - [x] resilier-abonnement-cv-express : résilier CV Express / express cv résiliation (vérifier d'abord le nom exact du service)
-- [ ] resilier-cvdesignr-premium : résilier CVDesignR Premium
 - [ ] prelevement-cv-inconnu : prélèvement inconnu site de CV que faire / abonnement CV caché 2,70 €
-- [ ] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
 
 ## B. Failles : CV selon l'outil (requête « cv libre office » déjà en impressions)
 - [ ] cv-libreoffice : modèle CV LibreOffice Writer gratuit / CV libre office
 - [ ] cv-google-docs : modèle CV Google Docs gratuit
 - [ ] cv-word-gratuit : modèle CV Word gratuit / CV Word à remplir
 - [ ] cv-sur-telephone : faire un CV sur son téléphone / CV sur iPhone ou Android
-- [ ] cv-ia-gratuit : faire son CV avec l'IA gratuitement / CV IA gratuit
 - [ ] cv-en-pdf : enregistrer son CV en PDF / envoyer son CV en PDF
 - [ ] cv-canva-gratuit : CV Canva gratuit, ce qui est vraiment gratuit
 
@@ -42,37 +49,41 @@ Règles :
 ## D. Métiers (pages « CV <métier> », beaucoup de candidats, concurrence faible)
 - [x] cv-agent-de-proprete : CV agent de propreté / agent de nettoyage (déjà couvert par blog/cv-agent-entretien)
 - [x] cv-ash : CV ASH agent de service hospitalier
-- [ ] cv-aesh : CV AESH
+- [ ] cv-infirmier : CV infirmière / infirmier
+- [ ] cv-cuisinier : CV cuisinier
+- [ ] cv-commis-de-cuisine : CV commis de cuisine
+- [ ] cv-comptable : CV comptable / aide comptable
+- [ ] cv-commercial : CV commercial
+- [ ] cv-electricien : CV électricien
+- [ ] cv-macon : CV maçon
+- [ ] cv-coiffeur : CV coiffeuse / coiffeur
 - [ ] cv-atsem : CV ATSEM
+- [ ] cv-operateur-de-production : CV opérateur de production
+- [ ] cv-secretaire : CV secrétaire / assistante de direction
+- [ ] cv-educateur-specialise : CV éducateur spécialisé
+- [ ] cv-hote-de-caisse : CV hôtesse de caisse / hôte de caisse
+- [ ] cv-developpeur-web : CV développeur web
+- [ ] cv-aesh : CV AESH
 - [ ] cv-assistante-maternelle : CV assistante maternelle
 - [ ] cv-auxiliaire-de-puericulture : CV auxiliaire de puériculture
 - [ ] cv-aide-a-domicile : CV aide à domicile
-- [ ] cv-commis-de-cuisine : CV commis de cuisine
-- [ ] cv-cuisinier : CV cuisinier
 - [ ] cv-plongeur : CV plongeur restauration
 - [ ] cv-femme-de-chambre : CV femme de chambre / valet de chambre
 - [ ] cv-receptionniste : CV réceptionniste hôtel
 - [ ] cv-employe-libre-service : CV employé libre service / mise en rayon
 - [ ] cv-magasinier : CV magasinier
 - [ ] cv-agent-de-quai : CV agent de quai
-- [ ] cv-operateur-de-production : CV opérateur de production
 - [ ] cv-chauffeur-poids-lourd : CV chauffeur poids lourd / chauffeur PL
 - [ ] cv-chauffeur-vtc : CV chauffeur VTC
-- [ ] cv-electricien : CV électricien
-- [ ] cv-macon : CV maçon
 - [ ] cv-plombier : CV plombier
 - [ ] cv-peintre-batiment : CV peintre en bâtiment
 - [ ] cv-mecanicien-automobile : CV mécanicien automobile
-- [ ] cv-coiffeur : CV coiffeuse / coiffeur
 - [ ] cv-estheticienne : CV esthéticienne
 - [ ] cv-teleconseiller : CV téléconseiller / conseiller clientèle
 - [ ] cv-agent-d-accueil : CV agent d'accueil
 - [ ] cv-secretaire-medicale : CV secrétaire médicale
-- [ ] cv-comptable : CV comptable / aide comptable
-- [ ] cv-commercial : CV commercial
 - [ ] cv-animateur : CV animateur périscolaire / BAFA
 - [ ] cv-ambulancier : CV ambulancier
-- [ ] cv-infirmier : CV infirmière / infirmier
 - [ ] cv-boulanger : CV boulanger / vendeuse en boulangerie
 
 ## E. Questions précises (conseil)
