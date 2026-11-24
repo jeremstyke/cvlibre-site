@@ -49,7 +49,7 @@ Règles :
 ## D. Métiers (pages « CV <métier> », beaucoup de candidats, concurrence faible)
 - [x] cv-agent-de-proprete : CV agent de propreté / agent de nettoyage (déjà couvert par blog/cv-agent-entretien)
 - [x] cv-ash : CV ASH agent de service hospitalier
-- [ ] cv-infirmier : CV infirmière / infirmier
+- [x] cv-infirmier : CV infirmière / infirmier
 - [ ] cv-cuisinier : CV cuisinier
 - [ ] cv-commis-de-cuisine : CV commis de cuisine
 - [ ] cv-comptable : CV comptable / aide comptable
