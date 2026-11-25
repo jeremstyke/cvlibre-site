@@ -10,7 +10,7 @@ Règles :
 - Quand il reste moins de 15 lignes « - [ ] », ajoute 30 nouvelles requêtes de longue traîne en fin de fichier, au même format (métiers courants pas encore traités, questions précises tirées des suggestions de recherche et des « autres questions posées »), en évitant tout doublon avec blog/.
 
 ## 0. PRIORITÉ (règle du 23 nov 2026) : les arguments de CVLibre et les concurrents payants, à traiter avant tout autre article
-- [ ] cv-ia-gratuit : faire son CV avec l'IA gratuitement / CV IA gratuit
+- [x] cv-ia-gratuit : faire son CV avec l'IA gratuitement / CV IA gratuit
 - [ ] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
 - [ ] cv-sans-filigrane : CV gratuit sans filigrane / télécharger CV PDF sans filigrane
 - [ ] mettre-a-jour-son-cv : mettre à jour son CV / refaire son ancien CV / modifier un CV PDF
