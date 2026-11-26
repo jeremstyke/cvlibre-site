@@ -11,7 +11,7 @@ Règles :
 
 ## 0. PRIORITÉ (règle du 23 nov 2026) : les arguments de CVLibre et les concurrents payants, à traiter avant tout autre article
 - [x] cv-ia-gratuit : faire son CV avec l'IA gratuitement / CV IA gratuit
-- [ ] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
+- [x] cv-gratuit-sans-inscription : CV gratuit sans inscription / CV gratuit sans payer à la fin
 - [ ] cv-sans-filigrane : CV gratuit sans filigrane / télécharger CV PDF sans filigrane
 - [ ] mettre-a-jour-son-cv : mettre à jour son CV / refaire son ancien CV / modifier un CV PDF
 - [ ] cv-a-partir-de-linkedin : créer son CV à partir de son profil LinkedIn / exporter LinkedIn en CV
