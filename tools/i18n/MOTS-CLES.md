@@ -50,7 +50,7 @@ Règles :
 - [x] cv-agent-de-proprete : CV agent de propreté / agent de nettoyage (déjà couvert par blog/cv-agent-entretien)
 - [x] cv-ash : CV ASH agent de service hospitalier
 - [x] cv-infirmier : CV infirmière / infirmier
-- [ ] cv-cuisinier : CV cuisinier
+- [x] cv-cuisinier : CV cuisinier
 - [ ] cv-commis-de-cuisine : CV commis de cuisine
 - [ ] cv-comptable : CV comptable / aide comptable
 - [ ] cv-commercial : CV commercial
